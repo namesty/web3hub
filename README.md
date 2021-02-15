@@ -1,1 +1,4 @@
-# Web3Hub
+#Web3Hub
+- Next.JS
+- ThemeUI
+- Apollo
