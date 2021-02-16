@@ -1,15 +1,36 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import React from 'react'
+import { useState } from 'react'
 
 const Header = () => {
+  const [user, setUser] = useState(null)
+  const handleSignInClick = () => {
+    if (user === null) {
+      setUser({})
+    }
+    if (user !== null) {
+      setUser(null)
+    }
+  }
   return (
-    <header role="header">
-      <div class="col">
-        <div class="brand">
+    <header
+      role="header"
+      sx={{
+        display: 'flex',
+        border: '1px solid black',
+        p: 2,
+        mb: 4,
+        '*': { display: 'flex' },
+        '.col': { flex: 1, '&:last-of-type': { justifyContent: 'flex-end' } },
+      }}
+    >
+      <div className="col">
+        <div className="brand" sx={{ mr: 3 }}>
           <a href="/">
-            <div class="logo">
-              <img src="images/X.png" alt="logo" />
+            <div className="logo">
+              <img src="images/X.png" alt="WEB3HUB" sx={{ fontWeight: 'bold' }} />
             </div>
           </a>
         </div>
@@ -21,21 +42,29 @@ const Header = () => {
           </ul>
         </nav>
       </div>
-      <div class="col">
-        <div class="user-area">
+      <div className="col">
+        <div className="user-area" sx={{ li: { ml: 2 } }}>
           <ul>
+            {user !== null && (
+              <React.Fragment>
+                <li>
+                  <a href="/apis">All APIs</a>
+                </li>
+                <li>
+                  <a href="/user/apis">My APIs</a>
+                </li>
+                <li>
+                  <button sx={{ display: 'inline-block' }}>New API</button>
+                </li>
+              </React.Fragment>
+            )}
             <li>
-              <a href="/apis">All APIs</a>
-            </li>
-            <li>
-              <a href="/user/apis">My APIs</a>
-            </li>
-            <li>
-              <button>New API</button>
-            </li>
-            <li>
-              <span>Sign In</span>
-              <span>0x643udbeu37hdbwu</span>
+              {user === null && (
+                <button onClick={handleSignInClick} sx={{ display: 'inline-block !important' }}>
+                  Sign In
+                </button>
+              )}
+              {user !== null && <span onClick={handleSignInClick} sx={{cursor: 'pointer'}}>0x643udbeu37hdbwu</span>}
             </li>
           </ul>
         </div>

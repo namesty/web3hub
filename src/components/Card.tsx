@@ -1,28 +1,28 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, Flex } from 'theme-ui'
 
 const Card = () => {
   return (
     <div className="Card">
-      <img className="api-logo" src="APILOGO.svg" />
+      <img className="api-logo" src="APILOGO.svg" sx={{backgroundColor: 'gray', width: '270px', height: '270px'}}/>
       <div className="info">
         <div className="row">
-          <div className="title"> </div>
-          <div className="subtitle"></div>
+          <div className="title">UniswapV2</div>
+          <div className="subtitle">Subtitle</div>
         </div>
-        <div className="row">
+        <Flex className="row" sx={{justifyContent: 'space-between'}}>
           <div className="left">
             <a href="/{API}/Docs">View Docs</a>
           </div>
-          <div className="right">
-            <div className="stars">
+          <Flex className="right">
+            <Flex className="stars">
               <img src="star.svg" className="star" />
               <span>17</span>
-            </div>
-            <button>IPFS</button>
-          </div>
-        </div>
+            </Flex>
+            <button sx={{ml: 2}}>IPFS</button>
+          </Flex>
+        </Flex>
       </div>
     </div>
   )
