@@ -9,17 +9,33 @@ const ApiView = () => {
   const router = useRouter()
   return (
     <Layout>
-      <main>
+      <main sx={{ maxWidth: '700px' }}>
         <div className="content">
-          <h1>{router.query.view}</h1>
-          <img className="api-logo" src="logo.svg" />
+          <img
+            className="api-logo"
+            src="api-logo.svg"
+            sx={{
+              background: 'black',
+              width: '270px',
+              height: '270px',
+              position: 'absolute',
+              left: '-300px',
+            }}
+          />
           <div className="api-info">
             <section>
-              <div className="title">
-                <h1>Uniswap V2</h1>
-                <span className="url">uniswapv2.opej.web3.eth</span>
+              <Flex className="title" sx={{ justifyContent: 'space-between' }}>
+                <h1 sx={{ mb: 0 }}>Uniswap V2</h1>
+                <a
+                  className="url"
+                  sx={{ display: 'inline-block', p: 2, px: 4, border: '1px solid black' }}
+                >
+                  uniswapv2.opej.web3.eth
+                </a>
+              </Flex>
+              <div className="subtitle" sx={{ mb: 4 }}>
+                Easily swap between any two ERC-20 tokens
               </div>
-              <div className="subtitle">Easily swap between any two ERC-20 tokens</div>
               <p className="description">
                 Pariatur occaecat ullamco excepteur elit quis nostrud cillum fugiat
                 commodo cupidatat laboris est nulla. Qui in magna ut eu duis est aute aute
@@ -32,36 +48,42 @@ const ApiView = () => {
               <a className="repo-link" href="https://www.github.com/GITHUBREPO">
                 Github Repo
               </a>
-              <div className="stars">
-                <img className="star" src="star.svg" />
+              <Flex className="stars" sx={{ alignContent: 'center' }}>
+                <img className="star" src="/images/star-black.svg" />
                 <span>12</span>
-              </div>
+              </Flex>
             </section>
+            <br />
+            <br />
             <section>
-              <h2>Get Started</h2>
+              <h2 sx={{ textAlign: 'center' }}>Get Started</h2>
               <code>
                 <pre>{`yarn install @web3api/client`}</pre>
               </code>
               <code>
-                <pre>{`
-                  import {
-                    Web3API,
-                    Ethereum,
-                    IPFS,
-                    Subgraph
-                  } from "@web3api/client-js";
+                <pre>
+                  {`import {
+  Web3API,
+  Ethereum,
+  IPFS,
+  Subgraph
+} from "@web3api/client-js";
 
-                  const api = new Web3API({
-                    uri: "simplestorage.eth",
-                    portals: {
-                      ethereum: new Ethereum({ provider: (window as any).ethereum }),
-                      ipfs: new IPFS({ provider: "http://localhost:5001" }),
-                      subgraph: new Subgraph({ provider: "http://localhost:8020" })
-                    }
-                  })`}</pre>
+const api = new Web3API({
+  uri: "simplestorage.eth",
+  portals: {
+    ethereum: new Ethereum({ provider: (window as any).ethereum }),
+    ipfs: new IPFS({ provider: "http://localhost:5001" }),
+    subgraph: new Subgraph({ provider: "http://localhost:8020" })
+  }
+})`}
+                </pre>
               </code>
             </section>
           </div>
+          <br />
+          <br />
+          <br />
           <div className="Playground" />
         </div>
       </main>

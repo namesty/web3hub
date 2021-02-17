@@ -21,6 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
     >
       <Header />
       {children}
+      <br/><br/><br/>
       <Global
         styles={(theme) => ({
           '*': {
@@ -61,7 +62,7 @@ const Layout = ({ children }: LayoutProps) => {
             padding: '0',
             listStyle: 'none',
           },
-          'a, button, [type="button"], [type="reset"], [type="submit"], [type="file"], [type="file"]::-webkit-file-upload-button': {
+          'a, Button, [type="Button"], [type="reset"], [type="submit"], [type="file"], [type="file"]::-webkit-file-upload-Button': {
             textTransform: 'none',
             appearance: 'none',
             cursor: 'pointer',
@@ -83,6 +84,27 @@ const Layout = ({ children }: LayoutProps) => {
           'table tbody tr:hover': {
             background: 'rgba(255, 255, 255, 0.08)',
           },
+          main: {
+            margin: 'auto',
+            maxWidth: '1200px'
+          },
+          pre: {
+            border: '1px solid black',
+            padding: '1rem',
+          },
+          fieldset: {
+            border: 'none',
+            padding: '0',
+            margin: '0'
+          },
+          'input,select,pre,code': {
+            backgroundColor: 'white !important'
+          },
+          '.callout-text': {
+            background: '#DDD',
+            padding: '1rem',
+            textAlign: 'center',
+          }
         })}
       />
       <style jsx global>{`

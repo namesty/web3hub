@@ -11,14 +11,14 @@ const Index = () => {
   return (
     <Layout>
       <main>
-        <div sx={{m: 'auto', maxWidth: '1200px'}}><h3>Browse APIs</h3></div>
-        <Flex className="content" sx={{m: 'auto', maxWidth: '1200px'}}>
+        <div><h3>Browse APIs</h3></div>
+        <Flex className="content">
           <div className="apis" sx={{mr: 5}}>
             <ApiGrid/>
-            <Pagination/>
           </div>
           <SortNav/>
         </Flex>
+        <Pagination/>
       </main>
     </Layout>
   )

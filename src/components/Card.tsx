@@ -1,28 +1,48 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex } from 'theme-ui'
+import { jsx, Flex, Button } from 'theme-ui'
+import Link from 'next/link'
 
 const Card = () => {
   return (
     <div className="Card">
-      <img className="api-logo" src="APILOGO.svg" sx={{backgroundColor: 'gray', width: '270px', height: '270px'}}/>
-      <div className="info">
-        <div className="row">
-          <div className="title">UniswapV2</div>
-          <div className="subtitle">Subtitle</div>
-        </div>
-        <Flex className="row" sx={{justifyContent: 'space-between'}}>
-          <div className="left">
-            <a href="/{API}/Docs">View Docs</a>
-          </div>
-          <Flex className="right">
-            <Flex className="stars">
-              <img src="star.svg" className="star" />
-              <span>17</span>
+      <div className="wrap-contents">
+        <Link href="apis/SOMEAPI">
+          <a>
+            <img
+              className="api-logo"
+              src="APILOGO.svg"
+              sx={{ backgroundColor: 'gray', width: '270px', height: '270px' }}
+            />
+          </a>
+        </Link>
+        <div className="info">
+          <Flex className="row" sx={{ justifyContent: 'space-between' }}>
+            <div className="left">
+              <div className="title">
+                <b>UniswapV2</b>
+              </div>
+              <div className="subtitle">Subtitle</div>
+            </div>
+            <Flex className="right" sx={{ alignItems: 'center' }}>
+              <Flex className="stars">
+                <img src="/images/star-gray.svg" className="star" />
+                <span>17</span>
+              </Flex>
+              <Button
+                sx={{
+                  ml: 2,
+                  background: 'black',
+                  border: 'none',
+                  py: 1,
+                  color: 'white',
+                }}
+              >
+                IPFS
+              </Button>
             </Flex>
-            <button sx={{ml: 2}}>IPFS</button>
           </Flex>
-        </Flex>
+        </div>
       </div>
     </div>
   )

@@ -1,21 +1,22 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex } from 'theme-ui'
+import Link from 'next/link'
 
 const Pagination = () => {
   return (
-    <Flex className="pagination" sx={{flex: 1, justifyContent: 'center', my: 5}}>
-      <a href="#">{'<'}</a>
+    <Flex className="pagination" sx={{flex: 1, justifyContent: 'center', mt: 5}}>
+      <Link href="#"><a>{'<'}</a></Link>
       <ol sx={{display: 'flex', '*': {mx: 1}}}>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
+        <li><Link href="#"><a>1</a></Link></li>
+        <li><Link href="#"><a>2</a></Link></li>
+        <li><Link href="#"><a>3</a></Link></li>
         <li>...</li>
-        <li><a href="#">20</a></li>
-        <li><a href="#">21</a></li>
-        <li><a href="#">22</a></li>
+        <li><Link href="#"><a>20</a></Link></li>
+        <li><Link href="#"><a>21</a></Link></li>
+        <li><Link href="#"><a>22</a></Link></li>
       </ol>
-      <a href="#">{'>'}</a>
+      <Link href="#"><a>{'>'}</a></Link>
     </Flex>
   )
 }

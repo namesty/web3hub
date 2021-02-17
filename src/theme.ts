@@ -19,7 +19,7 @@ const GlobalTheme = {
   },
   colors: {
     text: '#454f5b',
-    background: '#fff',
+    background: '#EEE',
     primary: '#5c6ac4',
     secondary: '#006fbb',
     highlight: '#47c1bf',
@@ -36,6 +36,20 @@ const GlobalTheme = {
         highlight: '#b7ecec',
         muted: '#e6e6e6',
       },
+    },
+  },
+  buttons: {
+    primary: {
+      color: 'white',
+      bg: 'black',
+      '&:hover': {
+        color: 'black',
+        bg: 'white',
+      }
+    },
+    secondary: {
+      color: 'background',
+      bg: 'secondary',
     },
   },
   styles: {

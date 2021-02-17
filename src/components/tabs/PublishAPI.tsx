@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, Input, Flex, Select, Button } from 'theme-ui'
 
 const CreateAPI = () => {
   return (
@@ -12,72 +12,76 @@ const CreateAPI = () => {
           <p>Point Web3hub to where your package has been uploaded.</p>
           <div>
             <fieldset>
-              <label>Package location</label>
-              <input
+              <div><label>Package location</label></div>
+              <Input
                 type="text"
                 placeholder="IPFS://fifmdoij9dfsjsd9fjwoefj09wej0f8rhwe98hrew98w09er"
               />
             </fieldset>
+            <br/>
             <fieldset>
               <div className="title">Package Preview</div>
-              <div className="preview">
-                <img className="api-logo" src="api-logo.svg" />
+              <Flex className="preview">
+                <img className="api-logo" src="api-logo.svg" sx={{background: 'black', width: '211px', height: '211px', mr: 2}}/>
                 <div className="api-info">
-                  <div className="title">Uniswap V2</div>
+                  <div className="title"><b>Uniswap V2</b></div>
                   <div className="sub-title">
                     Easily swap between any two ERC-20 Tokens
                   </div>
-                  <div className="description">
-                    Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-                  </div>
-                  <a className="repo-link" href="github.com/fsnasnfan">
+                  <p className="description">
+                    <small>Tempor pariatur laboris minim velit. Elit in voluptate excepteur do ipsum ad dolor. Id cillum et deserunt proident dolore nulla aliqua voluptate duis. Minim duis pariatur commodo cupidatat. Irure ad ullamco est et incididunt officia irure ad velit. Proident ipsum cupidatat reprehenderit dolor in tempor nulla.</small>
+                  </p>
+                  <a className="repo-link" href="https://www.github.com/GITHUBREPO" target="_BLANK">
                     Github Repo
                   </a>
                 </div>
-              </div>
+              </Flex>
             </fieldset>
           </div>
+          <br/>
           <div>
             <h5>Enable persistence</h5>
             <p>Ensure your package remains available</p>
             <fieldset>
-              <label>Pinning service provider</label>
-              <select>
+              <div><label>Pinning service provider</label></div>
+              <Select>
                 <option>Web3API.org pinning service</option>
                 <option>Another</option>
                 <option>And Another</option>
-              </select>
+              </Select>
             </fieldset>
           </div>
         </form>
       </div>
+      <br/><br/>
       <div className="routing">
         <h4>Routing</h4>
         <p>Register your package to an ENS domain and make it available on the Web3Hub</p>
         <form>
-          <label>ENS Subdomain</label>
-          <input type="text" placeholder="uniswapv2.open.web3.eth" />
+          <div><label>ENS Subdomain</label></div>
+          <Input type="text" placeholder="uniswapv2.open.web3.eth" />
           <p>
             <small>This option will cost ~0.0023 ETH ($2.90 USD)</small>
             <br />
             <small>
-              Need ETH? Purcahse with your bank or card <a href="#">here</a>
+              Need ETH? Purcahse with your bank or card <a href="https://www.moonpay.com/" target="_BLANK">here</a>
             </small>
           </p>
-          <button>Register ENS</button>
+          <Button>Register ENS</Button>
           <ul>
             <li>
-              <a href="#">View Transaction</a>
+              <a href="https://etherscan.io/" target="_BLANK">View Transaction</a>
             </li>
             <li>
-              <a href="#">View Transaction</a>
+              <a href="https://etherscan.io/" target="_BLANK">View Transaction</a>
             </li>
             <li>
-              <a href="#">View Transaction</a>
+              <a href="https://etherscan.io/" target="_BLANK">View Transaction</a>
             </li>
           </ul>
-          <div className="text-callout">
-            Package now live on the Web3Hub! <a href="#">View API</a>
+          <br/>
+          <div className="callout-text">
+            Package now live on the Web3Hub! <a href="/apis/ENTITY">View API</a>
           </div>
         </form>
       </div>

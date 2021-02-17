@@ -1,13 +1,13 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, Input } from 'theme-ui'
 
 const SortNav = () => {
   return (
     <nav>
       <form>
         <fieldset>
-          <input type="text" placeholder="search" />
+          <Input type="text" placeholder="search" />
         </fieldset>
         <fieldset>
           <b>Arrange by:</b>

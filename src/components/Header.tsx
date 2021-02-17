@@ -1,27 +1,35 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, Button } from 'theme-ui'
 import React from 'react'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+
+const TEMPUSER = '0x643udbeu37hdbwu'
 
 const Header = () => {
+  const router = useRouter()
   const [user, setUser] = useState(null)
   const handleSignInClick = () => {
-    if (user === null) {
-      setUser({})
-    }
-    if (user !== null) {
-      setUser(null)
-    }
+    setUser(TEMPUSER)
   }
+  const handleSignOutClick = () => {
+    setUser(null)
+  }
+  const handleNewAPIClick = () => {
+    router.push('/apis/create?activeTab=create')
+  }
+
   return (
     <header
       role="header"
       sx={{
         display: 'flex',
+        alignItems: 'center',
         border: '1px solid black',
         p: 2,
-        mb: 4,
+        mb: 5,
         '*': { display: 'flex' },
         '.col': { flex: 1, '&:last-of-type': { justifyContent: 'flex-end' } },
       }}
@@ -30,41 +38,45 @@ const Header = () => {
         <div className="brand" sx={{ mr: 3 }}>
           <a href="/">
             <div className="logo">
-              <img src="images/X.png" alt="WEB3HUB" sx={{ fontWeight: 'bold' }} />
+              <img src="/images/X.png" alt="WEB3HUB" sx={{ fontWeight: 'bold' }} />
             </div>
           </a>
         </div>
         <nav>
           <ul>
             <li>
-              <a href="/docs">Web3Api Docs</a>
+              <a href="https://web3api.dev" target="_BLANK">Web3Api Docs</a>
             </li>
           </ul>
         </nav>
       </div>
       <div className="col">
         <div className="user-area" sx={{ li: { ml: 2 } }}>
-          <ul>
+          <ul sx={{display: 'flex', alignItems: 'center'}}>
             {user !== null && (
               <React.Fragment>
                 <li>
-                  <a href="/apis">All APIs</a>
+                  <Link href="/"><a>All APIs</a></Link>
                 </li>
                 <li>
-                  <a href="/user/apis">My APIs</a>
+                  <Link href="/apis/user"><a>My APIs</a></Link>
                 </li>
                 <li>
-                  <button sx={{ display: 'inline-block' }}>New API</button>
+                  <Button onClick={handleNewAPIClick} sx={{ display: 'inline-block' }}>New API</Button>
                 </li>
               </React.Fragment>
             )}
             <li>
               {user === null && (
-                <button onClick={handleSignInClick} sx={{ display: 'inline-block !important' }}>
+                <Button onClick={handleSignInClick} sx={{ display: 'inline-block !important' }}>
                   Sign In
-                </button>
+                </Button>
               )}
-              {user !== null && <span onClick={handleSignInClick} sx={{cursor: 'pointer'}}>0x643udbeu37hdbwu</span>}
+              {user !== null && 
+                <Button onClick={handleSignOutClick} sx={{ display: 'inline-block !important' }}>
+                  {TEMPUSER}
+                </Button>
+              }
             </li>
           </ul>
         </div>
