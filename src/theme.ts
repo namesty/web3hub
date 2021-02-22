@@ -1,10 +1,8 @@
 const GlobalTheme = {
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fonts: {
-    body:
-      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-    heading:
-      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+    body: '"Montserrat", sans-serif',
+    heading: '"Montserrat", sans-serif',
     monospace: 'Menlo, monospace',
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
@@ -20,13 +18,19 @@ const GlobalTheme = {
   colors: {
     text: '#454f5b',
     background: '#EEE',
-    primary: '#5c6ac4',
-    secondary: '#006fbb',
-    highlight: '#47c1bf',
-    muted: '#e6e6e6',
-    gray: '#dfe3e8',
-    accent: '#f49342',
-    darken: '#00044c',
+    greenGradient: 'background: linear-gradient(0deg, #529DAD 1.85%, #60C092 97.11%);',
+    green: '#60c093',
+    darkGreen: '#0D373C',
+    grayGreen: '1B262C',
+    teal: '#539dad',
+    moreTeal: '#509DAC',
+    tealHighlight: '#66E0D9',
+    lightTeal: '#598188',
+    darkTeal: '#335E67',
+    gray: '#1c272d',
+    babyBlue: '#CAD9F3',
+    navy: '#3C5172',
+    orange: '#E67100',
     modes: {
       dark: {
         text: '#3e4155',
@@ -45,7 +49,7 @@ const GlobalTheme = {
       '&:hover': {
         color: 'black',
         bg: 'white',
-      }
+      },
     },
     secondary: {
       color: 'background',
