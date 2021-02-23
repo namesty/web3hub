@@ -9,6 +9,12 @@ import Link from 'next/link'
 import Web3 from 'web3'
 import { useRouter } from 'next/router'
 
+// import Ceramic from '@ceramicnetwork/http-client'
+// import { IDX } from '@ceramicstudio/idx'
+// import ethAddressToDID from '../utils/ethAddressToDID'
+// const ceramic = new Ceramic('https://gateway-clay.ceramic.network')
+// const idx = new IDX({ ceramic })
+
 const SignInArea = () => {
   const [{ dapp }, dispatch] = useStateValue()
   const router = useRouter()
@@ -16,11 +22,13 @@ const SignInArea = () => {
     router.push('/apis/create?activeTab=create')
   }
   const onboard = getOnboard({
-    address: (address) => {
+    address: async (address) => {
       dispatch({
         type: 'SET_ADDRESS',
         payload: address,
       })
+      // let IDXDATA = await idx.get('basicProfile', await ethAddressToDID(address))
+      // console.log(IDXDATA)
     },
     network: (network) => {
       dispatch({
