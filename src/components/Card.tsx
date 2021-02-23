@@ -8,11 +8,11 @@ const Card = () => {
     <div className="Card">
       <div className="wrap-contents">
         <Link href="apis/SOMEAPI">
-          <a>
+          <a sx={{ width: '100%', maxHeight: '270px', display: 'block'}}>
             <img
               className="api-logo"
               src="APILOGO.svg"
-              sx={{ backgroundColor: 'gray', width: '270px', height: '270px' }}
+              sx={{ backgroundColor: 'gray', width: '100%', height: '270px', maxHeight: '270px', display: 'block' }}
             />
           </a>
         </Link>

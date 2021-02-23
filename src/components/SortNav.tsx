@@ -1,30 +1,20 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Input } from 'theme-ui'
+import { jsx, Input, Select } from 'theme-ui'
 
 const SortNav = () => {
   return (
     <nav>
-      <form>
+      <form sx={{display: 'flex', justifyContent: 'space-between'}}>
         <fieldset>
-          <Input type="text" placeholder="search" />
+          <Input type="text" placeholder="search" sx={{ width: 8}}/>
         </fieldset>
         <fieldset>
-          <b>Arrange by:</b>
-          <ul className="choices" sx={{ 'label, input': { cursor: 'pointer'}}}>
-            <li>
-              <label htmlFor="HighestRated">Higest Rated</label>
-              <input type="radio" id="HighestRated" name="arrange" value="HighestRated" />
-            </li>
-            <li>
-              <label htmlFor="MostRecent">Most Recent</label>
-              <input type="radio" id="MostRecent" name="arrange" value="MostRecent" />
-            </li>
-            <li>
-              <label htmlFor="Alphabetical">Alphabetical</label>
-              <input type="radio" id="Alphabetical" name="arrange" value="Alphabetical" />
-            </li>
-          </ul>
+          <Select sx={{minWidth: '150px'}}>
+            <option value="HighestRated">Higest Rated</option>
+            <option value="MostRecent">Most Recent</option>
+            <option value="Alphabetical">Alphabetical</option>
+          </Select>
         </fieldset>
       </form>
     </nav>

@@ -1,26 +1,11 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Button } from 'theme-ui'
-import React from 'react'
-import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { jsx } from 'theme-ui'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
-
-const TEMPUSER = '0x643udbeu37hdbwu'
+const SignInArea = dynamic(() => import('./SignInArea'), { ssr: false })
 
 const Header = () => {
-  const router = useRouter()
-  const [user, setUser] = useState(null)
-  const handleSignInClick = () => {
-    setUser(TEMPUSER)
-  }
-  const handleSignOutClick = () => {
-    setUser(null)
-  }
-  const handleNewAPIClick = () => {
-    router.push('/apis/create?activeTab=create')
-  }
-
   return (
     <header
       role="header"
@@ -36,11 +21,13 @@ const Header = () => {
     >
       <div className="col">
         <div className="brand" sx={{ mr: 3 }}>
-          <a href="/">
-            <div className="logo">
-              <img src="/images/X.png" alt="WEB3HUB" sx={{ fontWeight: 'bold' }} />
-            </div>
-          </a>
+          <Link href="/">
+            <a>
+              <div className="logo">
+                <img src="/images/X.png" alt="WEB3HUB" sx={{ fontWeight: 'bold' }} />
+              </div>
+            </a>
+          </Link>          
         </div>
         <nav>
           <ul>
@@ -51,35 +38,7 @@ const Header = () => {
         </nav>
       </div>
       <div className="col">
-        <div className="user-area" sx={{ li: { ml: 2 } }}>
-          <ul sx={{display: 'flex', alignItems: 'center'}}>
-            {user !== null && (
-              <React.Fragment>
-                <li>
-                  <Link href="/"><a>All APIs</a></Link>
-                </li>
-                <li>
-                  <Link href="/apis/user"><a>My APIs</a></Link>
-                </li>
-                <li>
-                  <Button onClick={handleNewAPIClick} sx={{ display: 'inline-block' }}>New API</Button>
-                </li>
-              </React.Fragment>
-            )}
-            <li>
-              {user === null && (
-                <Button onClick={handleSignInClick} sx={{ display: 'inline-block !important' }}>
-                  Sign In
-                </Button>
-              )}
-              {user !== null && 
-                <Button onClick={handleSignOutClick} sx={{ display: 'inline-block !important' }}>
-                  {TEMPUSER}
-                </Button>
-              }
-            </li>
-          </ul>
-        </div>
+        <SignInArea />
       </div>
     </header>
   )

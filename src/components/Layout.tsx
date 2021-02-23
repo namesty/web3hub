@@ -52,7 +52,7 @@ const Layout = ({ children }: LayoutProps) => {
             margin: '0',
             padding: '0',
             overflowX: 'hidden',
-            overflowY: 'scroll',
+            overflowY: 'scroll !important',
             backgroundRepeat: 'no-repeat',
             backgroundSize: '100% auto',
             backgroundAttachment: 'scroll',
