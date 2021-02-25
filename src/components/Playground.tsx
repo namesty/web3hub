@@ -17,6 +17,8 @@ const Playground = () => {
       className="playground"
       sx={{
         backgroundColor: 'w3gray',
+        borderRadius: '16px',
+        overflow: 'hidden',
         'code, pre, textarea': {
           color: 'softBlue',
           backgroundColor: 'transparent !important',
@@ -31,8 +33,6 @@ const Playground = () => {
         sx={{
           p: '1.5rem',
           backgroundColor: 'w3gray',
-          borderTopLeftRadius: '16px',
-          borderTopRightRadius: '16px',
           '*': { display: 'flex', alignItems: 'center' },
         }}
       >
@@ -49,7 +49,7 @@ const Playground = () => {
           <a className="text-nav" href="/uniswap/docs" sx={{ mr: 5 }}>
             GO TO API PAGE
           </a>
-          <Stars count={320} />
+          <Stars count={320} onDark/>
           <ul className="category-Badges" sx={{ ml: 4 }}>
             <li>
               <Badge label="ipfs" />

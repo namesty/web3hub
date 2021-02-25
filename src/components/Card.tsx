@@ -2,48 +2,83 @@
 /** @jsx jsx */
 import { jsx, Flex, Button } from 'theme-ui'
 import Link from 'next/link'
+import Stars from './Stars'
+import Badge from './Badge'
 
 const Card = () => {
   return (
-    <div className="Card">
-      <div className="wrap-contents">
-        <Link href="apis/SOMEAPI">
-          <a sx={{ width: '100%', maxHeight: '270px', display: 'block'}}>
-            <img
-              className="api-logo"
-              src="APILOGO.svg"
-              sx={{ backgroundColor: 'gray', width: '100%', height: '270px', maxHeight: '270px', display: 'block' }}
-            />
-          </a>
-        </Link>
+    <div
+      className="Card"
+      sx={{
+        width: '270px',
+        p: 4,
+        boxShadow: '0px 0px 10px 5px #DDD',
+        borderRadius: '8px',
+      }}
+    >
+      <Link href="apis/SOMEAPI">
+        <a sx={{textDecoration: 'none'}}>
+        <div className="wrap-contents">
+        <div sx={{ display: 'block', m: 'auto' }}>
+          <img
+            className="api-logo"
+            src="/images/uniswap.png"
+            sx={{
+              width: '140px',
+              height: '140px',
+              display: 'block',
+              m: 'auto',
+            }}
+          />
+        </div>
+
         <div className="info">
-          <Flex className="row" sx={{ justifyContent: 'space-between' }}>
-            <div className="left">
-              <div className="title">
-                <b>UniswapV2</b>
-              </div>
-              <div className="subtitle">Subtitle</div>
+          <div className="row" sx={{ justifyContent: 'space-between' }}>
+            <h3 className="title" sx={{ textAlign: 'center', my: 2 }}>
+              UniswapV2
+            </h3>
+            <div className="subtitle" sx={{ textAlign: 'center', my: 2, mb: 3 }}>
+              Historical data and analytics for Uniswap V2
             </div>
-            <Flex className="right" sx={{ alignItems: 'center' }}>
-              <Flex className="stars">
-                <img src="/images/star-gray.svg" className="star" />
-                <span>17</span>
-              </Flex>
-              <Button
+            <Flex sx={{ alignItems: 'center', m: 'auto', justifyContent: 'center' }}>
+              <Stars count={320} />
+              <div
                 sx={{
-                  ml: 2,
-                  background: 'black',
-                  border: 'none',
-                  py: 1,
-                  color: 'white',
+                  width: '2px',
+                  height: '30px',
+                  bg: 'darkGreen',
+                  opacity: '.1',
+                  mx: 3,
                 }}
-              >
-                IPFS
-              </Button>
+              />
+              <Flex sx={{ alignItems: 'center', cursor: 'default' }}>
+                <img
+                  src="/images/doc.svg"
+                  alt="docs"
+                  sx={{ mr: 2, width: '13px', height: '16px', top: '-2px' }}
+                />
+                <b>Docs</b>
+              </Flex>
             </Flex>
-          </Flex>
+            <ul
+              className="category-Badges"
+              sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}
+            >
+              <li>
+                <Badge label="ipfs" dark />
+              </li>
+              <li>
+                <Badge label="defi" dark />
+              </li>
+              <li>
+                <Badge label="amm" dark />
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+        </a>
+      </Link>
     </div>
   )
 }

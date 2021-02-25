@@ -26,7 +26,7 @@ const GlobalTheme = {
     w3gray: '#1B2731',
 
     // tealHighlight: '#66E0D9',
-    // lightTeal: '#598188',
+    w3lightTeal: '#598188',
     // darkTeal: '#335E67',
 
     green: '#60c093',
@@ -37,6 +37,7 @@ const GlobalTheme = {
     gray: '#1c272d',
 
     babyBlue: 'rgba(202,217,243, .3)',
+    babyBlueDark: 'rgba(202,217,243)',
     softBlue: '#B2D2D9',
 
     navy: '#13212C',

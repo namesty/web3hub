@@ -2,7 +2,6 @@
 /** @jsx jsx */
 import { jsx, Flex, Button, useThemeUI, Styled } from 'theme-ui'
 import Layout from '../components/Layout'
-import Pagination from '../components/Pagination'
 import SortNav from '../components/SortNav'
 import ApiGrid from '../components/ApiGrid'
 
@@ -19,7 +18,6 @@ const Index = () => {
           <br/>
           <ApiGrid />
         </section>
-        <Pagination />
       </main>
       <br/><br/><br/>
     </Layout>
