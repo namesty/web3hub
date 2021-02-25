@@ -19,19 +19,32 @@ const GlobalTheme = {
   colors: {
     text: '#454f5b',
     background: '#EEE',
-    greenGradient: 'background: linear-gradient(0deg, #529DAD 1.85%, #60C092 97.11%);',
+    w3Teal: '#335E67',
+    w3MoreTeal: '#509DAC',
+    w3NavHighlightTeal: '#243843',
+    
+
+    // tealHighlight: '#66E0D9',
+    // lightTeal: '#598188',
+    // darkTeal: '#335E67',
+
     green: '#60c093',
-    darkGreen: '#0D373C',
-    grayGreen: '1B262C',
-    teal: '#539dad',
-    moreTeal: '#509DAC',
-    tealHighlight: '#66E0D9',
-    lightTeal: '#598188',
-    darkTeal: '#335E67',
+    darkGreen: '#12191E',
+    grayGreen: '#1B262C',
+    activeGreen: '#243843',
+
     gray: '#1c272d',
+
     babyBlue: '#CAD9F3',
+
     navy: '#3C5172',
+
     orange: '#E67100',
+
+    greenGradient: 'linear-gradient(0deg, #529DAD 1.85%, #60C092 97.11%)',
+    hazeGradient: 'linear-gradient(180deg, #FFFFFF 0%, #E1ECEA 100%)',
+
+    offWhite: '#E9E9E9',
     modes: {
       dark: {
         text: '#3e4155',
@@ -46,10 +59,18 @@ const GlobalTheme = {
   buttons: {
     primary: {
       color: 'white',
-      bg: 'black',
+      bg: 'w3Teal',
+      boxShadow: '0px 15px 30px rgba(20, 102, 204, 0.16)',
+      borderRadius: '8px',
+      p: 3,
+      fontWeight: 'bold',
+      fontSize: '14px',
+      lineHeight: '14px',
+      textAlign: 'center',
+      letterSpacing: '-0.6px',
+      textTransform: 'uppercase',
       '&:hover': {
-        color: 'black',
-        bg: 'white',
+        bg: 'w3MoreTeal',
       },
     },
     secondary: {

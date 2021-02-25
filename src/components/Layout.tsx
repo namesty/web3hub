@@ -1,24 +1,23 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
 import { Global } from '@emotion/core'
 import Header from './Header'
 type LayoutProps = {
   children?: any
 }
+
 const Layout = ({ children }: LayoutProps) => {
   return (
     <div
       className="layout"
       sx={{
-        maxWidth: '1440px',
-        margin: 'auto',
-        padding: '0 1rem',
         '&::before, &::after': {
           display: 'none',
         },
       }}
     >
+      
       <Header />
       {children}
       <br/><br/><br/>
@@ -48,14 +47,16 @@ const Layout = ({ children }: LayoutProps) => {
             },
           },
           body: {
+            minHeight: '100vh',
             scrollBehavior: 'smooth',
             margin: '0',
             padding: '0',
             overflowX: 'hidden',
             overflowY: 'scroll !important',
             backgroundRepeat: 'no-repeat',
-            backgroundSize: '100% auto',
+            backgroundSize: '100% 100%',
             backgroundAttachment: 'scroll',
+            background: theme.colors.hazeGradient
           },
           'ul, ol, li': {
             margin: '0',
@@ -88,6 +89,9 @@ const Layout = ({ children }: LayoutProps) => {
             margin: 'auto',
             maxWidth: '1200px'
           },
+          code: {
+            m: 0
+          },
           pre: {
             border: '1px solid black',
             padding: '1rem',
@@ -104,6 +108,15 @@ const Layout = ({ children }: LayoutProps) => {
             background: '#DDD',
             padding: '1rem',
             textAlign: 'center',
+          },
+          '.text-nav': {
+            fontWeight: 'bold',
+            fontSize: '12px',
+            lineHeight: '14px',
+            letterSpacing: '-0.6px',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+            color: theme.colors.w3MoreTeal,
           }
         })}
       />

@@ -65,35 +65,39 @@ const SignInArea = () => {
   return (
     <Flex className="sign-in-wrap" sx={{ li: { ml: 2 } }}>
       <ul sx={{ display: 'flex', alignItems: 'center' }}>
-        {dapp.balance >= 0 && (
+        {dapp.balance < 0 ? (
+          <li
+            onClick={handleSignInClick}
+            onKeyUp={handleSignInClick}
+            sx={{ cursor: 'pointer', alignItems: 'center' }}
+          >
+            <img src="/images/user.svg" alt="user" sx={{ height: '17px' }} />
+            <span>&nbsp;</span>
+            <span className="text-nav" sx={{ color: 'white' }}>
+              Sign in
+            </span>
+          </li>
+        ) : (
           <React.Fragment>
-            {/* <li>
-              <Link href="/">
-                <a>All APIs</a>
-              </Link>
-            </li> */}
             <li>
               <Link href="/apis/user">
-                <a>My APIs</a>
+                <a className="text-nav" sx={{ '&:hover': { color: 'w3MoreTeal'}}}>My APIs</a>
               </Link>
             </li>
-            <li>
-              <Button onClick={handleNewAPIClick} sx={{ display: 'inline-block' }}>
-                New API
-              </Button>
+            <li className="wallet-addr" sx={{ p: '.425rem' }}>
+              <span className="text-nav" sx={{ color: 'white', fontSize: '1rem', textTransform: 'initial' }}>
+                {dapp.address && addrShortener(dapp.address)}
+              </span>
             </li>
           </React.Fragment>
         )}
         <li>
-          {dapp.balance < 0 ? (
-            <Button onClick={handleSignInClick} onKeyUp={handleSignInClick}>
-              Sign In
-            </Button>
-          ) : (
-            <Box className="wallet-addr" sx={{border: '1px solid black', borderRadius: 4, p: '.425rem'}}>
-              {dapp.address && addrShortener(dapp.address)}
-            </Box>
-          )}
+          <Button
+            onClick={dapp.balance < 0 ? handleSignInClick : handleNewAPIClick}
+            sx={{ display: 'inline-block', ml: 3 }}
+          >
+            <span>Create API</span>
+          </Button>
         </li>
       </ul>
     </Flex>

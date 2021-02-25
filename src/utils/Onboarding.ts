@@ -7,7 +7,7 @@ const getOnboard = function (subscriptions) {
       dappId: '834729ff-3ae1-42ec-b770-95de5ff553a0',
       subscriptions,
       hideBranding: true,
-      networkId: 3,
+      networkId: 1,
       walletSelect: {
         wallets: [
           { walletName: 'metamask', preferred: true },
