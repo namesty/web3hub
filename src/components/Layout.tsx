@@ -17,10 +17,8 @@ const Layout = ({ children }: LayoutProps) => {
         },
       }}
     >
-      
       <Header />
       {children}
-      <br/><br/><br/>
       <Global
         styles={(theme) => ({
           '*': {
@@ -94,15 +92,12 @@ const Layout = ({ children }: LayoutProps) => {
           },
           pre: {
             border: '1px solid black',
-            padding: '1rem',
+            padding: '0',
           },
           fieldset: {
             border: 'none',
             padding: '0',
             margin: '0'
-          },
-          'input,select,pre,code': {
-            backgroundColor: 'white !important'
           },
           '.callout-text': {
             background: '#DDD',

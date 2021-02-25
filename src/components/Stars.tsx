@@ -7,7 +7,7 @@ type BadgeProps = {
 }
 const Stars = ({ count }: BadgeProps) => {
   return (
-    <Flex className="stars">
+    <Flex className="stars" sx={{cursor: 'default'}}>
       <img className="star" src="images/star.svg" />
       <div
         className="star-count"

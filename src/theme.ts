@@ -22,7 +22,8 @@ const GlobalTheme = {
     w3Teal: '#335E67',
     w3MoreTeal: '#509DAC',
     w3NavHighlightTeal: '#243843',
-    
+
+    w3gray: '#1B2731',
 
     // tealHighlight: '#66E0D9',
     // lightTeal: '#598188',
@@ -35,9 +36,10 @@ const GlobalTheme = {
 
     gray: '#1c272d',
 
-    babyBlue: '#CAD9F3',
+    babyBlue: 'rgba(202,217,243, .3)',
+    softBlue: '#B2D2D9',
 
-    navy: '#3C5172',
+    navy: '#13212C',
 
     orange: '#E67100',
 
@@ -54,6 +56,18 @@ const GlobalTheme = {
         highlight: '#b7ecec',
         muted: '#e6e6e6',
       },
+    },
+  },
+  forms: {
+    border: '2px solid',
+    bg: 'transparent',
+    select: {
+      cursor: 'pointer',
+      dark: {
+        border: '2px solid',
+        color: 'white',
+        borderColor: 'babyBlue',    
+      }
     },
   },
   buttons: {
@@ -74,8 +88,30 @@ const GlobalTheme = {
       },
     },
     secondary: {
-      color: 'background',
-      bg: 'secondary',
+      color: 'white',
+      border: '2px solid black',
+      borderColor: 'babyBlue',
+      borderRadius: '8px',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      lineHeight: '14px',
+      textAlign: 'center',
+      letterSpacing: '-0.6px',
+      textTransform: 'uppercase',
+      bg: 'transparent',
+      '&:hover': {
+        bg: 'rgba(255,255,255,.1)',
+      },
+    },
+    tertiary: {
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      lineHeight: '14px',
+      textAlign: 'center',
+      letterSpacing: '-0.6px',
+      textTransform: 'uppercase',
+      bg: 'transparent',
     },
   },
   styles: {

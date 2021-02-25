@@ -21,6 +21,7 @@ const Index = () => {
         </section>
         <Pagination />
       </main>
+      <br/><br/><br/>
     </Layout>
   )
 }

@@ -9,11 +9,13 @@ const Badge = ({ label }: BadgeProps) => {
   return (
     <div
       sx={{
-        border: '2px solid babyBlue',
+        cursor: 'default',
+        border: '2px solid black',
         textTransform: 'uppercase',
         borderColor: 'babyBlue',
-        borderRadius: 3,
-        p: 2,
+        borderRadius: '8px',
+        px: 2,
+        py: 1,
         mx: 2,
         color: 'babyBlue',
         fontFamily: '"Poppins"',

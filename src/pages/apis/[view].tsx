@@ -87,6 +87,7 @@ const api = new Web3API({
           <div className="Playground" />
         </div>
       </main>
+      <br/><br/><br/>
     </Layout>
   )
 }
