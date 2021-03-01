@@ -2,7 +2,7 @@ const GlobalTheme = {
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   sizes: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fonts: {
-    body: '"Montserrat", sans-serif',
+    body: '"Inter", sans-serif',
     heading: '"Montserrat", sans-serif',
     monospace: 'Menlo, monospace',
   },

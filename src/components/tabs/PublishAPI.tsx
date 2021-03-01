@@ -22,7 +22,7 @@ const CreateAPI = () => {
             <fieldset>
               <div className="title">Package Preview</div>
               <Flex className="preview">
-                <img className="api-logo" src="api-logo.svg" sx={{background: 'black', width: '211px', height: '211px', mr: 2}}/>
+                <img className="api-logo" src="api-logo.svg" sx={{bg: 'black', width: '211px', height: '211px', mr: 2}}/>
                 <div className="api-info">
                   <div className="title"><b>Uniswap V2</b></div>
                   <div className="sub-title">

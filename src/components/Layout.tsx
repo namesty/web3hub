@@ -92,7 +92,7 @@ const Layout = ({ children }: LayoutProps) => {
           },
           pre: {
             border: '1px solid black',
-            padding: '0',
+            padding: '.75rem',
           },
           fieldset: {
             border: 'none',
@@ -112,6 +112,9 @@ const Layout = ({ children }: LayoutProps) => {
             textTransform: 'uppercase',
             textDecoration: 'none',
             color: theme.colors.w3MoreTeal,
+          },
+          '.bn-onboard-custom' : {
+            zIndex: 100000
           }
         })}
       />

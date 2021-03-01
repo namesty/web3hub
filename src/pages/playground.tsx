@@ -13,7 +13,7 @@ const PlaygroundPage = () => {
         <Global
         styles={(theme) => ({
           body: {
-            background: theme.colors.darkGreen + ' !important'
+            bg: theme.colors.darkGreen + ' !important'
           }
         })}
       />
