@@ -1,14 +1,14 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Input, Flex, Select, Button } from 'theme-ui'
+import { jsx, Input, Flex, Select, Button, Styled } from 'theme-ui'
 
 const CreateAPI = () => {
   return (
     <div className="publish">
       <div className="storage">
-        <h4>Storage</h4>
+        <Styled.h4>Storage</Styled.h4>
         <form>
-          <h5>Location</h5>
+          <Styled.h4>Location</Styled.h4>
           <p>Point Web3hub to where your package has been uploaded.</p>
           <div>
             <fieldset>
@@ -40,7 +40,7 @@ const CreateAPI = () => {
           </div>
           <br/>
           <div>
-            <h5>Enable persistence</h5>
+            <Styled.h4>Enable persistence</Styled.h4>
             <p>Ensure your package remains available</p>
             <fieldset>
               <div><label>Pinning service provider</label></div>
@@ -55,7 +55,7 @@ const CreateAPI = () => {
       </div>
       <br/><br/>
       <div className="routing">
-        <h4>Routing</h4>
+        <Styled.h4>Routing</Styled.h4>
         <p>Register your package to an ENS domain and make it available on the Web3Hub</p>
         <form>
           <div><label>ENS Subdomain</label></div>

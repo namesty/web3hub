@@ -11,7 +11,7 @@ const UserApis = () => {
     <Layout>
       <main>
         <div>
-          <h3>My APIs</h3>
+          <Styled.h3>My APIs</Styled.h3>
         </div>
         <section className="content">
           <SortNav />

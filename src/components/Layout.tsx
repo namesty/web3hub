@@ -2,7 +2,6 @@
 /** @jsx jsx */
 import { jsx, useThemeUI } from 'theme-ui'
 import { Global } from '@emotion/core'
-import Header from './Header'
 type LayoutProps = {
   children?: any
 }
@@ -17,7 +16,6 @@ const Layout = ({ children }: LayoutProps) => {
         },
       }}
     >
-      <Header />
       {children}
       <Global
         styles={(theme) => ({
@@ -50,11 +48,11 @@ const Layout = ({ children }: LayoutProps) => {
             margin: '0',
             padding: '0',
             overflowX: 'hidden',
-            overflowY: 'scroll !important',
+            overflowY: 'hidden !important',
             backgroundRepeat: 'no-repeat',
             backgroundSize: '100% 100%',
             backgroundAttachment: 'scroll',
-            background: theme.colors.hazeGradient
+            background: theme.colors.hazeGradient,
           },
           'ul, ol, li': {
             margin: '0',
@@ -84,11 +82,15 @@ const Layout = ({ children }: LayoutProps) => {
             background: 'rgba(255, 255, 255, 0.08)',
           },
           main: {
-            margin: 'auto',
-            maxWidth: '1200px'
+            height: '100vh',
+            overflowY: 'scroll',
+            overflowX: 'hidden',
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
           },
           code: {
-            m: 0
+            m: 0,
           },
           pre: {
             border: '1px solid black',
@@ -97,7 +99,12 @@ const Layout = ({ children }: LayoutProps) => {
           fieldset: {
             border: 'none',
             padding: '0',
-            margin: '0'
+            margin: '0',
+          },
+          '.contents': {
+            maxWidth: '1200px',
+            margin: 'auto',
+            width: '100%',
           },
           '.callout-text': {
             background: '#DDD',
@@ -113,9 +120,9 @@ const Layout = ({ children }: LayoutProps) => {
             textDecoration: 'none',
             color: theme.colors.w3MoreTeal,
           },
-          '.bn-onboard-custom' : {
-            zIndex: 100000
-          }
+          '.bn-onboard-custom': {
+            zIndex: 100000,
+          },
         })}
       />
       <style jsx global>{`

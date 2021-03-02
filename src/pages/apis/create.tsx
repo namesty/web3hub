@@ -34,12 +34,12 @@ const CreateApi = () => {
             },
           }}
         >
-          <h3 className={'tab create ' + (activeTab === 'create' ? 'active' : '')}>
+          <Styled.h3 className={'tab create ' + (activeTab === 'create' ? 'active' : '')}>
             Create
-          </h3>
-          <h3 className={'tab publish ' + (activeTab === 'publish' ? 'active' : '')}>
+          </Styled.h3>
+          <Styled.h3 className={'tab publish ' + (activeTab === 'publish' ? 'active' : '')}>
             Publish
-          </h3>
+          </Styled.h3>
         </Flex>
         <div className="content">
           {activeTab === 'create' && <CreateAPI />}

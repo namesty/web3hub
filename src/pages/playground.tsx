@@ -4,20 +4,28 @@ import { jsx, Flex, Button, useThemeUI, Styled } from 'theme-ui'
 import Layout from '../components/Layout'
 import Playground from '../components/Playground'
 import { Global } from '@emotion/core'
+import Navbar from '../components/Navbar'
 
 const PlaygroundPage = () => {
+  const {theme} = useThemeUI()
   return (
     <Layout>
-      <main>
-        <Playground/>
-        <Global
+      <Flex>
+        <Navbar/>
+        <main>
+          <div className="contents">
+            <Playground/>
+          </div>
+        </main>
+      </Flex>
+      <Global
         styles={(theme) => ({
           body: {
-            bg: theme.colors.darkGreen + ' !important'
+            background: 'none' + ' !important',
+            backgroundColor: theme.colors.darkGreen + ' !important'
           }
         })}
       />
-      </main>
     </Layout>
   )
 }

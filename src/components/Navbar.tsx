@@ -6,24 +6,27 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 const SignInArea = dynamic(() => import('./SignInArea'), { ssr: false })
 
-const Header = () => {
+const Navbar = () => {
   const router = useRouter()
   return (
-    <header
-      role="header"
+    <nav
+      role="nav"
       sx={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        px: 4,
-        mb: 5,
+        py: 4,
         backgroundColor: 'grayGreen',
-        '*': { display: 'flex' },
+        flexDirection: 'column',
+        height: '100vh',
+        maxWidth: '112px',
+        zIndex: 100,
+        '*': { display: 'flex', flexDirection: 'column', },
         '.col': { flex: 3, '&:last-of-type': { justifyContent: 'flex-end' } },
       }}
     >
       <div className="col">
-        <div className="brand" sx={{ mr: 3 }}>
+        <div className="brand" sx={{ mb: 3 }}>
           <Link href="/">
             <a>
               <div className="logo">
@@ -34,11 +37,11 @@ const Header = () => {
         </div>
       </div>
       <div className="col" sx={{ flex: '6 !important', justifyContent: 'center' }}>
-        <nav sx={{ flex: 1 }}>
+        <div sx={{ flex: 1 }}>
           <ul
             sx={{
               flex: 1,
-              justifyContent: 'space-around',
+              justifyContent: 'center',
               alignContent: 'center',
               li: {
                 display: 'flex',
@@ -47,7 +50,8 @@ const Header = () => {
                   backgroundColor: 'w3NavHighlightTeal',
                 },
                 a: {
-                  p: 4,
+                  px: 3,
+                  py: 4,
                   textDecoration: 'none',
                   display: 'flex',
                   alignItems: 'center',
@@ -55,10 +59,15 @@ const Header = () => {
               },
             }}
           >
-            <li sx={{backgroundColor: router.pathname === '/' ? 'w3NavHighlightTeal' : 'transparent'}}>
+            <li
+              sx={{
+                backgroundColor:
+                  router.pathname === '/' ? 'w3NavHighlightTeal' : 'transparent',
+              }}
+            >
               <Link href="/" sx={{ alignItems: 'center' }}>
                 <a>
-                  <div sx={{ flexDirection: 'column' }}>
+                  <div sx={{ flexDirection: 'row', transform: 'rotate(90deg)' }}>
                     <img
                       src="/images/box.svg"
                       alt="box"
@@ -77,12 +86,19 @@ const Header = () => {
                       />
                     </div>
                   </div>
-                  <span>&nbsp;</span>
+                  <div sx={{mb: 3}}/>
                   <span className="text-nav">API's</span>
                 </a>
               </Link>
             </li>
-            <li sx={{backgroundColor: router.pathname === '/playground' ? 'w3NavHighlightTeal' : 'transparent'}}>
+            <li
+              sx={{
+                backgroundColor:
+                  router.pathname === '/playground'
+                    ? 'w3NavHighlightTeal'
+                    : 'transparent',
+              }}
+            >
               <Link href="/playground">
                 <a className="text-nav">
                   <img
@@ -97,23 +113,23 @@ const Header = () => {
             </li>
             <li>
               <a className="text-nav" href="https://web3api.dev" target="_BLANK">
-                <span>Web3Api Docs</span>
-                <span>&nbsp;</span>
+                
                 <img
-                  src="/images/outbound.svg"
+                  src="/images/doc.svg"
                   alt="outbound"
-                  sx={{ width: '14px', height: '14px' }}
+                  sx={{ height: '19px' }}
                 />
+                <span>&nbsp;</span>
+                <span>Docs</span>
+                
               </a>
             </li>
           </ul>
-        </nav>
+        </div>
       </div>
-      <div className="col" sx={{ flex: '3 !important' }}>
-        <SignInArea />
-      </div>
-    </header>
+      <div className="col" sx={{ flex: '3 !important' }}/>
+    </nav>
   )
 }
 
-export default Header
+export default Navbar

@@ -1,11 +1,11 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Select } from 'theme-ui'
+import { jsx, Select, Styled } from 'theme-ui'
 
 const CreateAPI = () => {
   return (
     <div className="create">
-      <h4>Create a Web3API Package</h4>
+      <Styled.h4>Create a Web3API Package</Styled.h4>
       <p>Start a new Web3API for your selected hosting configuration</p>
       <form>
         <fieldset>

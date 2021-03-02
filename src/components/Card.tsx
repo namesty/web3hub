@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Button } from 'theme-ui'
+import { jsx, Flex, Button, Styled } from 'theme-ui'
 import Link from 'next/link'
 import Stars from './Stars'
 import Badge from './Badge'
@@ -34,9 +34,9 @@ const Card = () => {
 
         <div className="info">
           <div className="row" sx={{ justifyContent: 'space-between' }}>
-            <h3 className="title" sx={{ textAlign: 'center', my: 2 }}>
+            <Styled.h3 className="title" sx={{ textAlign: 'center', my: 2 }}>
               UniswapV2
-            </h3>
+            </Styled.h3>
             <div className="subtitle" sx={{ textAlign: 'center', my: 2, mb: 3 }}>
               Historical data and analytics for Uniswap V2
             </div>
