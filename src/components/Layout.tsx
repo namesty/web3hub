@@ -62,6 +62,10 @@ const Layout = ({ children }: LayoutProps) => {
             display: 'flex',
             alignItems: 'center',
           },
+          fieldset : {
+            padding: 0,
+            border: 'none'
+          },
           '.contents': {
             maxWidth: '1200px',
             margin: 'auto',

@@ -23,9 +23,8 @@ const CreateApi = () => {
   return (
     <Layout>
       <Flex>
-        <Navbar />
-        <main>
-          <div className="contents">
+        <main sx={{pb: 5}}>
+          <div className="contents" sx={{maxWidth: 'calc(1200px + 112px)'}}>
             <Header title={activeTab === 'create' ? 'Create a Web3API Package' : 'Publish'}/>
             <Flex
               className="tabs"
@@ -75,7 +74,7 @@ const CreateApi = () => {
                 bg: 'white',
                 '> *': {
                   px: '55px',
-                  py: '90px',
+                  pt: '90px',
                 },
               }}
             >

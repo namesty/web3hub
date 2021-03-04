@@ -58,7 +58,7 @@ yarn deploy --IPFS`}</Styled.pre>
           </Styled.code>
         </Flex>
       </form>
-      <div sx={{}}>
+      <div>
         <div
           sx={{
             px: 4,
@@ -68,13 +68,19 @@ yarn deploy --IPFS`}</Styled.pre>
             borderRadius: '8px',
           }}
         >
-          <div sx={{ '*': { textAlign: 'center' } }}>
+          <Flex
+            sx={{
+              flexDirection: 'column',
+              alignItems: 'center',
+              '*': { textAlign: 'center' },
+            }}
+          >
             <Styled.h1 sx={{ color: 'white' }}>Need help?</Styled.h1>
             <Styled.p sx={{ mb: 4, color: 'white' }}>
-              First time developing with Web3API? View the getting started tutorial here
+              First time developing with Web3API? <br/> View the getting started tutorial here.
             </Styled.p>
             <Button variant="callout">Getting Started</Button>
-          </div>
+          </Flex>
         </div>
       </div>
     </Flex>

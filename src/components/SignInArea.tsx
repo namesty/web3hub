@@ -65,27 +65,49 @@ const SignInArea = () => {
             onKeyUp={handleSignInClick}
             sx={{ cursor: 'pointer', alignItems: 'center' }}
           >
-            <img src="/images/user.svg" alt="user" sx={{ height: '17px' }} />
+            <img src="/images/user.svg" alt="user" />
             <span>&nbsp;</span>
-            <span className="text-nav">Sign in</span>
+            <span
+              sx={{
+                color: '#0D373C',
+                fontFamily: 'Montserrat',
+                fontSize: '14px',
+                fontWeight: '600',
+                lineHeight: '17px',
+                letterSpacing: '-0.4000000059604645px',
+              }}
+            >
+              Sign in
+            </span>
           </li>
         ) : (
           <React.Fragment>
             <li>
-              <Link href="/apis/user">
-                <a className="header-nav" sx={{ display: 'flex', alignItems: 'center' }}>
-                  <img src="/images/apis.svg" alt="apis" />
-                  <span sx={{
-                    fontFamily: 'Montserrat',
-                    fontSize: '14px',
-                    fontStyle: 'normal',
-                    fontWeight: '600',
-                    lineHeight: '17px',
-                    letterSpacing: '-0.4000000059604645px',
-                    textAlign: 'left',                    
-                  }}>My APIs</span>
-                </a>
-              </Link>
+              {router.pathname === '/apis/create' ? (
+                ''
+              ) : (
+                <Link href="/apis/user">
+                  <a
+                    className="header-nav"
+                    sx={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    <img src="/images/apis.svg" alt="apis" />
+                    <span
+                      sx={{
+                        fontFamily: 'Montserrat',
+                        fontSize: '14px',
+                        fontStyle: 'normal',
+                        fontWeight: '600',
+                        lineHeight: '17px',
+                        letterSpacing: '-0.4000000059604645px',
+                        textAlign: 'left',
+                      }}
+                    >
+                      My APIs
+                    </span>
+                  </a>
+                </Link>
+              )}
             </li>
             <li className="wallet-addr" sx={{ p: '.425rem' }}>
               <span

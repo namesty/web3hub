@@ -154,13 +154,13 @@ const ApiView = () => {
                   </ul>
                   <ul className="category-Badges" sx={{ display: 'flex', mt: 3, ml: 0 }}>
                     <li sx={{ ml: -2 }}>
-                      <Badge label="ipfs" dark />
+                      <Badge label="ipfs"/>
                     </li>
                     <li sx={{ ml: -2 }}>
-                      <Badge label="defi" dark />
+                      <Badge label="defi"/>
                     </li>
                     <li sx={{ ml: -2 }}>
-                      <Badge label="amm" dark />
+                      <Badge label="amm"/>
                     </li>
                   </ul>
                   <br />

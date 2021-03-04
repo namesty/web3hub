@@ -4,21 +4,20 @@ import { jsx } from 'theme-ui'
 
 type BadgeProps = {
   label: string
-  dark?: boolean
 }
-const Badge = ({ label, dark }: BadgeProps) => {
+const Badge = ({ label }: BadgeProps) => {
   return (
     <div
       sx={{
         cursor: 'default',
         border: '2px solid black',
         textTransform: 'uppercase',
-        borderColor: dark ? 'babyBlueDark' : 'babyBlue',
+        borderColor: '#509DAC',
         borderRadius: '8px',
         px: 2,
         py: 1,
         mx: 2,
-        color: dark ? 'babyBlueDark' : 'babyBlue',
+        color: '#509DAC',
         fontFamily: '"Poppins"',
         fontWeight: '600',
         fontSize: '12px',

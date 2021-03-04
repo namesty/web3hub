@@ -60,9 +60,8 @@ const GlobalTheme = {
     },
   },
   forms: {
-    border: '2px solid rgba(205, 208, 227, 0.295455)',
-    bg: 'transparent',
     select: {
+      bg: 'transparent',
       border: '2px solid rgba(205, 208, 227, 0.295455)',
       cursor: 'pointer',
       borderRadius: '8px',
@@ -72,6 +71,9 @@ const GlobalTheme = {
         borderColor: 'babyBlue',
       },
     },
+    input: {
+      border: '2px solid rgba(205, 208, 227, 0.295455)',
+    }
   },
   buttons: {
     primary: {
