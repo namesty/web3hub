@@ -60,15 +60,17 @@ const GlobalTheme = {
     },
   },
   forms: {
-    border: '2px solid',
+    border: '2px solid rgba(205, 208, 227, 0.295455)',
     bg: 'transparent',
     select: {
+      border: '2px solid rgba(205, 208, 227, 0.295455)',
       cursor: 'pointer',
+      borderRadius: '8px',
       dark: {
         border: '2px solid',
         color: 'white',
-        borderColor: 'babyBlue',    
-      }
+        borderColor: 'babyBlue',
+      },
     },
   },
   buttons: {
@@ -104,6 +106,23 @@ const GlobalTheme = {
         bg: 'rgba(255,255,255,.1)',
       },
     },
+    secondaryOnLight: {
+      color: '#688184',
+      border: '2px solid #688184',
+      borderRadius: '8px',
+      p: 3,
+      fontWeight: 'bold',
+      fontSize: '14px',
+      lineHeight: '14px',
+      textAlign: 'center',
+      letterSpacing: '-0.6px',
+      textTransform: 'uppercase',
+      bg: 'transparent',
+      '&:hover': {
+        color: 'black',
+        border: '2px solid black',
+      },
+    },
     tertiary: {
       color: 'white',
       fontWeight: 'bold',
@@ -125,7 +144,7 @@ const GlobalTheme = {
       textTransform: 'uppercase',
       py: '20px',
       px: '60px',
-    }
+    },
   },
   styles: {
     root: {
@@ -193,21 +212,23 @@ const GlobalTheme = {
       textDecoration: 'none',
     },
     pre: {
-      fontFamily: 'monospace',
       overflowX: 'auto',
-      border: '1px solid black',
+      border: '2px solid rgba(205, 208, 227, 0.295455)',
       padding: '.75rem',
-      borderRadius: '4px',
+      borderRadius: '8px',
       marginTop: 0,
+      fontFamily: 'Roboto Mono',
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      fontSize: '14px',
+      lineHeight: '140.62%',
+      color: '#000000',
       code: {
         color: 'inherit',
       },
     },
     code: {
-      fontFamily: 'monospace',
-      fontSize: 'inherit',
       m: 0,
-      
     },
     table: {
       width: '100%',

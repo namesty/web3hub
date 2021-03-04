@@ -168,7 +168,7 @@ const ApiView = () => {
                     <Flex sx={{ alignItems: 'center', justifyContent: 'center' }}>
                       <img
                         sx={{ maxWidth: '19px', mr: 2 }}
-                        src="/images/android.svg"
+                        src="/images/playground.svg"
                         alt="icon"
                       />
                       <span>Playground</span>

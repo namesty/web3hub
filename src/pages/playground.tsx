@@ -5,6 +5,7 @@ import Layout from '../components/Layout'
 import Playground from '../components/Playground'
 import { Global } from '@emotion/core'
 import Navbar from '../components/Navbar'
+import Header from '../components/Header'
 
 const PlaygroundPage = () => {
   const {theme} = useThemeUI()
@@ -14,6 +15,7 @@ const PlaygroundPage = () => {
         <Navbar/>
         <main>
           <div className="contents">
+            <Header onDark title="Playground"/>
             <Playground/>
           </div>
         </main>

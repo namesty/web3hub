@@ -6,7 +6,6 @@ const CreateAPI = () => {
   return (
     <div className="publish">
       <div className="storage">
-        <Styled.h4>Storage</Styled.h4>
         <form>
           <Styled.h4>Location</Styled.h4>
           <p>Point Web3hub to where your package has been uploaded.</p>

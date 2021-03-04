@@ -18,17 +18,12 @@ import { useRouter } from 'next/router'
 const SignInArea = () => {
   const [{ dapp }, dispatch] = useStateValue()
   const router = useRouter()
-  const handleNewAPIClick = () => {
-    router.push('/apis/create?activeTab=create')
-  }
   const onboard = getOnboard({
     address: async (address) => {
       dispatch({
         type: 'SET_ADDRESS',
         payload: address,
       })
-      // let IDXDATA = await idx.get('basicProfile', await ethAddressToDID(address))
-      // console.log(IDXDATA)
     },
     network: (network) => {
       dispatch({
@@ -54,7 +49,6 @@ const SignInArea = () => {
       })
     },
   })
-
   const handleSignInClick = async () => {
     let selected = await onboard.walletSelect()
     if (selected) {
@@ -73,19 +67,39 @@ const SignInArea = () => {
           >
             <img src="/images/user.svg" alt="user" sx={{ height: '17px' }} />
             <span>&nbsp;</span>
-            <span className="text-nav" sx={{ color: 'white' }}>
-              Sign in
-            </span>
+            <span className="text-nav">Sign in</span>
           </li>
         ) : (
           <React.Fragment>
             <li>
               <Link href="/apis/user">
-                <a className="text-nav" sx={{ '&:hover': { color: 'w3MoreTeal'}}}>My APIs</a>
+                <a className="header-nav" sx={{ display: 'flex', alignItems: 'center' }}>
+                  <img src="/images/apis.svg" alt="apis" />
+                  <span sx={{
+                    fontFamily: 'Montserrat',
+                    fontSize: '14px',
+                    fontStyle: 'normal',
+                    fontWeight: '600',
+                    lineHeight: '17px',
+                    letterSpacing: '-0.4000000059604645px',
+                    textAlign: 'left',                    
+                  }}>My APIs</span>
+                </a>
               </Link>
             </li>
             <li className="wallet-addr" sx={{ p: '.425rem' }}>
-              <span className="text-nav" sx={{ color: 'white', fontSize: '1rem', textTransform: 'initial' }}>
+              <span
+                className="header-nav"
+                sx={{
+                  textTransform: 'initial',
+                  fontFamily: 'Montserrat',
+                  fontSize: '14px',
+                  fontStyle: 'normal',
+                  fontWeight: '600',
+                  lineHeight: '17px',
+                  letterSpacing: '-0.4000000059604645px',
+                }}
+              >
                 {dapp.address && addrShortener(dapp.address)}
               </span>
             </li>
@@ -93,10 +107,15 @@ const SignInArea = () => {
         )}
         <li>
           <Button
-            onClick={dapp.balance < 0 ? handleSignInClick : handleNewAPIClick}
+            variant={router.pathname !== '/apis/create' ? 'primary' : 'secondaryOnLight'}
+            onClick={() => {
+              router.pathname !== '/apis/create'
+                ? router.push('/apis/create?activeTab=create')
+                : router.push('/')
+            }}
             sx={{ display: 'inline-block', ml: 3 }}
           >
-            <span>Create API</span>
+            <span>{router.pathname !== '/apis/create' ? 'Create API' : 'Cancel'}</span>
           </Button>
         </li>
       </ul>

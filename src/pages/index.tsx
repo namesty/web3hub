@@ -5,7 +5,7 @@ import Layout from '../components/Layout'
 import SortNav from '../components/SortNav'
 import ApiGrid from '../components/ApiGrid'
 import Navbar from '../components/Navbar'
-import Modal from '../components/Modal'
+import Header from '../components/Header'
 
 const Index = () => {
   const { theme } = useThemeUI()
@@ -15,9 +15,7 @@ const Index = () => {
         <Navbar />
         <main>
           <div className="contents">
-            <div>
-              <Styled.h1>Browse APIs</Styled.h1>
-            </div>
+            <Header title="Browse APIs"/>
             <section className="content">
               <SortNav />
               <br />

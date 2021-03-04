@@ -7,6 +7,7 @@ import CreateAPI from '../../components/tabs/CreateAPI'
 import PublishAPI from '../../components/tabs/PublishAPI'
 import { useRouter } from 'next/router'
 import Navbar from '../../components/Navbar'
+import Header from '../../components/Header'
 
 const CreateApi = () => {
   const { theme } = useThemeUI()
@@ -25,9 +26,7 @@ const CreateApi = () => {
         <Navbar />
         <main>
           <div className="contents">
-            <Styled.h4>
-              {activeTab === 'create' ? 'Create a Web3API Package' : 'Publish'}
-            </Styled.h4>
+            <Header title={activeTab === 'create' ? 'Create a Web3API Package' : 'Publish'}/>
             <Flex
               className="tabs"
               onClick={handleTabClick}

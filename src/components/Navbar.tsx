@@ -102,8 +102,8 @@ const Navbar = () => {
               <Link href="/playground">
                 <a className="text-nav">
                   <img
-                    src="/images/android.svg"
-                    alt="android"
+                    src="/images/playground.svg"
+                    alt="playground"
                     sx={{ width: '24px', height: '27px' }}
                   />
                   <span>&nbsp;</span>
