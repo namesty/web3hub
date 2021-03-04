@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Button, Select, useThemeUI } from 'theme-ui'
+import { jsx, Flex, Button, Select, useThemeUI, Styled } from 'theme-ui'
 import Badge from './Badge'
 import Stars from './Stars'
 
@@ -78,7 +78,7 @@ const Playground = () => {
               New
             </Button>
           </Flex>
-          <code>
+          <Styled.code>
             <textarea
               onChange={() => console.log('YO')}
               sx={{ resize: 'none', width: '100%', height: '350px' }}
@@ -94,7 +94,7 @@ const Playground = () => {
   }
             `}
             ></textarea>
-          </code>
+          </Styled.code>
         </div>
         &nbsp;
         <div className="result" sx={{ flex: 6, backgroundColor: 'navy' }}>
@@ -116,8 +116,8 @@ const Playground = () => {
               </span>
             </div>
           </Flex>
-          <code sx={{ overflowX: 'scroll' }}>
-            <pre>{`
+          <Styled.code sx={{ overflowX: 'scroll' }}>
+            <Styled.pre>{`
 "data": {
   "transactions": [
     {
@@ -129,8 +129,8 @@ const Playground = () => {
     }
   ]
 }
-            `}</pre>
-          </code>
+            `}</Styled.pre>
+          </Styled.code>
         </div>
       </Flex>
     </div>

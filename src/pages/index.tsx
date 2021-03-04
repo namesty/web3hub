@@ -5,6 +5,7 @@ import Layout from '../components/Layout'
 import SortNav from '../components/SortNav'
 import ApiGrid from '../components/ApiGrid'
 import Navbar from '../components/Navbar'
+import Modal from '../components/Modal'
 
 const Index = () => {
   const { theme } = useThemeUI()

@@ -193,11 +193,11 @@ const ApiView = () => {
                 />
                 <div sx={{ width: '550px' }}>
                   <Styled.h2 sx={{ textAlign: 'center' }}>Get Started</Styled.h2>
-                  <code>
-                    <pre>{`yarn install @web3api/client`}</pre>
-                  </code>
-                  <code>
-                    <pre>
+                  <Styled.code>
+                    <Styled.pre>{`yarn install @web3api/client`}</Styled.pre>
+                  </Styled.code>
+                  <Styled.code>
+                    <Styled.pre>
                       {`import {
   Web3API,
   Ethereum,
@@ -213,8 +213,8 @@ const api = new Web3API({
     subgraph: new Subgraph({ provider: "http://localhost:8020" })
   }
 })`}
-                    </pre>
-                  </code>
+                    </Styled.pre>
+                  </Styled.code>
                 </div>
               </Flex>
               <br />

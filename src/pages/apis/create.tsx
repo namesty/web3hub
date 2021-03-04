@@ -6,6 +6,7 @@ import Layout from '../../components/Layout'
 import CreateAPI from '../../components/tabs/CreateAPI'
 import PublishAPI from '../../components/tabs/PublishAPI'
 import { useRouter } from 'next/router'
+import Navbar from '../../components/Navbar'
 
 const CreateApi = () => {
   const { theme } = useThemeUI()
@@ -20,33 +21,58 @@ const CreateApi = () => {
   }, [router.query.activeTab])
   return (
     <Layout>
-      <main sx={{ maxWidth: '766px', m: 'auto' }}>
-        <Flex
-          className="tabs"
-          onClick={handleTabClick}
-          sx={{
-            '*': { cursor: 'pointer', mr: 2, mb: 4 },
-            '.tab': {
-              fontWeight: 'normal',
-              '&.active': {
-                fontWeight: 'bold',
-              },
-            },
-          }}
-        >
-          <Styled.h3 className={'tab create ' + (activeTab === 'create' ? 'active' : '')}>
-            Create
-          </Styled.h3>
-          <Styled.h3 className={'tab publish ' + (activeTab === 'publish' ? 'active' : '')}>
-            Publish
-          </Styled.h3>
-        </Flex>
-        <div className="content">
-          {activeTab === 'create' && <CreateAPI />}
-          {activeTab === 'publish' && <PublishAPI />}
-        </div>
-      </main>
-      <br/><br/><br/>
+      <Flex>
+        <Navbar />
+        <main>
+          <div className="contents">
+            <Flex
+              className="tabs"
+              onClick={handleTabClick}
+              sx={{
+                '*': { cursor: 'pointer', mr: 2, mb: 4 },
+                '.tab': {
+                  textAlign: 'center',
+                  fontFamily: 'Montserrat',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  lineHeight: '20px',
+                  letterSpacing: '-0.4000000059604645px',
+                  pb: ' 18px',
+                  color: '#688184',
+                  '&.active': {
+                    fontWeight: 'bold',
+                    color: 'darkGreen',
+                    borderBottom: '2px solid #66E0D9',
+                    '&:hover': {
+                      borderBottom: '2px solid #66E0D9',
+                    }
+                  },
+                  '&:hover': {
+                    borderBottom: '2px solid #EEE',
+                  }
+                },
+              }}
+            >
+              <Styled.h3
+                className={'tab create ' + (activeTab === 'create' ? 'active' : '')}
+                sx={{ flex: 1 }}
+              >
+                Create
+              </Styled.h3>
+              <Styled.h3
+                className={'tab publish ' + (activeTab === 'publish' ? 'active' : '')}
+                sx={{ flex: 1 }}
+              >
+                Publish
+              </Styled.h3>
+            </Flex>
+            <div className="tab-content">
+              {activeTab === 'create' && <CreateAPI />}
+              {activeTab === 'publish' && <PublishAPI />}
+            </div>
+          </div>
+        </main>
+      </Flex>
     </Layout>
   )
 }

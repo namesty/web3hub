@@ -11,15 +11,15 @@ const CreateAPI = () => {
           <Styled.h4>Location</Styled.h4>
           <p>Point Web3hub to where your package has been uploaded.</p>
           <div>
-            <fieldset>
+            <div>
               <div><label>Package location</label></div>
               <Input
                 type="text"
                 placeholder="IPFS://fifmdoij9dfsjsd9fjwoefj09wej0f8rhwe98hrew98w09er"
               />
-            </fieldset>
+            </div>
             <br/>
-            <fieldset>
+            <div>
               <div className="title">Package Preview</div>
               <Flex className="preview">
                 <img className="api-logo" src="api-logo.svg" sx={{bg: 'black', width: '211px', height: '211px', mr: 2}}/>
@@ -36,20 +36,20 @@ const CreateAPI = () => {
                   </a>
                 </div>
               </Flex>
-            </fieldset>
+            </div>
           </div>
           <br/>
           <div>
             <Styled.h4>Enable persistence</Styled.h4>
             <p>Ensure your package remains available</p>
-            <fieldset>
+            <div>
               <div><label>Pinning service provider</label></div>
               <Select>
                 <option>Web3API.org pinning service</option>
                 <option>Another</option>
                 <option>And Another</option>
               </Select>
-            </fieldset>
+            </div>
           </div>
         </form>
       </div>

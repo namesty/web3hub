@@ -54,6 +54,19 @@ const Layout = ({ children }: LayoutProps) => {
             backgroundAttachment: 'scroll',
             background: theme.colors.hazeGradient,
           },
+          main: {
+            height: '100vh',
+            overflowY: 'scroll',
+            overflowX: 'hidden',
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+          },
+          '.contents': {
+            maxWidth: '1200px',
+            margin: 'auto',
+            width: '100%',
+          },
           'ul, ol, li': {
             margin: '0',
             padding: '0',
@@ -63,9 +76,6 @@ const Layout = ({ children }: LayoutProps) => {
             textTransform: 'none',
             appearance: 'none',
             cursor: 'pointer',
-          },
-          'h1, h2, h3, h4, h5, h6, p': {
-            marginTop: '0',
           },
           'img, svg, picture, span, a, b, u, i, small, sub, strong, label': {
             display: 'inline-block',
@@ -80,31 +90,6 @@ const Layout = ({ children }: LayoutProps) => {
           },
           'table tbody tr:hover': {
             background: 'rgba(255, 255, 255, 0.08)',
-          },
-          main: {
-            height: '100vh',
-            overflowY: 'scroll',
-            overflowX: 'hidden',
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-          },
-          code: {
-            m: 0,
-          },
-          pre: {
-            border: '1px solid black',
-            padding: '.75rem',
-          },
-          fieldset: {
-            border: 'none',
-            padding: '0',
-            margin: '0',
-          },
-          '.contents': {
-            maxWidth: '1200px',
-            margin: 'auto',
-            width: '100%',
           },
           '.callout-text': {
             background: '#DDD',

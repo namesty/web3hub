@@ -114,6 +114,18 @@ const GlobalTheme = {
       textTransform: 'uppercase',
       bg: 'transparent',
     },
+    callout: {
+      color: 'white',
+      background: 'linear-gradient(0deg, #529DAD 1.85%, #60C092 97.11%)',
+      fontFamily: 'Montserrat',
+      fontSize: '14px',
+      fontWeight: '700',
+      lineHeight: '14px',
+      letterSpacing: '-0.6000000238418579px',
+      textTransform: 'uppercase',
+      py: '20px',
+      px: '60px',
+    }
   },
   styles: {
     root: {
@@ -122,6 +134,7 @@ const GlobalTheme = {
       fontWeight: 'body',
     },
     h1: {
+      marginTop: '0',
       color: 'text',
       fontFamily: 'heading',
       lineHeight: 'heading',
@@ -129,6 +142,7 @@ const GlobalTheme = {
       fontSize: 5,
     },
     h2: {
+      marginTop: '0',
       color: 'text',
       fontFamily: 'heading',
       lineHeight: 'heading',
@@ -136,6 +150,7 @@ const GlobalTheme = {
       fontSize: 4,
     },
     h3: {
+      marginTop: '0',
       color: 'text',
       fontFamily: 'heading',
       lineHeight: 'heading',
@@ -143,6 +158,7 @@ const GlobalTheme = {
       fontSize: 3,
     },
     h4: {
+      marginTop: '0',
       color: 'text',
       fontFamily: 'heading',
       lineHeight: 'heading',
@@ -150,6 +166,7 @@ const GlobalTheme = {
       fontSize: 2,
     },
     h5: {
+      marginTop: '0',
       color: 'text',
       fontFamily: 'heading',
       lineHeight: 'heading',
@@ -157,6 +174,7 @@ const GlobalTheme = {
       fontSize: 1,
     },
     h6: {
+      marginTop: '0',
       color: 'text',
       fontFamily: 'heading',
       lineHeight: 'heading',
@@ -164,6 +182,7 @@ const GlobalTheme = {
       fontSize: 0,
     },
     p: {
+      marginTop: '0',
       color: 'text',
       fontFamily: 'body',
       fontWeight: 'body',
@@ -176,6 +195,8 @@ const GlobalTheme = {
     pre: {
       fontFamily: 'monospace',
       overflowX: 'auto',
+      border: '1px solid black',
+      padding: '.75rem',
       code: {
         color: 'inherit',
       },
@@ -183,6 +204,7 @@ const GlobalTheme = {
     code: {
       fontFamily: 'monospace',
       fontSize: 'inherit',
+      m: 0,
     },
     table: {
       width: '100%',

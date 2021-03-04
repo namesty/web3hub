@@ -8,7 +8,7 @@ const CreateAPI = () => {
       <Styled.h4>Create a Web3API Package</Styled.h4>
       <p>Start a new Web3API for your selected hosting configuration</p>
       <form>
-        <fieldset>
+        <div>
           <div>
             <label>Hosting Configuration</label>
           </div>
@@ -17,9 +17,9 @@ const CreateAPI = () => {
             <option>Another</option>
             <option>And Another</option>
           </Select>
-        </fieldset>
+        </div>
         <br/>
-        <fieldset>
+        <div>
           <div>
             <label>
               Clone the{' '}
@@ -29,31 +29,31 @@ const CreateAPI = () => {
               to your local dev environment
             </label>
           </div>
-          <code>
-            <pre>
+          <Styled.code>
+            <Styled.pre>
               git clone https://github.com/web3api-start/uniswapv2 cd uniswapv2 yarn
               install
-            </pre>
-          </code>
-        </fieldset>
+            </Styled.pre>
+          </Styled.code>
+        </div>
         <br/>
-        <fieldset>
+        <div>
           <div className="callout-text">
             First time developing with Web3API? View the getting started tutorial{' '}
             <a href="https://web3api.dev/" target="_BLANK">
               here
             </a>
           </div>
-        </fieldset>
+        </div>
         <br/>
-        <fieldset>
+        <div>
           <div>
             <label>When ready deploy the package to IPFS using the following</label>
           </div>
-          <code>
-            <pre>yarn codegen yarn build yarn deploy --IPFS</pre>
-          </code>
-        </fieldset>
+          <Styled.code>
+            <Styled.pre>yarn codegen yarn build yarn deploy --IPFS</Styled.pre>
+          </Styled.code>
+        </div>
       </form>
     </div>
   )
