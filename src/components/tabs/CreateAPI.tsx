@@ -1,14 +1,25 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Select, Styled } from 'theme-ui'
+import { jsx, Select, Styled, Flex, Button } from 'theme-ui'
 
 const CreateAPI = () => {
   return (
-    <div className="create">
-      <Styled.h4>Create a Web3API Package</Styled.h4>
-      <p>Start a new Web3API for your selected hosting configuration</p>
-      <form>
-        <div>
+    <Flex className="create">
+      <form
+        sx={{
+          '* > div': {
+            width: '220px',
+            mr: '44px',
+            color: '#688184',
+            fontFamily: 'Montserrat',
+            fontSize: '14px',
+            lineHeight: '22px',
+            letterSpacing: '-0.4000000059604645px',
+            '+ *': { width: '484px', mb: '54px' },
+          },
+        }}
+      >
+        <Flex>
           <div>
             <label>Hosting Configuration</label>
           </div>
@@ -17,9 +28,8 @@ const CreateAPI = () => {
             <option>Another</option>
             <option>And Another</option>
           </Select>
-        </div>
-        <br/>
-        <div>
+        </Flex>
+        <Flex>
           <div>
             <label>
               Clone the{' '}
@@ -31,31 +41,43 @@ const CreateAPI = () => {
           </div>
           <Styled.code>
             <Styled.pre>
-              git clone https://github.com/web3api-start/uniswapv2 cd uniswapv2 yarn
-              install
+              {`git clone https://github.com/web3api-start/uniswapv2 
+cd uniswapv2
+yarn install`}
             </Styled.pre>
           </Styled.code>
-        </div>
-        <br/>
-        <div>
-          <div className="callout-text">
-            First time developing with Web3API? View the getting started tutorial{' '}
-            <a href="https://web3api.dev/" target="_BLANK">
-              here
-            </a>
-          </div>
-        </div>
-        <br/>
-        <div>
+        </Flex>
+        <Flex>
           <div>
             <label>When ready deploy the package to IPFS using the following</label>
           </div>
           <Styled.code>
-            <Styled.pre>yarn codegen yarn build yarn deploy --IPFS</Styled.pre>
+            <Styled.pre>{`yarn codegen
+yarn build
+yarn deploy --IPFS`}</Styled.pre>
           </Styled.code>
-        </div>
+        </Flex>
       </form>
-    </div>
+      <div sx={{}}>
+        <div
+          sx={{
+            px: 4,
+            backgroundColor: '#0D373C',
+            p: '46px',
+            boxShadow: '0px 25px 40px rgba(0, 0, 0, 0.06)',
+            borderRadius: '8px',
+          }}
+        >
+          <div sx={{ '*': { textAlign: 'center' } }}>
+            <Styled.h1 sx={{ color: 'white' }}>Need help?</Styled.h1>
+            <Styled.p sx={{ mb: 4, color: 'white' }}>
+              First time developing with Web3API? View the getting started tutorial here
+            </Styled.p>
+            <Button variant="callout">Getting Started</Button>
+          </div>
+        </div>
+      </div>
+    </Flex>
   )
 }
 

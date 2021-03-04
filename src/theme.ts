@@ -197,6 +197,8 @@ const GlobalTheme = {
       overflowX: 'auto',
       border: '1px solid black',
       padding: '.75rem',
+      borderRadius: '4px',
+      marginTop: 0,
       code: {
         color: 'inherit',
       },
@@ -205,6 +207,7 @@ const GlobalTheme = {
       fontFamily: 'monospace',
       fontSize: 'inherit',
       m: 0,
+      
     },
     table: {
       width: '100%',

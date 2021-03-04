@@ -25,6 +25,9 @@ const CreateApi = () => {
         <Navbar />
         <main>
           <div className="contents">
+            <Styled.h4>
+              {activeTab === 'create' ? 'Create a Web3API Package' : 'Publish'}
+            </Styled.h4>
             <Flex
               className="tabs"
               onClick={handleTabClick}
@@ -39,17 +42,18 @@ const CreateApi = () => {
                   letterSpacing: '-0.4000000059604645px',
                   pb: ' 18px',
                   color: '#688184',
+                  mb: 0,
                   '&.active': {
                     fontWeight: 'bold',
                     color: 'darkGreen',
                     borderBottom: '2px solid #66E0D9',
                     '&:hover': {
                       borderBottom: '2px solid #66E0D9',
-                    }
+                    },
                   },
                   '&:hover': {
                     borderBottom: '2px solid #EEE',
-                  }
+                  },
                 },
               }}
             >
@@ -66,7 +70,16 @@ const CreateApi = () => {
                 Publish
               </Styled.h3>
             </Flex>
-            <div className="tab-content">
+            <div
+              className="tab-content"
+              sx={{
+                bg: 'white',
+                '> *': {
+                  px: '55px',
+                  py: '90px',
+                },
+              }}
+            >
               {activeTab === 'create' && <CreateAPI />}
               {activeTab === 'publish' && <PublishAPI />}
             </div>
