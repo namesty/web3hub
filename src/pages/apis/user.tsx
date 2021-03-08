@@ -7,11 +7,13 @@ import Layout from '../../components/Layout'
 import Header from '../../components/Header'
 import Navbar from '../../components/Navbar'
 import ContentNav from '../../components/ContentNav'
+import Published from '../../components/tabs/Published'
+import Favorites from '../../components/tabs/Favorites'
 
 const UserApis = () => {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState(router.query.activeTab as string)
-
+  console.log(activeTab)
   useEffect(() => {
     setActiveTab(router.query.activeTab as string)
   }, [router.query.activeTab])
@@ -38,15 +40,15 @@ const UserApis = () => {
                 ]}
               />
               <br />
-              {/* {activeTab === 'published' && <Published />}
-              {activeTab === 'favorites' && <Favorites />} */}
+              {activeTab === 'published' && <Published/>}
+              {activeTab === 'favorites' && <Favorites />}
             </section>
+            <br />
+            <br />
+            <br />
           </div>
         </main>
       </Flex>
-      <br />
-      <br />
-      <br />
     </Layout>
   )
 }

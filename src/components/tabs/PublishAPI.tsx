@@ -4,7 +4,7 @@ import { jsx, Input, Flex, Select, Button, Styled, Field} from 'theme-ui'
 import Stars from '../Stars'
 import Badge from '../Badge'
 
-const CreateAPI = () => {
+const PublishAPI = () => {
   return (
     <Flex className="publish">
       <form
@@ -124,4 +124,4 @@ const CreateAPI = () => {
   )
 }
 
-export default CreateAPI
+export default PublishAPI
