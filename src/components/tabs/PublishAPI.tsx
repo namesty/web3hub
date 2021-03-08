@@ -74,8 +74,8 @@ const CreateAPI = () => {
         <section>
           <fieldset>
             <label />
-            <Flex>
-              
+            <Flex>   
+              <Button>Register ENS</Button>
               <p sx={{ m: 0, ml: 3 }}>
                 <small>This option will cost ~0.0023 ETH ($2.90 USD)</small>
                 <br />
@@ -86,7 +86,7 @@ const CreateAPI = () => {
                   </a>
                 </small>
               </p>
-              <Button>Register ENS</Button>
+              
             </Flex>
           </fieldset>
         </section>

@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Button, Select, useThemeUI, Styled } from 'theme-ui'
+import { jsx, Flex, Button, Select, Field, useThemeUI, Styled } from 'theme-ui'
 import Badge from './Badge'
 import Stars from './Stars'
 
@@ -33,19 +33,19 @@ const Playground = () => {
         sx={{
           p: '1.5rem',
           backgroundColor: 'w3gray',
-          '*': { display: 'flex', alignItems: 'center' },
+          '*': { display: 'flex' },
+          label: {
+            display: 'none'
+          }
         }}
       >
-        <Select sx={{   
-          ...theme.theme.forms.select.dark,
-          width: '20rem'
-        }}>
-          <option value="Uniswap">Uniswap</option>
-          <option value="YFI">YFI</option>
-          <option value="Curve">Curve</option>
-          <option value="Filecoin">Filecoin</option>
-        </Select>
-        <Flex className="selection-detail" sx={{ ml: 4 }}>
+        <Field 
+          label="test"
+          name="api-search"
+          placeholder="Search"
+          sx={{width: '20rem'}}
+          />        
+        <Flex className="selection-detail" sx={{ ml: 4, alignItems: 'center' }}>
           <a className="text-nav" href="/uniswap/docs" sx={{ mr: 5 }}>
             GO TO API PAGE
           </a>
