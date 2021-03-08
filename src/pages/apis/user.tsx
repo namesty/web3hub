@@ -1,14 +1,20 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { jsx, Flex, Button, useThemeUI, Styled } from 'theme-ui'
 import Layout from '../../components/Layout'
-import ApiGrid from '../../components/ApiGrid'
-import SortNav from '../../components/SortNav'
 import Header from '../../components/Header'
 import Navbar from '../../components/Navbar'
+import ContentNav from '../../components/ContentNav'
 
 const UserApis = () => {
-  const { theme } = useThemeUI()
+  const router = useRouter()
+  const [activeTab, setActiveTab] = useState(router.query.activeTab as string)
+
+  useEffect(() => {
+    setActiveTab(router.query.activeTab as string)
+  }, [router.query.activeTab])
   return (
     <Layout>
       <Flex>
@@ -17,9 +23,23 @@ const UserApis = () => {
           <div className="contents">
             <Header title="My API's" />
             <section className="content">
-              <SortNav />
+              <ContentNav
+                setActiveTab={setActiveTab}
+                activeTab={activeTab}
+                tabs={[
+                  {
+                    label: 'Published',
+                    count: 0,
+                  },
+                  {
+                    label: 'Favorites',
+                    count: 12,
+                  },
+                ]}
+              />
               <br />
-              <ApiGrid />
+              {/* {activeTab === 'published' && <Published />}
+              {activeTab === 'favorites' && <Favorites />} */}
             </section>
           </div>
         </main>

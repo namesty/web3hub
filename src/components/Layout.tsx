@@ -70,6 +70,7 @@ const Layout = ({ children }: LayoutProps) => {
             maxWidth: '1200px',
             margin: 'auto',
             width: '100%',
+            height: '100%'
           },
           'ul, ol, li': {
             margin: '0',

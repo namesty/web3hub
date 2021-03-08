@@ -6,7 +6,6 @@ import Layout from '../../components/Layout'
 import CreateAPI from '../../components/tabs/CreateAPI'
 import PublishAPI from '../../components/tabs/PublishAPI'
 import { useRouter } from 'next/router'
-import Navbar from '../../components/Navbar'
 import Header from '../../components/Header'
 
 const CreateApi = () => {

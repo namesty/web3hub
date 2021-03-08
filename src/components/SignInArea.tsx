@@ -86,7 +86,7 @@ const SignInArea = () => {
               {router.pathname === '/apis/create' ? (
                 ''
               ) : (
-                <Link href="/apis/user">
+                <Link href="/apis/user?activeTab=published">
                   <a
                     className="header-nav"
                     sx={{ display: 'flex', alignItems: 'center' }}
