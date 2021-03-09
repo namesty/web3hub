@@ -6,6 +6,7 @@ import Layout from '../../components/Layout'
 import Stars from '../../components/Stars'
 import Badge from '../../components/Badge'
 import Navbar from '../../components/Navbar'
+import Header from '../../components/Header'
 
 const ApiView = () => {
   const { theme } = useThemeUI()
@@ -16,6 +17,7 @@ const ApiView = () => {
         <Navbar/>
         <main>
           <div className="contents">
+            <Header backNav={`Browse API's`} />
             <div
               className="wrap"
               sx={{

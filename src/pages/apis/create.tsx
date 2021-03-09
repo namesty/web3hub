@@ -1,17 +1,22 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { jsx, Flex, Button, useThemeUI, Styled } from 'theme-ui'
+
 import Layout from '../../components/Layout'
+
 import CreateAPI from '../../components/tabs/CreateAPI'
 import PublishAPI from '../../components/tabs/PublishAPI'
-import { useRouter } from 'next/router'
+
 import Header from '../../components/Header'
+import Modal from '../../components/Modal'
 
 const CreateApi = () => {
   const { theme } = useThemeUI()
   const router = useRouter()
   const [activeTab, setActiveTab] = useState(router.query.activeTab)
+  const [modalOpen, setmodalOpen] = useState(false)
   const handleTabClick = (e: React.BaseSyntheticEvent) => {
     e.stopPropagation()
     setActiveTab(e.target.classList[1])
@@ -23,6 +28,7 @@ const CreateApi = () => {
     <Layout>
       <Flex>
         <main sx={{pb: 5}}>
+          {modalOpen && <Modal screen="success" close={()=>{setmodalOpen(false)}}/>}
           <div className="contents" sx={{maxWidth: 'calc(1200px + 112px)'}}>
             <Header title={activeTab === 'create' ? 'Create a Web3API Package' : 'Publish'}/>
             <Flex

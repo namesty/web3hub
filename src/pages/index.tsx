@@ -1,12 +1,12 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Button, useThemeUI, Styled } from 'theme-ui'
+import { jsx, Flex, useThemeUI } from 'theme-ui'
 import Layout from '../components/Layout'
 import SortNav from '../components/SortNav'
 import ApiGrid from '../components/ApiGrid'
 import Navbar from '../components/Navbar'
 import Header from '../components/Header'
-import Modal from '../components/Modal'
+import BGWave from '../components/BGWave'
 
 const Index = () => {
   const { theme } = useThemeUI()
@@ -16,7 +16,6 @@ const Index = () => {
         <Navbar />
         <main>
           <div className="contents">
-            {/* <Modal screen="success" /> */}
             <Header title="Browse APIs"/>
             <section className="content">
               <SortNav />
@@ -29,6 +28,7 @@ const Index = () => {
           </div>
         </main>
       </Flex>
+      <BGWave light/>
     </Layout>
   )
 }

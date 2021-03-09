@@ -54,6 +54,17 @@ const Layout = ({ children }: LayoutProps) => {
             backgroundAttachment: 'scroll',
             background: theme.colors.hazeGradient,
           },
+          'body::before, body::after': {
+            display: 'none',
+            zIndex: '-1',
+            position: 'absolute',
+            content: "''",
+            top: '0',
+            left: '0',
+            width: '100vw',
+            height: '100vh',
+            backgroundAttachment: 'scroll',
+          },
           main: {
             height: '100vh',
             overflowY: 'scroll',
@@ -115,21 +126,6 @@ const Layout = ({ children }: LayoutProps) => {
           },
         })}
       />
-      <style jsx global>{`
-        /* Typescript weirdness */
-        body::before,
-        body::after {
-          display: none;
-          zindex: -1;
-          position: absolute;
-          content: '';
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          backgroundattachment: scroll;
-        }
-      `}</style>
     </div>
   )
 }

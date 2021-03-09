@@ -2,12 +2,14 @@
 /** @jsx jsx */
 import React from 'react'
 import { jsx, Flex, Button, useThemeUI, Styled } from 'theme-ui'
+import Close from '../../public/images/close.svg'
 
 type ModalProps = {
   screen: string
+  close: () => void
 }
 
-const Modal = ({ screen = 'success' }: ModalProps) => {
+const Modal = ({ screen = 'success', close }: ModalProps) => {
   const { theme } = useThemeUI()
   return (
     <Flex
@@ -43,6 +45,18 @@ const Modal = ({ screen = 'success' }: ModalProps) => {
       >
         {screen === 'success' && (
           <React.Fragment>
+            <Close
+            onClick={close}
+            sx={{
+              position: 'absolute',
+              right: 4,
+              top: 4,
+              fill: '#597980',
+              '&:hover': {
+                fill: '#FFFFFF',
+                cursor: 'pointer'
+              }
+            }}/>
             <img src="/images/trophy.svg" alt="trophy" sx={{ width: '220px' }} />
             <Styled.h1
               sx={{ color: 'white', fontSize: '44px', fontWeight: 'bold', pt: 4, mb: 2 }}

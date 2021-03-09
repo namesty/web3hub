@@ -8,6 +8,8 @@ import addrShortener from '../utils/addrShortener'
 import Link from 'next/link'
 import Web3 from 'web3'
 import { useRouter } from 'next/router'
+import User from '../../public/images/user.svg'
+import MyAPIs from '../../public/images/apis.svg'
 
 // import Ceramic from '@ceramicnetwork/http-client'
 // import { IDX } from '@ceramicstudio/idx'
@@ -15,7 +17,11 @@ import { useRouter } from 'next/router'
 // const ceramic = new Ceramic('https://gateway-clay.ceramic.network')
 // const idx = new IDX({ ceramic })
 
-const SignInArea = () => {
+type SignInAreaProps = {
+  onDark?: boolean
+}
+
+const SignInArea = ({ onDark }: SignInAreaProps) => {
   const [{ dapp }, dispatch] = useStateValue()
   const router = useRouter()
   const onboard = getOnboard({
@@ -55,9 +61,15 @@ const SignInArea = () => {
       await onboard.walletCheck()
     }
   }
-
+  console.log('onDark:',onDark)
   return (
-    <Flex className="sign-in-wrap" sx={{ li: { ml: 2 } }}>
+    <Flex
+      className="sign-in-wrap"
+      sx={{
+        '*': { display: 'flex', color: onDark ? 'white !important' : '' },
+        li: { ml: 2 },
+      }}
+    >
       <ul sx={{ display: 'flex', alignItems: 'center' }}>
         {dapp.balance < 0 ? (
           <li
@@ -65,7 +77,7 @@ const SignInArea = () => {
             onKeyUp={handleSignInClick}
             sx={{ cursor: 'pointer', alignItems: 'center' }}
           >
-            <img src="/images/user.svg" alt="user" />
+            <User stroke={onDark ? 'white' : 'darkGreen'} />
             <span>&nbsp;</span>
             <span
               sx={{
@@ -91,7 +103,7 @@ const SignInArea = () => {
                     className="header-nav"
                     sx={{ display: 'flex', alignItems: 'center' }}
                   >
-                    <img src="/images/apis.svg" alt="apis" />
+                    <MyAPIs stroke={onDark ? 'white' : 'darkGreen'} sx={{mr: 2}}/>
                     <span
                       sx={{
                         fontFamily: 'Montserrat',

@@ -14,6 +14,7 @@ const Card = () => {
         p: 4,
         boxShadow: '0px 0px 10px 5px #DDD',
         borderRadius: '8px',
+        bg: 'white'
       }}
     >
       <Link href="apis/SOMEAPI">
@@ -65,13 +66,13 @@ const Card = () => {
               sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}
             >
               <li>
-                <Badge label="ipfs" dark />
+                <Badge label="ipfs" />
               </li>
               <li>
-                <Badge label="defi" dark />
+                <Badge label="defi" />
               </li>
               <li>
-                <Badge label="amm" dark />
+                <Badge label="amm" />
               </li>
             </ul>
           </div>

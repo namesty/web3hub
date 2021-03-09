@@ -3,6 +3,7 @@
 import { jsx, Flex, Button, Select, Field, useThemeUI, Styled } from 'theme-ui'
 import Badge from './Badge'
 import Stars from './Stars'
+import BGWave from '../components/BGWave'
 
 const Playground = () => {
   const theme = useThemeUI()
@@ -24,7 +25,7 @@ const Playground = () => {
           backgroundColor: 'transparent !important',
           border: 'none',
           fontSize: '14px',
-          lineHeight: '14px'
+          lineHeight: '14px',
         },
       }}
     >
@@ -35,21 +36,21 @@ const Playground = () => {
           backgroundColor: 'w3gray',
           '*': { display: 'flex' },
           label: {
-            display: 'none'
-          }
+            display: 'none',
+          },
         }}
       >
-        <Field 
+        <Field
           label="test"
           name="api-search"
           placeholder="Search"
-          sx={{width: '20rem'}}
-          />        
+          sx={{ width: '20rem' }}
+        />
         <Flex className="selection-detail" sx={{ ml: 4, alignItems: 'center' }}>
           <a className="text-nav" href="/uniswap/docs" sx={{ mr: 5 }}>
             GO TO API PAGE
           </a>
-          <Stars count={320} onDark/>
+          <Stars count={320} onDark />
           <ul className="category-Badges" sx={{ ml: 4 }}>
             <li>
               <Badge label="ipfs" />
@@ -69,7 +70,7 @@ const Playground = () => {
             className="templates"
             sx={{ flex: 1, mb: 4, justifyContent: 'space-between' }}
           >
-            <Select sx={{...theme.theme.forms.select.dark, width: '280px'}}>
+            <Select sx={{ ...theme.theme.forms.select.dark, width: '280px' }}>
               <option value="GetSwap">Get Swap</option>
               <option value="GetSwap">Get Transaction</option>
               <option value="GetSwap">Get History</option>
@@ -111,7 +112,11 @@ const Playground = () => {
               <Button variant="tertiary">Save</Button>
             </div>
             <div className="right">
-              <span className="text-nav left-chevron" onClick={handleShowSchema} sx={{cursor: 'pointer'}}>
+              <span
+                className="text-nav left-chevron"
+                onClick={handleShowSchema}
+                sx={{ cursor: 'pointer' }}
+              >
                 <span sx={{ fontSize: '2.5rem', pr: '1rem' }}>‹</span> Show Schema
               </span>
             </div>
@@ -133,6 +138,7 @@ const Playground = () => {
           </Styled.code>
         </div>
       </Flex>
+      <BGWave dark/>
     </div>
   )
 }

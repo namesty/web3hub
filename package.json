@@ -12,9 +12,11 @@
   "dependencies": {
     "@ceramicnetwork/http-client": "^0.9.6",
     "@ceramicstudio/idx": "^0.8.0",
+    "@svgr/webpack": "^5.5.0",
     "@theme-ui/components": "^0.3.1",
     "@theme-ui/css": "^0.3.1",
     "animate.css": "^4.1.1",
+    "babel-plugin-inline-react-svg": "^2.0.1",
     "bnc-onboard": "latest",
     "graphql-playground-react": "^1.7.27",
     "multicodec": "^2.1.0",
