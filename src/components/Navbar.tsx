@@ -1,10 +1,10 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-const SignInArea = dynamic(() => import('./SignInArea'), { ssr: false })
+import APIs from '../../public/images/APIs.svg'
+import PlaygroundImg from '../../public/images/playground.svg'
 
 const Navbar = () => {
   const router = useRouter()
@@ -44,10 +44,25 @@ const Navbar = () => {
               justifyContent: 'center',
               alignContent: 'center',
               li: {
+                // transition: 'border-left-color, background-color 2s ease',
                 display: 'flex',
                 alignItems: 'center',
+                borderLeft: '2px solid',
+                borderLeftColor: 'grayGreen',
+                svg: {
+                  stroke: '#509DAC',
+                },
                 '&:hover': {
+                  borderLeftColor: 'w3NavHighlightTeal',
                   backgroundColor: 'w3NavHighlightTeal',
+                },
+                '&.active': {
+                  borderLeftColor: 'w3tealHighlight',
+                  backgroundColor: 'w3NavHighlightTeal',
+                  span: { color: 'white !important'},
+                  svg: {
+                    stroke: 'white',
+                  }
                 },
                 a: {
                   px: 3,
@@ -59,54 +74,20 @@ const Navbar = () => {
               },
             }}
           >
-            <li
-              sx={{
-                backgroundColor:
-                  router.pathname === '/' ? 'w3NavHighlightTeal' : 'transparent',
-              }}
-            >
+            <li className={router.pathname === '/' ? 'active' : ''}>
               <Link href="/" sx={{ alignItems: 'center' }}>
                 <a>
-                  <div sx={{ flexDirection: 'row', transform: 'rotate(90deg)' }}>
-                    <img
-                      src="/images/box.svg"
-                      alt="box"
-                      sx={{ width: '13px', height: '13px', m: 'auto' }}
-                    />
-                    <div sx={{ alignItems: 'center' }}>
-                      <img
-                        src="/images/box.svg"
-                        alt="box"
-                        sx={{ width: '13px', height: '13px' }}
-                      />
-                      <img
-                        src="/images/box.svg"
-                        alt="box"
-                        sx={{ width: '13px', height: '13px' }}
-                      />
-                    </div>
-                  </div>
-                  <div sx={{mb: 3}}/>
+                  <APIs />
+                  <span sx={{height: 2}}>&nbsp;</span>
                   <span className="text-nav">API's</span>
                 </a>
               </Link>
             </li>
-            <li
-              sx={{
-                backgroundColor:
-                  router.pathname === '/playground'
-                    ? 'w3NavHighlightTeal'
-                    : 'transparent',
-              }}
-            >
+            <li className={router.pathname === '/playground' ? 'active' : ''}>
               <Link href="/playground">
                 <a className="text-nav">
-                  <img
-                    src="/images/playground.svg"
-                    alt="playground"
-                    sx={{ width: '24px', height: '27px' }}
-                  />
-                  <span>&nbsp;</span>
+                  <PlaygroundImg />
+                  <span sx={{height: 2}}>&nbsp;</span>
                   <span>Playground</span>
                 </a>
               </Link>

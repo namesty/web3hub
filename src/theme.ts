@@ -25,7 +25,7 @@ const GlobalTheme = {
 
     w3gray: '#1B2731',
 
-    // tealHighlight: '#66E0D9',
+    w3tealHighlight: '#66E0D9',
     w3lightTeal: '#598188',
     // darkTeal: '#335E67',
 

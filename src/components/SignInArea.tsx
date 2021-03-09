@@ -9,7 +9,7 @@ import Link from 'next/link'
 import Web3 from 'web3'
 import { useRouter } from 'next/router'
 import User from '../../public/images/user.svg'
-import MyAPIs from '../../public/images/apis.svg'
+import MyAPIs from '../../public/images/myapis.svg'
 
 // import Ceramic from '@ceramicnetwork/http-client'
 // import { IDX } from '@ceramicstudio/idx'
