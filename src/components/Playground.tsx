@@ -43,7 +43,7 @@ const Playground = () => {
           label="test"
           name="api-search"
           placeholder="Search"
-          sx={{ width: '20rem' }}
+          sx={{ width: '20rem', borderColor: '#688184', color: '#688184', bg: '#13212C' }}
         />
         <Flex className="selection-detail" sx={{ ml: 4, alignItems: 'center' }}>
           <a className="text-nav" href="/uniswap/docs" sx={{ mr: 5 }}>
@@ -52,13 +52,7 @@ const Playground = () => {
           <Stars count={320} onDark />
           <ul className="category-Badges" sx={{ ml: 4 }}>
             <li>
-              <Badge label="ipfs" />
-            </li>
-            <li>
-              <Badge label="defi" />
-            </li>
-            <li>
-              <Badge label="amm" />
+              <Button variant="secondary">IPFS</Button>
             </li>
           </ul>
         </Flex>

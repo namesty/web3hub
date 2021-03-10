@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import APIs from '../../public/images/apis.svg'
 import PlaygroundImg from '../../public/images/playground.svg'
+import Doc from '../../public/images/Doc.svg'
 
 const Navbar = () => {
   const router = useRouter()
@@ -94,15 +95,9 @@ const Navbar = () => {
             </li>
             <li>
               <a className="text-nav" href="https://web3api.dev" target="_BLANK">
-                
-                <img
-                  src="/images/doc.svg"
-                  alt="outbound"
-                  sx={{ height: '19px' }}
-                />
+                <Doc/>
                 <span>&nbsp;</span>
                 <span>Docs</span>
-                
               </a>
             </li>
           </ul>

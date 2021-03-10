@@ -13,7 +13,7 @@ const Badge = ({ label }: BadgeProps) => {
         cursor: 'default',
         border: '2px solid black',
         textTransform: 'uppercase',
-        borderColor: '#509DAC',
+        borderColor: '#EFF5F4',
         borderRadius: '8px',
         px: 2,
         py: 1,

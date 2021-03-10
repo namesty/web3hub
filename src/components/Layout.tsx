@@ -23,6 +23,7 @@ const Layout = ({ children }: LayoutProps) => {
           '*': {
             boxSizing: 'border-box',
             position: 'relative',
+            outline: 'none',
             '*::before, *::after': {
               boxSizing: 'border-box',
               position: 'relative',
@@ -89,7 +90,7 @@ const Layout = ({ children }: LayoutProps) => {
             border: 'none'
           },
           '.contents': {
-            maxWidth: '1200px',
+            maxWidth: '1224px',
             margin: 'auto',
             width: '100%',
             height: '100%'

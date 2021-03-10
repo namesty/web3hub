@@ -20,7 +20,7 @@ const GlobalTheme = {
     text: '#454f5b',
     background: '#EEE',
     w3Teal: '#335E67',
-    w3MoreTeal: '#509DAC',
+    w3MoreTeal: '#4A7A84',
     w3NavHighlightTeal: '#243843',
 
     w3gray: '#1B2731',
@@ -76,11 +76,11 @@ const GlobalTheme = {
     }
   },
   buttons: {
-    primary: {
+    primary: {      
       color: 'white',
       bg: 'w3Teal',
       boxShadow: '0px 15px 30px rgba(20, 102, 204, 0.16)',
-      borderRadius: '8px',
+      borderRadius: '4px',
       p: 3,
       fontWeight: 'bold',
       fontSize: '14px',
@@ -91,12 +91,15 @@ const GlobalTheme = {
       '&:hover': {
         bg: 'w3MoreTeal',
       },
+      '&:active': {
+        bg: '#255661',
+      },
     },
     secondary: {
-      color: 'white',
-      border: '2px solid black',
-      borderColor: 'babyBlue',
-      borderRadius: '8px',
+      color: '#688184',
+      border: '2px solid',
+      borderColor: '#688184',
+      borderRadius: '4px',
       fontWeight: 'bold',
       fontSize: '14px',
       lineHeight: '14px',
@@ -105,13 +108,17 @@ const GlobalTheme = {
       textTransform: 'uppercase',
       bg: 'transparent',
       '&:hover': {
-        bg: 'rgba(255,255,255,.1)',
+        bg: 'rgba(104, 129, 132, 0.1)',
       },
+      '&:active': {
+        bg: 'rgba(104, 129, 132, 0.2)'
+      }
     },
+    
     secondaryOnLight: {
       color: '#688184',
       border: '2px solid #688184',
-      borderRadius: '8px',
+      borderRadius: '4px',
       p: 3,
       fontWeight: 'bold',
       fontSize: '14px',

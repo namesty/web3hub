@@ -32,7 +32,7 @@ const CreateApi = () => {
               }}
             />
           )}
-          <div className="contents" sx={{ maxWidth: 'calc(1200px + 112px)' }}>
+          <div className="contents" sx={{ maxWidth: 'calc(1224px + 112px)' }}>
             <Header
               title={activeTab === 'create' ? 'Create a Web3API Package' : 'Publish'}
             />

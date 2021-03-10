@@ -19,7 +19,6 @@ const Index = () => {
             <Header title="Browse APIs"/>
             <section className="content">
               <SortNav />
-              <br />
               <ApiGrid />
             </section>
             <br />

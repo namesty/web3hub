@@ -10,74 +10,78 @@ const Card = () => {
     <div
       className="Card"
       sx={{
-        width: '270px',
-        p: 4,
-        boxShadow: '0px 0px 10px 5px #DDD',
         borderRadius: '8px',
-        bg: 'white'
+        bg: 'white',
+        transition: 'transform .2s ease',
+        '&:hover': {
+          transform: 'scale(1.05)',
+        },
       }}
     >
       <Link href="apis/SOMEAPI">
-        <a sx={{textDecoration: 'none'}}>
-        <div className="wrap-contents">
-        <div sx={{ display: 'block', m: 'auto' }}>
-          <img
-            className="api-logo"
-            src="/images/uniswap.png"
-            sx={{
-              width: '140px',
-              height: '140px',
-              display: 'block',
-              m: 'auto',
-            }}
-          />
-        </div>
-
-        <div className="info">
-          <div className="row" sx={{ justifyContent: 'space-between' }}>
-            <Styled.h3 className="title" sx={{ textAlign: 'center', my: 2 }}>
-              UniswapV2
-            </Styled.h3>
-            <div className="subtitle" sx={{ textAlign: 'center', my: 2, mb: 3 }}>
-              Historical data and analytics for Uniswap V2
-            </div>
-            <Flex sx={{ alignItems: 'center', m: 'auto', justifyContent: 'center' }}>
-              <Stars count={320} />
-              <div
+        <a sx={{ textDecoration: 'none', p: 4 }}>
+          <div className="wrap-contents">
+            <div sx={{ display: 'block', m: 'auto' }}>
+              <img
+                className="api-logo"
+                src="/images/uniswap.png"
                 sx={{
-                  width: '2px',
-                  height: '30px',
-                  bg: 'darkGreen',
-                  opacity: '.1',
-                  mx: 3,
+                  width: '140px',
+                  height: '140px',
+                  display: 'block',
+                  m: 'auto',
                 }}
               />
-              <Flex sx={{ alignItems: 'center', cursor: 'default' }}>
-                <img
-                  src="/images/doc.svg"
-                  alt="docs"
-                  sx={{ mr: 2, width: '13px', height: '16px', top: '-2px' }}
-                />
-                <b>Docs</b>
-              </Flex>
-            </Flex>
-            <ul
-              className="category-Badges"
-              sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}
-            >
-              <li>
-                <Badge label="ipfs" />
-              </li>
-              <li>
-                <Badge label="defi" />
-              </li>
-              <li>
-                <Badge label="amm" />
-              </li>
-            </ul>
+            </div>
+
+            <div className="info">
+              <div className="row" sx={{ justifyContent: 'space-between' }}>
+                <Styled.h3
+                  className="title"
+                  sx={{
+                    textAlign: 'center',
+                    my: 2,
+                    fontFamily: 'Montserrat',
+                    fontWeight: 'bold',
+                    fontSize: '20px',
+                    lineHeight: '28px',
+                    letterSpacing: '-0.01em',
+                    color: '#000000',
+                  }}
+                >
+                  UniswapV2
+                </Styled.h3>
+                <div
+                  className="subtitle"
+                  sx={{
+                    textAlign: 'center',
+                    my: 2,
+                    fontFamily: 'Montserrat',
+                    fontSize: '14px',
+                    lineHeight: '18px',
+                    color: '#688184',
+                    mixBlendMode: 'normal',
+                  }}
+                >
+                  Historical data and analytics for Uniswap V2
+                </div>
+                <Flex
+                  sx={{
+                    alignItems: 'center',
+                    m: 'auto',
+                    justifyContent: 'center',
+                    my: 3,
+                    mb: 4,
+                  }}
+                >
+                  <Stars count={320} />
+                </Flex>
+                <Flex sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Badge label="ipfs" />
+                </Flex>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
         </a>
       </Link>
     </div>
