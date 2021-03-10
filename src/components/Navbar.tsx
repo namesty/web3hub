@@ -3,7 +3,7 @@
 import { jsx } from 'theme-ui'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import APIs from '../../public/images/APIs.svg'
+import APIs from '../../public/images/apis.svg'
 import PlaygroundImg from '../../public/images/playground.svg'
 
 const Navbar = () => {
