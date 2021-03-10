@@ -29,8 +29,8 @@ const Modal = ({ screen = 'success', close }: ModalProps) => {
         sx={{
           minWidth: '630px',
           height: '570px',
-          left: '0px',
           top: '0px',
+          left: '-112px',
           backgroundColor: '#0D373C',
           boxShadow: '0px 25px 40px rgba(0, 0, 0, 0.06)',
           borderRadius: '8px',
@@ -40,7 +40,6 @@ const Modal = ({ screen = 'success', close }: ModalProps) => {
           justifyContent: 'center',
           alignItems: 'center',
           zIndex: 10000000,
-          left: '-112px',
         }}
       >
         {screen === 'success' && (

@@ -13,12 +13,12 @@ const BGWave = ({ dark, light }: BGWaveProps) => {
     <Global
       styles={(theme) => ({
         'body::before': {
-          display: 'block !important',
-          zIndex: '-1 !important',
-          top: '0 !important',
-          left: 'auto !important',
-          right: '0 !important',
-          background: `url(/images/background-wave-${color}.svg) no-repeat right !important`,
+          display: 'block',
+          zIndex: -1,
+          top: '0',
+          left: 'auto',
+          right: '0',
+          background: `url(/images/background-wave-${color}.svg) no-repeat right`,
         },
       })}
     />

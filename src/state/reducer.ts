@@ -2,9 +2,9 @@ import InitialState from '../state/initialState'
 
 type newState = {
   address: string
-  network: string
-  balance: string
-  wallet: string
+  network: number
+  balance: number
+  wallet: { name: string; }
   web3?: any 
 }
 

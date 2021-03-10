@@ -1,15 +1,13 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Button, useThemeUI, Styled } from 'theme-ui'
+import { jsx, Flex } from 'theme-ui'
 import Layout from '../components/Layout'
 import Playground from '../components/Playground'
 import { Global } from '@emotion/core'
 import Navbar from '../components/Navbar'
 import Header from '../components/Header'
 
-
 const PlaygroundPage = () => {
-  const {theme} = useThemeUI()
   return (
     <Layout>
       <Flex>

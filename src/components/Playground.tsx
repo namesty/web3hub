@@ -70,7 +70,7 @@ const Playground = () => {
             className="templates"
             sx={{ flex: 1, mb: 4, justifyContent: 'space-between' }}
           >
-            <Select sx={{ ...theme.theme.forms.select.dark, width: '280px' }}>
+            <Select sx={{ border: '2px solid babyBlue', color: 'white', width: '280px' }}>
               <option value="GetSwap">Get Swap</option>
               <option value="GetSwap">Get Transaction</option>
               <option value="GetSwap">Get History</option>
