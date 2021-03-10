@@ -23,10 +23,19 @@ const CreateApi = () => {
   return (
     <Layout>
       <Flex>
-        <main sx={{pb: 5}}>
-          {modalOpen && <Modal screen="success" close={()=>{setmodalOpen(false)}}/>}
-          <div className="contents" sx={{maxWidth: 'calc(1200px + 112px)'}}>
-            <Header title={activeTab === 'create' ? 'Create a Web3API Package' : 'Publish'}/>
+        <main sx={{ pb: 5 }}>
+          {modalOpen && (
+            <Modal
+              screen="success"
+              close={() => {
+                setmodalOpen(false)
+              }}
+            />
+          )}
+          <div className="contents" sx={{ maxWidth: 'calc(1200px + 112px)' }}>
+            <Header
+              title={activeTab === 'create' ? 'Create a Web3API Package' : 'Publish'}
+            />
             <Flex
               className="tabs"
               onClick={handleTabClick}
@@ -82,6 +91,9 @@ const CreateApi = () => {
               {activeTab === 'create' && <CreateAPI />}
               {activeTab === 'publish' && <PublishAPI />}
             </div>
+            <br />
+            <br />
+            <br />
           </div>
         </main>
       </Flex>

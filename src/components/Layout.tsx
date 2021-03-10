@@ -104,6 +104,9 @@ const Layout = ({ children }: LayoutProps) => {
             appearance: 'none',
             cursor: 'pointer',
           },
+          'a:visited, a:active': {
+            textDecoration: 'none',
+          },
           'img, svg, picture, span, a, b, u, i, small, sub, strong, label': {
             display: 'inline-block',
           },
@@ -130,7 +133,7 @@ const Layout = ({ children }: LayoutProps) => {
             letterSpacing: '-0.6px',
             textTransform: 'uppercase',
             textDecoration: 'none',
-            color: 'w3MoreTeal',
+            color: theme.colors.w3MoreTeal,
           },
           '.bn-onboard-custom': {
             zIndex: 100000,

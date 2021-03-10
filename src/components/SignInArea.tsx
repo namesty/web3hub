@@ -71,7 +71,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
             onKeyUp={handleSignInClick}
             sx={{ cursor: 'pointer', alignItems: 'center' }}
           >
-            <User stroke={onDark ? 'white' : 'darkGreen'} />
+            <User stroke={onDark ? 'white' : 'rgb(69, 79, 91)'} />
             <span>&nbsp;</span>
             <span
               sx={{
@@ -97,7 +97,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                     className="header-nav"
                     sx={{ display: 'flex', alignItems: 'center' }}
                   >
-                    <MyAPIs stroke={onDark ? 'white' : 'darkGreen'} sx={{mr: 2}}/>
+                    <MyAPIs stroke={onDark ? 'white' : 'rgb(69, 79, 91)'} sx={{mr: 2}}/>
                     <span
                       sx={{
                         fontFamily: 'Montserrat',
