@@ -1,7 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, useThemeUI } from 'theme-ui'
+import { jsx } from 'theme-ui'
 import { Global } from '@emotion/core'
+
 type LayoutProps = {
   children?: any
 }
@@ -129,7 +130,7 @@ const Layout = ({ children }: LayoutProps) => {
             letterSpacing: '-0.6px',
             textTransform: 'uppercase',
             textDecoration: 'none',
-            color: theme.colors.w3MoreTeal,
+            color: 'w3MoreTeal',
           },
           '.bn-onboard-custom': {
             zIndex: 100000,

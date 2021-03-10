@@ -5,6 +5,7 @@ import { jsx } from 'theme-ui'
 type BadgeProps = {
   label: string
 }
+
 const Badge = ({ label }: BadgeProps) => {
   return (
     <div

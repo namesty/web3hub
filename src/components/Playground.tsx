@@ -1,12 +1,11 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Button, Select, Field, useThemeUI, Styled } from 'theme-ui'
+import { jsx, Flex, Button, Select, Field, Styled } from 'theme-ui'
 import Badge from './Badge'
 import Stars from './Stars'
 import BGWave from '../components/BGWave'
 
 const Playground = () => {
-  const theme = useThemeUI()
   const handleNewQuery = (e: React.BaseSyntheticEvent) => {
     console.log(e.target)
   }

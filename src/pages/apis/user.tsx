@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { jsx, Flex, Button, useThemeUI, Styled } from 'theme-ui'
+import { jsx, Flex } from 'theme-ui'
 import Layout from '../../components/Layout'
 import Header from '../../components/Header'
 import Navbar from '../../components/Navbar'

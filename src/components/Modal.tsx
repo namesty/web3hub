@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import React from 'react'
-import { jsx, Flex, Button, useThemeUI, Styled } from 'theme-ui'
+import { jsx, Flex, Button, Styled } from 'theme-ui'
 import Close from '../../public/images/close.svg'
 
 type ModalProps = {
@@ -10,7 +10,6 @@ type ModalProps = {
 }
 
 const Modal = ({ screen = 'success', close }: ModalProps) => {
-  const { theme } = useThemeUI()
   return (
     <Flex
       className="overlay"

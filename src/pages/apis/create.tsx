@@ -2,18 +2,14 @@
 /** @jsx jsx */
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { jsx, Flex, Button, useThemeUI, Styled } from 'theme-ui'
-
+import { jsx, Flex, Styled } from 'theme-ui'
 import Layout from '../../components/Layout'
-
 import CreateAPI from '../../components/tabs/CreateAPI'
 import PublishAPI from '../../components/tabs/PublishAPI'
-
 import Header from '../../components/Header'
 import Modal from '../../components/Modal'
 
 const CreateApi = () => {
-  const { theme } = useThemeUI()
   const router = useRouter()
   const [activeTab, setActiveTab] = useState(router.query.activeTab)
   const [modalOpen, setmodalOpen] = useState(false)

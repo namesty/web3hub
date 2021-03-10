@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Button, Styled } from 'theme-ui'
+import { jsx, Flex, Styled } from 'theme-ui'
 import Link from 'next/link'
 import Stars from './Stars'
 import Badge from './Badge'

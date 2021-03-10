@@ -11,12 +11,6 @@ import { useRouter } from 'next/router'
 import User from '../../public/images/user.svg'
 import MyAPIs from '../../public/images/myapis.svg'
 
-// import Ceramic from '@ceramicnetwork/http-client'
-// import { IDX } from '@ceramicstudio/idx'
-// import ethAddressToDID from '../utils/ethAddressToDID'
-// const ceramic = new Ceramic('https://gateway-clay.ceramic.network')
-// const idx = new IDX({ ceramic })
-
 type SignInAreaProps = {
   onDark?: boolean
 }

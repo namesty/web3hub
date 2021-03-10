@@ -1,7 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Button, useThemeUI, Styled } from 'theme-ui'
-// import { useRouter } from 'next/router'
+import { jsx, Flex, Button, Styled } from 'theme-ui'
 import Layout from '../../components/Layout'
 import Stars from '../../components/Stars'
 import Badge from '../../components/Badge'
@@ -9,8 +8,6 @@ import Navbar from '../../components/Navbar'
 import Header from '../../components/Header'
 
 const ApiView = () => {
-  const { theme } = useThemeUI()
-  // const router = useRouter()
   return (
     <Layout>
       <Flex>
@@ -25,7 +22,6 @@ const ApiView = () => {
                 bg: 'white',
                 px: '2rem',
                 py: '2rem',
-                
               }}
             >
               <Flex className="top">

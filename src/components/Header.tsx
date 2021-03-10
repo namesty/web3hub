@@ -2,7 +2,6 @@
 /** @jsx jsx */
 import { jsx, Flex, Styled } from 'theme-ui'
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 const SignInArea = dynamic(() => import('./SignInArea'), { ssr: false })
 import ArrowBack from '../../public/images/arrow-back.svg'

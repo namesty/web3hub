@@ -1,8 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { useState, useEffect } from 'react'
-import { jsx, Flex, Button, useThemeUI, Styled, Label } from 'theme-ui'
-import { useRouter } from 'next/router'
+import { jsx, Flex, Styled } from 'theme-ui'
 
 type tab = {
   label: string
@@ -16,8 +14,6 @@ type ContentNav = {
 }
 
 const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
-  const { theme } = useThemeUI()
-  const router = useRouter()
   return (
     <Flex
       className="tabs"

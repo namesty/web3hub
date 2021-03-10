@@ -59,7 +59,6 @@ const PublishAPI = () => {
             </Select>
           </fieldset>
         </section>
-
         <section>
           <Styled.h4>Where do you want to store your API</Styled.h4>
           <p>
@@ -70,7 +69,6 @@ const PublishAPI = () => {
             <Field label="" name="ens" defaultValue="uniswapv2.open.web3.eth" />
           </fieldset>
         </section>
-
         <section>
           <fieldset>
             <label />
@@ -86,12 +84,10 @@ const PublishAPI = () => {
                   </a>
                 </small>
               </p>
-              
             </Flex>
           </fieldset>
         </section>
       </form>
-
       <Flex className="preview" sx={{flex: 3, textAlign: 'center', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column'}}>
         <div className="title">Package Preview</div>
         <Flex className="preview-content" sx={{
@@ -116,7 +112,6 @@ const PublishAPI = () => {
             <div className="sub-title">Easily swap between any two ERC-20 Tokens</div>
             <Stars count={320}/>
             <Badge label="IPFS"/>
-            
           </Flex>
         </Flex>
       </Flex>
