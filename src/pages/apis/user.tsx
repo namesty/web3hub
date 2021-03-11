@@ -13,7 +13,6 @@ import Favorites from '../../components/tabs/Favorites'
 const UserApis = () => {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState(router.query.activeTab as string)
-  console.log(activeTab)
   useEffect(() => {
     setActiveTab(router.query.activeTab as string)
   }, [router.query.activeTab])

@@ -1,24 +1,25 @@
-/** @jsxRuntime classic */
 /** @jsx jsx */
+/** @jsxRuntime classic */
 import { jsx } from 'theme-ui'
 
 type BadgeProps = {
-  label: string
+  label: string,
+  onDark?: boolean
 }
 
-const Badge = ({ label }: BadgeProps) => {
+const Badge = ({ label, onDark }: BadgeProps) => {
   return (
     <div
       sx={{
         cursor: 'default',
         border: '2px solid black',
         textTransform: 'uppercase',
-        borderColor: '#EFF5F4',
+        borderColor: onDark ? '#CAD9F3': '#EFF5F4',
         borderRadius: '8px',
         px: 2,
         py: 1,
         mx: 2,
-        color: '#509DAC',
+        color: onDark ? '#CAD9F3': '#509DAC',
         fontFamily: '"Poppins"',
         fontWeight: '600',
         fontSize: '12px',

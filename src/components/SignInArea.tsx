@@ -55,7 +55,6 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
       await onboard.walletCheck()
     }
   }
-  console.log('onDark:',onDark)
   return (
     <Flex
       className="sign-in-wrap"

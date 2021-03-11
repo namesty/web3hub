@@ -4,14 +4,31 @@ import { jsx, Flex, Button, Select, Field, Styled } from 'theme-ui'
 import Badge from './Badge'
 import Stars from './Stars'
 import BGWave from '../components/BGWave'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import RDS from 'react-dropdown-select'
 
 const Playground = () => {
+  const [searchValues, setsearchValues] = useState([])
+  const [searchOptions, setsearchOptions] = useState([])
   const handleNewQuery = (e: React.BaseSyntheticEvent) => {
     console.log(e.target)
   }
   const handleShowSchema = (e: React.BaseSyntheticEvent) => {
     console.log(e.target)
   }
+  const handleSearchValuesChange = (values) => {
+    setsearchValues(values)
+  }
+  useEffect(() => {
+    async function getAPIs() {
+      let search = await axios.get('/api/apis')
+      setsearchOptions(search.data)
+    }
+    getAPIs()
+  }, [])
+
+  console.log(searchOptions)
   return (
     <div
       className="playground"
@@ -39,22 +56,99 @@ const Playground = () => {
           },
         }}
       >
-        <Field
-          label="test"
-          name="api-search"
-          placeholder="Search"
-          sx={{ width: '20rem', borderColor: '#688184', color: '#688184', bg: '#13212C' }}
-        />
-        <Flex className="selection-detail" sx={{ ml: 4, alignItems: 'center' }}>
-          <a className="text-nav" href="/uniswap/docs" sx={{ mr: 5 }}>
-            GO TO API PAGE
-          </a>
-          <Stars count={320} onDark />
-          <ul className="category-Badges" sx={{ ml: 4 }}>
-            <li>
-              <Button variant="secondary">IPFS</Button>
-            </li>
-          </ul>
+        {searchOptions.length === 0 && (
+          <Field
+            label="test"
+            name="api-search"
+            placeholder={'Search API’s'}
+            sx={{
+              width: '20rem',
+              border: ' 2px solid #688184',
+              color: '#688184',
+              bg: '#13212C',
+              p: '10px',
+              px: '13px',
+              fontFamily: 'Istok Web',
+              fontSize: '14px',
+              lineHeight: '150%',
+              borderRadius: '8px',
+              height: '38px'
+            }}
+          />
+        )}
+        {searchOptions.length > 0 && (
+          <RDS
+            sx={{
+              width: '20rem',
+              border: ' 2px solid #688184',
+              color: '#688184',
+              bg: '#13212C',
+              p: '8px',
+              borderRadius: '8px',
+              '&:hover, &:focus-within': {
+                borderColor: '#688184',
+                boxShadow: 'none',
+              },
+              '.react-dropdown-select-input': {
+                color: '#688184',
+                fontFamily: 'Istok Web',
+                fontSize: '14px',
+                lineHeight: '100%',
+              },
+              '.react-dropdown-select-clear': {
+                fontSize: '25px',
+                top: '-2px',
+                right: '-6px',
+              },
+              '.react-dropdown-select-dropdown': {
+                top: '36px',
+                bg: '#13212C',
+                color: 'white',
+                border: '2px solid #688184',
+                borderBottomLeftRadius: '8px',
+                borderBottomRightRadius: '8px',
+              },
+              '.react-dropdown-select-item': {
+                borderColor: '#688184',
+                fontFamily: 'Montserrat',
+                fontWeight: 'bold',
+                fontSize: '14px',
+                lineHeight: '14px',
+                color: '#FFFFFF',
+                padding: '8px 16px',
+              }
+            }}
+            searchBy="id"
+            searchable
+            clearable
+            keepSelectedInList
+            labelField="id"
+            valueField="id"
+            placeholder={'Search API’s'}
+            dropdownHandle={false}
+            options={searchOptions}
+            values={searchValues}
+            onChange={handleSearchValuesChange}
+          />
+        )}
+
+        <Flex
+          className="selection-detail"
+          sx={{ ml: 4, alignItems: 'center', justifyContent: 'space-between', flex: 1 }}
+        >
+          <div className="left">
+            <Stars count={320} onDark />
+            <ul className="category-Badges" sx={{ ml: 3 }}>
+              <li>
+                <Badge label="IPFS" onDark />
+              </li>
+            </ul>
+          </div>
+          <div className="right">
+            <a className="text-nav" href="/uniswap/docs">
+              GO TO API PAGE
+            </a>
+          </div>
         </Flex>
       </Flex>
       <Flex className="body" sx={{ '> *': { p: '1.5rem' } }}>
@@ -84,7 +178,7 @@ const Playground = () => {
       _asset
       _type
       _amount
-    }
+    }xw
   }
             `}
             ></textarea>
@@ -131,7 +225,7 @@ const Playground = () => {
           </Styled.code>
         </div>
       </Flex>
-      <BGWave dark/>
+      <BGWave dark />
     </div>
   )
 }
