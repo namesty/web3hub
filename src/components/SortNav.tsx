@@ -1,29 +1,36 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Input, Flex, Select } from 'theme-ui'
+import { jsx, Flex, Select } from 'theme-ui'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import SearchBox from './SearchBox'
 
 const SortNav = () => {
+  // TODO: Turn this into reusable hook because it also exsits on playground
+  const [searchValues, setsearchValues] = useState([])
+  const [searchOptions, setsearchOptions] = useState([])
+  const handleSearchValuesChange = (values) => setsearchValues(values)
+  useEffect(() => {
+    async function getAPIs() {
+      let search = await axios.get('/api/apis')
+      setsearchOptions(search.data)
+    }
+    getAPIs()
+  }, [])
   return (
     <nav>
       <form>
-        <Input
-          type="text"
-          placeholder="Search"
-          sx={{
-            flex: 1,
-            width: '100%',
-            p: 3,
-            bg: '#EFF5F4',
-            mixBlendMode: 'normal',
-            borderRadius: '8px',
-            fontFamily: 'Montserrat',
-            fontWeight: '500',
-            fontSize: '15px',
-            lineHeight: '18px',
-            letterSpacing: '-0.4px',
-            color: '#598188',
-            borderColor: 'transparent',
-          }}
+        <SearchBox
+          detachedResults
+          large
+          dark
+          searchBy="id"
+          placeholder={'Search'}
+          labelField="id"
+          valueField="id"
+          options={searchOptions}
+          values={searchValues}
+          onChange={handleSearchValuesChange}
         />
         <br />
         <Flex sx={{ justifyContent: 'space-between', flex: 1, alignItems: 'center' }}>

@@ -37,7 +37,7 @@ const GlobalTheme = {
     gray: '#1c272d',
 
     babyBlue: 'rgba(202,217,243, .3)',
-    babyBlueDark: 'rgba(202,217,243)',
+    babyBlueDark: '#cad9f3',
     softBlue: '#B2D2D9',
 
     navy: '#13212C',
@@ -96,9 +96,9 @@ const GlobalTheme = {
       },
     },
     secondary: {
-      color: '#688184',
+      color: '#FFF',
       border: '2px solid',
-      borderColor: '#688184',
+      borderColor: '#304353',
       borderRadius: '4px',
       fontWeight: 'bold',
       fontSize: '14px',

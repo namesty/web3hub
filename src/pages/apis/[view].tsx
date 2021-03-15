@@ -6,6 +6,7 @@ import Stars from '../../components/Stars'
 import Badge from '../../components/Badge'
 import Navbar from '../../components/Navbar'
 import Header from '../../components/Header'
+import BottomSpace from '../../components/BottomSpace'
 
 const ApiView = () => {
   return (
@@ -215,14 +216,10 @@ const api = new Web3API({
                   </Styled.code>
                 </div>
               </Flex>
-              <br />
-              <br />
-              <br />
+              <BottomSpace/>
               <div className="Playground" />
             </div>
-            <br />
-            <br />
-            <br />
+            <BottomSpace/>
           </div>
         </main>
       </Flex>

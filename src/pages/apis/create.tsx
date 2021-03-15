@@ -8,6 +8,7 @@ import CreateAPI from '../../components/tabs/CreateAPI'
 import PublishAPI from '../../components/tabs/PublishAPI'
 import Header from '../../components/Header'
 import Modal from '../../components/Modal'
+import BottomSpace from '../../components/BottomSpace'
 
 const CreateApi = () => {
   const router = useRouter()
@@ -91,9 +92,7 @@ const CreateApi = () => {
               {activeTab === 'create' && <CreateAPI />}
               {activeTab === 'publish' && <PublishAPI />}
             </div>
-            <br />
-            <br />
-            <br />
+            <BottomSpace/>
           </div>
         </main>
       </Flex>

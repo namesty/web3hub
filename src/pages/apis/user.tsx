@@ -9,6 +9,7 @@ import Navbar from '../../components/Navbar'
 import ContentNav from '../../components/ContentNav'
 import Published from '../../components/tabs/Published'
 import Favorites from '../../components/tabs/Favorites'
+import BottomSpace from '../../components/BottomSpace'
 
 const UserApis = () => {
   const router = useRouter()
@@ -42,9 +43,7 @@ const UserApis = () => {
               {activeTab === 'published' && <Published/>}
               {activeTab === 'favorites' && <Favorites />}
             </section>
-            <br />
-            <br />
-            <br />
+            <BottomSpace/>
           </div>
         </main>
       </Flex>

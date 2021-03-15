@@ -1,15 +1,15 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, useThemeUI } from 'theme-ui'
+import { jsx, Flex } from 'theme-ui'
 import Layout from '../components/Layout'
 import SortNav from '../components/SortNav'
 import ApiGrid from '../components/ApiGrid'
 import Navbar from '../components/Navbar'
 import Header from '../components/Header'
 import BGWave from '../components/BGWave'
+import BottomSpace from '../components/BottomSpace'
 
 const Index = () => {
-  const { theme } = useThemeUI()
   return (
     <Layout>
       <Flex>
@@ -21,9 +21,7 @@ const Index = () => {
               <SortNav />
               <ApiGrid />
             </section>
-            <br />
-            <br />
-            <br />
+            <BottomSpace/>
           </div>
         </main>
       </Flex>
