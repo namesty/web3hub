@@ -49,7 +49,6 @@ const SearchBox = ({
           borderBottomLeftRadius: detachedResults ? '8px': '0',
           borderBottomRightRadius: detachedResults ? '8px': '0',
           borderBottomColor: detachedResults ? '#688184': 'transparent',
-          pt: 'calc(1rem - 2px)',
           '*': {
             color: dark ? '#FFFFFF' : '#688184',
           },
@@ -106,6 +105,7 @@ const SearchBox = ({
           pl: '1.25rem',
           '&.react-dropdown-select-item-selected': {
             bg: dark ? '#13212C' : '#EFF5F4',
+            color: dark ? '#FFFFFF' : '#688184',
           },
           '&:hover': {
             bg: dark ? '#1F3A46': 'w3MoreTeal',
