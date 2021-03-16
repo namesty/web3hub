@@ -39,12 +39,12 @@ const SearchBox = ({
       sx={{
         borderRadius: '8px',
         width: large ? '100%' : '400px',
-        border: ' 2px solid #688184',
+        border: ' 2px solid',
         color: dark ? '#688184' : '#598188',
         bg: dark ? '#13212C' : '#EFF5F4',
         p: '1rem',
         height: '62px',
-        borderColor: dark ? '#688184' : '#transparent',
+        borderColor: dark ? '#688184' : 'transparent',
         '&[aria-expanded="true"]': {
           borderBottomLeftRadius: detachedResults ? '8px': '0',
           borderBottomRightRadius: detachedResults ? '8px': '0',
@@ -62,7 +62,7 @@ const SearchBox = ({
           color: '#688184',
         },
         '&:hover, &:focus-within': {
-          borderColor: '#688184',
+          borderColor: dark ? '#688184' : 'transparent',
           boxShadow: 'none',
         },
         '.react-dropdown-select-input': {
@@ -106,6 +106,7 @@ const SearchBox = ({
           '&.react-dropdown-select-item-selected': {
             bg: dark ? '#13212C' : '#EFF5F4',
             color: dark ? '#FFFFFF' : '#688184',
+            borderBottomColor: 'rgba(104,129,132,.5)',
           },
           '&:hover': {
             bg: dark ? '#1F3A46': 'w3MoreTeal',
