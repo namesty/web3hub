@@ -19,7 +19,7 @@ const Badge = ({ label, onDark }: BadgeProps) => {
         px: 2,
         py: 1,
         mx: 2,
-        color: onDark ? '#CAD9F3': '#509DAC',
+        color: onDark ? '#CAD9F3': 'w3green',
         fontFamily: '"Poppins"',
         fontWeight: '600',
         fontSize: '12px',

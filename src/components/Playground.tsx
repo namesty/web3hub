@@ -50,11 +50,11 @@ const Playground = () => {
     <div
       className="playground"
       sx={{
-        backgroundColor: 'w3gray',
+        backgroundColor: 'w3shade3',
         borderRadius: '16px',
         overflow: 'hidden',
         'code, pre, textarea': {
-          color: 'softBlue',
+          color: 'w3PlaygroundSoftBlue',
           backgroundColor: 'transparent !important',
           border: 'none',
           fontSize: '14px',
@@ -68,7 +68,7 @@ const Playground = () => {
             className="header"
             sx={{
               p: '1.5rem',
-              backgroundColor: 'w3gray',
+              backgroundColor: 'w3shade2',
               '*': { display: 'flex' },
               label: {
                 display: 'none',
@@ -110,7 +110,7 @@ const Playground = () => {
             </Flex>
           </Flex>
           <Flex className="body" sx={{ '> *': { p: '1.5rem' } }}>
-            <div className="query" sx={{ flex: 4, backgroundColor: 'navy' }}>
+            <div className="query" sx={{ flex: 4, backgroundColor: 'w3PlayGroundNavy' }}>
               <Flex
                 className="templates"
                 sx={{ flex: 1, mb: 4, justifyContent: 'space-between' }}
@@ -148,7 +148,7 @@ mutation {
               </Styled.code>
             </div>
             &nbsp;
-            <div className="result" sx={{ flex: 6, backgroundColor: 'navy' }}>
+            <div className="result" sx={{ flex: 6, backgroundColor: 'w3PlayGroundNavy' }}>
               <Flex
                 className="controls"
                 sx={{
@@ -158,7 +158,7 @@ mutation {
                 }}
               >
                 <div className="left">
-                  <Button variant="primary">Run</Button>
+                  <Button variant="primaryMedium">Run</Button>
                   <Button variant="tertiary">Save</Button>
                 </div>
                 <div className="right">

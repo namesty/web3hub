@@ -50,18 +50,21 @@ const CreateApi = () => {
                   lineHeight: '20px',
                   letterSpacing: '-0.4000000059604645px',
                   pb: ' 18px',
-                  color: '#688184',
+                  color: 'text',
                   mb: 0,
                   '&.active': {
                     fontWeight: 'bold',
-                    color: 'darkGreen',
-                    borderBottom: '2px solid #66E0D9',
+                    color: 'w3darkGreen',
+                    borderBottom: '2px solid',
+                    borderBottomColor: 'w3NavNeonHighlightTeal',
                     '&:hover': {
-                      borderBottom: '2px solid #66E0D9',
+                      borderBottom: '2px solid',
+                      borderBottomColor: 'w3NavNeonHighlightTeal',
                     },
                   },
                   '&:hover': {
-                    borderBottom: '2px solid #EEE',
+                    borderBottom: '2px solid',
+                    borderBottomColor: 'background',
                   },
                 },
               }}

@@ -26,9 +26,10 @@ const SelectBox = ({
     <RDS
       sx={{
         width: '280px',
-        border: ' 2px solid #688184',
-        color: '#688184',
-        bg: dark ? '#13212C' : 'white',
+        border: ' 2px solid',
+        borderColor: 'w3beige',
+        color: 'text',
+        bg: dark ? 'w3shade1' : 'white',
         p: '1rem',
         borderRadius: '8px',
         height: skinny ? '42px': '62px',
@@ -38,14 +39,14 @@ const SelectBox = ({
           borderBottom: 'none',
           pt: 'calc(1rem - 2px)',
           '*': {
-            color: dark ? '#FFFFFF' : '#688184',
+            color: dark ? 'white' : 'text',
           },
         },
         '.react-dropdown-select-no-data': {
-          color: '#688184',
+          color: 'text',
         },
         '&:hover, &:focus-within': {
-          borderColor: '#688184',
+          borderColor: 'text',
           boxShadow: 'none',
         },
         '.react-dropdown-select-input': {
@@ -58,9 +59,10 @@ const SelectBox = ({
         },
         '.react-dropdown-select-dropdown': {
           top: skinny ? '38px': '58px',
-          bg: dark ? '#13212C' : 'white',
-          color: dark ? 'white' : '#688184',
-          border: dark ? '2px solid #688184' : '2px solid #688184',
+          bg: dark ? 'w3shade1' : 'white',
+          color: dark ? 'white' : 'text',
+          border: dark ? '2px solid' : '2px solid',
+          borderColor: dark ? 'w3beige' : 'w3beige',
           borderBottomLeftRadius: '8px',
           borderBottomRightRadius: '8px',
           borderTopLeftRadius: '0px',
@@ -75,7 +77,7 @@ const SelectBox = ({
           fontWeight: 'bold',
           fontSize: '14px',
           lineHeight: '14px',
-          color: dark ? '#FFFFFF' : '#688184',
+          color: dark ? 'white' : 'text',
           padding: '1rem 2rem',
           height: skinny ? '36px': '56px',
           display: 'flex',
@@ -83,11 +85,11 @@ const SelectBox = ({
           justifyContent: 'left',
           pl: '1.25rem',
           '&.react-dropdown-select-item-selected': {
-            bg: dark ? '#13212C' : 'white',
+            bg: dark ? 'w3shade1' : 'white',
             borderBottomColor: 'inherit',
           },
           '&:hover': {
-            bg: dark ? '#1F3A46' : 'babyBlueDark',
+            bg: dark ? 'w3shade3' : '#cad9f3',
           },
           '&:last-of-type': {
             borderBottom: 'none',
@@ -110,7 +112,7 @@ const SelectBox = ({
             lineHeight: '14px',
             letterSpacing: '-0.004em',
             textTransform: 'capitalize',
-            color: dark ? '#FFFFFF' : '#688184',
+            color: dark ? 'white' : 'text',
           },
         },
         '.react-dropdown-select-dropdown-handle:focus path': {

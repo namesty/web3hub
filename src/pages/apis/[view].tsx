@@ -7,8 +7,11 @@ import Badge from '../../components/Badge'
 import Navbar from '../../components/Navbar'
 import Header from '../../components/Header'
 import BottomSpace from '../../components/BottomSpace'
+import PlaygroundImg from '../../../public/images/playground.svg'
+import { useRouter } from 'next/router'
 
 const ApiView = () => {
+  const router = useRouter()
   return (
     <Layout>
       <Flex>
@@ -105,7 +108,7 @@ const ApiView = () => {
                     className="links"
                     sx={{
                       '*': {
-                        color: '#509DAC',
+                        color: 'w3green',
                         textDecoration: 'none',
 
                         fontFamily: 'Inter',
@@ -163,17 +166,19 @@ const ApiView = () => {
                     </li>
                   </ul>
                   <br />
-                  <Button variant="primary">
+                  <Button variant="primaryWithGradient" onClick={()=>{router.push('/playground')}}>
                     <Flex sx={{ alignItems: 'center', justifyContent: 'center' }}>
                       <img
                         sx={{ maxWidth: '19px', mr: 2 }}
                         src="/images/playground.svg"
                         alt="icon"
                       />
+                      <PlaygroundImg stroke="#FFF" sx={{width: '34px', height: '32px', position: 'absolute', left: '-12%'}}/>    
                       <span>Playground</span>
                     </Flex>
                   </Button>
                 </div>
+                
               </Flex>
 
               <Flex

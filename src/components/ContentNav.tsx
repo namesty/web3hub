@@ -25,19 +25,22 @@ const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
           fontSize: '16px',
           letterSpacing: '-0.4000000059604645px',
           pb: ' 18px',
-          color: '#688184',
+          color: 'text',
           mb: 0,
           minWidth: '120px',
           '&.active': {
             fontWeight: 'bold',
-            color: 'darkGreen',
-            borderBottom: '2px solid #66E0D9',
+            color: 'w3darkGreen',
+            borderBottom: '2px solid',
+            borderBottomColor: 'w3NavNeonHighlightTeal',
             '&:hover': {
-              borderBottom: '2px solid #66E0D9',
+              borderBottom: '2px solid',
+              borderBottomColor: 'w3NavNeonHighlightTeal',
             },
           },
           '&:hover': {
-            borderBottom: '2px solid #EEE',
+            borderBottom: '2px solid',
+            borderBottomColor: 'background',
           },
         },
       }}
@@ -58,7 +61,7 @@ const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
                 fontSize: '16px',
                 lineHeight: '20px',
                 letterSpacing: '-0.4px',
-                color: '#0D373C',
+                color: 'w3darkGreen',
                 mixBlendMode: 'normal',
                 opacity: '0.9',
                 mb: 0
@@ -70,13 +73,12 @@ const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
               sx={{
                 backgroundColor: 'rgba(104,129,132,.1)',
                 fontFamily: 'Montserrat',
-                
                 fontWeight: '600',
                 fontSize: '13px',
                 lineHeight: '16px',
                 textAlign: 'center',
                 letterSpacing: '-0.4px',
-                color: 'darkGreen',
+                color: 'w3darkGreen',
                 mixBlendMode: 'normal',
                 px: '.3rem',
                 py: '.1rem',

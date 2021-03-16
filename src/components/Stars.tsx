@@ -29,7 +29,7 @@ const Stars = ({ count, onDark, large }: BadgeProps) => {
                 fontWeight: '600',
                 fontSize: '14px',
                 lineHeight: '17px',
-                color: onDark && 'offWhite',
+                color: onDark && 'w3OffWhite',
                 ml: 2,
               }
             : {

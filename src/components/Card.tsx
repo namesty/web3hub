@@ -52,7 +52,7 @@ const Card = ({boxShadowOn, noHover}: CardProps) => {
                     fontSize: '20px',
                     lineHeight: '28px',
                     letterSpacing: '-0.01em',
-                    color: '#000000',
+                    color: 'black',
                   }}
                 >
                   UniswapV2
@@ -65,7 +65,7 @@ const Card = ({boxShadowOn, noHover}: CardProps) => {
                     fontFamily: 'Montserrat',
                     fontSize: '14px',
                     lineHeight: '18px',
-                    color: '#688184',
+                    color: 'text',
                     mixBlendMode: 'normal',
                   }}
                 >

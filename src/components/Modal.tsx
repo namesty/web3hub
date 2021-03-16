@@ -30,7 +30,7 @@ const Modal = ({ screen = 'success', close }: ModalProps) => {
           height: '570px',
           top: '0px',
           left: '-112px',
-          backgroundColor: '#0D373C',
+          backgroundColor: 'w3darkGreen',
           boxShadow: '0px 25px 40px rgba(0, 0, 0, 0.06)',
           borderRadius: '8px',
           pt: '35px',
@@ -51,7 +51,7 @@ const Modal = ({ screen = 'success', close }: ModalProps) => {
               top: 4,
               fill: '#597980',
               '&:hover': {
-                fill: '#FFFFFF',
+                fill: 'white',
                 cursor: 'pointer'
               }
             }}/>

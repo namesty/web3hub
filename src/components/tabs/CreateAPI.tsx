@@ -11,7 +11,7 @@ const CreateAPI = () => {
           '* > div': {
             width: '220px',
             mr: '44px',
-            color: '#688184',
+            color: 'text',
             fontFamily: 'Montserrat',
             fontSize: '14px',
             lineHeight: '22px',
@@ -40,7 +40,8 @@ const CreateAPI = () => {
                 display: 'flex',
                 width: '150px',
                 alignItems: 'center',
-                border: '2px solid #509DAC',
+                border: '2px solid',
+                borderColor: 'w3green',
                 filter: 'drop-shadow(0px 15px 30px rgba(20, 102, 204, 0.16))',
                 borderRadius: '4px',
                 fontFamily: 'Montserrat',
@@ -50,7 +51,7 @@ const CreateAPI = () => {
                 textAlign: 'center',
                 letterSpacing: '-0.6px',
                 textTransform: 'uppercase',
-                color: '#509DAC',
+                color: 'w3green',
                 textDecoration: 'none',
                 p: 3,
                 '&:after': {
@@ -89,7 +90,7 @@ yarn deploy --IPFS`}</Styled.pre>
         <div
           sx={{
             px: 4,
-            backgroundColor: '#0D373C',
+            backgroundColor: 'w3darkGreen',
             p: '46px',
             boxShadow: '0px 25px 40px rgba(0, 0, 0, 0.06)',
             borderRadius: '8px',

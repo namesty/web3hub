@@ -26,13 +26,34 @@ const Header = ({ title, onDark, backNav }: HeaderProps) => {
         '.col': { flex: 2, '&:last-of-type': { justifyContent: 'flex-end' } },
       }}
     >
-      {title && <Styled.h1>{title}</Styled.h1>}
+      {title && (
+        <Styled.h1
+          sx={{
+            color: 'w3darkGreen',
+
+            fontFamily: 'Montserrat',
+            fontSize: '44px',
+
+            fontWeight: '700',
+            lineHeight: '52px',
+            letterSpacing: '-2.4000000953674316px',
+            textAlign: 'left',
+          }}
+        >
+          {title}
+        </Styled.h1>
+      )}
       {backNav && (
         <Flex
-         onClick={()=>{ router.back() }}
-         sx={{alignItems: 'center', cursor: 'pointer'}}>
-          <ArrowBack sx={{mr: 2}}/>
-          <Styled.h3 sx={{mb: 0, textTransform: 'uppercase', color: '#0D373C'}}>{backNav}</Styled.h3>
+          onClick={() => {
+            router.back()
+          }}
+          sx={{ alignItems: 'center', cursor: 'pointer' }}
+        >
+          <ArrowBack sx={{ mr: 2 }} />
+          <Styled.h3 sx={{ mb: 0, textTransform: 'uppercase', color: 'w3darkGreen' }}>
+            {backNav}
+          </Styled.h3>
         </Flex>
       )}
       <div className="col">

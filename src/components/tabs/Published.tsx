@@ -24,7 +24,7 @@ const Published = () => {
           lineHeight: '28px',
           textAlign: 'center',
           letterSpacing: '-0.01em',
-          color: '#688184',
+          color: 'text',
         }}
       >
         Looks like you did not publish an API yet!

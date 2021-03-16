@@ -40,17 +40,17 @@ const SearchBox = ({
         borderRadius: '8px',
         width: large ? '100%' : '400px',
         border: ' 2px solid',
-        color: dark ? '#688184' : '#598188',
-        bg: dark ? '#13212C' : '#EFF5F4',
+        color: dark ? 'text' : '#598188',
+        bg: dark ? 'w3shade1' : '#EFF5F4',
         p: '1rem',
         height: '62px',
-        borderColor: dark ? '#688184' : 'transparent',
+        borderColor: dark ? 'text' : 'transparent',
         '&[aria-expanded="true"]': {
           borderBottomLeftRadius: detachedResults ? '8px': '0',
           borderBottomRightRadius: detachedResults ? '8px': '0',
-          borderBottomColor: detachedResults ? '#688184': 'transparent',
+          borderBottomColor: detachedResults ? 'text': 'transparent',
           '*': {
-            color: dark ? '#FFFFFF' : '#688184',
+            color: dark ? 'white' : 'text',
           },
           '.react-dropdown-select-content': {
             '&::before': {
@@ -59,14 +59,14 @@ const SearchBox = ({
           },
         },
         '.react-dropdown-select-no-data': {
-          color: '#688184',
+          color: 'text',
         },
         '&:hover, &:focus-within': {
-          borderColor: dark ? '#688184' : 'transparent',
+          borderColor: dark ? 'text' : 'transparent',
           boxShadow: 'none',
         },
         '.react-dropdown-select-input': {
-          color: dark ? '#FFFFFF' : '#688184',
+          color: dark ? 'white' : 'text',
           fontFamily: 'Istok Web',
           fontSize: '14px',
           lineHeight: '100%',
@@ -79,14 +79,16 @@ const SearchBox = ({
         },
         '.react-dropdown-select-dropdown': {
           top: detachedResults ? '75px': '58px',
-          bg: dark ? '#13212C' : '#EFF5F4',
+          bg: dark ? 'w3shade1' : '#EFF5F4',
           color: 'white',
-          border: '2px solid #688184',
+          border: '2px solid',
+          borderColor: 'w3beige',
           borderBottomLeftRadius: '8px',
           borderBottomRightRadius: '8px',
           borderTopLeftRadius: detachedResults ? '8px': '0px',
           borderTopRightRadius: detachedResults ? '8px': '0px',
-          borderTop: detachedResults ? '2px solid #688184' : '1px solid rgba(104,129,132,.5)',
+          borderTop: detachedResults ? '2px solid' : '1px solid',
+          borderTopColor: detachedResults ? 'w3beige' : 'rgba(104,129,132,.5)',
           left: '-2px',
           width: detachedResults ? '30%' : 'calc(100% + 4px)',
         },
@@ -96,7 +98,7 @@ const SearchBox = ({
           fontWeight: 'bold',
           fontSize: '14px',
           lineHeight: '14px',
-          color: dark ? '#FFFFFF' : '#688184',
+          color: dark ? 'white' : 'text',
           padding: '1rem 2rem',
           height: '56px',
           display: 'flex',
@@ -104,12 +106,12 @@ const SearchBox = ({
           justifyContent: 'left',
           pl: '1.25rem',
           '&.react-dropdown-select-item-selected': {
-            bg: dark ? '#13212C' : '#EFF5F4',
-            color: dark ? '#FFFFFF' : '#688184',
+            bg: dark ? 'w3shade1' : '#EFF5F4',
+            color: dark ? 'white' : 'text',
             borderBottomColor: 'rgba(104,129,132,.5)',
           },
           '&:hover': {
-            bg: dark ? '#1F3A46': 'w3MoreTeal',
+            bg: dark ? 'w3shade3': 'w3TextNavTeal',
             color: dark ? 'inherit': 'white'
           },
           '&::before': {

@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import React from 'react'
-import { jsx, Flex, Button, Box } from 'theme-ui'
+import { jsx, Flex, Button, useThemeUI } from 'theme-ui'
 import { useStateValue } from '../state/state'
 import getOnboard from '../utils/Onboarding'
 import addrShortener from '../utils/addrShortener'
@@ -17,6 +17,7 @@ type SignInAreaProps = {
 
 const SignInArea = ({ onDark }: SignInAreaProps) => {
   const [{ dapp }, dispatch] = useStateValue()
+  const { theme } = useThemeUI()
   const router = useRouter()
   const onboard = getOnboard({
     address: async (address) => {
@@ -70,11 +71,11 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
             onKeyUp={handleSignInClick}
             sx={{ cursor: 'pointer', alignItems: 'center' }}
           >
-            <User stroke={onDark ? 'white' : 'rgb(69, 79, 91)'} />
+            <User stroke={onDark ? 'white' :  theme.colors.w3darkGreen } />
             <span>&nbsp;</span>
             <span
               sx={{
-                color: '#0D373C',
+                color: 'w3darkGreen',
                 fontFamily: 'Montserrat',
                 fontSize: '14px',
                 fontWeight: '600',
@@ -96,7 +97,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                     className="header-nav"
                     sx={{ display: 'flex', alignItems: 'center' }}
                   >
-                    <MyAPIs stroke={onDark ? 'white' : '#509DAC'} sx={{mr: 2}}/>
+                    <MyAPIs stroke={onDark ? 'white' : theme.colors.w3green} sx={{mr: 2}}/>
                     <span
                       sx={{
                         fontFamily: 'Montserrat',
@@ -106,7 +107,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                         lineHeight: '17px',
                         letterSpacing: '-0.4000000059604645px',
                         textAlign: 'left',
-                        color: '#509DAC'
+                        color: 'w3green'
                       }}
                     >
                       My APIs
@@ -116,7 +117,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
               )}
             </li>
             <li className="wallet-addr" sx={{ p: '.425rem', display: 'flex', alignItems: 'center' }}>
-              <User stroke={onDark ? 'white' : 'rgb(69, 79, 91)'} />
+              <User stroke={onDark ? 'white' : theme.colors.w3darkGreen} />
               <span
                 className="header-nav"
                 sx={{
@@ -124,7 +125,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                   textTransform: 'initial',
                   fontFamily: 'Montserrat',
                   fontSize: '14px',
-                  
+                  color: 'w3darkGreen',
                   fontWeight: '600',
                   lineHeight: '17px',
                   letterSpacing: '-0.4000000059604645px',

@@ -17,47 +17,53 @@ const GlobalTheme = {
     heading: 1.25,
   },
   colors: {
-    text: '#454f5b',
     background: '#EEE',
-    w3Teal: '#335E67',
-    w3MoreTeal: '#4A7A84',
+    text: '#688184',
+
+    w3green: '#509DAC',
+    w3darkGreen: '#0D373C',
+    w3beige: '#688184',
+    w3darkGray: '#141A1E',
+    
+    w3shade0: '#12191E',
+    w3shade1: '#13212C',
+    w3shade2: '#1B2731',
+    w3shade3: '#1F3A46',
+    
+    w3greenGradient: 'linear-gradient(0deg, #529DAD 1.85%, #60C092 97.11%)',
+    w3hazeGradient: 'linear-gradient(180deg, #FFFFFF 0%, #E1ECEA 100%)',
+    
+    w3ButtonTeal: '#335E67',
+    w3TextNavTeal: '#4A7A84',
+    
     w3NavHighlightTeal: '#243843',
+    w3NavNeonHighlightTeal: '#66E0D9',
+    w3NavGrayGreen: '#1B262C',
+    
+    w3PlayGroundNavy: '#13212C',
+    w3PlaygroundSoftBlue: '#B2D2D9',
+    
+    w3OffWhite: '#E9E9E9',
 
-    w3gray: '#1B2731',
+    unknownHEX0: '#CAD9F3',
+    unknownHEX1: '#EFF5F4',
+    unknownHEX2: '#DDDDDD',
+    unknownHEX3: '#597980',
+    unknownHEX4: '#598188',
+    unknownHEX5: '#EFF5F4',
+    unknownHEX6: '#EFF5F4',
+    unknownHEX7: '#EFF5F4',
+    unknownHEX8: '#86909F',
+    unknownHEX9: '#FCFDFD',
+    unknownHEX10: '#ECF4F2',
 
-    w3tealHighlight: '#66E0D9',
-    w3lightTeal: '#598188',
-    // darkTeal: '#335E67',
+    unknownRGBA0: 'rgba(28, 94, 93, 0.1)',
+    unknownRGBA1: 'rgba(104,129,132,.1)',
+    unknownRGBA2: 'rgba(0,0,0,.4)',
+    unknownRGBA3: 'rgba(0, 0, 0, 0.06)',
+    unknownRGBA4: 'rgba(104,129,132,.5)',
+    unknownRGBA5: 'rgba(20, 102, 204, 0.16)',
 
-    green: '#60c093',
-    darkGreen: '#12191E',
-    grayGreen: '#1B262C',
-    activeGreen: '#243843',
-
-    gray: '#1c272d',
-
-    babyBlue: 'rgba(202,217,243, .3)',
-    babyBlueDark: '#cad9f3',
-    softBlue: '#B2D2D9',
-
-    navy: '#13212C',
-
-    orange: '#E67100',
-
-    greenGradient: 'linear-gradient(0deg, #529DAD 1.85%, #60C092 97.11%)',
-    hazeGradient: 'linear-gradient(180deg, #FFFFFF 0%, #E1ECEA 100%)',
-
-    offWhite: '#E9E9E9',
-    modes: {
-      dark: {
-        text: '#3e4155',
-        background: '#000639',
-        primary: '#9c6ade',
-        secondary: '#b4e1fa',
-        highlight: '#b7ecec',
-        muted: '#e6e6e6',
-      },
-    },
   },
   forms: {
     select: {
@@ -68,7 +74,7 @@ const GlobalTheme = {
       dark: {
         border: '2px solid',
         color: 'white',
-        borderColor: 'babyBlue',
+        borderColor: 'rgba(202,217,243, .3)',
       },
     },
     input: {
@@ -78,7 +84,7 @@ const GlobalTheme = {
   buttons: {
     primary: {
       color: 'white',
-      bg: 'w3Teal',
+      bg: 'w3ButtonTeal',
       boxShadow: '0px 15px 30px rgba(20, 102, 204, 0.16)',
       borderRadius: '4px',
       fontWeight: 'bold',
@@ -91,7 +97,48 @@ const GlobalTheme = {
       p: '1.5rem',
       px: '2.5rem',
       '&:hover': {
-        bg: 'w3MoreTeal',
+        bg: 'w3TextNavTeal',
+      },
+      '&:active': {
+        bg: '#255661',
+      },
+    },
+    primaryMedium: {
+      color: 'white',
+      bg: 'w3ButtonTeal',
+      boxShadow: '0px 15px 30px rgba(20, 102, 204, 0.16)',
+      borderRadius: '4px',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      lineHeight: '14px',
+      textAlign: 'center',
+      letterSpacing: '-0.6px',
+      textTransform: 'uppercase',
+      fontFamily: 'Montserrat',
+      p: 3,
+      '&:hover': {
+        bg: 'w3TextNavTeal',
+      },
+      '&:active': {
+        bg: '#255661',
+      },
+    },
+    primaryWithGradient: {
+      color: 'white',
+      background: 'linear-gradient(0deg, #529DAD 1.85%, #60C092 97.11%)',
+      boxShadow: '0px 15px 30px rgba(20, 102, 204, 0.16)',
+      borderRadius: '4px',
+      fontWeight: 'bold',
+      fontSize: '14px',
+      lineHeight: '14px',
+      textAlign: 'center',
+      letterSpacing: '-0.6px',
+      textTransform: 'uppercase',
+      fontFamily: 'Montserrat',
+      p: '1.5rem',
+      px: '2.5rem',
+      '&:hover': {
+        bg: 'w3TextNavTeal',
       },
       '&:active': {
         bg: '#255661',
@@ -116,10 +163,10 @@ const GlobalTheme = {
         bg: 'rgba(104, 129, 132, 0.2)',
       },
     },
-
     secondaryOnLight: {
-      color: '#688184',
-      border: '2px solid #688184',
+      color: 'text',
+      border: '2px solid',
+      borderColor: 'w3beige',
       borderRadius: '4px',
       p: 3,
       fontWeight: 'bold',

@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx } from 'theme-ui'
+import { jsx,useThemeUI } from 'theme-ui'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import APIs from '../../public/images/apis.svg'
@@ -9,6 +9,7 @@ import Doc from '../../public/images/Doc.svg'
 
 const Navbar = () => {
   const router = useRouter()
+  const { theme } = useThemeUI()
   return (
     <nav
       role="nav"
@@ -17,7 +18,7 @@ const Navbar = () => {
         alignItems: 'center',
         justifyContent: 'space-between',
         py: 4,
-        backgroundColor: 'grayGreen',
+        backgroundColor: 'w3NavGrayGreen',
         flexDirection: 'column',
         height: '100vh',
         maxWidth: '112px',
@@ -49,16 +50,16 @@ const Navbar = () => {
                 display: 'flex',
                 alignItems: 'center',
                 borderLeft: '2px solid',
-                borderLeftColor: 'grayGreen',
+                borderLeftColor: 'w3NavGrayGreen',
                 svg: {
-                  stroke: '#509DAC',
+                  stroke: theme.colors.w3green,
                 },
                 '&:hover': {
                   borderLeftColor: 'w3NavHighlightTeal',
                   backgroundColor: 'w3NavHighlightTeal',
                 },
                 '&.active': {
-                  borderLeftColor: 'w3tealHighlight',
+                  borderLeftColor: 'w3NavNeonHighlightTeal',
                   backgroundColor: 'w3NavHighlightTeal',
                   span: { color: 'white !important'},
                   svg: {

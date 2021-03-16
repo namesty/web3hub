@@ -66,7 +66,7 @@ const Layout = ({ children }: LayoutProps) => {
             backgroundRepeat: 'no-repeat',
             backgroundSize: '100% 100%',
             backgroundAttachment: 'scroll',
-            background: theme.colors.hazeGradient,
+            background: theme.colors.w3hazeGradient,
           },
           'body::before': {
             display: 'none',
@@ -133,12 +133,7 @@ const Layout = ({ children }: LayoutProps) => {
             background: 'rgba(255, 255, 255, 0.04)',
           },
           'table tbody tr:hover': {
-            background: 'rgba(255, 255, 255, 0.08)',
-          },
-          '.callout-text': {
-            background: '#DDD',
-            padding: '1rem',
-            textAlign: 'center',
+            background: 'rgba(255, 255, 255, 0.04)',
           },
           '.text-nav': {
             fontWeight: 'bold',
@@ -147,7 +142,7 @@ const Layout = ({ children }: LayoutProps) => {
             letterSpacing: '-0.6px',
             textTransform: 'uppercase',
             textDecoration: 'none',
-            color: theme.colors.w3MoreTeal,
+            color: theme.colors.w3TextNavTeal,
           },
           '.bn-onboard-custom': {
             zIndex: 100000,

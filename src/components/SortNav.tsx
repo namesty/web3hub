@@ -16,7 +16,7 @@ const SortNav = () => {
   useEffect(() => {
     setsearchOptions(dapp.apis)
   }, [dapp.apis])
-  
+
   return (
     <nav>
       <form>
@@ -33,14 +33,27 @@ const SortNav = () => {
             onChange={handleSearchValuesChange}
           />
         )}
-        
+
         <br />
-        <Flex sx={{ justifyContent: 'space-between', flex: 1, alignItems: 'center' }}>
+        <Flex
+          sx={{
+            justifyContent: 'space-between',
+            flex: 1,
+            alignItems: 'center',
+            color: 'w3darkGreen',
+            fontFamily: 'Montserrat',
+            fontSize: '15px',
+            fontWeight: '500',
+            lineHeight: '18px',
+            letterSpacing: '-0.4000000059604645px',
+            textAlign: 'right',
+          }}
+        >
           <span>
-            <b>46</b>API's
+            <b>46</b>&nbsp;API's
           </span>
           <div>
-            <Select sx={{ minWidth: '150px', border: 'none', color: 'w3lightTeal' }}>
+            <Select sx={{ minWidth: '120px', border: 'none' }}>
               <option value="HighestRated">Higest Rated</option>
               <option value="MostRecent">Most Recent</option>
               <option value="Alphabetical">Alphabetical</option>

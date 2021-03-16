@@ -34,7 +34,7 @@ const ApiGrid = () => {
           lineHeight: '52px',
           textAlign: 'center',
           letterSpacing: '-1px',
-          color: '#688184',
+          color: 'text',
         }}
       >
         You reached the end of the list. <b>Don’t stop here!</b>
