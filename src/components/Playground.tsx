@@ -1,10 +1,9 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Button, Select, Field, Styled } from 'theme-ui'
+import { jsx, Flex, Button, Styled } from 'theme-ui'
 import Badge from './Badge'
 import Stars from './Stars'
 import BGWave from '../components/BGWave'
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import SelectBox from './SelectBox'
 import SearchBox from './SearchBox'
@@ -12,6 +11,7 @@ import { useStateValue } from '../state/state'
 
 const Playground = () => {
   const [{ dapp }, dispatch] = useStateValue()
+  
   // TODO: Turn this into reusable hook because it also exsits on index
   const [searchValues, setsearchValues] = useState([])
   const [searchOptions, setsearchOptions] = useState(dapp.apis)
@@ -41,6 +41,10 @@ const Playground = () => {
   //   }
   //   getRelatedFunctions()
   // }, [searchValues])
+
+  useEffect(() => {
+    setsearchOptions(dapp.apis)
+  }, [dapp.apis])
 
   return (
     <div

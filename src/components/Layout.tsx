@@ -14,8 +14,6 @@ const Layout = ({ children }: LayoutProps) => {
   const [,dispatch] = useStateValue()
   const { data: apis, error } = useSWR('/api/apis')
 
-  console.log('apis',apis)
-
   useEffect(() => {
     dispatch({
       type: 'SET_AVAILABLE_APIS',

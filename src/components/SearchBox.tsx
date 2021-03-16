@@ -29,6 +29,7 @@ const SearchBox = ({
   values,
   onChange,
 }: RDSProps) => {
+  // Styling fix
   const forceUpdate: () => void = useState()[1].bind(null, {})
   useEffect(() => {
     setTimeout(()=>forceUpdate(),100)

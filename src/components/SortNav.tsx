@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Select } from 'theme-ui'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useStateValue } from '../state/state'
 import SearchBox from './SearchBox'
 
@@ -12,21 +12,28 @@ const SortNav = () => {
   const [searchValues, setsearchValues] = useState([])
   const [searchOptions, setsearchOptions] = useState(dapp.apis)
   const handleSearchValuesChange = (values) => setsearchValues(values)
+
+  useEffect(() => {
+    setsearchOptions(dapp.apis)
+  }, [dapp.apis])
   
   return (
     <nav>
       <form>
-        <SearchBox
-          detachedResults
-          large
-          searchBy="id"
-          placeholder={'Search'}
-          labelField="id"
-          valueField="id"
-          options={searchOptions}
-          values={searchValues}
-          onChange={handleSearchValuesChange}
-        />
+        {dapp.apis && dapp.apis.length > 0 && (
+          <SearchBox
+            detachedResults
+            large
+            searchBy="id"
+            placeholder={'Search'}
+            labelField="id"
+            valueField="id"
+            options={searchOptions}
+            values={searchValues}
+            onChange={handleSearchValuesChange}
+          />
+        )}
+        
         <br />
         <Flex sx={{ justifyContent: 'space-between', flex: 1, alignItems: 'center' }}>
           <span>
