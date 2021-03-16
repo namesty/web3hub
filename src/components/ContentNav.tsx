@@ -23,11 +23,11 @@ const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
           textAlign: 'center',
           fontFamily: 'Montserrat',
           fontSize: '16px',
-          fontWeight: 'bold',
           letterSpacing: '-0.4000000059604645px',
           pb: ' 18px',
           color: '#688184',
           mb: 0,
+          minWidth: '120px',
           '&.active': {
             fontWeight: 'bold',
             color: 'darkGreen',
@@ -51,10 +51,10 @@ const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
             onClick={() => setActiveTab(id)}
           >
             <span
+              className="label"
               sx={{
                 fontFamily: 'Montserrat',
-                fontStyle: 'normal',
-                fontWeight: 'bold',
+                
                 fontSize: '16px',
                 lineHeight: '20px',
                 letterSpacing: '-0.4px',
@@ -70,7 +70,7 @@ const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
               sx={{
                 backgroundColor: 'rgba(104,129,132,.1)',
                 fontFamily: 'Montserrat',
-                fontStyle: 'normal',
+                
                 fontWeight: '600',
                 fontSize: '13px',
                 lineHeight: '16px',

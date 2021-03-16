@@ -5,7 +5,12 @@ import Link from 'next/link'
 import Stars from './Stars'
 import Badge from './Badge'
 
-const Card = () => {
+type CardProps = {
+  boxShadowOn?: boolean
+  noHover?: boolean
+}
+
+const Card = ({boxShadowOn, noHover}: CardProps) => {
   return (
     <div
       className="Card"
@@ -13,8 +18,9 @@ const Card = () => {
         borderRadius: '8px',
         bg: 'white',
         transition: 'transform .2s ease',
+        boxShadow: boxShadowOn ? '0px 32px 44px rgba(28, 94, 93, 0.1)': 'none',
         '&:hover': {
-          transform: 'scale(1.05)',
+          transform: noHover ? 'none' : 'scale(1.05)',
         },
       }}
     >

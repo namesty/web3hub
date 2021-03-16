@@ -3,6 +3,7 @@
 import { jsx, Input, Flex, Select, Button, Styled, Field} from 'theme-ui'
 import Stars from '../Stars'
 import Badge from '../Badge'
+import Card from '../Card'
 
 const PublishAPI = () => {
   return (
@@ -90,30 +91,11 @@ const PublishAPI = () => {
       </form>
       <Flex className="preview" sx={{flex: 3, textAlign: 'center', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column'}}>
         <div className="title">Package Preview</div>
-        <Flex className="preview-content" sx={{
-          maxWidth: '282px',
-          boxShadow: '0px 32px 44px rgba(28, 94, 93, 0.1)',
-          borderRadius: '8px',
-          p: '24px',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-                   alignItems: 'center',
-                   textAlign: 'center'
-        }}>
-          <img
-            className="api-logo"
-            src="api-logo.svg"
-            sx={{ bg: 'black', width: '211px', height: '211px', mr: 2 }}
-          />
-          <Flex className="api-info" sx={{ flexDirection: 'column', alignItems: 'center'}}>
-            <div className="title">
-              <b>Uniswap V2</b>
-            </div>
-            <div className="sub-title">Easily swap between any two ERC-20 Tokens</div>
-            <Stars count={320}/>
-            <Badge label="IPFS"/>
-          </Flex>
-        </Flex>
+        <div className="wrapper" sx={{maxWidth: '280px'}}>
+          <Card boxShadowOn noHover/>
+        </div>
+        
+       
       </Flex>
     </Flex>
   )

@@ -25,7 +25,7 @@ const Stars = ({ count, onDark, large }: BadgeProps) => {
         sx={
           !large
             ? {
-                fontStyle: 'normal',
+                
                 fontWeight: '600',
                 fontSize: '14px',
                 lineHeight: '17px',

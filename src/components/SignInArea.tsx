@@ -96,16 +96,17 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                     className="header-nav"
                     sx={{ display: 'flex', alignItems: 'center' }}
                   >
-                    <MyAPIs stroke={onDark ? 'white' : 'rgb(69, 79, 91)'} sx={{mr: 2}}/>
+                    <MyAPIs stroke={onDark ? 'white' : '#509DAC'} sx={{mr: 2}}/>
                     <span
                       sx={{
                         fontFamily: 'Montserrat',
                         fontSize: '14px',
-                        fontStyle: 'normal',
+                        
                         fontWeight: '600',
                         lineHeight: '17px',
                         letterSpacing: '-0.4000000059604645px',
                         textAlign: 'left',
+                        color: '#509DAC'
                       }}
                     >
                       My APIs
@@ -114,14 +115,16 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                 </Link>
               )}
             </li>
-            <li className="wallet-addr" sx={{ p: '.425rem' }}>
+            <li className="wallet-addr" sx={{ p: '.425rem', display: 'flex', alignItems: 'center' }}>
+              <User stroke={onDark ? 'white' : 'rgb(69, 79, 91)'} />
               <span
                 className="header-nav"
                 sx={{
+                  ml: 2,
                   textTransform: 'initial',
                   fontFamily: 'Montserrat',
                   fontSize: '14px',
-                  fontStyle: 'normal',
+                  
                   fontWeight: '600',
                   lineHeight: '17px',
                   letterSpacing: '-0.4000000059604645px',
@@ -140,9 +143,10 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                 ? router.push('/apis/create?activeTab=create')
                 : router.push('/')
             }}
-            sx={{ display: 'inline-block', ml: 3 }}
+            sx={{ display: 'inline-block', ml: 3, p: '1.5rem',
+            px: '2.5rem', }}
           >
-            <span>{router.pathname !== '/apis/create' ? 'Create API' : 'Cancel'}</span>
+            <span>{router.pathname !== '/apis/create' ? 'Create New API' : 'Cancel'}</span>
           </Button>
         </li>
       </ul>

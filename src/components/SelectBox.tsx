@@ -104,7 +104,7 @@ const SelectBox = ({
             alignItems: 'center',
             justifyContent: 'center',
             fontFamily: 'Montserrat',
-            fontStyle: 'normal',
+            
             fontWeight: 'bold',
             fontSize: '14px',
             lineHeight: '14px',

@@ -73,21 +73,23 @@ const GlobalTheme = {
     },
     input: {
       border: '2px solid rgba(205, 208, 227, 0.295455)',
-    }
+    },
   },
   buttons: {
-    primary: {      
+    primary: {
       color: 'white',
       bg: 'w3Teal',
       boxShadow: '0px 15px 30px rgba(20, 102, 204, 0.16)',
       borderRadius: '4px',
-      p: 3,
       fontWeight: 'bold',
       fontSize: '14px',
       lineHeight: '14px',
       textAlign: 'center',
       letterSpacing: '-0.6px',
       textTransform: 'uppercase',
+      fontFamily: 'Montserrat',
+      p: '1.5rem',
+      px: '2.5rem',
       '&:hover': {
         bg: 'w3MoreTeal',
       },
@@ -111,10 +113,10 @@ const GlobalTheme = {
         bg: 'rgba(104, 129, 132, 0.1)',
       },
       '&:active': {
-        bg: 'rgba(104, 129, 132, 0.2)'
-      }
+        bg: 'rgba(104, 129, 132, 0.2)',
+      },
     },
-    
+
     secondaryOnLight: {
       color: '#688184',
       border: '2px solid #688184',

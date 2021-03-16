@@ -26,9 +26,9 @@ const ApiGrid = () => {
       </Grid>
       <p
         sx={{
-          mt: 5,
+          mt: '5rem',
           fontFamily: 'Montserrat',
-          fontStyle: 'normal',
+          
           fontWeight: 'normal',
           fontSize: '20px',
           lineHeight: '52px',
@@ -42,7 +42,7 @@ const ApiGrid = () => {
         <Button
             variant={'primary'}
             onClick={() => {router.push('/apis/create?activeTab=create')}}
-            sx={{ display: 'inline-block', ml: 3 }}
+            sx={{ display: 'inline-block', ml: 3, mt: 4 }}
           >
             <span>Create New API</span>
           </Button>

@@ -75,7 +75,7 @@ const Navbar = () => {
               },
             }}
           >
-            <li className={router.pathname === '/' ? 'active' : ''}>
+            <li className={router.pathname === '/' || router.pathname === '/apis/user' ? 'active' : ''}>
               <Link href="/" sx={{ alignItems: 'center' }}>
                 <a>
                   <APIs />
