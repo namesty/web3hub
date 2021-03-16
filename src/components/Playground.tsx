@@ -62,7 +62,7 @@ const Playground = () => {
         },
       }}
     >
-      {searchOptions.length > 0 && (
+      {searchOptions && searchOptions.length > 0 && (
         <React.Fragment>
           <Flex
             className="header"
