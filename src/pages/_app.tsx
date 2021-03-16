@@ -5,6 +5,12 @@ import InitialState from '../state/initialState'
 import Reducer from '../state/reducer'
 import Head from 'next/head'
 import 'animate.css/animate.css'
+import { SWRConfig } from 'swr'
+import {fetcherREST} from '../utils/fetcher'
+const swrOptions = {
+  refreshInterval: 5000,
+  fetcher: (resource) => fetcherREST(resource)
+}
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -17,7 +23,9 @@ function MyApp({ Component, pageProps }) {
             rel="stylesheet"
           ></link>
         </Head>
-        <Component {...pageProps} />
+        <SWRConfig value={swrOptions}>
+          <Component {...pageProps} />
+        </SWRConfig>
       </ThemeProvider>
     </StateProvider>
   )

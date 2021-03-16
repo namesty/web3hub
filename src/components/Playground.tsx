@@ -8,11 +8,13 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import SelectBox from './SelectBox'
 import SearchBox from './SearchBox'
+import { useStateValue } from '../state/state'
 
 const Playground = () => {
+  const [{ dapp }, dispatch] = useStateValue()
   // TODO: Turn this into reusable hook because it also exsits on index
   const [searchValues, setsearchValues] = useState([])
-  const [searchOptions, setsearchOptions] = useState([])
+  const [searchOptions, setsearchOptions] = useState(dapp.apis)
   
   const [queryValues, setqueryValues] = useState([])
   const [queryOptions, setqueryOptions] = useState([
@@ -32,13 +34,6 @@ const Playground = () => {
   const handleSearchValuesChange = (values) => setsearchValues(values)
   const handleQueryValuesChange = (values) => setqueryValues(values)
   
-  useEffect(() => {
-    async function getAPIs() {
-      let search = await axios.get('/api/apis')
-      setsearchOptions(search.data)
-    }
-    getAPIs()
-  }, [])
   // useEffect(() => {
   //   async function getRelatedFunctions() {
   //     let queries = await axios.get(`/api/apis/${searchValues[0].id}/queries`)

@@ -6,7 +6,8 @@ let initialState = {
       name: 'TEST'
     },
     network: 3,
-    web3: {}
+    web3: {},
+    apis: []
   }
 }
 export default initialState

@@ -1,29 +1,24 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Select } from 'theme-ui'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useState } from 'react'
+import { useStateValue } from '../state/state'
 import SearchBox from './SearchBox'
 
 const SortNav = () => {
+  const [{ dapp }, dispatch] = useStateValue()
+
   // TODO: Turn this into reusable hook because it also exsits on playground
   const [searchValues, setsearchValues] = useState([])
-  const [searchOptions, setsearchOptions] = useState([])
+  const [searchOptions, setsearchOptions] = useState(dapp.apis)
   const handleSearchValuesChange = (values) => setsearchValues(values)
-  useEffect(() => {
-    async function getAPIs() {
-      let search = await axios.get('/api/apis')
-      setsearchOptions(search.data)
-    }
-    getAPIs()
-  }, [])
+  
   return (
     <nav>
       <form>
         <SearchBox
           detachedResults
           large
-          dark
           searchBy="id"
           placeholder={'Search'}
           labelField="id"

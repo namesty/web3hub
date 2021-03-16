@@ -1,5 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
+import {useState, useEffect} from 'react'
 import { jsx } from 'theme-ui'
 import RDS from 'react-dropdown-select'
 
@@ -28,15 +29,19 @@ const SearchBox = ({
   values,
   onChange,
 }: RDSProps) => {
+  const forceUpdate: () => void = useState()[1].bind(null, {})
+  useEffect(() => {
+    setTimeout(()=>forceUpdate(),100)
+  }, [])
   return (
     <RDS
       sx={{
+        borderRadius: '8px',
         width: large ? '100%' : '400px',
         border: ' 2px solid #688184',
         color: dark ? '#688184' : '#598188',
         bg: dark ? '#13212C' : '#EFF5F4',
         p: '1rem',
-        borderRadius: '8px',
         height: '62px',
         borderColor: dark ? '#688184' : '#transparent',
         '&[aria-expanded="true"]': {

@@ -1,13 +1,28 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
+import { useEffect } from 'react'
 import { jsx } from 'theme-ui'
 import { Global } from '@emotion/core'
+import { useStateValue } from '../state/state'
+import useSWR from 'swr'
 
 type LayoutProps = {
   children?: any
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const [,dispatch] = useStateValue()
+  const { data: apis, error } = useSWR('/api/apis')
+
+  console.log('apis',apis)
+
+  useEffect(() => {
+    dispatch({
+      type: 'SET_AVAILABLE_APIS',
+      payload: apis,
+    })
+  }, [apis])
+
   return (
     <div
       className="layout"
@@ -85,15 +100,15 @@ const Layout = ({ children }: LayoutProps) => {
             display: 'flex',
             alignItems: 'center',
           },
-          fieldset : {
+          fieldset: {
             padding: 0,
-            border: 'none'
+            border: 'none',
           },
           '.contents': {
             maxWidth: '1224px',
             margin: 'auto',
             width: '100%',
-            height: '100%'
+            height: '100%',
           },
           'ul, ol, li': {
             margin: '0',

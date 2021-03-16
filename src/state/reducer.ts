@@ -6,6 +6,7 @@ type newState = {
   balance: number
   wallet: { name: string; }
   web3?: any 
+  apis: any[]
 }
 
 function dappReducer(state = {}, action) {
@@ -26,6 +27,9 @@ function dappReducer(state = {}, action) {
       return { ...state, ...newStateObj }
     case 'SET_WEB3':
       newStateObj.web3 = action.payload
+      return { ...state, ...newStateObj }
+    case 'SET_AVAILABLE_APIS':
+      newStateObj.apis = action.payload
       return { ...state, ...newStateObj }
     default:
       return state
