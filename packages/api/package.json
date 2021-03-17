@@ -3,16 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "export": "rm -rf .next out && next build && next export",
-    "deploy": "cd out && surge && cd .."
+    "start": "ts-node src/server.ts",
+    "dev": "nodemon src/server.ts",
+    "db:deploy": "docker-compose up -d"
   },
   "dependencies": {
-    "express": "4.17.1"
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "passport": "0.4.1",
+    "passport-github2": "0.1.12",
+    "pg-promise": "10.9.5",
+    "ts-node": "9.1.1"
   },
   "devDependencies": {
+    "@types/express": "4.11.1",
+    "@types/node": "12.12.2",
+    "@types/passport-github2": "1.1.3",
+    "nodemon": "2.0.7",
     "typescript": "^4.0.5"
   }
 }
