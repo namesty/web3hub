@@ -110,7 +110,10 @@ const Playground = () => {
             </Flex>
           </Flex>
           <Flex className="body" sx={{ '> *': { p: '1.5rem' } }}>
-            <div className="query" sx={{ flex: 4, backgroundColor: 'w3PlayGroundNavy' }}>
+            <div
+              className="query"
+              sx={{ width: '40%', backgroundColor: 'w3PlayGroundNavy' }}
+            >
               <Flex
                 className="templates"
                 sx={{ flex: 1, mb: 4, justifyContent: 'space-between' }}
@@ -148,7 +151,10 @@ mutation {
               </Styled.code>
             </div>
             &nbsp;
-            <div className="result" sx={{ flex: 6, backgroundColor: 'w3PlayGroundNavy' }}>
+            <div
+              className="result"
+              sx={{ width: '60%', backgroundColor: 'w3PlayGroundNavy', display: 'flex', flexDirection: 'column' }}
+            >
               <Flex
                 className="controls"
                 sx={{
@@ -171,8 +177,8 @@ mutation {
                   </span>
                 </div>
               </Flex>
-              <Styled.code sx={{ overflowX: 'scroll' }}>
-                <Styled.pre>{`
+              <Styled.code sx={{ flex: 1 }}>
+                <Styled.pre sx={{height: '100%'}}>{`
 "data": {
 "transactions": [
   {
