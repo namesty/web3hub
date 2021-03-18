@@ -15,7 +15,7 @@ const ApiView = () => {
   return (
     <Layout>
       <Flex>
-        <Navbar/>
+        <Navbar />
         <main>
           <div className="contents">
             <Header backNav={`Browse API's`} />
@@ -68,7 +68,6 @@ const ApiView = () => {
                   <p
                     className="description"
                     sx={{
-                      fontFamily: 'Inter',
                       lineHeight: '20px',
                     }}
                   >
@@ -110,10 +109,7 @@ const ApiView = () => {
                       '*': {
                         color: 'w3green',
                         textDecoration: 'none',
-
-                        fontFamily: 'Inter',
                         fontSize: '14px',
-
                         fontWeight: '400',
                         lineHeight: '17px',
                         letterSpacing: '0px',
@@ -156,29 +152,41 @@ const ApiView = () => {
                   </ul>
                   <ul className="category-Badges" sx={{ display: 'flex', mt: 3, ml: 0 }}>
                     <li sx={{ ml: -2 }}>
-                      <Badge label="ipfs"/>
+                      <Badge label="ipfs" />
                     </li>
                     <li sx={{ ml: -2 }}>
-                      <Badge label="defi"/>
+                      <Badge label="defi" />
                     </li>
                     <li sx={{ ml: -2 }}>
-                      <Badge label="amm"/>
+                      <Badge label="amm" />
                     </li>
                   </ul>
                   <br />
-                  <Button variant="primaryWithGradient" onClick={()=>{router.push('/playground')}}>
+                  <Button
+                    variant="primaryWithGradient"
+                    onClick={() => {
+                      router.push('/playground')
+                    }}
+                  >
                     <Flex sx={{ alignItems: 'center', justifyContent: 'center' }}>
                       <img
                         sx={{ maxWidth: '19px', mr: 2 }}
                         src="/images/playground.svg"
                         alt="icon"
                       />
-                      <PlaygroundImg stroke="#FFF" sx={{width: '34px', height: '32px', position: 'absolute', left: '-12%'}}/>    
+                      <PlaygroundImg
+                        stroke="#FFF"
+                        sx={{
+                          width: '34px',
+                          height: '32px',
+                          position: 'absolute',
+                          left: '-12%',
+                        }}
+                      />
                       <span>Playground</span>
                     </Flex>
                   </Button>
                 </div>
-                
               </Flex>
 
               <Flex
@@ -221,10 +229,10 @@ const api = new Web3API({
                   </Styled.code>
                 </div>
               </Flex>
-              <BottomSpace/>
+              <BottomSpace />
               <div className="Playground" />
             </div>
-            <BottomSpace/>
+            <BottomSpace />
           </div>
         </main>
       </Flex>

@@ -44,7 +44,6 @@ const CreateApi = () => {
                 '*': { cursor: 'pointer', mr: 2, mb: 4 },
                 '.tab': {
                   textAlign: 'center',
-                  fontFamily: 'Montserrat',
                   fontSize: '16px',
                   fontWeight: 'bold',
                   lineHeight: '20px',

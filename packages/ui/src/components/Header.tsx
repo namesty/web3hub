@@ -30,10 +30,7 @@ const Header = ({ title, onDark, backNav }: HeaderProps) => {
         <Styled.h1
           sx={{
             color: 'w3darkGreen',
-
-            fontFamily: 'Montserrat',
             fontSize: '44px',
-
             fontWeight: '700',
             lineHeight: '52px',
             letterSpacing: '-2.4000000953674316px',

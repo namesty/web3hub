@@ -18,10 +18,8 @@ const Published = () => {
       <Styled.h5
         sx={{
           fontFamily: 'Montserrat',
-          
-          fontWeight: 'normal',
-          fontSize: '20px',
-          lineHeight: '28px',
+          fontSize: '1.25rem',
+          lineHeight: '1.75rem',
           textAlign: 'center',
           letterSpacing: '-0.01em',
           color: 'text',

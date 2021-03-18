@@ -47,7 +47,6 @@ const Card = ({boxShadowOn, noHover}: CardProps) => {
                   sx={{
                     textAlign: 'center',
                     my: 2,
-                    fontFamily: 'Montserrat',
                     fontWeight: 'bold',
                     fontSize: '20px',
                     lineHeight: '28px',

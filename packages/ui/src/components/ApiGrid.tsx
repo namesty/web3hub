@@ -28,8 +28,6 @@ const ApiGrid = () => {
         sx={{
           mt: '5rem',
           fontFamily: 'Montserrat',
-          
-          fontWeight: 'normal',
           fontSize: '20px',
           lineHeight: '52px',
           textAlign: 'center',

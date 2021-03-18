@@ -21,7 +21,6 @@ const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
         '*': { cursor: 'pointer', mr: 2, mb: 4 },
         '.tab': {
           textAlign: 'center',
-          fontFamily: 'Montserrat',
           fontSize: '16px',
           letterSpacing: '-0.4000000059604645px',
           pb: ' 18px',
@@ -56,8 +55,7 @@ const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
             <span
               className="label"
               sx={{
-                fontFamily: 'Montserrat',
-                
+                fontFamily: 'Montserrat',                
                 fontSize: '16px',
                 lineHeight: '20px',
                 letterSpacing: '-0.4px',
