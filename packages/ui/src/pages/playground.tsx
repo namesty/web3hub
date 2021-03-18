@@ -13,7 +13,7 @@ const PlaygroundPage = () => {
       <Flex>
         <Navbar />
         <main>
-          <div className="contents">
+          <div className="contents animate">
             <Header onDark title="Playground" />
             <Playground />
           </div>

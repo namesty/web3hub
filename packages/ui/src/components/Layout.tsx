@@ -10,6 +10,8 @@ type LayoutProps = {
   children?: any
 }
 
+let pageLevelAnimationTiming = '1s'
+
 const Layout = ({ children }: LayoutProps) => {
   const [, dispatch] = useStateValue()
   const { data: apis, error } = useSWR('/api/apis')
@@ -30,9 +32,13 @@ const Layout = ({ children }: LayoutProps) => {
         },
       }}
     >
-      {children}
+      {children}      
       <Global
         styles={(theme) => ({
+          '@keyframes shift': {
+            from: { transform: 'translate(-10px, 0)' },
+            to: { transform: 'translate(0, 0)' }
+           },
           '*': {
             boxSizing: 'border-box',
             position: 'relative',
@@ -107,6 +113,9 @@ const Layout = ({ children }: LayoutProps) => {
             margin: 'auto',
             width: '100%',
             height: '100%',
+          },
+          '.contents.animate': {
+            animation: `fadeIn ${pageLevelAnimationTiming}, shift ${pageLevelAnimationTiming}`,
           },
           'ul, ol, li': {
             margin: '0',
