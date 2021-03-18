@@ -1,7 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { useEffect } from 'react'
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
+import { timing } from '../theme'
 import { Global } from '@emotion/core'
 import { useStateValue } from '../state/state'
 import useSWR from 'swr'
@@ -10,12 +11,13 @@ type LayoutProps = {
   children?: any
 }
 
-let pageLevelAnimationTiming = '1s'
-
 const Layout = ({ children }: LayoutProps) => {
+  const { theme } = useThemeUI()
   const [, dispatch] = useStateValue()
   const { data: apis, error } = useSWR('/api/apis')
-
+  // https://github.com/system-ui/theme-ui/issues/834#issuecomment-625865772
+  const pageLevelAnimationTiming = timing[3] +'s'
+  
   useEffect(() => {
     dispatch({
       type: 'SET_AVAILABLE_APIS',

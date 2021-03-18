@@ -1,7 +1,8 @@
+export const timing = [.25,.5,.75,1,1.25,1.5,1.75,2,3]
+
 const GlobalTheme = {
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   sizes: [0, 4, 8, 16, 32, 64, 128, 256, 512],
-  timing: [.25,.5,.75,1,1.25,1.5,1.75,2,3,],
   fonts: {
     body: '"Inter", sans-serif',
     heading: '"Montserrat", sans-serif',
