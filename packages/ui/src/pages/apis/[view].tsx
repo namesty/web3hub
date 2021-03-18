@@ -22,7 +22,7 @@ const ApiView = () => {
             <div
               className="wrap"
               sx={{
-                borderRadius: '8px',
+                borderRadius: '0.5rem',
                 bg: 'white',
                 px: '2rem',
                 py: '2rem',
@@ -33,12 +33,12 @@ const ApiView = () => {
                   className="api-logo"
                   src="/images/uniswap.png"
                   sx={{
-                    width: '210px',
-                    height: '210px',
+                    width: '13.125rem',
+                    height: '13.125rem',
                     mr: 4,
                   }}
                 />
-                <div className="api-info" sx={{ mr: 4, width: '450px' }}>
+                <div className="api-info" sx={{ mr: 4, width: '28.125rem' }}>
                   <Styled.h1
                     className="title"
                     sx={{
@@ -47,8 +47,8 @@ const ApiView = () => {
                       fontWeight: 'bold',
                       fontSize: 66,
                       color: 'black',
-                      lineHeight: '80px',
-                      letterSpacing: '-2px',
+                      lineHeight: '5rem',
+                      letterSpacing: '-0.125rem',
                     }}
                   >
                     Uniswap V2
@@ -58,9 +58,9 @@ const ApiView = () => {
                     sx={{
                       mb: 4,
                       color: '#86909F',
-                      fontSize: '18px',
+                      fontSize: '1.125rem',
                       fontWeight: '500',
-                      lineHeight: '21.94px',
+                      lineHeight: '1.3713rem',
                     }}
                   >
                     Easily swap between any two ERC-20 tokens
@@ -68,7 +68,7 @@ const ApiView = () => {
                   <p
                     className="description"
                     sx={{
-                      lineHeight: '20px',
+                      lineHeight: '1.25rem',
                     }}
                   >
                     Pariatur occaecat ullamco excepteur elit quis nostrud cillum fugiat
@@ -85,9 +85,9 @@ const ApiView = () => {
                   sx={{
                     px: '1.5rem',
                     py: '2rem',
-                    minWidth: '360px',
-                    boxShadow: '0px 5px 10px 5px #DDD',
-                    borderRadius: '8px',
+                    minWidth: '22.5rem',
+                    boxShadow: '0rem 0.3125rem 0.625rem 0.3125rem #DDD',
+                    borderRadius: '0.5rem',
                     top: 4,
                     position: 'absolute',
                     right: 0,
@@ -95,7 +95,7 @@ const ApiView = () => {
                     background: 'white',
                   }}
                 >
-                  <Flex sx={{ justifyContent: 'space-between', mb: '10px' }}>
+                  <Flex sx={{ justifyContent: 'space-between', mb: '0.625rem' }}>
                     <div className="left">
                       <Styled.h4 className="title">UniswapV2</Styled.h4>
                     </div>
@@ -109,10 +109,10 @@ const ApiView = () => {
                       '*': {
                         color: 'w3green',
                         textDecoration: 'none',
-                        fontSize: '14px',
+                        fontSize: '0.875rem',
                         fontWeight: '400',
-                        lineHeight: '17px',
-                        letterSpacing: '0px',
+                        lineHeight: '1.0625rem',
+                        letterSpacing: '0rem',
                       },
                       li: {
                         mb: '1.5rem',
@@ -121,7 +121,7 @@ const ApiView = () => {
                   >
                     <li sx={{ display: 'flex' }}>
                       <img
-                        sx={{ maxWidth: '19px', mr: 2 }}
+                        sx={{ maxWidth: '1.1875rem', mr: 2 }}
                         src="/images/link.svg"
                         alt="icon"
                       />
@@ -131,7 +131,7 @@ const ApiView = () => {
                     </li>
                     <li sx={{ display: 'flex' }}>
                       <img
-                        sx={{ maxWidth: '19px', mr: 2 }}
+                        sx={{ maxWidth: '1.1875rem', mr: 2 }}
                         src="/images/github.svg"
                         alt="icon"
                       />
@@ -141,7 +141,7 @@ const ApiView = () => {
                     </li>
                     <li sx={{ display: 'flex' }}>
                       <img
-                        sx={{ maxWidth: '19px', mr: 2 }}
+                        sx={{ maxWidth: '1.1875rem', mr: 2 }}
                         src="/images/doc.svg"
                         alt="icon"
                       />
@@ -170,15 +170,15 @@ const ApiView = () => {
                   >
                     <Flex sx={{ alignItems: 'center', justifyContent: 'center' }}>
                       <img
-                        sx={{ maxWidth: '19px', mr: 2 }}
+                        sx={{ maxWidth: '1.1875rem', mr: 2 }}
                         src="/images/playground.svg"
                         alt="icon"
                       />
                       <PlaygroundImg
                         stroke="#FFF"
                         sx={{
-                          width: '34px',
-                          height: '32px',
+                          width: '2.125rem',
+                          height: '2rem',
                           position: 'absolute',
                           left: '-12%',
                         }}
@@ -191,19 +191,19 @@ const ApiView = () => {
 
               <Flex
                 className="bottom"
-                sx={{ bg: '#FCFDFD', borderTop: '1px solid #ECF4F2', mt: 4, pt: 4 }}
+                sx={{ bg: '#FCFDFD', borderTop: '0.0625rem solid #ECF4F2', mt: 4, pt: 4 }}
               >
                 <img
                   className="api-logo"
                   src="api-logo.svg"
                   sx={{
                     opacity: 0,
-                    width: '210px',
-                    height: '210px',
+                    width: '13.125rem',
+                    height: '13.125rem',
                     mr: 4,
                   }}
                 />
-                <div sx={{ width: '550px' }}>
+                <div sx={{ width: '34.375rem' }}>
                   <Styled.h2 sx={{ textAlign: 'center' }}>Get Started</Styled.h2>
                   <Styled.code>
                     <Styled.pre>{`yarn install @web3api/client`}</Styled.pre>

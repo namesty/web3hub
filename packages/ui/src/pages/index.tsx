@@ -16,16 +16,16 @@ const Index = () => {
         <Navbar />
         <main>
           <div className="contents">
-            <Header title="Browse APIs"/>
+            <Header title="Browse APIs" />
             <section className="content">
               <SortNav />
               <ApiGrid />
             </section>
-            <BottomSpace/>
+            <BottomSpace />
           </div>
         </main>
       </Flex>
-      <BGWave light/>
+      <BGWave light />
     </Layout>
   )
 }

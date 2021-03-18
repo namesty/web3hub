@@ -71,16 +71,16 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
             onKeyUp={handleSignInClick}
             sx={{ cursor: 'pointer', alignItems: 'center' }}
           >
-            <User stroke={onDark ? 'white' :  theme.colors.w3darkGreen } />
+            <User stroke={onDark ? 'white' : theme.colors.w3darkGreen} />
             <span>&nbsp;</span>
             <span
               sx={{
                 color: 'w3darkGreen',
                 fontFamily: 'Montserrat',
-                fontSize: '14px',
+                fontSize: '0.875rem',
                 fontWeight: '600',
-                lineHeight: '17px',
-                letterSpacing: '-0.4000000059604645px',
+                lineHeight: '1.0625rem',
+                letterSpacing: '-0.025rem',
               }}
             >
               Sign in
@@ -97,17 +97,20 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                     className="header-nav"
                     sx={{ display: 'flex', alignItems: 'center' }}
                   >
-                    <MyAPIs stroke={onDark ? 'white' : theme.colors.w3green} sx={{mr: 2}}/>
+                    <MyAPIs
+                      stroke={onDark ? 'white' : theme.colors.w3green}
+                      sx={{ mr: 2 }}
+                    />
                     <span
                       sx={{
                         fontFamily: 'Montserrat',
-                        fontSize: '14px',
-                        
+                        fontSize: '0.875rem',
+
                         fontWeight: '600',
-                        lineHeight: '17px',
-                        letterSpacing: '-0.4000000059604645px',
+                        lineHeight: '1.0625rem',
+                        letterSpacing: '-0.025rem',
                         textAlign: 'left',
-                        color: 'w3green'
+                        color: 'w3green',
                       }}
                     >
                       My APIs
@@ -116,7 +119,10 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                 </Link>
               )}
             </li>
-            <li className="wallet-addr" sx={{ p: '.425rem', display: 'flex', alignItems: 'center' }}>
+            <li
+              className="wallet-addr"
+              sx={{ p: '0.425rem', display: 'flex', alignItems: 'center' }}
+            >
               <User stroke={onDark ? 'white' : theme.colors.w3darkGreen} />
               <span
                 className="header-nav"
@@ -124,11 +130,11 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                   ml: 2,
                   textTransform: 'initial',
                   fontFamily: 'Montserrat',
-                  fontSize: '14px',
+                  fontSize: '0.875rem',
                   color: 'w3darkGreen',
                   fontWeight: '600',
-                  lineHeight: '17px',
-                  letterSpacing: '-0.4000000059604645px',
+                  lineHeight: '1.0625rem',
+                  letterSpacing: '-0.025rem',
                 }}
               >
                 {dapp.address && addrShortener(dapp.address)}
@@ -144,10 +150,11 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                 ? router.push('/apis/create?activeTab=create')
                 : router.push('/')
             }}
-            sx={{ display: 'inline-block', ml: 3, p: '1.5rem',
-            px: '2.5rem', }}
+            sx={{ display: 'inline-block', ml: 3, p: '1.5rem', px: '2.5rem' }}
           >
-            <span>{router.pathname !== '/apis/create' ? 'Create New API' : 'Cancel'}</span>
+            <span>
+              {router.pathname !== '/apis/create' ? 'Create New API' : 'Cancel'}
+            </span>
           </Button>
         </li>
       </ul>

@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Input, Flex, Select, Button, Styled, Field} from 'theme-ui'
+import { jsx, Input, Flex, Select, Button, Styled, Field } from 'theme-ui'
 import Stars from '../Stars'
 import Badge from '../Badge'
 import Card from '../Card'
@@ -12,27 +12,27 @@ const PublishAPI = () => {
         sx={{
           flex: 7,
           section: {
-            mb: '54px',
+            mb: '3.375rem',
           },
           fieldset: {
             display: 'flex',
             alignItems: 'center',
             p: {
               fontFamily: 'Istok Web',
-              fontSize: '16px',
-              lineHeight: '24px',
+              fontSize: '1rem',
+              lineHeight: '1.5rem',
               color: 'text',
             },
           },
           label: {
-            width: '220px',
-            mr: '44px',
+            width: '13.75rem',
+            mr: '2.75rem',
             color: 'text',
             fontFamily: 'Montserrat',
-            fontSize: '14px',
-            lineHeight: '22px',
-            letterSpacing: '-0.4000000059604645px',
-            '+ *': { width: '484px' },
+            fontSize: '0.875rem',
+            lineHeight: '1.375rem',
+            letterSpacing: '-0.025rem',
+            '+ *': { width: '30.25rem' },
           },
         }}
       >
@@ -73,7 +73,7 @@ const PublishAPI = () => {
         <section>
           <fieldset>
             <label />
-            <Flex>   
+            <Flex>
               <Button>Register ENS</Button>
               <p sx={{ m: 0, ml: 3 }}>
                 <small>This option will cost ~0.0023 ETH ($2.90 USD)</small>
@@ -89,13 +89,20 @@ const PublishAPI = () => {
           </fieldset>
         </section>
       </form>
-      <Flex className="preview" sx={{flex: 3, textAlign: 'center', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column'}}>
+      <Flex
+        className="preview"
+        sx={{
+          flex: 3,
+          textAlign: 'center',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          flexDirection: 'column',
+        }}
+      >
         <div className="title">Package Preview</div>
-        <div className="wrapper" sx={{maxWidth: '280px'}}>
-          <Card boxShadowOn noHover/>
+        <div className="wrapper" sx={{ maxWidth: '17.5rem' }}>
+          <Card boxShadowOn noHover />
         </div>
-        
-       
       </Flex>
     </Flex>
   )

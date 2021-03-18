@@ -10,15 +10,15 @@ type CardProps = {
   noHover?: boolean
 }
 
-const Card = ({boxShadowOn, noHover}: CardProps) => {
+const Card = ({ boxShadowOn, noHover }: CardProps) => {
   return (
     <div
       className="Card"
       sx={{
-        borderRadius: '8px',
+        borderRadius: '0.5rem',
         bg: 'white',
         transition: 'transform .2s ease',
-        boxShadow: boxShadowOn ? '0px 32px 44px rgba(28, 94, 93, 0.1)': 'none',
+        boxShadow: boxShadowOn ? '0rem 2rem 2.75rem rgba(28, 94, 93, 0.1)' : 'none',
         '&:hover': {
           transform: noHover ? 'none' : 'scale(1.05)',
         },
@@ -32,8 +32,8 @@ const Card = ({boxShadowOn, noHover}: CardProps) => {
                 className="api-logo"
                 src="/images/uniswap.png"
                 sx={{
-                  width: '140px',
-                  height: '140px',
+                  width: '8.75rem',
+                  height: '8.75rem',
                   display: 'block',
                   m: 'auto',
                 }}
@@ -48,8 +48,8 @@ const Card = ({boxShadowOn, noHover}: CardProps) => {
                     textAlign: 'center',
                     my: 2,
                     fontWeight: 'bold',
-                    fontSize: '20px',
-                    lineHeight: '28px',
+                    fontSize: '1.25rem',
+                    lineHeight: '1.75rem',
                     letterSpacing: '-0.01em',
                     color: 'black',
                   }}
@@ -62,8 +62,8 @@ const Card = ({boxShadowOn, noHover}: CardProps) => {
                     textAlign: 'center',
                     my: 2,
                     fontFamily: 'Montserrat',
-                    fontSize: '14px',
-                    lineHeight: '18px',
+                    fontSize: '0.875rem',
+                    lineHeight: '1.125rem',
                     color: 'text',
                     mixBlendMode: 'normal',
                   }}

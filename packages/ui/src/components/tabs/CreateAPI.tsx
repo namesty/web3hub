@@ -9,14 +9,14 @@ const CreateAPI = () => {
       <form
         sx={{
           '* > div': {
-            width: '220px',
-            mr: '44px',
+            width: '13.75rem',
+            mr: '2.75rem',
             color: 'text',
             fontFamily: 'Montserrat',
-            fontSize: '14px',
-            lineHeight: '22px',
-            letterSpacing: '-0.4000000059604645px',
-            '+ *': { width: '484px', mb: '54px' },
+            fontSize: '0.875rem',
+            lineHeight: '1.375rem',
+            letterSpacing: '-0.025rem',
+            '+ *': { width: '30.25rem', mb: '3.375rem' },
           },
         }}
       >
@@ -32,24 +32,26 @@ const CreateAPI = () => {
         </Flex>
         <Flex>
           <div>
-            <label sx={{mb: 2}}>Clone the starter repo to your local dev environment</label>
+            <label sx={{ mb: 2 }}>
+              Clone the starter repo to your local dev environment
+            </label>
             <a
               href="https://github.com/Web3Api/boilerplate"
               target="_BLANK"
               sx={{
                 display: 'flex',
-                width: '150px',
+                width: '9.375rem',
                 alignItems: 'center',
-                border: '2px solid',
+                border: '0.125rem solid',
                 borderColor: 'w3green',
-                filter: 'drop-shadow(0px 15px 30px rgba(20, 102, 204, 0.16))',
-                borderRadius: '4px',
+                filter: 'drop-shadow(0rem 0.9375rem 1.875rem rgba(20, 102, 204, 0.16))',
+                borderRadius: '0.25rem',
                 fontFamily: 'Montserrat',
                 fontWeight: 'bold',
-                fontSize: '12px',
-                lineHeight: '14px',
+                fontSize: '0.75rem',
+                lineHeight: '0.875rem',
                 textAlign: 'center',
-                letterSpacing: '-0.6px',
+                letterSpacing: '-0.0375rem',
                 textTransform: 'uppercase',
                 color: 'w3green',
                 textDecoration: 'none',
@@ -60,8 +62,8 @@ const CreateAPI = () => {
                   content: "''",
                   width: '1rem',
                   height: '1rem',
-                  background: 'url(/images/outbound.svg) no-repeat'
-                }
+                  background: 'url(/images/outbound.svg) no-repeat',
+                },
               }}
             >
               starter repo
@@ -91,9 +93,9 @@ yarn deploy --IPFS`}</Styled.pre>
           sx={{
             px: 4,
             backgroundColor: 'w3darkGreen',
-            p: '46px',
-            boxShadow: '0px 25px 40px rgba(0, 0, 0, 0.06)',
-            borderRadius: '8px',
+            p: '2.875rem',
+            boxShadow: '0rem 1.5625rem 2.5rem rgba(0, 0, 0, 0.06)',
+            borderRadius: '0.5rem',
             overflow: 'hidden',
             '&:after': {
               display: 'block',
@@ -101,12 +103,12 @@ yarn deploy --IPFS`}</Styled.pre>
               position: 'absolute',
               left: '-5%',
               top: '18%',
-              width: '200px',
-              height: '300px',
+              width: '12.5rem',
+              height: '18.75rem',
               background: 'url(/images/doc.svg) left center no-repeat transparent',
               backgroundSize: '100%',
-              opacity: .2
-            }
+              opacity: 0.2,
+            },
           }}
         >
           <Flex

@@ -26,15 +26,15 @@ const Modal = ({ screen = 'success', close }: ModalProps) => {
     >
       <Flex
         sx={{
-          minWidth: '630px',
-          height: '570px',
-          top: '0px',
-          left: '-112px',
+          minWidth: '39.375rem',
+          height: '35.625rem',
+          top: '0rem',
+          left: '-7rem',
           backgroundColor: 'w3darkGreen',
-          boxShadow: '0px 25px 40px rgba(0, 0, 0, 0.06)',
-          borderRadius: '8px',
-          pt: '35px',
-          pb: '70px',
+          boxShadow: '0rem 1.5625rem 2.5rem rgba(0, 0, 0, 0.06)',
+          borderRadius: '0.5rem',
+          pt: '2.1875rem',
+          pb: '4.375rem',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
@@ -44,24 +44,31 @@ const Modal = ({ screen = 'success', close }: ModalProps) => {
         {screen === 'success' && (
           <React.Fragment>
             <Close
-            onClick={close}
-            sx={{
-              position: 'absolute',
-              right: 4,
-              top: 4,
-              fill: '#597980',
-              '&:hover': {
-                fill: 'white',
-                cursor: 'pointer'
-              }
-            }}/>
-            <img src="/images/trophy.svg" alt="trophy" sx={{ width: '220px' }} />
+              onClick={close}
+              sx={{
+                position: 'absolute',
+                right: 4,
+                top: 4,
+                fill: '#597980',
+                '&:hover': {
+                  fill: 'white',
+                  cursor: 'pointer',
+                },
+              }}
+            />
+            <img src="/images/trophy.svg" alt="trophy" sx={{ width: '13.75rem' }} />
             <Styled.h1
-              sx={{ color: 'white', fontSize: '44px', fontWeight: 'bold', pt: 4, mb: 2 }}
+              sx={{
+                color: 'white',
+                fontSize: '2.75rem',
+                fontWeight: 'bold',
+                pt: 4,
+                mb: 2,
+              }}
             >
               Sucess!
             </Styled.h1>
-            <Styled.h4 sx={{ color: 'white', fontSize: '20px', pb: 3 }}>
+            <Styled.h4 sx={{ color: 'white', fontSize: '1.25rem', pb: 3 }}>
               Package now live on the Web3Hub!
             </Styled.h4>
             <Button variant="callout">View API</Button>

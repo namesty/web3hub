@@ -11,7 +11,7 @@ type LayoutProps = {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const [,dispatch] = useStateValue()
+  const [, dispatch] = useStateValue()
   const { data: apis, error } = useSWR('/api/apis')
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Layout = ({ children }: LayoutProps) => {
             MozOsxFontSmoothing: 'grayscale',
             fontSmoothing: 'antialiased',
             WebkitFontSmoothing: 'antialiased',
-            textShadow: 'rgba(0, 0, 0, 0.01) 0 0 1px',
+            textShadow: 'rgba(0, 0, 0, 0.01) 0 0 0.0625rem',
             '&::before, &::after': {
               display: 'none',
             },
@@ -103,7 +103,7 @@ const Layout = ({ children }: LayoutProps) => {
             border: 'none',
           },
           '.contents': {
-            maxWidth: '1224px',
+            maxWidth: '76.5rem',
             margin: 'auto',
             width: '100%',
             height: '100%',
@@ -137,9 +137,9 @@ const Layout = ({ children }: LayoutProps) => {
           },
           '.text-nav': {
             fontWeight: 'bold',
-            fontSize: '12px',
-            lineHeight: '14px',
-            letterSpacing: '-0.6px',
+            fontSize: '0.75rem',
+            lineHeight: '0.875rem',
+            letterSpacing: '-0.0375rem',
             textTransform: 'uppercase',
             textDecoration: 'none',
             color: theme.colors.w3TextNavTeal,

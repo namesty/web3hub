@@ -33,7 +33,7 @@ const CreateApi = () => {
               }}
             />
           )}
-          <div className="contents" sx={{ maxWidth: 'calc(1224px + 112px)' }}>
+          <div className="contents" sx={{ maxWidth: 'calc(76.5rem + 7rem)' }}>
             <Header
               title={activeTab === 'create' ? 'Create a Web3API Package' : 'Publish'}
             />
@@ -44,25 +44,25 @@ const CreateApi = () => {
                 '*': { cursor: 'pointer', mr: 2, mb: 4 },
                 '.tab': {
                   textAlign: 'center',
-                  fontSize: '16px',
+                  fontSize: '1rem',
                   fontWeight: 'bold',
-                  lineHeight: '20px',
-                  letterSpacing: '-0.4000000059604645px',
-                  pb: ' 18px',
+                  lineHeight: '1.25rem',
+                  letterSpacing: '-0.025rem',
+                  pb: ' 1.125rem',
                   color: 'text',
                   mb: 0,
                   '&.active': {
                     fontWeight: 'bold',
                     color: 'w3darkGreen',
-                    borderBottom: '2px solid',
+                    borderBottom: '0.125rem solid',
                     borderBottomColor: 'w3NavNeonHighlightTeal',
                     '&:hover': {
-                      borderBottom: '2px solid',
+                      borderBottom: '0.125rem solid',
                       borderBottomColor: 'w3NavNeonHighlightTeal',
                     },
                   },
                   '&:hover': {
-                    borderBottom: '2px solid',
+                    borderBottom: '0.125rem solid',
                     borderBottomColor: 'background',
                   },
                 },
@@ -86,15 +86,15 @@ const CreateApi = () => {
               sx={{
                 bg: 'white',
                 '> *': {
-                  px: '55px',
-                  pt: '90px',
+                  px: '3.4375rem',
+                  pt: '5.625rem',
                 },
               }}
             >
               {activeTab === 'create' && <CreateAPI />}
               {activeTab === 'publish' && <PublishAPI />}
             </div>
-            <BottomSpace/>
+            <BottomSpace />
           </div>
         </main>
       </Flex>

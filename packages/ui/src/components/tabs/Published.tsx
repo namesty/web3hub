@@ -14,7 +14,7 @@ const Published = () => {
         justifyContent: 'center',
       }}
     >
-      <img src="/images/thinking-emoji.svg" alt="thinking"  sx={{mb: 4}}/>
+      <img src="/images/thinking-emoji.svg" alt="thinking" sx={{ mb: 4 }} />
       <Styled.h5
         sx={{
           fontFamily: 'Montserrat',
@@ -32,7 +32,7 @@ const Published = () => {
         onClick={() => {
           router.push('/apis/create?activeTab=create')
         }}
-        sx={{ display: 'inline-block', ml: 3, p: '1.5rem', px: '2.5rem'}}
+        sx={{ display: 'inline-block', ml: 3, p: '1.5rem', px: '2.5rem' }}
       >
         <span>Create New API</span>
       </Button>

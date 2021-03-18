@@ -42,10 +42,10 @@ const SortNav = () => {
             alignItems: 'center',
             color: 'w3darkGreen',
             fontFamily: 'Montserrat',
-            fontSize: '15px',
+            fontSize: '0.9375rem',
             fontWeight: '500',
-            lineHeight: '18px',
-            letterSpacing: '-0.4000000059604645px',
+            lineHeight: '1.125rem',
+            letterSpacing: '-0.025rem',
             textAlign: 'right',
           }}
         >
@@ -53,7 +53,7 @@ const SortNav = () => {
             <b>46</b>&nbsp;API's
           </span>
           <div>
-            <Select sx={{ minWidth: '120px', border: 'none' }}>
+            <Select sx={{ minWidth: '7.5rem', border: 'none' }}>
               <option value="HighestRated">Higest Rated</option>
               <option value="MostRecent">Most Recent</option>
               <option value="Alphabetical">Alphabetical</option>

@@ -11,11 +11,11 @@ import { useStateValue } from '../state/state'
 
 const Playground = () => {
   const [{ dapp }, dispatch] = useStateValue()
-  
+
   // TODO: Turn this into reusable hook because it also exsits on index
   const [searchValues, setsearchValues] = useState([])
   const [searchOptions, setsearchOptions] = useState(dapp.apis)
-  
+
   const [queryValues, setqueryValues] = useState([])
   const [queryOptions, setqueryOptions] = useState([
     {
@@ -30,10 +30,10 @@ const Playground = () => {
   ])
   const handleNewQuery = (e: React.BaseSyntheticEvent) => console.log(e.target)
   const handleShowSchema = (e: React.BaseSyntheticEvent) => console.log(e.target)
-  
+
   const handleSearchValuesChange = (values) => setsearchValues(values)
   const handleQueryValuesChange = (values) => setqueryValues(values)
-  
+
   // useEffect(() => {
   //   async function getRelatedFunctions() {
   //     let queries = await axios.get(`/api/apis/${searchValues[0].id}/queries`)
@@ -51,14 +51,14 @@ const Playground = () => {
       className="playground"
       sx={{
         backgroundColor: 'w3shade3',
-        borderRadius: '16px',
+        borderRadius: '1rem',
         overflow: 'hidden',
         'code, pre, textarea': {
           color: 'w3PlaygroundSoftBlue',
           backgroundColor: 'transparent !important',
           border: 'none',
-          fontSize: '14px',
-          lineHeight: '14px',
+          fontSize: '0.875rem',
+          lineHeight: '0.875rem',
         },
       }}
     >
@@ -132,7 +132,7 @@ const Playground = () => {
               <Styled.code>
                 <textarea
                   onChange={() => console.log('YO')}
-                  sx={{ resize: 'none', width: '100%', height: '350px' }}
+                  sx={{ resize: 'none', width: '100%', height: '21.875rem' }}
                   value={`
 mutation {
   swap(token: jfid) {

@@ -17,7 +17,12 @@ const Stars = ({ count, onDark, large }: BadgeProps) => {
         sx={
           !large
             ? { width: 'auto' }
-            : { width: '18px', height: '18px', top: '-2px', left: '-2px' }
+            : {
+                width: '1.125rem',
+                height: '1.125rem',
+                top: '-0.125rem',
+                left: '-0.125rem',
+              }
         }
       />
       <div
@@ -25,18 +30,17 @@ const Stars = ({ count, onDark, large }: BadgeProps) => {
         sx={
           !large
             ? {
-                
                 fontWeight: '600',
-                fontSize: '14px',
-                lineHeight: '17px',
+                fontSize: '0.875rem',
+                lineHeight: '1.0625rem',
                 color: onDark && 'w3OffWhite',
                 ml: 2,
               }
             : {
-                fontSize: '24px',
+                fontSize: '1.5rem',
                 fontWeight: '700',
-                lineHeight: '29px',
-                letterSpacing: '0px',
+                lineHeight: '1.8125rem',
+                letterSpacing: '0rem',
               }
         }
       >

@@ -40,10 +40,10 @@ const UserApis = () => {
                 ]}
               />
               <br />
-              {activeTab === 'published' && <Published/>}
+              {activeTab === 'published' && <Published />}
               {activeTab === 'favorites' && <Favorites />}
             </section>
-            <BottomSpace/>
+            <BottomSpace />
           </div>
         </main>
       </Flex>

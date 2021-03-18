@@ -21,7 +21,7 @@ const Header = ({ title, onDark, backNav }: HeaderProps) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: '152px',
+        height: '9.5rem',
         '*': { display: 'flex', color: onDark ? 'white !important' : '' },
         '.col': { flex: 2, '&:last-of-type': { justifyContent: 'flex-end' } },
       }}
@@ -30,10 +30,10 @@ const Header = ({ title, onDark, backNav }: HeaderProps) => {
         <Styled.h1
           sx={{
             color: 'w3darkGreen',
-            fontSize: '44px',
+            fontSize: '2.75rem',
             fontWeight: '700',
-            lineHeight: '52px',
-            letterSpacing: '-2.4000000953674316px',
+            lineHeight: '3.25rem',
+            letterSpacing: '-0.15rem',
             textAlign: 'left',
           }}
         >

@@ -24,25 +24,25 @@ const GlobalTheme = {
     w3darkGreen: '#0D373C',
     w3beige: '#688184',
     w3darkGray: '#141A1E',
-    
+
     w3shade0: '#12191E',
     w3shade1: '#13212C',
     w3shade2: '#1B2731',
     w3shade3: '#1F3A46',
-    
+
     w3greenGradient: 'linear-gradient(0deg, #529DAD 1.85%, #60C092 97.11%)',
     w3hazeGradient: 'linear-gradient(180deg, #FFFFFF 0%, #E1ECEA 100%)',
-    
+
     w3ButtonTeal: '#335E67',
     w3TextNavTeal: '#4A7A84',
-    
+
     w3NavHighlightTeal: '#243843',
     w3NavNeonHighlightTeal: '#66E0D9',
     w3NavGrayGreen: '#1B262C',
-    
+
     w3PlayGroundNavy: '#13212C',
     w3PlaygroundSoftBlue: '#B2D2D9',
-    
+
     w3OffWhite: '#E9E9E9',
 
     unknownHEX0: '#CAD9F3',
@@ -60,7 +60,6 @@ const GlobalTheme = {
     unknownRGBA3: 'rgba(0, 0, 0, 0.06)',
     unknownRGBA4: 'rgba(104,129,132,.5)',
     unknownRGBA5: 'rgba(20, 102, 204, 0.16)',
-
   },
   forms: {
     select: {

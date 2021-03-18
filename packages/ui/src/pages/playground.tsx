@@ -11,11 +11,11 @@ const PlaygroundPage = () => {
   return (
     <Layout>
       <Flex>
-        <Navbar/>
+        <Navbar />
         <main>
           <div className="contents">
-            <Header onDark title="Playground"/>
-            <Playground/>
+            <Header onDark title="Playground" />
+            <Playground />
           </div>
         </main>
       </Flex>
@@ -23,8 +23,8 @@ const PlaygroundPage = () => {
         styles={(theme) => ({
           body: {
             background: 'none' + ' !important',
-            backgroundColor: theme.colors.w3shade0 + ' !important'
-          }
+            backgroundColor: theme.colors.w3shade0 + ' !important',
+          },
         })}
       />
     </Layout>
