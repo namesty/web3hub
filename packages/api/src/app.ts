@@ -1,46 +1,37 @@
 import express, { Application } from "express";
 import passport from "passport";
+import session from "express-session";
+
 import "dotenv/config";
 
-import GithubStrategy from "./services/github";
+import { GithubStrategy } from "services/github";
+import { controllers } from "controllers";
+
 export default class App {
   private _PORT = process.env.PORT || 3001;
   public app: Application;
 
   constructor() {
     this.app = express();
-
-    this.app.use(passport.initialize());
-    this.app.use(passport.session());
     passport.use(GithubStrategy);
 
-    this.app.get(
-      "/auth/github",
-      passport.authenticate("github", {
-        scope: ["read:org", "read:user"],
+    // @TODO: Right now the session information is
+    // being stored in application memory and it's just for dev purposes
+    // if we want to follow the approach of server handling session data
+    // we will need to add another memory store like mongo
+    // more info: https://tilomitra.com/how-do-nodejs-sessions-work/
+    this.app.use(
+      session({
+        name: "web3hub",
+        secret: "keyboard cat",
+        resave: false,
+        saveUninitialized: true,
       })
     );
 
-    this.app.get(
-      "/auth/github/callback",
-      passport.authenticate("github", { failureRedirect: "/login" }),
-      (req, res) => {
-        res.json({ status: 200 });
-      }
-    );
-
-    this.app.get("/", (req, res) => {
-      res.json({ status: 200 });
-    });
-
-    this.app.get("/login", (req, res) => {
-      res.json({ status: 404 });
-    });
-
-    this.app.get("/logout", (req, res) => {
-      req.logout();
-      res.json({ status: 200 });
-    });
+    this.app.use(passport.initialize());
+    this.app.use(passport.session());
+    this.app.use("/", controllers);
   }
 
   public getServer() {

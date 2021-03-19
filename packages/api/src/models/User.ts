@@ -1,6 +1,11 @@
-import db from "../services/db";
+import db from "services/db";
 
-interface UserData {
+declare global {
+  namespace Express {
+    export interface User extends UserData {}
+  }
+}
+export interface UserData {
   accessToken: string;
   username: string;
 }
