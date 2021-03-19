@@ -1,7 +1,7 @@
 import { serializeUser, deserializeUser } from "passport";
 import { Strategy as GithubStrategy } from "passport-github2";
 
-import { User, UserData } from "models/User";
+import { User, UserData } from "../../models/User";
 
 const { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } = process.env;
 

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { authenticate } from "passport";
 
-import { fetchOrganizations } from "services/github";
+import { fetchOrganizations } from "../services/github";
 
 const router = Router();
 

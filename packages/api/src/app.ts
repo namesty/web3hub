@@ -4,8 +4,8 @@ import session from "express-session";
 
 import "dotenv/config";
 
-import { GithubStrategy } from "services/github";
-import { controllers } from "controllers";
+import { GithubStrategy } from "./services/github";
+import { controllers } from "./controllers";
 
 export default class App {
   private _PORT = process.env.PORT || 3001;

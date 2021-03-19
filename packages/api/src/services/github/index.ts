@@ -1,4 +1,4 @@
-import GithubStrategy from "services/github/strategy";
+import GithubStrategy from "../github/strategy";
 
 export { GithubStrategy };
-export * from "services/github/api";
+export * from "../github/api";
