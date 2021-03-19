@@ -5,10 +5,12 @@ declare global {
     export interface User extends UserData {}
   }
 }
+
 export interface UserData {
   accessToken: string;
   username: string;
 }
+
 export class User {
   public static async create({
     accessToken,

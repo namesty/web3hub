@@ -60,7 +60,6 @@ yarn-error.log
 
 # dotenv environment variables file
 .env
-database.env
 
 # next.js build output
 .next
