@@ -1,12 +1,11 @@
-import * as express from "express";
-import * as passport from "passport";
-import GithubStrategy from "./services/github";
-
+import express, { Application } from "express";
+import passport from "passport";
 import "dotenv/config";
 
+import GithubStrategy from "./services/github";
 export default class App {
   private _PORT = process.env.PORT || 3001;
-  public app: express.Application;
+  public app: Application;
 
   constructor() {
     this.app = express();
@@ -15,11 +14,19 @@ export default class App {
     this.app.use(passport.session());
     passport.use(GithubStrategy);
 
-    this.app.get("/auth/github", passport.authenticate("github"));
+    this.app.get(
+      "/auth/github",
+      passport.authenticate("github", {
+        scope: ["read:org", "read:user"],
+      })
+    );
 
     this.app.get(
       "/auth/github/callback",
-      passport.authenticate("github", { failureRedirect: "/login" })
+      passport.authenticate("github", { failureRedirect: "/login" }),
+      (req, res) => {
+        res.json({ status: 200 });
+      }
     );
 
     this.app.get("/", (req, res) => {

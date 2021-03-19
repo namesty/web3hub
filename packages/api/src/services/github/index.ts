@@ -1,5 +1,6 @@
-import * as passport from "passport";
+import { serializeUser, deserializeUser } from "passport";
 import { Strategy as GithubStrategy } from "passport-github2";
+import { User } from "../../models/User";
 
 const { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } = process.env;
 
@@ -9,15 +10,29 @@ const strategyConfig = {
   callbackURL: "http://localhost:3001/auth/github/callback",
 };
 
-const authCallback = (accessToken, refreshToken, profile, done) => {
-  // If token is retrieved, check database
-  console.log("Access token ", accessToken);
-  console.log("Refresh token ", refreshToken);
-  console.log("Profile ", profile);
-  return done(null, true);
+interface GithubProfileDTO {
+  id: string;
+  profileUrl: string;
+  username?: string;
+}
+
+const authCallback = async (
+  accessToken: string,
+  _,
+  profile: GithubProfileDTO,
+  done
+) => {
+  try {
+    let { username, profileUrl } = profile;
+    username = username || profileUrl.split("/").slice(-1)[0];
+    const user = await User.create({ accessToken, username });
+    return done(null, user);
+  } catch (e) {
+    throw new Error(e);
+  }
 };
 
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((obj, done) => done(null, obj));
+serializeUser((user, done) => done(null, user));
+deserializeUser((obj, done) => done(null, obj));
 
 export default new GithubStrategy(strategyConfig, authCallback);

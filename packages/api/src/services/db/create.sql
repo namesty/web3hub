@@ -1,7 +1,9 @@
 create table users (
   id bigserial not null,
+  username varchar not null,
   github_token varchar,
-  primary key(id)
+  primary key(id),
+  UNIQUE(username)
 );
 create table addresses_types (
   id bigserial not null,

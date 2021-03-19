@@ -3,7 +3,7 @@ version: "3.7"
 services:
   db:
     build:
-      context: ./src/db
+      context: ./db
       dockerfile: Dockerfile
     ports:
       - 5432:5432
