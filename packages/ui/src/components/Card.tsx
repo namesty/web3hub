@@ -20,7 +20,8 @@ const Card = ({ boxShadowOn, noHover }: CardProps) => {
         transition: 'transform .2s ease',
         boxShadow: boxShadowOn ? '0rem 2rem 2.75rem rgba(28, 94, 93, 0.1)' : 'none',
         '&:hover': {
-          transform: noHover ? 'none' : 'scale(1.05)',
+          transform: noHover ? 'none' : 'translateY(-5px)',
+          boxShadow: boxShadowOn ? '0rem 2rem 2.75rem rgba(28, 94, 93, .125)' : 'none',
         },
       }}
     >

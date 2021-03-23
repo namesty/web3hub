@@ -33,10 +33,8 @@ const CreateApi = () => {
               }}
             />
           )}
-          <div className="contents" sx={{ maxWidth: 'calc(76.5rem + 7rem)' }}>
-            <Header
-              title={activeTab === 'create' ? 'Create a Web3API Package' : 'Publish'}
-            />
+          <div className="contents animate" sx={{ maxWidth: 'calc(76.5rem + 112px)' }}>
+            <Header title={'Create a Web3API'}/>
             <Flex
               className="tabs"
               onClick={handleTabClick}

@@ -47,13 +47,14 @@ const SortNav = () => {
             lineHeight: '1.125rem',
             letterSpacing: '-0.025rem',
             textAlign: 'right',
+            pb: 2
           }}
         >
           <span>
             <b>46</b>&nbsp;API's
           </span>
           <div>
-            <Select sx={{ minWidth: '7.5rem', border: 'none' }}>
+            <Select sx={{ minWidth: '8rem', border: 'none' }}>
               <option value="HighestRated">Higest Rated</option>
               <option value="MostRecent">Most Recent</option>
               <option value="Alphabetical">Alphabetical</option>

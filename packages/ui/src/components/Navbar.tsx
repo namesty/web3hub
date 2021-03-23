@@ -78,7 +78,7 @@ const Navbar = () => {
           >
             <li
               className={
-                router.pathname === '/' || router.pathname === '/apis/user'
+                router.pathname === '/' || router.pathname.includes('/apis')
                   ? 'active'
                   : ''
               }
@@ -91,7 +91,7 @@ const Navbar = () => {
                 </a>
               </Link>
             </li>
-            <li className={router.pathname === '/playground' ? 'active' : ''}>
+            <li className={router.pathname.includes('/playground') ? 'active' : ''}>
               <Link href="/playground">
                 <a className="text-nav">
                   <PlaygroundImg />

@@ -35,6 +35,7 @@ const Header = ({ title, onDark, backNav }: HeaderProps) => {
             lineHeight: '3.25rem',
             letterSpacing: '-0.15rem',
             textAlign: 'left',
+            mb: 0
           }}
         >
           {title}

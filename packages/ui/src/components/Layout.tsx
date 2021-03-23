@@ -115,6 +115,8 @@ const Layout = ({ children }: LayoutProps) => {
             margin: 'auto',
             width: '100%',
             height: '100%',
+            paddingLeft: '1rem',
+            paddingRight: '1rem'
           },
           '.contents.animate': {
             animation: `fadeIn ${pageLevelAnimationTiming}, shift ${pageLevelAnimationTiming}`,

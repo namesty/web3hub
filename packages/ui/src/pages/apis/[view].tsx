@@ -86,7 +86,7 @@ const ApiView = () => {
                     px: '1.5rem',
                     py: '2rem',
                     minWidth: '22.5rem',
-                    boxShadow: '0rem 0.3125rem 0.625rem 0.3125rem #DDD',
+                    boxShadow: '0rem 1.5625rem 2.5rem rgba(0, 0, 0, 0.06)',
                     borderRadius: '0.5rem',
                     top: 4,
                     position: 'absolute',

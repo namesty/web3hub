@@ -103,7 +103,7 @@ const Playground = () => {
                 </ul>
               </div>
               <div className="right">
-                <a className="text-nav" href="/uniswap/docs">
+                <a className="text-nav" href="/apis/SOMEAPI">
                   GO TO API PAGE
                 </a>
               </div>
@@ -164,7 +164,7 @@ mutation {
                 }}
               >
                 <div className="left">
-                  <Button variant="primaryMedium">Run</Button>
+                  <Button variant="primarySmall">Run</Button>
                   <Button variant="tertiary">Save</Button>
                 </div>
                 <div className="right">

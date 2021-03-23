@@ -6,7 +6,7 @@ const GlobalTheme = {
   fonts: {
     body: '"Inter", sans-serif',
     heading: '"Montserrat", sans-serif',
-    monospace: 'Menlo, monospace',
+    monospace: '"Roboto Mono", monospace',
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
   fontWeights: {
@@ -92,8 +92,9 @@ const GlobalTheme = {
       letterSpacing: '-0.6px',
       textTransform: 'uppercase',
       fontFamily: 'Montserrat',
-      p: '1.5rem',
-      px: '2.5rem',
+      width: '200px',
+      height: '56px',
+      p: 3,
       '&:hover': {
         bg: 'w3TextNavTeal',
       },
@@ -101,7 +102,7 @@ const GlobalTheme = {
         bg: '#255661',
       },
     },
-    primaryMedium: {
+    primarySmall: {
       color: 'white',
       bg: 'w3ButtonTeal',
       boxShadow: '0px 15px 30px rgba(20, 102, 204, 0.16)',
@@ -133,8 +134,9 @@ const GlobalTheme = {
       letterSpacing: '-0.6px',
       textTransform: 'uppercase',
       fontFamily: 'Montserrat',
-      p: '1.5rem',
-      px: '2.5rem',
+      width: '200px',
+      height: '56px',
+      zIndex: 1,
       '&:hover': {
         bg: 'w3TextNavTeal',
       },
@@ -154,6 +156,9 @@ const GlobalTheme = {
       letterSpacing: '-0.6px',
       textTransform: 'uppercase',
       bg: 'transparent',
+      width: '200px',
+      height: '56px',
+      p: 3,
       '&:hover': {
         bg: 'rgba(104, 129, 132, 0.1)',
       },
@@ -166,7 +171,6 @@ const GlobalTheme = {
       border: '2px solid',
       borderColor: 'w3beige',
       borderRadius: '4px',
-      p: 3,
       fontWeight: 'bold',
       fontSize: '14px',
       lineHeight: '14px',
@@ -174,6 +178,9 @@ const GlobalTheme = {
       letterSpacing: '-0.6px',
       textTransform: 'uppercase',
       bg: 'transparent',
+      width: '200px',
+      height: '56px',
+      p: 3,
       '&:hover': {
         color: 'black',
         border: '2px solid black',
@@ -273,7 +280,7 @@ const GlobalTheme = {
       padding: '.75rem',
       borderRadius: '8px',
       marginTop: 0,
-      fontFamily: 'Roboto Mono',
+      fontFamily: 'monospace',
       fontStyle: 'normal',
       fontWeight: 'normal',
       fontSize: '14px',
@@ -285,6 +292,7 @@ const GlobalTheme = {
     },
     code: {
       m: 0,
+      fontFamily: 'monospace',
     },
     table: {
       width: '100%',

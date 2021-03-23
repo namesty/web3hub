@@ -144,17 +144,17 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
         )}
         <li>
           <Button
-            variant={router.pathname !== '/apis/create' ? 'primary' : 'secondaryOnLight'}
+            variant={
+              router.pathname !== '/apis/create' ? 'primary' : 'secondaryOnLight'
+            }
             onClick={() => {
               router.pathname !== '/apis/create'
                 ? router.push('/apis/create?activeTab=create')
                 : router.push('/')
             }}
-            sx={{ display: 'inline-block', ml: 3, p: '1.5rem', px: '2.5rem' }}
+            sx={{ display: 'inline-block', ml: 3 }}
           >
-            <span>
-              {router.pathname !== '/apis/create' ? 'Create New API' : 'Cancel'}
-            </span>
+            {router.pathname !== '/apis/create' ? 'Create New API' : 'Cancel'}
           </Button>
         </li>
       </ul>

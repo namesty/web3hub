@@ -15,14 +15,14 @@ const ApiGrid = () => {
           rowGap: '4%',
         }}
       >
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        <Card boxShadowOn />
+        <Card boxShadowOn />
+        <Card boxShadowOn />
+        <Card boxShadowOn />
+        <Card boxShadowOn />
+        <Card boxShadowOn />
+        <Card boxShadowOn />
+        <Card boxShadowOn />
       </Grid>
       <p
         sx={{

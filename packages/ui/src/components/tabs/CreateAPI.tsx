@@ -91,12 +91,14 @@ yarn deploy --IPFS`}</Styled.pre>
       <div>
         <div
           sx={{
-            px: 4,
+            px: 2,
             backgroundColor: 'w3darkGreen',
             p: '2.875rem',
             boxShadow: '0rem 1.5625rem 2.5rem rgba(0, 0, 0, 0.06)',
             borderRadius: '0.5rem',
             overflow: 'hidden',
+            width: '300px',
+            height: '300px',
             '&:after': {
               display: 'block',
               content: "''",
@@ -108,6 +110,7 @@ yarn deploy --IPFS`}</Styled.pre>
               background: 'url(/images/doc.svg) left center no-repeat transparent',
               backgroundSize: '100%',
               opacity: 0.2,
+              zIndex: '0'
             },
           }}
         >
@@ -118,12 +121,12 @@ yarn deploy --IPFS`}</Styled.pre>
               '*': { textAlign: 'center' },
             }}
           >
-            <Styled.h1 sx={{ color: 'white' }}>Need help?</Styled.h1>
+            <Styled.h2 sx={{ color: 'white', fontWeight: 'bold', mb: 2, mt: 0 }}>Need help?</Styled.h2>
             <Styled.p sx={{ mb: 4, color: 'white' }}>
-              First time developing with Web3API? <br /> View the getting started tutorial
+              First time developing with Web3API? View the getting started tutorial
               here.
             </Styled.p>
-            <Button variant="callout">Getting Started</Button>
+            <Button variant="primaryWithGradient">Getting Started</Button>
           </Flex>
         </div>
       </div>
