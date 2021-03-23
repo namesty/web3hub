@@ -19,7 +19,7 @@ export class User {
     const connection = await db.connect();
     try {
       await connection.none(
-        "INSERT INTO users (username, github_token) VALUES ($1, $2) ON CONFLICT (username) DO NOTHING ",
+        "INSERT INTO users (username, github_token) VALUES ($1, $2) ON CONFLICT (username) DO NOTHING",
         [username, accessToken]
       );
       return username;

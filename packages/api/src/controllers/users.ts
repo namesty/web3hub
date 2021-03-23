@@ -5,7 +5,7 @@ import { fetchOrganizations } from "../services/github";
 
 const router = Router();
 
-export const isLoggedWithGithub = (
+const isLoggedWithGithub = (
   request: Request,
   response: Response,
   next: NextFunction
@@ -46,4 +46,4 @@ router.get("/auth/session/remove", (request: Request, response: Response) => {
   response.json({ status: 200 });
 });
 
-export default router;
+export { isLoggedWithGithub, router as AuthController };
