@@ -16,7 +16,6 @@ const Home = () => {
       <Flex>
         <Navbar />
         <main>
-          <Modal screen="connect" close={()=>{}}/> 
           <div className="contents animate">
             <Header title="Browse APIs" />
             <section className="content">
