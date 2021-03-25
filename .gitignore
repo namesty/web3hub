@@ -68,3 +68,6 @@ yarn-error.log
 
 # db docker volume
 postgres-data
+
+# UML diagram files
+*.puml
