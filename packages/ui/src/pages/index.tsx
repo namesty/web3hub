@@ -8,44 +8,15 @@ import Navbar from '../components/Navbar'
 import Header from '../components/Header'
 import BGWave from '../components/BGWave'
 import BottomSpace from '../components/BottomSpace'
+import Modal from '../components/Modal'
 
-// import { useEffect, useState } from 'react'
-// import { useRouter } from 'next/router'
-
-const Index = () => {
-  // const router = useRouter()
-  // const [pageAnimationInFinished, setPageAnimationInFinished] = useState(false)
-  // const [pageAnimationOutStarted, setPageAnimationOutStarted] = useState(false)
-  // const handlePageAnimationEnd = () => {
-  //   if(pageAnimationInFinished === false) {
-  //     setPageAnimationInFinished(true)
-  //     return
-  //   }
-  //   if(pageAnimationOutStarted === true) {
-  //     router.push('/')
-  //   }
-  // }
-  // useEffect(() => {
-  // }, [pageAnimationInFinished])
-
+const Home = () => {
   return (
     <Layout>
       <Flex>
         <Navbar />
         <main>
-          {/* <div
-            className={(pageAnimationOutStarted && 'out')}
-            sx={{
-              width: '100px',
-              height: '100px',
-              bg: 'red',
-              animation: 'fadeIn 2s',
-              '&.out': {
-                animation: 'fadeOut 1s',
-              },
-            }}
-            onAnimationEnd={handlePageAnimationEnd}
-          /> */}
+          <Modal screen="connect" close={()=>{}}/> 
           <div className="contents animate">
             <Header title="Browse APIs" />
             <section className="content">
@@ -61,4 +32,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default Home
