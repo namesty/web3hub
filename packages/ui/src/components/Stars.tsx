@@ -31,16 +31,18 @@ const Stars = ({ count, onDark, large }: BadgeProps) => {
           !large
             ? {
                 fontWeight: '600',
-                fontSize: '0.875rem',
-                lineHeight: '1.0625rem',
-                color: onDark && 'w3OffWhite',
+                color: onDark ? 'w3OffWhite' : 'black',
                 ml: 2,
+                fontSize: '1.25rem',
+                lineHeight: '1.5rem',
               }
             : {
-                fontSize: '1.5rem',
                 fontWeight: '700',
-                lineHeight: '1.8125rem',
+
                 letterSpacing: '0rem',
+                color: onDark ? 'w3OffWhite' : 'black',
+                fontSize: '1.25rem',
+                lineHeight: '1.5rem',
               }
         }
       >

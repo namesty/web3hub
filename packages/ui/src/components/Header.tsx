@@ -22,20 +22,20 @@ const Header = ({ title, onDark, backNav }: HeaderProps) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         height: '9.5rem',
-        '*': { display: 'flex', color: onDark ? 'white !important' : '' },
+        '> *': { display: 'flex' },
         '.col': { flex: 2, '&:last-of-type': { justifyContent: 'flex-end' } },
       }}
     >
       {title && (
         <Styled.h1
           sx={{
-            color: 'w3darkGreen',
             fontSize: '2.75rem',
             fontWeight: '700',
             lineHeight: '3.25rem',
             letterSpacing: '-0.15rem',
             textAlign: 'left',
-            mb: 0
+            mb: 0,
+            color: onDark ? 'white' : 'w3darkGreen',
           }}
         >
           {title}
@@ -49,7 +49,13 @@ const Header = ({ title, onDark, backNav }: HeaderProps) => {
           sx={{ alignItems: 'center', cursor: 'pointer' }}
         >
           <ArrowBack sx={{ mr: 2 }} />
-          <Styled.h3 sx={{ mb: 0, textTransform: 'uppercase', color: 'w3darkGreen' }}>
+          <Styled.h3
+            sx={{
+              mb: 0,
+              textTransform: 'uppercase',
+              color: onDark ? 'white' : 'w3darkGreen',
+            }}
+          >
             {backNav}
           </Styled.h3>
         </Flex>

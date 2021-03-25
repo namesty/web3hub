@@ -84,7 +84,7 @@ const PublishAPI = () => {
               </small>
             </p>
             <br />
-            <Button variant='primary'>Register ENS</Button>
+            <Button variant='primaryMedium'>Register ENS</Button>
             
           </fieldset>
         </section>
@@ -98,7 +98,7 @@ const PublishAPI = () => {
             
             
             <br />
-            <Button variant='primary'>Publish</Button>
+            <Button variant='primaryMedium'>Publish</Button>
           </fieldset>
         </section>
       </form>

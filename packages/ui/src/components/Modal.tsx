@@ -71,7 +71,7 @@ const Modal = ({ screen = 'success', close }: ModalProps) => {
             <Styled.h4 sx={{ color: 'white', fontSize: '1.25rem', pb: 3 }}>
               Package now live on the Web3Hub!
             </Styled.h4>
-            <Button variant="callout">View API</Button>
+            <Button variant="calloutLarge">View API</Button>
           </React.Fragment>
         )}
       </Flex>

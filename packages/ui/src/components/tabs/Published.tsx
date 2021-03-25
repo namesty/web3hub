@@ -28,7 +28,7 @@ const Published = () => {
         Looks like you did not publish an API yet!
       </Styled.h5>
       <Button
-        variant={'primary'}
+        variant="primaryLarge"
         onClick={() => {
           router.push('/apis/create?activeTab=create')
         }}

@@ -60,7 +60,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
     <Flex
       className="sign-in-wrap"
       sx={{
-        '*': { display: 'flex', color: onDark ? 'white !important' : '' },
+        ul: { display: 'flex', color: onDark ? 'white !important' : '' },
         li: { ml: 2 },
       }}
     >
@@ -69,13 +69,13 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
           <li
             onClick={handleSignInClick}
             onKeyUp={handleSignInClick}
-            sx={{ cursor: 'pointer', alignItems: 'center' }}
+            sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
           >
             <User stroke={onDark ? 'white' : theme.colors.w3darkGreen} />
             <span>&nbsp;</span>
             <span
               sx={{
-                color: 'w3darkGreen',
+                color: onDark ? 'white' : 'w3darkGreen',
                 fontFamily: 'Montserrat',
                 fontSize: '0.875rem',
                 fontWeight: '600',
@@ -105,12 +105,11 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                       sx={{
                         fontFamily: 'Montserrat',
                         fontSize: '0.875rem',
-
+                        color: onDark ? 'white !important' : 'w3green',
                         fontWeight: '600',
                         lineHeight: '1.0625rem',
                         letterSpacing: '-0.025rem',
                         textAlign: 'left',
-                        color: 'w3green',
                       }}
                     >
                       My APIs
@@ -131,10 +130,11 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                   textTransform: 'initial',
                   fontFamily: 'Montserrat',
                   fontSize: '0.875rem',
-                  color: 'w3darkGreen',
                   fontWeight: '600',
                   lineHeight: '1.0625rem',
                   letterSpacing: '-0.025rem',
+                  color: onDark ? 'white' : 'w3darkGreen',
+                  cursor: 'default'
                 }}
               >
                 {dapp.address && addrShortener(dapp.address)}
@@ -145,7 +145,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
         <li>
           <Button
             variant={
-              router.pathname !== '/apis/create' ? 'primary' : 'secondaryOnLight'
+              router.pathname !== '/apis/create' ? 'primaryMedium' : 'secondaryMedium'
             }
             onClick={() => {
               router.pathname !== '/apis/create'

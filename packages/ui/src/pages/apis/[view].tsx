@@ -85,7 +85,7 @@ const ApiView = () => {
                   sx={{
                     px: '1.5rem',
                     py: '2rem',
-                    minWidth: '22.5rem',
+                    width: '360px',
                     boxShadow: '0rem 1.5625rem 2.5rem rgba(0, 0, 0, 0.06)',
                     borderRadius: '0.5rem',
                     top: 4,
@@ -95,9 +95,24 @@ const ApiView = () => {
                     background: 'white',
                   }}
                 >
-                  <Flex sx={{ justifyContent: 'space-between', mb: '0.625rem' }}>
+                  <Flex sx={{ justifyContent: 'space-between', mb: '0.625rem', alignItems: 'center', mb: 4 }}>
                     <div className="left">
-                      <Styled.h4 className="title">UniswapV2</Styled.h4>
+                      <Styled.h4
+                        className="title"
+                        sx={{
+                          mb: 0,
+                          color: 'black',
+                          fontSize: '16px',
+                          fontStyle: 'normal',
+                          fontWeight: '700',
+                          lineHeight: '14px',
+                          letterSpacing: '-0.004em',
+                          textAlign: 'left',
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        UniswapV2
+                      </Styled.h4>
                     </div>
                     <div className="right">
                       <Stars count={320} large />
@@ -109,13 +124,16 @@ const ApiView = () => {
                       '*': {
                         color: 'w3green',
                         textDecoration: 'none',
-                        fontSize: '0.875rem',
-                        fontWeight: '400',
-                        lineHeight: '1.0625rem',
-                        letterSpacing: '0rem',
                       },
                       li: {
-                        mb: '1.5rem',
+                        fontFamily: 'Istok Web',
+                        fontStyle: 'normal',
+                        fontWeight: 'normal',
+                        fontSize: '1rem',
+                        lineHeight: '23px',
+                        mb: 3,
+
+                        mixBlendMode: 'normal',
                       },
                     }}
                   >
@@ -136,7 +154,7 @@ const ApiView = () => {
                         alt="icon"
                       />
                       <a href="https://www.github.com/uniswap/uniswap-v2" target="_BLANK">
-                        https://www.github.com/uniswap/uniswap-v2
+                        github.com/uniswap/uniswap-v2
                       </a>
                     </li>
                     <li sx={{ display: 'flex' }}>
@@ -163,12 +181,13 @@ const ApiView = () => {
                   </ul>
                   <br />
                   <Button
-                    variant="primaryWithGradient"
+                    variant="calloutLarge"
+                    sx={{ pl: 4, width: '100%' }}
                     onClick={() => {
                       router.push('/playground')
                     }}
                   >
-                    <Flex sx={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <Flex sx={{ alignItems: 'center', justifyContent: 'left' }}>
                       <img
                         sx={{ maxWidth: '1.1875rem', mr: 2 }}
                         src="/images/playground.svg"

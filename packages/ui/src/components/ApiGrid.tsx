@@ -38,7 +38,7 @@ const ApiGrid = () => {
         You reached the end of the list. <b>Don’t stop here!</b>
         <br />
         <Button
-          variant={'primary'}
+          variant="primaryLarge"
           onClick={() => {
             router.push('/apis/create?activeTab=create')
           }}

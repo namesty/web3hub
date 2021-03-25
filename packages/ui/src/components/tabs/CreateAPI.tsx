@@ -1,11 +1,10 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Select, Styled, Flex, Button } from 'theme-ui'
-import Outbound from '../../public/images/outbound.svg'
 
 const CreateAPI = () => {
   return (
-    <Flex className="create">
+    <Flex className="create" sx={{ justifyContent: 'space-between'}}>
       <form
         sx={{
           '* > div': {
@@ -126,7 +125,7 @@ yarn deploy --IPFS`}</Styled.pre>
               First time developing with Web3API? View the getting started tutorial
               here.
             </Styled.p>
-            <Button variant="primaryWithGradient">Getting Started</Button>
+            <Button variant="calloutMedium" sx={{ px: '2.25rem', py: '1.25rem'}}>Getting Started</Button>
           </Flex>
         </div>
       </div>

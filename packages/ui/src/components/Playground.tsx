@@ -128,7 +128,7 @@ const Playground = () => {
                   onChange={handleQueryValuesChange}
                 />
 
-                <Button variant="secondary" onClick={handleNewQuery}>
+                <Button variant="secondarySmall" onClick={handleNewQuery}>
                   New
                 </Button>
               </Flex>
@@ -165,7 +165,7 @@ mutation {
               >
                 <div className="left">
                   <Button variant="primarySmall">Run</Button>
-                  <Button variant="tertiary">Save</Button>
+                  <Button variant="hollowSmall">Save</Button>
                 </div>
                 <div className="right">
                   <span
