@@ -1,9 +1,11 @@
 create table users (
   id bigserial not null,
-  username varchar not null,
+  username varchar,
+  github_id varchar,
   github_token varchar,
   primary key(id),
-  UNIQUE(username)
+  UNIQUE(username),
+  UNIQUE(github_id)
 );
 create table addresses_types (
   id bigserial not null,
@@ -12,8 +14,10 @@ create table addresses_types (
 );
 create table addresses (
   id bigserial not null,
+  address varchar not null,
   fk_user_id bigint not null,
   fk_address_type_id bigint not null,
+  UNIQUE(address),
   primary key(id),
   constraint fk_addresses_user foreign key (fk_user_id) references users(id),
   constraint fk_addresses_address_type foreign key (fk_address_type_id) references addresses_types(id)
@@ -62,3 +66,7 @@ create table starred_apis (
   constraint fk_starred_api_user foreign key (fk_user_id) references users(id),
   constraint fk_starred_api_api foreign key (fk_api_id) references apis(id)
 );
+
+insert into addresses_types (name) values ('ethereum');
+insert into uri_types (name) values ('ens');
+insert into uri_types (name) values ('ipfs');

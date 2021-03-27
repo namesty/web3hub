@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { authenticate } from "passport";
 
+import { User } from "../models/User";
 import { fetchOrganizations } from "../services/github";
 
 const router = Router();
@@ -25,6 +26,27 @@ const userOrganizations = async (request: Request, response: Response) => {
   });
 };
 
+const handleSignin = async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  const { address, addressType } = request.body;
+
+  if (address) {
+    const user = await User.findOrCreateByAddress({
+      address,
+      addressType,
+    });
+    return response.json({
+      status: 200,
+      user,
+    });
+  }
+
+  return next();
+};
+
 const authScopes = authenticate("github", {
   scope: ["read:org", "read:user"],
 });
@@ -33,15 +55,15 @@ const onErrorAuthHandler = authenticate("github", {
   failureRedirect: "/login",
 });
 
-const onSuccessAuthHandler = (_, response: Response) => {
-  response.redirect("/");
+const onSuccessAuthHandler = ({ user }: Request, response: Response) => {
+  response.json({ status: 200, user });
 };
 
 router.get("/user/orgs", isLoggedWithGithub, userOrganizations);
 
-router.get("/auth/github", authScopes);
+router.post("/auth/sign-in", handleSignin, authScopes);
 router.get("/auth/github/callback", onErrorAuthHandler, onSuccessAuthHandler);
-router.get("/auth/session/remove", (request: Request, response: Response) => {
+router.get("/auth/sign-out", (request: Request, response: Response) => {
   request.logout();
   response.json({ status: 200 });
 });
