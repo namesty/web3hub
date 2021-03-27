@@ -39,12 +39,12 @@ export class User {
         [githubId]
       );
       return data;
-    } catch (e) {
+    } catch (error) {
       console.log(
         "Error on method: User.findOrCreateByGithub() -> ",
-        e.message
+        error.message
       );
-      throw new Error(e);
+      throw new Error(error);
     } finally {
       connection.done();
     }
@@ -78,12 +78,12 @@ export class User {
         address,
         userId,
       };
-    } catch (e) {
+    } catch (error) {
       console.log(
         "Error on method: User.findOrCreateByAddress() -> ",
-        e.message
+        error.message
       );
-      throw new Error(e);
+      throw new Error(error);
     } finally {
       connection.done();
     }

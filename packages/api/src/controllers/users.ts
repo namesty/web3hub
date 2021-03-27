@@ -26,7 +26,7 @@ const userOrganizations = async (request: Request, response: Response) => {
   });
 };
 
-const handleSignin = async (
+const handleSignIn = async (
   request: Request,
   response: Response,
   next: NextFunction
@@ -61,7 +61,7 @@ const onSuccessAuthHandler = ({ user }: Request, response: Response) => {
 
 router.get("/user/orgs", isLoggedWithGithub, userOrganizations);
 
-router.post("/auth/sign-in", handleSignin, authScopes);
+router.get("/auth/sign-in", handleSignIn, authScopes);
 router.get("/auth/github/callback", onErrorAuthHandler, onSuccessAuthHandler);
 router.get("/auth/sign-out", (request: Request, response: Response) => {
   request.logout();
