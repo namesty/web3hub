@@ -1,28 +1,20 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { Grid, jsx, Button } from 'theme-ui'
-import Card from '../components/Card'
 import { useRouter } from 'next/router'
 
-const ApiGrid = () => {
+const ApiGrid = ({children}) => {
   const router = useRouter()
   return (
     <div>
       <Grid
         gap={'3%'}
         sx={{
-          gridTemplateColumns: '1fr 1fr 1fr 1fr',
-          rowGap: '4%',
+          gridTemplateColumns: ['1fr', '1fr 1fr', '1fr 1fr 1fr', '1fr 1fr 1fr 1fr'],
+          rowGap: ['1%', '2%', '3%', '4%'],
         }}
       >
-        <Card boxShadowOn />
-        <Card boxShadowOn />
-        <Card boxShadowOn />
-        <Card boxShadowOn />
-        <Card boxShadowOn />
-        <Card boxShadowOn />
-        <Card boxShadowOn />
-        <Card boxShadowOn />
+        {children}
       </Grid>
       <p
         sx={{

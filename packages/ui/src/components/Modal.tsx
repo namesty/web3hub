@@ -4,13 +4,27 @@ import React from 'react'
 import { jsx, Flex, Button, Styled } from 'theme-ui'
 import Image from 'next/image'
 import Close from '../../public/images/close.svg'
+import onboardInit from '../utils/onboardInit'
+import { useStateValue } from '../state/state'
 
 type ModalProps = {
   screen: string
+  noLeftShift?: boolean
   close: () => void
 }
 
-const Modal = ({ screen = 'connect', close }: ModalProps) => {
+const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
+  const [{ dapp }, dispatch] = useStateValue()
+  const onboard: any = onboardInit(dispatch)
+
+  const handleWeb3SignInClick = async () => {
+    let selected = await onboard.walletSelect()
+    if (selected) {
+      await onboard.walletCheck()
+      close()
+    }
+  }
+
   return (
     <Flex
       className="overlay"
@@ -30,7 +44,7 @@ const Modal = ({ screen = 'connect', close }: ModalProps) => {
           width: '39.375rem',
           height: '35.625rem',
           top: '0rem',
-          left: '-7rem',
+          left: noLeftShift ? '0rem' : '-7rem',
           backgroundColor: 'w3darkGreen',
           boxShadow: '0rem 1.5625rem 2.5rem rgba(0, 0, 0, 0.06)',
           borderRadius: '0.5rem',
@@ -103,7 +117,12 @@ const Modal = ({ screen = 'connect', close }: ModalProps) => {
                 },
               }}
             />
-            <Image src="/images/ethereum-logo.svg" alt="github" width={140} height={140} />
+            <Image
+              src="/images/ethereum-logo.svg"
+              alt="github"
+              width={140}
+              height={140}
+            />
             <Styled.h1
               sx={{
                 color: 'white',
@@ -130,7 +149,9 @@ const Modal = ({ screen = 'connect', close }: ModalProps) => {
             >
               Registering an ENS requires an Ethereum wallet to continue.
             </Styled.h4>
-            <Button variant="calloutLarge">Connect</Button>
+            <Button variant="calloutLarge" onClick={handleWeb3SignInClick}>
+              Connect
+            </Button>
           </React.Fragment>
         )}
         {screen === 'signin' && (
@@ -216,7 +237,9 @@ const Modal = ({ screen = 'connect', close }: ModalProps) => {
                   width={79}
                   height={79}
                 />
-                <Button variant="calloutLarge">Sign In With Wallet</Button>
+                <Button variant="calloutLarge" onClick={handleWeb3SignInClick}>
+                  Sign In With Wallet
+                </Button>
               </Flex>
             </Flex>
           </React.Fragment>

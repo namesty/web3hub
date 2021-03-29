@@ -6,6 +6,7 @@ import Stars from './Stars'
 import Badge from './Badge'
 
 type CardProps = {
+  api?: any
   boxShadowOn?: boolean
   noHover?: boolean
 }

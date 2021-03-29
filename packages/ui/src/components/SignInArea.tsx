@@ -3,13 +3,13 @@
 import React from 'react'
 import { jsx, Flex, Button, useThemeUI } from 'theme-ui'
 import { useStateValue } from '../state/state'
-import getOnboard from '../utils/Onboarding'
+
 import addrShortener from '../utils/addrShortener'
 import Link from 'next/link'
-import Web3 from 'web3'
 import { useRouter } from 'next/router'
 import User from '../../public/images/user.svg'
 import MyAPIs from '../../public/images/myapis.svg'
+import onboardInit from '../utils/onboardInit'
 
 type SignInAreaProps = {
   onDark?: boolean
@@ -19,37 +19,8 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
   const [{ dapp }, dispatch] = useStateValue()
   const { theme } = useThemeUI()
   const router = useRouter()
-  const onboard = getOnboard({
-    address: async (address) => {
-      dispatch({
-        type: 'SET_ADDRESS',
-        payload: address,
-      })
-    },
-    network: (network) => {
-      dispatch({
-        type: 'SET_NETWORK',
-        payload: network,
-      })
-    },
-    balance: (balance) => {
-      dispatch({
-        type: 'SET_BALANCE',
-        payload: balance,
-      })
-    },
-    wallet: (wallet) => {
-      let web3 = new Web3(wallet.provider)
-      dispatch({
-        type: 'SET_WALLET',
-        payload: wallet,
-      })
-      dispatch({
-        type: 'SET_WEB3',
-        payload: web3,
-      })
-    },
-  })
+  const onboard:any = onboardInit(dispatch)
+  
   const handleSignInClick = async () => {
     let selected = await onboard.walletSelect()
     if (selected) {

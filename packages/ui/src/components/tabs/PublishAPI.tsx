@@ -1,15 +1,55 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Input, Flex, Select, Button, Styled, Field } from 'theme-ui'
-import Stars from '../Stars'
-import Badge from '../Badge'
-import Card from '../Card'
 import { useState } from 'react'
+import { jsx, Input, Flex, Select, Button, Styled, Field } from 'theme-ui'
+import { useStateValue } from '../../state/state'
+import Card from '../Card'
+import Modal from '../Modal'
 
 const PublishAPI = () => {
+  const [{ dapp }, dispatch] = useStateValue()
   const [subdomain, setSubdomain] = useState('')
+  const [showENSModal, setShowENSModal] = useState(false)
+  const [showSignInModal, setShowSignInModal] = useState(false)
+
+  const handleRegisterENS = async (e) => {
+    e.preventDefault()
+    if (subdomain.length > 0 && dapp.address === undefined) {
+      setShowENSModal(true)
+    }
+  }
+
+  const handlePublish = async (e) => {
+    e.preventDefault()
+    if (subdomain.length > 0 && dapp.address !== undefined) {
+      setShowSignInModal(true)
+    }
+  }
+
   return (
     <Flex className="publish">
+      {showENSModal && (
+        <div sx={{ position: 'fixed', top: 0, left: 0, zIndex: 100000 }}>
+          <Modal
+            screen={showSignInModal ? 'signin' : 'connect'}
+            noLeftShift
+            close={() => {
+              setShowENSModal(false)
+            }}
+          />
+        </div>
+      )}
+      {showSignInModal && (
+        <div sx={{ position: 'fixed', top: 0, left: 0, zIndex: 100000 }}>
+          <Modal
+            screen={showSignInModal ? 'signin' : 'connect'}
+            noLeftShift
+            close={() => {
+              setShowSignInModal(false)
+            }}
+          />
+        </div>
+      )}
       <form
         sx={{
           flex: 7,
@@ -49,11 +89,10 @@ const PublishAPI = () => {
             fontSize: '16px',
             lineHeight: '140.62%',
           },
-          
         }}
       >
         <section>
-          <Styled.h4 sx={{}}>Location</Styled.h4>
+          <Styled.h4>Location</Styled.h4>
           <p>Point Web3hub to where your package has been uploaded.</p>
           <fieldset>
             <label>IPFS location</label>
@@ -63,42 +102,59 @@ const PublishAPI = () => {
             />
           </fieldset>
         </section>
-
         <section>
-          <Styled.h4 sx={{}}>Pointer</Styled.h4>
+          <Styled.h4>Pointer</Styled.h4>
           <p>
             Register your API to an ENS domain that developers will reference when
             integrating.
           </p>
           <fieldset>
             <label>ENS Subdomain</label>
-            <Input type="text" placeholder="{SUBDOMAIN}.open.web3.eth" />
-            
-            <p sx={{ }}>
-              <small>This option will cost ~0.0023 ETH ($2.90 USD)
-              <br />
-              Need ETH?{' '}
-              <a href="https://www.moonpay.com/" target="_BLANK" sx={{color: '#509DAC', textDecoration: 'none'}}>
-                 Purcahse with your bank or card here
-              </a>
+            <Input
+              type="text"
+              placeholder="{SUBDOMAIN}.open.web3.eth"
+              pattern="[\w.-]"
+              onChange={(e) => {
+                setSubdomain(e.target.value)
+              }}
+              value={subdomain}
+            />
+
+            <p>
+              <small>
+                This option will cost ~0.0023 ETH ($2.90 USD)
+                <br />
+                Need ETH?{' '}
+                <a
+                  href="https://www.moonpay.com/"
+                  target="_BLANK"
+                  sx={{ color: '#509DAC', textDecoration: 'none' }}
+                >
+                  Purcahse with your bank or card here
+                </a>
               </small>
             </p>
             <br />
-            <Button variant='primaryMedium'>Register ENS</Button>
-            
+            <Button
+              variant="primaryMedium"
+              onClick={handleRegisterENS}
+              disabled={subdomain.length === 0}
+            >
+              Register ENS
+            </Button>
           </fieldset>
         </section>
         <section>
-          <Styled.h4 sx={{}}>Publish to Web3Hub</Styled.h4>
+          <Styled.h4>Publish to Web3Hub</Styled.h4>
           <p>
             Make your package discoverable on the Web3Hub. After publishing, the IPFS
             pacakge will be persistently pinned using Fleek. Learn more
           </p>
           <fieldset>
-            
-            
             <br />
-            <Button variant='primaryMedium'>Publish</Button>
+            <Button variant="primaryMedium" onClick={handlePublish}>
+              Publish
+            </Button>
           </fieldset>
         </section>
       </form>

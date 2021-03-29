@@ -13,7 +13,6 @@ import BottomSpace from '../../components/BottomSpace'
 const CreateApi = () => {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState(router.query.activeTab)
-  const [modalOpen, setmodalOpen] = useState(false)
   const handleTabClick = (e: React.BaseSyntheticEvent) => {
     e.stopPropagation()
     setActiveTab(e.target.classList[1])
@@ -25,14 +24,6 @@ const CreateApi = () => {
     <Layout>
       <Flex>
         <main sx={{ pb: 5 }}>
-          {modalOpen && (
-            <Modal
-              screen="success"
-              close={() => {
-                setmodalOpen(false)
-              }}
-            />
-          )}
           <div className="contents animate" sx={{ maxWidth: 'calc(76.5rem + 112px)' }}>
             <Header title={'Create a Web3API'}/>
             <Flex
