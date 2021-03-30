@@ -2,18 +2,26 @@ import { Request, Response, Router } from "express";
 
 import { Api, ApiData } from "../models/Api";
 import { checkContentIsValid } from "../services/ens";
+import { validatePublishBody } from "./helpers";
 
 const router = Router();
 
 const publishApi = async (request: Request, response: Response) => {
   try {
     const apiInfo: ApiData = {
-      ownerId: request.body.userId,
+      ownerId: 1,
       ...request.body,
     };
 
     const pointer = apiInfo.locations.find((api) => api.type === "pointer");
     const location = apiInfo.locations.find((api) => api.type === "location");
+
+    if (!pointer || !location) {
+      return response.json({
+        status: 400,
+        error: "You need to send pointer AND location in Locations array",
+      });
+    }
 
     const { valid, message } = await checkContentIsValid(
       pointer.uri,
@@ -27,7 +35,7 @@ const publishApi = async (request: Request, response: Response) => {
 
     return response.json({
       status: 406,
-      message,
+      error: message,
     });
   } catch (error) {
     if (error.message === "One of the locations has an invalid URI type") {
@@ -51,6 +59,6 @@ const getAll = async (_: Request, response: Response) => {
 };
 
 router.get("/api/actives", getAll);
-router.post("/publish", publishApi);
+router.post("/publish", validatePublishBody, publishApi);
 
 export { router as ApiController };

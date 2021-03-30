@@ -14,7 +14,7 @@ export interface ApiData {
   ownerId: string;
 }
 
-enum Authorities {
+export enum Authorities {
   ENS = 1,
   IPFS,
 }
