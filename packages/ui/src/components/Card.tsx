@@ -11,7 +11,7 @@ type CardProps = {
   noHover?: boolean
 }
 
-const Card = ({ boxShadowOn, noHover }: CardProps) => {
+const Card = ({ api, boxShadowOn, noHover }: CardProps) => {
   return (
     <div
       className="Card"
@@ -26,13 +26,13 @@ const Card = ({ boxShadowOn, noHover }: CardProps) => {
         },
       }}
     >
-      <Link href="apis/SOMEAPI">
+      <Link href={`apis/${api.name}`}>
         <a sx={{ textDecoration: 'none', p: 4 }}>
           <div className="wrap-contents">
             <div sx={{ display: 'block', m: 'auto' }}>
               <img
                 className="api-logo"
-                src="/images/uniswap.png"
+                src={`${api.logo}`}
                 sx={{
                   width: '8.75rem',
                   height: '8.75rem',
@@ -56,7 +56,7 @@ const Card = ({ boxShadowOn, noHover }: CardProps) => {
                     color: 'black',
                   }}
                 >
-                  UniswapV2
+                  {api.name}
                 </Styled.h3>
                 <div
                   className="subtitle"
@@ -70,7 +70,7 @@ const Card = ({ boxShadowOn, noHover }: CardProps) => {
                     mixBlendMode: 'normal',
                   }}
                 >
-                  Historical data and analytics for Uniswap V2
+                  {api.subtitle}
                 </div>
                 <Flex
                   sx={{
@@ -84,7 +84,9 @@ const Card = ({ boxShadowOn, noHover }: CardProps) => {
                   <Stars count={320} />
                 </Flex>
                 <Flex sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <Badge label="ipfs" />
+                  <a href={`https://cloudflare/ipfs/${api.ipfs}`} target="_BLANK">
+                    <Badge label="ipfs" />
+                  </a>
                 </Flex>
               </div>
             </div>

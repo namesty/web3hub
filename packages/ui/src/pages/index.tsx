@@ -24,9 +24,9 @@ const Home = () => {
             <section className="content">
               <SortNav />
               <ApiGrid>
-                {dapp?.apis && dapp.apis.map((api, idx) => (
+                {/* {dapp?.apis && dapp.apis.map((api, idx) => (
                   <Card api={api} boxShadowOn key={idx + '-api'} />
-                ))}
+                ))} */}
               </ApiGrid>
             </section>
             <BottomSpace />

@@ -8,23 +8,71 @@ import Modal from '../Modal'
 
 const PublishAPI = () => {
   const [{ dapp }, dispatch] = useStateValue()
-  const [subdomain, setSubdomain] = useState('')
+  // inputes
+  const [subdomain, setsubdomain] = useState('')
+  const [ipfs, setipfs] = useState('')
+
+  // modals
   const [showENSModal, setShowENSModal] = useState(false)
   const [showSignInModal, setShowSignInModal] = useState(false)
 
+  // errors
+  const [ipfsError, setipfsError] = useState('')
+  const [ensError, setensError] = useState('')
+
+  type ErrorMsg = {
+    children: any
+    bottomshift?: boolean
+  }
+
+  // error component
+  const ErrorMsg = ({ children, bottomshift}: ErrorMsg) => (
+    <span
+      sx={{
+        fontSize: '14px',
+        lineHeight: '22px',
+        letterSpacing: '-0.4000000059604645px',
+        textAlign: 'left',
+        color: 'rgba(255, 0, 0, 0.5)',
+        mt: 2,
+        position: bottomshift ? 'relative' : 'absolute',
+      }}
+    >
+      {children}
+    </span>
+  )
+
   const handleRegisterENS = async (e) => {
     e.preventDefault()
-    if (subdomain.length > 0 && dapp.address === undefined) {
-      setShowENSModal(true)
+    if (subdomain.length > 0) {
+      // setShowENSModal(true)
+    } else {
     }
   }
 
-  const handlePublish = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (subdomain.length > 0 && dapp.address !== undefined) {
-      setShowSignInModal(true)
+    // if (ipfs.length > 0 && subdomain.length > 0) {
+    // setShowSignInModal(true)
+    // }
+    console.log('SUBMIT')
+    console.log({e})
+    console.log(e.target)
+  }
+
+  const handleInvalid = async (e) => {
+    e.preventDefault()
+    console.log('INVALID')
+    console.log({e})
+    console.log(e.target)
+    if(e.target.name === 'ipfs') {
+      setipfsError('Please enter a valid IPFS hash')
+    }
+    if(e.target.name === 'ens') {
+      setensError('Please enter a valid ENS sub-domain')
     }
   }
+  
 
   return (
     <Flex className="publish">
@@ -51,6 +99,8 @@ const PublishAPI = () => {
         </div>
       )}
       <form
+        onSubmit={handleSubmit}
+        onInvalid={handleInvalid}
         sx={{
           flex: 7,
           section: {
@@ -60,7 +110,7 @@ const PublishAPI = () => {
             color: 'w3darkGreen',
             mb: 2,
           },
-          fieldset: {
+          '.fieldset': {
             left: '-1px',
           },
           p: {
@@ -74,6 +124,7 @@ const PublishAPI = () => {
           label: {
             width: '13.75rem',
             mr: '2.75rem',
+            mb: 2,
             color: 'text',
             fontFamily: 'Montserrat',
             fontSize: '0.875rem',
@@ -84,23 +135,70 @@ const PublishAPI = () => {
           input: {
             color: 'black',
             p: 3,
+            pr: 5,
             borderRadius: '8px',
             fontFamily: 'Roboto Mono',
             fontSize: '16px',
             lineHeight: '140.62%',
+          },
+          '@keyframes rotate': {
+            '100%': {
+              transform: 'rotate(360deg)',
+            },
+          },
+          '.inputwrap': {
+            '&:after': {
+              display: 'block',
+              position: 'absolute',
+              right: '.75rem',
+              top: 'calc(50% - 11px)',
+              content: "''",
+              width: '22px',
+              height: '22px',
+            },
+            '&.loading': {
+              '&:after': {
+                animation: 'rotate 1s infinite linear',
+                background: 'url(/images/loading.svg) no-repeat',
+              },
+            },
+            '&.success': {
+              '&:after': {
+                background: 'url(/images/check-circle.svg) no-repeat',
+              },
+            },
+            '&.error': {
+              input: {
+                borderColor: 'rgba(255, 0, 0, 0.5)',
+              },
+              '&:after': {
+                background: 'url(/images/fail.svg) no-repeat',
+              },
+            },
           },
         }}
       >
         <section>
           <Styled.h4>Location</Styled.h4>
           <p>Point Web3hub to where your package has been uploaded.</p>
-          <fieldset>
+          <div className="fieldset">
             <label>IPFS location</label>
-            <Input
-              type="text"
-              placeholder="IPFS://fifmdoij9dfsjsd9fjwoefj09wej0f8rhwe98hrew98w09er"
-            />
-          </fieldset>
+            <div className="inputwrap">
+              <Input
+                type="text"
+                name="ipfs"
+                placeholder="QmPBWKRhX9aqQh4zsn..."
+                required
+                pattern="^Qm[1-9A-HJ-NP-Za-km-z]{44}(\/.*)?|^\/ipns\/.+"
+                onChange={(e) => {
+                  setipfs(e.target.value)
+                  setipfsError('')
+                }}
+                value={ipfs}
+              />
+            </div>
+            {ipfsError && <ErrorMsg>{ipfsError}</ErrorMsg>}
+          </div>
         </section>
         <section>
           <Styled.h4>Pointer</Styled.h4>
@@ -108,18 +206,27 @@ const PublishAPI = () => {
             Register your API to an ENS domain that developers will reference when
             integrating.
           </p>
-          <fieldset>
+          <div className="fieldset">
             <label>ENS Subdomain</label>
-            <Input
-              type="text"
-              placeholder="{SUBDOMAIN}.open.web3.eth"
-              pattern="[\w.-]"
-              onChange={(e) => {
-                setSubdomain(e.target.value)
-              }}
-              value={subdomain}
-            />
-
+            <div className="inputwrap">
+              <Input
+                type="text"
+                name="ens"
+                placeholder="{SUBDOMAIN}.open.web3.eth"
+                required
+                pattern="^[^.]+\.open\.web3\.eth$"
+                onChange={(e) => {
+                  setsubdomain(e.target.value)
+                  setensError('')
+                }}
+                value={subdomain}
+              />
+            </div>
+            {ensError && (
+              <ErrorMsg bottomshift>
+                {ensError}
+              </ErrorMsg>
+            )}
             <p>
               <small>
                 This option will cost ~0.0023 ETH ($2.90 USD)
@@ -142,7 +249,7 @@ const PublishAPI = () => {
             >
               Register ENS
             </Button>
-          </fieldset>
+          </div>
         </section>
         <section>
           <Styled.h4>Publish to Web3Hub</Styled.h4>
@@ -150,12 +257,16 @@ const PublishAPI = () => {
             Make your package discoverable on the Web3Hub. After publishing, the IPFS
             pacakge will be persistently pinned using Fleek. Learn more
           </p>
-          <fieldset>
+          <div className="fieldset">
             <br />
-            <Button variant="primaryMedium" onClick={handlePublish}>
+            <Button
+              variant="primaryMedium"
+              type="submit"
+              disabled={subdomain.length === 0 || ipfs.length === 0}
+            >
               Publish
             </Button>
-          </fieldset>
+          </div>
         </section>
       </form>
       <Flex
@@ -170,7 +281,7 @@ const PublishAPI = () => {
       >
         <div className="title">Package Preview</div>
         <div className="wrapper" sx={{ maxWidth: '17.5rem' }}>
-          <Card boxShadowOn noHover />
+          {/* <Card boxShadowOn noHover api={ipfsDataResult}/> */}
         </div>
       </Flex>
     </Flex>

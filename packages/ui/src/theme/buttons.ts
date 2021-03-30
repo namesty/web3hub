@@ -46,6 +46,10 @@ const buttonColorStates = {
       bg: '#255661',
       borderColor: '#255661',
     },
+    '&[disabled]': {
+      bg: 'w3TextNavTeal',
+      cursor: 'not-allowed'
+    }
   },
   secondary: {
     borderColor: 'text',
@@ -56,6 +60,9 @@ const buttonColorStates = {
     '&:active': {
       bg: 'rgba(104, 129, 132, 0.2)',
     },
+    '&[disabled]': {
+      cursor: 'not-allowed'
+    }
   },
   hollow: {
     boxShadow: 'none',
