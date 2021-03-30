@@ -51,6 +51,7 @@ create table apis (
 create table uri_types (
   id bigserial not null,
   name varchar not null,
+  type varchar not null,
   UNIQUE(name),
   primary key(id)
 );
@@ -71,7 +72,7 @@ create table starred_apis (
 );
 insert into addresses_types (name)
 values ('ethereum');
-insert into uri_types (name)
-values ('ens');
-insert into uri_types (name)
-values ('ipfs');
+insert into uri_types (name, type)
+values ('ens', 'pointer');
+insert into uri_types (name, type)
+values ('ipfs', 'location');

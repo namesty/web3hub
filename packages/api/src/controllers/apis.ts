@@ -1,8 +1,10 @@
 import { Request, Response, Router } from "express";
 
-import { Api, ApiData } from "../models/Api";
+import { Api, ApiData, ApiModel } from "../models/Api";
+import { SanitizeApis } from "../services/cronjob/checkApis";
 import { checkContentIsValid } from "../services/ens";
 import { validatePublishBody } from "./helpers";
+import { isLoggedWithGithub } from "./users";
 
 const router = Router();
 
@@ -58,7 +60,21 @@ const getAll = async (_: Request, response: Response) => {
   }
 };
 
+export const checkAndUpdateApis = async () => {
+  try {
+    const apis = await Api.getAllActive();
+
+    apis.forEach(async (api: ApiModel) => {
+      const { valid } = await checkContentIsValid(api.pointer, api.location);
+      if (!valid) Api.deactivate(api.id);
+    });
+  } catch (e) {
+    console.log("Error when checking and updating apis -> ", e.message);
+  }
+};
+
+SanitizeApis.getInstance();
 router.get("/api/actives", getAll);
-router.post("/publish", validatePublishBody, publishApi);
+router.post("/publish", isLoggedWithGithub, validatePublishBody, publishApi);
 
 export { router as ApiController };
