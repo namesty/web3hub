@@ -12,9 +12,12 @@ const publishApi = async (request: Request, response: Response) => {
       ...request.body,
     };
 
+    const pointer = apiInfo.locations.find((api) => api.type === "pointer");
+    const location = apiInfo.locations.find((api) => api.type === "location");
+
     const { valid, message } = await checkContentIsValid(
-      apiInfo.pointer,
-      apiInfo.location
+      pointer.uri,
+      location.uri
     );
 
     if (valid) {
@@ -27,6 +30,10 @@ const publishApi = async (request: Request, response: Response) => {
       message,
     });
   } catch (error) {
+    if (error.message === "One of the locations has an invalid URI type") {
+      return response.json({ status: 400, error: error.message });
+    }
+
     response.json({ status: 500, error: error.message });
   }
 };

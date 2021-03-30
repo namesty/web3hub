@@ -2,10 +2,15 @@ import { providers } from "ethers";
 import ENS, { getEnsAddress } from "@ensdomains/ensjs";
 import { helpers } from "content-hash";
 
+interface CheckContentResponse {
+  valid: boolean;
+  message?: string;
+}
+
 export const checkContentIsValid = async (
   pointer: string,
   location: string
-) => {
+): Promise<CheckContentResponse> => {
   const provider = new providers.JsonRpcProvider(process.env.RPC_NODE);
 
   const ens = new ENS({
@@ -25,7 +30,7 @@ export const checkContentIsValid = async (
   const hash = content.split("/").slice(-1)[0];
   const decodedContent = helpers.cidV0ToV1Base32(hash);
 
-  if (`ipfs://${decodedContent}` === location) {
+  if (location.includes(decodedContent)) {
     return { valid: true };
   }
 
