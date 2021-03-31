@@ -4,6 +4,7 @@ import { jsx, Flex, Styled } from 'theme-ui'
 import Link from 'next/link'
 import Stars from './Stars'
 import Badge from './Badge'
+import { cloudFlareGateway } from '../constants'
 
 type CardProps = {
   api?: any
@@ -11,8 +12,6 @@ type CardProps = {
   boxShadowOn?: boolean
   noHover?: boolean
 }
-
-const cloudFlareGateway = 'https://cloudflare-ipfs.com/ipfs/'
 
 const sample = {
   name: 'SimpleStorage (ETH)',

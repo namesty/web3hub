@@ -1,0 +1,1 @@
+export const cloudFlareGateway = 'https://cloudflare-ipfs.com/ipfs/'
