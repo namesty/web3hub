@@ -3,11 +3,14 @@
 import { useState } from 'react'
 import { jsx, Input, Flex, Select, Button, Styled, Field } from 'theme-ui'
 import { useStateValue } from '../../state/state'
+import getMetaDataFromPackageHash from '../../utils/getMetaDataFromPackageHash'
 import Card from '../Card'
 import Modal from '../Modal'
 
+
 const PublishAPI = () => {
   const [{ dapp }, dispatch] = useStateValue()
+  
   // inputes
   const [subdomain, setsubdomain] = useState('')
   const [ipfs, setipfs] = useState('')
@@ -19,6 +22,9 @@ const PublishAPI = () => {
   // errors
   const [ipfsError, setipfsError] = useState('')
   const [ensError, setensError] = useState('')
+
+  // data
+  const [apiData, setApiData] = useState(null)
 
   type ErrorMsg = {
     children: any
@@ -42,6 +48,15 @@ const PublishAPI = () => {
     </span>
   )
 
+  const handleIPFSHashInput = async (e) => {
+    setipfs(e.target.value)
+    setipfsError('')
+    if(e.target.value !== '') {
+      let metaData = await getMetaDataFromPackageHash(e.target.value)
+      setApiData(metaData)
+    }
+  }
+
   const handleRegisterENS = async (e) => {
     e.preventDefault()
     if (subdomain.length > 0) {
@@ -56,15 +71,11 @@ const PublishAPI = () => {
     // setShowSignInModal(true)
     // }
     console.log('SUBMIT')
-    console.log({e})
     console.log(e.target)
   }
 
   const handleInvalid = async (e) => {
     e.preventDefault()
-    console.log('INVALID')
-    console.log({e})
-    console.log(e.target)
     if(e.target.name === 'ipfs') {
       setipfsError('Please enter a valid IPFS hash')
     }
@@ -190,10 +201,7 @@ const PublishAPI = () => {
                 placeholder="QmPBWKRhX9aqQh4zsn..."
                 required
                 pattern="^Qm[1-9A-HJ-NP-Za-km-z]{44}(\/.*)?|^\/ipns\/.+"
-                onChange={(e) => {
-                  setipfs(e.target.value)
-                  setipfsError('')
-                }}
+                onChange={handleIPFSHashInput}
                 value={ipfs}
               />
             </div>
@@ -281,7 +289,7 @@ const PublishAPI = () => {
       >
         <div className="title">Package Preview</div>
         <div className="wrapper" sx={{ maxWidth: '17.5rem' }}>
-          {/* <Card boxShadowOn noHover api={ipfsDataResult}/> */}
+          {apiData && <Card api={apiData} ipfsHash={ipfs} boxShadowOn noHover/>}
         </div>
       </Flex>
     </Flex>
