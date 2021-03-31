@@ -25,7 +25,7 @@ const PublishAPI = () => {
   const [ipfsSuccess, setipfsSuccess] = useState(false)
 
   // modals
-  const [showENSModal, setShowENSModal] = useState(false)
+  const [showConnectModal, setShowConnectModal] = useState(false)
   const [showSignInModal, setShowSignInModal] = useState(false)
 
   // data
@@ -76,17 +76,17 @@ const PublishAPI = () => {
 
   const handleRegisterENS = async (e) => {
     e.preventDefault()
-    if (subdomain.length > 0) {
-      // setShowENSModal(true)
+    if (subdomain.length > 0 && dapp.address === undefined) {
+      setShowConnectModal(true)
     } else {
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // if (ipfs.length > 0 && subdomain.length > 0) {
-    // setShowSignInModal(true)
-    // }
+    if (apiData && subdomain.length > 0) {
+      setShowSignInModal(true)
+    }
     console.log('SUBMIT')
     console.log(e.target)
   }
@@ -106,13 +106,13 @@ const PublishAPI = () => {
 
   return (
     <Flex className="publish">
-      {showENSModal && (
+      {showConnectModal && (
         <div sx={{ position: 'fixed', top: 0, left: 0, zIndex: 100000 }}>
           <Modal
-            screen={showSignInModal ? 'signin' : 'connect'}
+            screen={'connect'}
             noLeftShift
             close={() => {
-              setShowENSModal(false)
+              setShowConnectModal(false)
             }}
           />
         </div>
@@ -120,7 +120,7 @@ const PublishAPI = () => {
       {showSignInModal && (
         <div sx={{ position: 'fixed', top: 0, left: 0, zIndex: 100000 }}>
           <Modal
-            screen={showSignInModal ? 'signin' : 'connect'}
+            screen={'signin'}
             noLeftShift
             close={() => {
               setShowSignInModal(false)
