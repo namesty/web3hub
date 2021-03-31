@@ -7,21 +7,26 @@ import getMetaDataFromPackageHash from '../../utils/getMetaDataFromPackageHash'
 import Card from '../Card'
 import Modal from '../Modal'
 
-
 const PublishAPI = () => {
   const [{ dapp }, dispatch] = useStateValue()
-  
-  // inputes
+
+  // inputs
   const [subdomain, setsubdomain] = useState('')
   const [ipfs, setipfs] = useState('')
+
+  // input states
+  const [subdomainLoading, setsubdomainLoading] = useState(false)
+  const [subdomainError, setsubdomainError] = useState('')
+  const [subdomainSuccess, setsubdomainSuccess] = useState(false)
+
+  // input states
+  const [ipfsLoading, setipfsLoading] = useState(false)
+  const [ipfsError, setipfsError] = useState('')
+  const [ipfsSuccess, setipfsSuccess] = useState(false)
 
   // modals
   const [showENSModal, setShowENSModal] = useState(false)
   const [showSignInModal, setShowSignInModal] = useState(false)
-
-  // errors
-  const [ipfsError, setipfsError] = useState('')
-  const [ensError, setensError] = useState('')
 
   // data
   const [apiData, setApiData] = useState(null)
@@ -32,7 +37,7 @@ const PublishAPI = () => {
   }
 
   // error component
-  const ErrorMsg = ({ children, bottomshift}: ErrorMsg) => (
+  const ErrorMsg = ({ children, bottomshift }: ErrorMsg) => (
     <span
       sx={{
         fontSize: '14px',
@@ -50,10 +55,22 @@ const PublishAPI = () => {
 
   const handleIPFSHashInput = async (e) => {
     setipfs(e.target.value)
+    setipfsLoading(true)
+    setipfsSuccess(false)
     setipfsError('')
-    if(e.target.value !== '') {
+    if (e.target.value !== '') {
       let metaData = await getMetaDataFromPackageHash(e.target.value)
-      setApiData(metaData)
+      if(metaData === undefined) {
+        setipfsLoading(false)
+        setApiData(null)
+        setipfsError('No Package Found')
+      } else {
+        setipfsLoading(false)
+        setipfsSuccess(true)  
+        setApiData(metaData)
+      }
+    } else {
+      setipfsLoading(false)
     }
   }
 
@@ -76,14 +93,16 @@ const PublishAPI = () => {
 
   const handleInvalid = async (e) => {
     e.preventDefault()
-    if(e.target.name === 'ipfs') {
+    if (e.target.name === 'ipfs') {
       setipfsError('Please enter a valid IPFS hash')
     }
-    if(e.target.name === 'ens') {
-      setensError('Please enter a valid ENS sub-domain')
+    if (e.target.name === 'ens') {
+      setsubdomainError('Please enter a valid ENS sub-domain')
     }
   }
-  
+
+  const ipfsState = ipfsLoading ? 'loading' : ipfsSuccess ? 'success' : ipfsError ? 'error' : ''
+  const subdomainState = subdomainLoading ? 'loading' : subdomainSuccess ? 'success' : subdomainError ? 'error' : ''
 
   return (
     <Flex className="publish">
@@ -194,7 +213,7 @@ const PublishAPI = () => {
           <p>Point Web3hub to where your package has been uploaded.</p>
           <div className="fieldset">
             <label>IPFS location</label>
-            <div className="inputwrap">
+            <div className={'inputwrap ' + ipfsState}>
               <Input
                 type="text"
                 name="ipfs"
@@ -203,6 +222,7 @@ const PublishAPI = () => {
                 pattern="^Qm[1-9A-HJ-NP-Za-km-z]{44}(\/.*)?|^\/ipns\/.+"
                 onChange={handleIPFSHashInput}
                 value={ipfs}
+                disabled={ipfsSuccess}
               />
             </div>
             {ipfsError && <ErrorMsg>{ipfsError}</ErrorMsg>}
@@ -216,7 +236,7 @@ const PublishAPI = () => {
           </p>
           <div className="fieldset">
             <label>ENS Subdomain</label>
-            <div className="inputwrap">
+            <div className={'inputwrap ' + subdomainState}>
               <Input
                 type="text"
                 name="ens"
@@ -225,16 +245,12 @@ const PublishAPI = () => {
                 pattern="^[^.]+\.open\.web3\.eth$"
                 onChange={(e) => {
                   setsubdomain(e.target.value)
-                  setensError('')
+                  setsubdomainError('')
                 }}
                 value={subdomain}
               />
             </div>
-            {ensError && (
-              <ErrorMsg bottomshift>
-                {ensError}
-              </ErrorMsg>
-            )}
+            {subdomainError && <ErrorMsg bottomshift>{subdomainError}</ErrorMsg>}
             <p>
               <small>
                 This option will cost ~0.0023 ETH ($2.90 USD)
@@ -289,7 +305,7 @@ const PublishAPI = () => {
       >
         <div className="title">Package Preview</div>
         <div className="wrapper" sx={{ maxWidth: '17.5rem' }}>
-          {apiData && <Card api={apiData} ipfsHash={ipfs} boxShadowOn noHover/>}
+          {apiData && <Card api={apiData} ipfsHash={ipfs} boxShadowOn noHover />}
         </div>
       </Flex>
     </Flex>
