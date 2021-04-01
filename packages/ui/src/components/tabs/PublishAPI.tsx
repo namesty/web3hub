@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { jsx, Input, Flex, Button, Styled } from 'theme-ui'
 import { useCreateSubdomain } from '../../hooks/ens/useCreateSubdomain'
 import { useStateValue } from '../../state/state'
@@ -9,6 +9,28 @@ import Card from '../Card'
 import Modal from '../Modal'
 import { MAIN_DOMAIN, ZERO_ADDRESS } from '../../constants'
 import { getOwner } from '../../services/ens/getOwner'
+
+type ErrorMsg = {
+  children: any
+  bottomshift?: boolean
+}
+
+// error component
+const ErrorMsg = ({ children, bottomshift }: ErrorMsg) => (
+  <span
+    sx={{
+      fontSize: '14px',
+      lineHeight: '22px',
+      letterSpacing: '-0.4000000059604645px',
+      textAlign: 'left',
+      color: 'rgba(255, 0, 0, 0.5)',
+      mt: 2,
+      position: bottomshift ? 'relative' : 'absolute',
+    }}
+  >
+    {children}
+  </span>
+)
 
 const PublishAPI = () => {
   const [{ dapp }, dispatch] = useStateValue()
@@ -37,49 +59,37 @@ const PublishAPI = () => {
   //ens
   const [executeCreateSubdomain] = useCreateSubdomain()
 
-  const handleSubdomainChange = async (e) => {
+  useEffect(() => {
+    if(subdomain !== '') {
+      checkForENSAvailability()
+    }
+  }, [dapp.address])
+
+  const checkForENSAvailability = async () => {
+    if(dapp.address !== undefined){
+      console.log('GOOD')
+      setsubdomainLoading(true)
+      try {
+        const owner = await getOwner(dapp.web3, `${subdomain}.${MAIN_DOMAIN}`)
+        if(owner === ZERO_ADDRESS) {
+          setsubdomainSuccess(true)
+          setsubdomainError('')
+        } else {
+          setsubdomainSuccess(false)
+          setsubdomainError("Subdomain name is not available")
+        }
+      } catch(e) {
+        console.log(e)
+      }
+      setsubdomainLoading(false)
+    }
+  }
+
+  const handleSubdomainChange = (e) => {
     setsubdomain(e.target.value)
     setsubdomainError('')
-    setsubdomainLoading(true)
-
-    try {
-      const owner = await getOwner(dapp.web3, `${e.target.value}.${MAIN_DOMAIN}`)
-
-      if(owner === ZERO_ADDRESS) {
-        setsubdomainSuccess(true)
-        setsubdomainError('')
-      } else {
-        setsubdomainSuccess(false)
-        setsubdomainError("Subdomain name is not available")
-      }
-    } catch(e) {
-      console.log(e)
-    }
-
-    setsubdomainLoading(false)
+    checkForENSAvailability()
   }
-
-  type ErrorMsg = {
-    children: any
-    bottomshift?: boolean
-  }
-
-  // error component
-  const ErrorMsg = ({ children, bottomshift }: ErrorMsg) => (
-    <span
-      sx={{
-        fontSize: '14px',
-        lineHeight: '22px',
-        letterSpacing: '-0.4000000059604645px',
-        textAlign: 'left',
-        color: 'rgba(255, 0, 0, 0.5)',
-        mt: 2,
-        position: bottomshift ? 'relative' : 'absolute',
-      }}
-    >
-      {children}
-    </span>
-  )
 
   const handleIPFSHashInput = async (e) => {
     setipfs(e.target.value)
@@ -104,7 +114,7 @@ const PublishAPI = () => {
 
   const handleRegisterENS = async (e) => {
     e.preventDefault()
-    if (subdomain.length > 0 && dapp.address === undefined) {
+    if (dapp.address === undefined) {
       setShowConnectModal(true)
     } else {
       executeCreateSubdomain(subdomain, ipfs)

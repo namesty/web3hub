@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { jsx, Flex, Button, useThemeUI } from 'theme-ui'
 import { useStateValue } from '../state/state'
 
@@ -29,7 +29,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
     setShowDisconnectModal(true)
   }
   const handleSignIn = () => {
-    setShowConnectModal(true)
+    setShowSignInModal(true)
   }
   const handleSignOut = () => {
     setShowSignOutModal(true)
