@@ -6,10 +6,10 @@ import Reducer from '../state/reducer'
 import Head from 'next/head'
 import 'animate.css/animate.css'
 import { SWRConfig } from 'swr'
-import {fetcherREST} from '../utils/fetcher'
+import { fetcherREST } from '../utils/fetcher'
 const swrOptions = {
   refreshInterval: 5000,
-  fetcher: (resource) => fetcherREST(resource)
+  fetcher: (resource) => fetcherREST(resource),
 }
 
 function MyApp({ Component, pageProps }) {

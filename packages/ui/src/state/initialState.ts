@@ -3,11 +3,11 @@ let initialState = {
     balance: -1,
     address: undefined,
     wallet: {
-      name: 'TEST'
+      name: 'TEST',
     },
     network: 3,
     web3: {},
-    apis: []
-  }
+    apis: [],
+  },
 }
 export default initialState

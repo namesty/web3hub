@@ -1,7 +1,8 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { useEffect } from 'react'
-import { jsx } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
+import { timing } from '../theme'
 import { Global } from '@emotion/core'
 import { useStateValue } from '../state/state'
 import useSWR from 'swr'
@@ -11,9 +12,12 @@ type LayoutProps = {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const [,dispatch] = useStateValue()
+  const { theme } = useThemeUI()
+  const [, dispatch] = useStateValue()
   const { data: apis, error } = useSWR('/api/apis')
-
+  // https://github.com/system-ui/theme-ui/issues/834#issuecomment-625865772
+  const pageLevelAnimationTiming = timing[3] +'s'
+  
   useEffect(() => {
     dispatch({
       type: 'SET_AVAILABLE_APIS',
@@ -30,9 +34,13 @@ const Layout = ({ children }: LayoutProps) => {
         },
       }}
     >
-      {children}
+      {children}      
       <Global
         styles={(theme) => ({
+          '@keyframes shift': {
+            from: { transform: 'translate(-10px, 0)' },
+            to: { transform: 'translate(0, 0)' }
+           },
           '*': {
             boxSizing: 'border-box',
             position: 'relative',
@@ -52,7 +60,7 @@ const Layout = ({ children }: LayoutProps) => {
             MozOsxFontSmoothing: 'grayscale',
             fontSmoothing: 'antialiased',
             WebkitFontSmoothing: 'antialiased',
-            textShadow: 'rgba(0, 0, 0, 0.01) 0 0 1px',
+            textShadow: 'rgba(0, 0, 0, 0.01) 0 0 0.0625rem',
             '&::before, &::after': {
               display: 'none',
             },
@@ -103,10 +111,15 @@ const Layout = ({ children }: LayoutProps) => {
             border: 'none',
           },
           '.contents': {
-            maxWidth: '1224px',
+            maxWidth: '76.5rem',
             margin: 'auto',
             width: '100%',
             height: '100%',
+            paddingLeft: '1rem',
+            paddingRight: '1rem'
+          },
+          '.contents.animate': {
+            animation: `fadeIn ${pageLevelAnimationTiming}, shift ${pageLevelAnimationTiming}`,
           },
           'ul, ol, li': {
             margin: '0',
@@ -137,9 +150,9 @@ const Layout = ({ children }: LayoutProps) => {
           },
           '.text-nav': {
             fontWeight: 'bold',
-            fontSize: '12px',
-            lineHeight: '14px',
-            letterSpacing: '-0.6px',
+            fontSize: '0.75rem',
+            lineHeight: '0.875rem',
+            letterSpacing: '-0.0375rem',
             textTransform: 'uppercase',
             textDecoration: 'none',
             color: theme.colors.w3TextNavTeal,

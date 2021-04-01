@@ -13,7 +13,6 @@ import BottomSpace from '../../components/BottomSpace'
 const CreateApi = () => {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState(router.query.activeTab)
-  const [modalOpen, setmodalOpen] = useState(false)
   const handleTabClick = (e: React.BaseSyntheticEvent) => {
     e.stopPropagation()
     setActiveTab(e.target.classList[1])
@@ -25,18 +24,8 @@ const CreateApi = () => {
     <Layout>
       <Flex>
         <main sx={{ pb: 5 }}>
-          {modalOpen && (
-            <Modal
-              screen="success"
-              close={() => {
-                setmodalOpen(false)
-              }}
-            />
-          )}
-          <div className="contents" sx={{ maxWidth: 'calc(1224px + 112px)' }}>
-            <Header
-              title={activeTab === 'create' ? 'Create a Web3API Package' : 'Publish'}
-            />
+          <div className="contents animate" sx={{ maxWidth: 'calc(76.5rem + 112px)' }}>
+            <Header title={'Create a Web3API'}/>
             <Flex
               className="tabs"
               onClick={handleTabClick}
@@ -44,26 +33,25 @@ const CreateApi = () => {
                 '*': { cursor: 'pointer', mr: 2, mb: 4 },
                 '.tab': {
                   textAlign: 'center',
-                  fontFamily: 'Montserrat',
-                  fontSize: '16px',
+                  fontSize: '1rem',
                   fontWeight: 'bold',
-                  lineHeight: '20px',
-                  letterSpacing: '-0.4000000059604645px',
-                  pb: ' 18px',
+                  lineHeight: '1.25rem',
+                  letterSpacing: '-0.025rem',
+                  pb: ' 1.125rem',
                   color: 'text',
                   mb: 0,
                   '&.active': {
                     fontWeight: 'bold',
                     color: 'w3darkGreen',
-                    borderBottom: '2px solid',
+                    borderBottom: '0.125rem solid',
                     borderBottomColor: 'w3NavNeonHighlightTeal',
                     '&:hover': {
-                      borderBottom: '2px solid',
+                      borderBottom: '0.125rem solid',
                       borderBottomColor: 'w3NavNeonHighlightTeal',
                     },
                   },
                   '&:hover': {
-                    borderBottom: '2px solid',
+                    borderBottom: '0.125rem solid',
                     borderBottomColor: 'background',
                   },
                 },
@@ -87,15 +75,15 @@ const CreateApi = () => {
               sx={{
                 bg: 'white',
                 '> *': {
-                  px: '55px',
-                  pt: '90px',
+                  px: '3.4375rem',
+                  pt: '5.625rem',
                 },
               }}
             >
               {activeTab === 'create' && <CreateAPI />}
               {activeTab === 'publish' && <PublishAPI />}
             </div>
-            <BottomSpace/>
+            <BottomSpace />
           </div>
         </main>
       </Flex>

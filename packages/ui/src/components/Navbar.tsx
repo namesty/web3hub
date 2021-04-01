@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx,useThemeUI } from 'theme-ui'
+import { jsx, useThemeUI } from 'theme-ui'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import APIs from '../../public/images/apis.svg'
@@ -21,9 +21,9 @@ const Navbar = () => {
         backgroundColor: 'w3NavGrayGreen',
         flexDirection: 'column',
         height: '100vh',
-        maxWidth: '112px',
+        maxWidth: '7rem',
         zIndex: 100,
-        '*': { display: 'flex', flexDirection: 'column', },
+        '*': { display: 'flex', flexDirection: 'column' },
         '.col': { flex: 3, '&:last-of-type': { justifyContent: 'flex-end' } },
       }}
     >
@@ -49,7 +49,7 @@ const Navbar = () => {
                 // transition: 'border-left-color, background-color 2s ease',
                 display: 'flex',
                 alignItems: 'center',
-                borderLeft: '2px solid',
+                borderLeft: '0.125rem solid',
                 borderLeftColor: 'w3NavGrayGreen',
                 svg: {
                   stroke: theme.colors.w3green,
@@ -61,10 +61,10 @@ const Navbar = () => {
                 '&.active': {
                   borderLeftColor: 'w3NavNeonHighlightTeal',
                   backgroundColor: 'w3NavHighlightTeal',
-                  span: { color: 'white !important'},
+                  span: { color: 'white !important' },
                   svg: {
                     stroke: 'white',
-                  }
+                  },
                 },
                 a: {
                   px: 3,
@@ -76,27 +76,33 @@ const Navbar = () => {
               },
             }}
           >
-            <li className={router.pathname === '/' || router.pathname === '/apis/user' ? 'active' : ''}>
+            <li
+              className={
+                router.pathname === '/' || router.pathname.includes('/apis')
+                  ? 'active'
+                  : ''
+              }
+            >
               <Link href="/" sx={{ alignItems: 'center' }}>
                 <a>
                   <APIs />
-                  <span sx={{height: 2}}>&nbsp;</span>
+                  <span sx={{ height: 2 }}>&nbsp;</span>
                   <span className="text-nav">API's</span>
                 </a>
               </Link>
             </li>
-            <li className={router.pathname === '/playground' ? 'active' : ''}>
+            <li className={router.pathname.includes('/playground') ? 'active' : ''}>
               <Link href="/playground">
                 <a className="text-nav">
                   <PlaygroundImg />
-                  <span sx={{height: 2}}>&nbsp;</span>
+                  <span sx={{ height: 2 }}>&nbsp;</span>
                   <span>Playground</span>
                 </a>
               </Link>
             </li>
             <li>
               <a className="text-nav" href="https://web3api.dev" target="_BLANK">
-                <Doc/>
+                <Doc />
                 <span>&nbsp;</span>
                 <span>Docs</span>
               </a>
@@ -104,7 +110,7 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-      <div className="col" sx={{ flex: '3 !important' }}/>
+      <div className="col" sx={{ flex: '3 !important' }} />
     </nav>
   )
 }
