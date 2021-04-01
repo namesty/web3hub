@@ -1,11 +1,14 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { useState } from 'react'
-import { jsx, Input, Flex, Select, Button, Styled, Field } from 'theme-ui'
+import { jsx, Input, Flex, Button, Styled } from 'theme-ui'
+import { useCreateSubdomain } from '../../hooks/ens/useCreateSubdomain'
 import { useStateValue } from '../../state/state'
 import getMetaDataFromPackageHash from '../../utils/getMetaDataFromPackageHash'
 import Card from '../Card'
 import Modal from '../Modal'
+import { MAIN_DOMAIN, ZERO_ADDRESS } from '../../constants'
+import { getOwner } from '../../services/ens/getOwner'
 
 const PublishAPI = () => {
   const [{ dapp }, dispatch] = useStateValue()
@@ -15,9 +18,9 @@ const PublishAPI = () => {
   const [ipfs, setipfs] = useState('')
 
   // input states
-  const [subdomainLoading, setsubdomainLoading] = useState(false)
   const [subdomainError, setsubdomainError] = useState('')
   const [subdomainSuccess, setsubdomainSuccess] = useState(false)
+  const [subdomainLoading, setsubdomainLoading] = useState(false)
 
   // input states
   const [ipfsLoading, setipfsLoading] = useState(false)
@@ -30,6 +33,31 @@ const PublishAPI = () => {
 
   // data
   const [apiData, setApiData] = useState(null)
+
+  //ens
+  const [executeCreateSubdomain] = useCreateSubdomain()
+
+  const handleSubdomainChange = async (e) => {
+    setsubdomain(e.target.value)
+    setsubdomainError('')
+    setsubdomainLoading(true)
+
+    try {
+      const owner = await getOwner(dapp.web3, `${e.target.value}.${MAIN_DOMAIN}`)
+
+      if(owner === ZERO_ADDRESS) {
+        setsubdomainSuccess(true)
+        setsubdomainError('')
+      } else {
+        setsubdomainSuccess(false)
+        setsubdomainError("Subdomain name is not available")
+      }
+    } catch(e) {
+      console.log(e)
+    }
+
+    setsubdomainLoading(false)
+  }
 
   type ErrorMsg = {
     children: any
@@ -79,6 +107,7 @@ const PublishAPI = () => {
     if (subdomain.length > 0 && dapp.address === undefined) {
       setShowConnectModal(true)
     } else {
+      executeCreateSubdomain(subdomain, ipfs)
     }
   }
 
@@ -243,10 +272,7 @@ const PublishAPI = () => {
                 placeholder="{SUBDOMAIN}.open.web3.eth"
                 required
                 pattern="^[^.]+\.open\.web3\.eth$"
-                onChange={(e) => {
-                  setsubdomain(e.target.value)
-                  setsubdomainError('')
-                }}
+                onChange={handleSubdomainChange}
                 value={subdomain}
               />
             </div>

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import APIs from '../../public/images/apis.svg'
 import PlaygroundImg from '../../public/images/playground.svg'
-import Doc from '../../public/images/Doc.svg'
+import Doc from '../../public/images/doc.svg'
 
 const Navbar = () => {
   const router = useRouter()
