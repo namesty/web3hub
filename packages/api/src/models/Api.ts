@@ -1,17 +1,12 @@
 import db from "../services/db";
-
-type Location = {
-  uri: string;
-  authority: string;
-  type: "pointer" | "location";
-};
-
 export interface ApiData {
+  id: number;
   name: string;
   description: string;
   icon: string;
-  locations: Location[];
-  ownerId: string;
+  location: string;
+  pointers: string[];
+  ownerId?: string;
 }
 
 export enum Authorities {
@@ -19,43 +14,31 @@ export enum Authorities {
   IPFS,
 }
 
-export interface ApiModel {
-  id: number;
-  description: string;
-  name: string;
-  icon: string;
-  location: string;
-  pointer: string;
-}
-
 export class Api {
   public static async create(apiInfo: ApiData) {
     const connection = await db.connect();
     try {
-      const { name, description, icon, locations, ownerId } = apiInfo;
-      const uris = {};
-
+      const { name, description, icon, location, pointers, ownerId } = apiInfo;
       const insertApi = async (tx) => {
         const api = await tx.one(
           "INSERT INTO apis (name, description, icon, fk_owner_id) VALUES ($1, $2, $3, $4) RETURNING *",
           [name, description, icon, ownerId]
         );
 
-        const insertUris = async (location, index) => {
-          const name = location.authority;
-          uris[name] = locations[index].uri;
-          const authId = Authorities[name.toUpperCase()];
+        //@TODO: Retrieve authId dynamically
+        await tx.none(
+          "INSERT INTO api_uris (uri, fk_api_id, fk_uri_type_id) VALUES ($1, $2, $3)",
+          [location, api.id, Authorities.IPFS]
+        );
 
-          if (!(location.authority === name)) {
-            throw new Error(`Authority ${name} is not supported`);
-          }
-
+        const insertPointers = async (location) => {
           await tx.none(
             "INSERT INTO api_uris (uri, fk_api_id, fk_uri_type_id) VALUES ($1, $2, $3)",
-            [uris[name], api.id, authId]
+            [location, api.id, Authorities.ENS]
           );
         };
-        locations.map(insertUris);
+
+        pointers.map(insertPointers);
       };
 
       await connection.tx(insertApi);
@@ -63,7 +46,8 @@ export class Api {
         name,
         description,
         icon,
-        uris,
+        location,
+        pointers,
       };
     } catch (error) {
       console.log("Error on method: Api.create() -> ", error.message);
@@ -73,7 +57,7 @@ export class Api {
     }
   }
 
-  public static async getAllActive(): Promise<ApiModel[]> {
+  public static async getAllActive(): Promise<ApiData[]> {
     const connection = await db.connect();
     try {
       const apis = await connection.manyOrNone(
@@ -82,7 +66,6 @@ export class Api {
           apis.description, 
           apis.name, 
           apis.icon, 
-          uri_types.name as authority, 
           uri_types.type as type, 
           api_uris.uri 
         FROM apis 
@@ -91,26 +74,27 @@ export class Api {
         WHERE visible = true`
       );
 
-      const uniqueApis: ApiModel[] = [];
-
-      //@TODO: Improve this algorithm
-      let api = {};
-      apis.map(({ id, type, uri, description, icon, name }) => {
-        api = {
-          ...api,
-          name,
-          description,
-          icon,
-          id,
+      const sanitizeApis = (acc: ApiData[], api) => {
+        const { authority, type, uri, ...metadata } = api;
+        let apiAdded = acc.find(({ id }) => id === api.id);
+        let apiSanitized = {
+          ...metadata,
+          pointers: [],
+          ...(apiAdded || {}),
         };
-        api[type] = uri;
-        if ("location" in api && "pointer" in api) {
-          uniqueApis.push(api);
-          api = {};
-        }
-      });
 
-      return uniqueApis;
+        if (api.type === "pointer") {
+          apiSanitized.pointers.push(api.uri);
+        } else {
+          apiSanitized.location = api.uri;
+        }
+
+        if (!apiAdded) return [...acc, apiSanitized];
+        apiAdded = apiSanitized;
+        return acc;
+      };
+
+      return apis.reduce(sanitizeApis, []);
     } catch (error) {
       console.log("Error on method: Api.getAllActive() -> ", error.message);
       throw new Error(error);

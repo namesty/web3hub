@@ -1,0 +1,48 @@
+{
+  "User": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "username": {
+        "type": "string"
+      },
+      "address": {
+        "type": "string"
+      },
+      "accessToken": {
+        "type": "string"
+      },
+      "githubId": {
+        "type": "string"
+      }
+    }
+  },
+  "Api": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "description": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "icon": {
+        "type": "string"
+      },
+      "location": {
+        "type": "string"
+      },
+      "pointers": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

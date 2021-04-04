@@ -8,17 +8,13 @@ export const validatePublishBody = (
   response: Response,
   next: NextFunction
 ) => {
-  const locationSchema = object({
-    uri: string().required(),
-    authority: string().required(),
-    type: string().valid("pointer", "location"),
-  });
-
+  
   const schema = object({
     description: string().required(),
     name: string().required(),
     icon: string().required(),
-    locations: array().items(locationSchema),
+    location: string().required(),
+    pointers: array().items(string()),
   });
 
   validateRequest(request, response, next, schema);

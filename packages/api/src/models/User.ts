@@ -7,7 +7,7 @@ declare global {
 }
 
 export interface UserData {
-  userId: string;
+  id: string;
   accessToken: string;
   username: string;
   address: string;
@@ -61,7 +61,6 @@ export class User {
         [address]
       );
       if (user) return user;
-      let userId;
       const createUserAndInsertAddress = async (tx) => {
         const user = await tx.one(
           "INSERT INTO users DEFAULT VALUES RETURNING id"
@@ -70,13 +69,12 @@ export class User {
           "INSERT INTO addresses (address, fk_user_id, fk_address_type_id) VALUES ($1, $2, $3)",
           [address, user.id, addressType]
         );
-        userId = user.id;
       };
 
       await db.tx(createUserAndInsertAddress);
       return {
         address,
-        userId,
+        id: user.id,
       };
     } catch (error) {
       console.log(

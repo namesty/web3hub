@@ -8,7 +8,7 @@ interface CheckContentResponse {
 }
 
 export const checkContentIsValid = async (
-  pointer: string,
+  pointers: string[],
   location: string
 ): Promise<CheckContentResponse> => {
   const provider = new providers.JsonRpcProvider(process.env.RPC_NODE);
@@ -18,24 +18,39 @@ export const checkContentIsValid = async (
     ensAddress: getEnsAddress("1"),
   });
 
-  const { value: content } = await ens.name(pointer).getContent();
+  const getContents = async (
+    pointers: string[]
+  ): Promise<{ value: string }[]> => {
+    const contentsPromises = pointers.map((p) => {
+      return ens.name(p).getContent();
+    });
+    return await Promise.all(contentsPromises);
+  };
 
-  if (!content) {
+  const contents = await getContents(pointers);
+  const unvalidPointers = contents.filter(({ value }) => {
+    return !value;
+  });
+
+  if (unvalidPointers.length) {
     return {
-      message: "ENS pointer is not registered",
+      message: `Pointer: ${unvalidPointers[0]} is not registered`,
       valid: false,
     };
   }
 
-  const hash = content.split("/").slice(-1)[0];
-  const decodedContent = helpers.cidV0ToV1Base32(hash);
+  const unvalidLocation = contents.filter(({ value }) => {
+    const hash = value.split("/").slice(-1)[0];
+    const decodedContent = helpers.cidV0ToV1Base32(hash);
+    return !location.includes(decodedContent);
+  });
 
-  if (location.includes(decodedContent)) {
-    return { valid: true };
+  if (unvalidLocation.length) {
+    return {
+      valid: false,
+      message: `Pointer: ${unvalidLocation[0]} is not pointing to given location`,
+    };
   }
 
-  return {
-    valid: false,
-    message: "ENS pointer is not pointing to given IPFS hash",
-  };
+  return { valid: true };
 };

@@ -75,4 +75,4 @@ values ('ethereum');
 insert into uri_types (name, type)
 values ('ens', 'pointer');
 insert into uri_types (name, type)
-values ('ipfs', 'location');
+values ('ipfs', 'storage');

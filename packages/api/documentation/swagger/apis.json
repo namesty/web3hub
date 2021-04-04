@@ -1,0 +1,48 @@
+{
+  "/apis/active": {
+    "get": {
+      "summary": "Get all APIs",
+      "description": "Retrieve all active APIs",
+      "produces": ["application/json"],
+      "parameters": [],
+      "responses": {
+        "200": {
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Api"
+            }
+          }
+        },
+        "500": {
+          "status": "500",
+          "error": "Server error"
+        }
+      }
+    }
+  },
+  "/publish": {
+    "post": {
+      "summary": "Create new API",
+      "parameters": [
+        {
+          "in": "body",
+          "description": "API Metadata",
+          "schema": {
+            "$ref": "#/definitions/Api"
+          }
+        }
+      ],
+      "description": "Store metadata ",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "status": "200",
+          "api": {
+            "$ref": "#/definitions/Api"
+          }
+        }
+      }
+    }
+  }
+}

@@ -61,7 +61,7 @@ const onSuccessAuthHandler = ({ user }: Request, response: Response) => {
 
 router.get("/user/orgs", isLoggedWithGithub, userOrganizations);
 
-router.get("/auth/sign-in", handleSignIn, authScopes);
+router.post("/auth/sign-in", handleSignIn, authScopes);
 router.get("/auth/github/callback", onErrorAuthHandler, onSuccessAuthHandler);
 router.get("/auth/sign-out", (request: Request, response: Response) => {
   request.logout();

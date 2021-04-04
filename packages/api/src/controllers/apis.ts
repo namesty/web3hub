@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 
-import { Api, ApiData, ApiModel } from "../models/Api";
+import { Api, ApiData } from "../models/Api";
 import { SanitizeApis } from "../services/cronjob/checkApis";
 import { checkContentIsValid } from "../services/ens";
 import { validatePublishBody } from "./helpers";
@@ -11,24 +11,12 @@ const router = Router();
 const publishApi = async (request: Request, response: Response) => {
   try {
     const apiInfo: ApiData = {
-      ownerId: 1,
+      ownerId: request.user.id,
       ...request.body,
     };
 
-    const pointer = apiInfo.locations.find((api) => api.type === "pointer");
-    const location = apiInfo.locations.find((api) => api.type === "location");
-
-    if (!pointer || !location) {
-      return response.json({
-        status: 400,
-        error: "You need to send pointer AND location in Locations array",
-      });
-    }
-
-    const { valid, message } = await checkContentIsValid(
-      pointer.uri,
-      location.uri
-    );
+    const { location, pointers } = apiInfo;
+    const { valid, message } = await checkContentIsValid(pointers, location);
 
     if (valid) {
       const api = await Api.create(apiInfo);
@@ -64,8 +52,8 @@ export const checkAndUpdateApis = async () => {
   try {
     const apis = await Api.getAllActive();
 
-    apis.forEach(async (api: ApiModel) => {
-      const { valid } = await checkContentIsValid(api.pointer, api.location);
+    apis.forEach(async (api: ApiData) => {
+      const { valid } = await checkContentIsValid(api.pointers, api.location);
       if (!valid) Api.deactivate(api.id);
     });
   } catch (e) {

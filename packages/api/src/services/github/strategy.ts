@@ -30,8 +30,8 @@ const authCallback = async (
     let { username, profileUrl, id: githubId } = profile;
     username = username || profileUrl.split("/").slice(-1)[0];
     const userInfo = { accessToken, username, githubId };
-    await User.findOrCreateByGithub(userInfo);
-    return done(null, userInfo);
+    const user = await User.findOrCreateByGithub(userInfo);
+    return done(null, { ...userInfo, id: user.id });
   } catch (e) {
     throw new Error(e);
   }
