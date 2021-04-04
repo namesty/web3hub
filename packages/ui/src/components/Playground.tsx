@@ -11,11 +11,11 @@ import { useStateValue } from '../state/state'
 
 const Playground = () => {
   const [{ dapp }, dispatch] = useStateValue()
-  
+
   // TODO: Turn this into reusable hook because it also exsits on index
   const [searchValues, setsearchValues] = useState([])
   const [searchOptions, setsearchOptions] = useState(dapp.apis)
-  
+
   const [queryValues, setqueryValues] = useState([])
   const [queryOptions, setqueryOptions] = useState([
     {
@@ -30,10 +30,10 @@ const Playground = () => {
   ])
   const handleNewQuery = (e: React.BaseSyntheticEvent) => console.log(e.target)
   const handleShowSchema = (e: React.BaseSyntheticEvent) => console.log(e.target)
-  
+
   const handleSearchValuesChange = (values) => setsearchValues(values)
   const handleQueryValuesChange = (values) => setqueryValues(values)
-  
+
   // useEffect(() => {
   //   async function getRelatedFunctions() {
   //     let queries = await axios.get(`/api/apis/${searchValues[0].id}/queries`)
@@ -51,14 +51,14 @@ const Playground = () => {
       className="playground"
       sx={{
         backgroundColor: 'w3shade3',
-        borderRadius: '16px',
+        borderRadius: '1rem',
         overflow: 'hidden',
         'code, pre, textarea': {
           color: 'w3PlaygroundSoftBlue',
           backgroundColor: 'transparent !important',
           border: 'none',
-          fontSize: '14px',
-          lineHeight: '14px',
+          fontSize: '0.875rem',
+          lineHeight: '0.875rem',
         },
       }}
     >
@@ -103,14 +103,17 @@ const Playground = () => {
                 </ul>
               </div>
               <div className="right">
-                <a className="text-nav" href="/uniswap/docs">
+                <a className="text-nav" href="/apis/SOMEAPI">
                   GO TO API PAGE
                 </a>
               </div>
             </Flex>
           </Flex>
           <Flex className="body" sx={{ '> *': { p: '1.5rem' } }}>
-            <div className="query" sx={{ flex: 4, backgroundColor: 'w3PlayGroundNavy' }}>
+            <div
+              className="query"
+              sx={{ width: '40%', backgroundColor: 'w3PlayGroundNavy' }}
+            >
               <Flex
                 className="templates"
                 sx={{ flex: 1, mb: 4, justifyContent: 'space-between' }}
@@ -125,14 +128,14 @@ const Playground = () => {
                   onChange={handleQueryValuesChange}
                 />
 
-                <Button variant="secondary" onClick={handleNewQuery}>
+                <Button variant="secondarySmall" onClick={handleNewQuery}>
                   New
                 </Button>
               </Flex>
               <Styled.code>
                 <textarea
                   onChange={() => console.log('YO')}
-                  sx={{ resize: 'none', width: '100%', height: '350px' }}
+                  sx={{ resize: 'none', width: '100%', height: '21.875rem' }}
                   value={`
 mutation {
   swap(token: jfid) {
@@ -148,7 +151,10 @@ mutation {
               </Styled.code>
             </div>
             &nbsp;
-            <div className="result" sx={{ flex: 6, backgroundColor: 'w3PlayGroundNavy' }}>
+            <div
+              className="result"
+              sx={{ width: '60%', backgroundColor: 'w3PlayGroundNavy', display: 'flex', flexDirection: 'column' }}
+            >
               <Flex
                 className="controls"
                 sx={{
@@ -158,8 +164,8 @@ mutation {
                 }}
               >
                 <div className="left">
-                  <Button variant="primaryMedium">Run</Button>
-                  <Button variant="tertiary">Save</Button>
+                  <Button variant="primarySmall">Run</Button>
+                  <Button variant="hollowSmall">Save</Button>
                 </div>
                 <div className="right">
                   <span
@@ -171,8 +177,8 @@ mutation {
                   </span>
                 </div>
               </Flex>
-              <Styled.code sx={{ overflowX: 'scroll' }}>
-                <Styled.pre>{`
+              <Styled.code sx={{ flex: 1 }}>
+                <Styled.pre sx={{height: '100%'}}>{`
 "data": {
 "transactions": [
   {

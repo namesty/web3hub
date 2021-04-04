@@ -4,8 +4,8 @@ type newState = {
   address: string
   network: number
   balance: number
-  wallet: { name: string; }
-  web3?: any 
+  wallet: { name: string }
+  web3?: any
   apis: any[]
 }
 

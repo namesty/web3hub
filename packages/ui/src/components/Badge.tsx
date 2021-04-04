@@ -3,7 +3,7 @@
 import { jsx } from 'theme-ui'
 
 type BadgeProps = {
-  label: string,
+  label: string
   onDark?: boolean
 }
 
@@ -12,18 +12,18 @@ const Badge = ({ label, onDark }: BadgeProps) => {
     <div
       sx={{
         cursor: 'default',
-        border: '2px solid black',
+        border: '0.125rem solid',
         textTransform: 'uppercase',
-        borderColor: onDark ? '#CAD9F3': '#EFF5F4',
-        borderRadius: '8px',
+        borderColor: onDark ? '#CAD9F3' : '#EFF5F4',
+        borderRadius: '0.5rem',
         px: 2,
         py: 1,
         mx: 2,
-        color: onDark ? '#CAD9F3': 'w3green',
+        color: onDark ? '#CAD9F3' : 'w3green',
         fontFamily: '"Poppins"',
         fontWeight: '600',
-        fontSize: '12px',
-        lineHeight: '18px',
+        fontSize: '0.75rem',
+        lineHeight: '1.125rem',
       }}
     >
       {label}

@@ -12,9 +12,9 @@ const getOnboard = function (subscriptions) {
         wallets: [
           { walletName: 'metamask', preferred: true },
           {
-            walletName: "walletConnect",
+            walletName: 'walletConnect',
             preferred: true,
-            infuraKey: 'e1fd18285cab4a02adac214587d3f112'
+            infuraKey: 'e1fd18285cab4a02adac214587d3f112',
           },
         ],
       },

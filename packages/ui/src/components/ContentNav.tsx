@@ -21,25 +21,24 @@ const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
         '*': { cursor: 'pointer', mr: 2, mb: 4 },
         '.tab': {
           textAlign: 'center',
-          fontFamily: 'Montserrat',
-          fontSize: '16px',
-          letterSpacing: '-0.4000000059604645px',
-          pb: ' 18px',
+          fontSize: '1rem',
+          letterSpacing: '-0.025rem',
+          pb: ' 1.125rem',
           color: 'text',
           mb: 0,
-          minWidth: '120px',
+          minWidth: '7.5rem',
           '&.active': {
             fontWeight: 'bold',
             color: 'w3darkGreen',
-            borderBottom: '2px solid',
+            borderBottom: '0.125rem solid',
             borderBottomColor: 'w3NavNeonHighlightTeal',
             '&:hover': {
-              borderBottom: '2px solid',
+              borderBottom: '0.125rem solid',
               borderBottomColor: 'w3NavNeonHighlightTeal',
             },
           },
           '&:hover': {
-            borderBottom: '2px solid',
+            borderBottom: '0.125rem solid',
             borderBottomColor: 'background',
           },
         },
@@ -57,14 +56,13 @@ const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
               className="label"
               sx={{
                 fontFamily: 'Montserrat',
-                
-                fontSize: '16px',
-                lineHeight: '20px',
-                letterSpacing: '-0.4px',
+                fontSize: '1rem',
+                lineHeight: '1.25rem',
+                letterSpacing: '-0.025rem',
                 color: 'w3darkGreen',
                 mixBlendMode: 'normal',
                 opacity: '0.9',
-                mb: 0
+                mb: 0,
               }}
             >
               {tab.label}
@@ -74,16 +72,16 @@ const ContentNav = ({ setActiveTab, activeTab, tabs }: ContentNav) => {
                 backgroundColor: 'rgba(104,129,132,.1)',
                 fontFamily: 'Montserrat',
                 fontWeight: '600',
-                fontSize: '13px',
-                lineHeight: '16px',
+                fontSize: '0.8125rem',
+                lineHeight: '1rem',
                 textAlign: 'center',
-                letterSpacing: '-0.4px',
+                letterSpacing: '-0.025rem',
                 color: 'w3darkGreen',
                 mixBlendMode: 'normal',
-                px: '.3rem',
-                py: '.1rem',
+                px: '0.3rem',
+                py: '0.1rem',
                 borderRadius: '50%',
-                mb: 0
+                mb: 0,
               }}
             >
               {tab.count}

@@ -1,51 +1,43 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { Grid, jsx, Button } from 'theme-ui'
-import Card from '../components/Card'
 import { useRouter } from 'next/router'
 
-const ApiGrid = () => {
+const ApiGrid = ({children}) => {
   const router = useRouter()
   return (
     <div>
       <Grid
         gap={'3%'}
         sx={{
-          gridTemplateColumns: '1fr 1fr 1fr 1fr',
-          rowGap: '4%',
+          gridTemplateColumns: ['1fr', '1fr 1fr', '1fr 1fr 1fr', '1fr 1fr 1fr 1fr'],
+          rowGap: ['1%', '2%', '3%', '4%'],
         }}
       >
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {children}
       </Grid>
       <p
         sx={{
           mt: '5rem',
           fontFamily: 'Montserrat',
-          
-          fontWeight: 'normal',
-          fontSize: '20px',
-          lineHeight: '52px',
+          fontSize: '1.25rem',
+          lineHeight: '3.25rem',
           textAlign: 'center',
-          letterSpacing: '-1px',
+          letterSpacing: '-0.0625rem',
           color: 'text',
         }}
       >
         You reached the end of the list. <b>Don’t stop here!</b>
-        <br/>
+        <br />
         <Button
-            variant={'primary'}
-            onClick={() => {router.push('/apis/create?activeTab=create')}}
-            sx={{ display: 'inline-block', ml: 3, mt: 4 }}
-          >
-            <span>Create New API</span>
-          </Button>
+          variant="primaryLarge"
+          onClick={() => {
+            router.push('/apis/create?activeTab=create')
+          }}
+          sx={{ display: 'inline-block', ml: 3, mt: 4 }}
+        >
+          <span>Create New API</span>
+        </Button>
       </p>
     </div>
   )

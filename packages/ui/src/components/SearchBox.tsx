@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { jsx } from 'theme-ui'
 import RDS from 'react-dropdown-select'
 
@@ -32,29 +32,31 @@ const SearchBox = ({
   // Styling fix
   const forceUpdate: () => void = useState()[1].bind(null, {})
   useEffect(() => {
-    setTimeout(()=>forceUpdate(),100)
+    setTimeout(() => forceUpdate(), 100)
   }, [])
   return (
     <RDS
       sx={{
-        borderRadius: '8px',
-        width: large ? '100%' : '400px',
-        border: ' 2px solid',
+        borderRadius: '0.5rem',
+        width: large ? '100%' : '25rem',
+        border: '0.125rem solid',
         color: dark ? 'text' : '#598188',
         bg: dark ? 'w3shade1' : '#EFF5F4',
         p: '1rem',
-        height: '62px',
+        height: '3.875rem',
         borderColor: dark ? 'text' : 'transparent',
         '&[aria-expanded="true"]': {
-          borderBottomLeftRadius: detachedResults ? '8px': '0',
-          borderBottomRightRadius: detachedResults ? '8px': '0',
-          borderBottomColor: detachedResults ? 'text': 'transparent',
+          borderBottomLeftRadius: detachedResults ? '0.5rem' : '0',
+          borderBottomRightRadius: detachedResults ? '0.5rem' : '0',
+          borderBottomColor: detachedResults ? 'text' : 'transparent',
           '*': {
             color: dark ? 'white' : 'text',
           },
           '.react-dropdown-select-content': {
             '&::before': {
-              background: dark ? 'url(/images/magnifying-glass-white.svg) no-repeat' : 'url(/images/magnifying-glass.svg) no-repeat',
+              background: dark
+                ? 'url(/images/magnifying-glass-white.svg) no-repeat'
+                : 'url(/images/magnifying-glass.svg) no-repeat',
             },
           },
         },
@@ -68,39 +70,39 @@ const SearchBox = ({
         '.react-dropdown-select-input': {
           color: dark ? 'white' : 'text',
           fontFamily: 'Istok Web',
-          fontSize: '14px',
+          fontSize: '0.875rem',
           lineHeight: '100%',
-          width: '200px',
+          width: '12.5rem',
         },
         '.react-dropdown-select-clear': {
-          fontSize: '25px',
-          top: '-2px',
-          right: '-6px',
+          fontSize: '1.5625rem',
+          top: '-0.125rem',
+          right: '-0.375rem',
         },
         '.react-dropdown-select-dropdown': {
-          top: detachedResults ? '75px': '58px',
+          top: detachedResults ? '4.6875rem' : '3.625rem',
           bg: dark ? 'w3shade1' : '#EFF5F4',
           color: 'white',
-          border: '2px solid',
+          border: '0.125rem solid',
           borderColor: 'w3beige',
-          borderBottomLeftRadius: '8px',
-          borderBottomRightRadius: '8px',
-          borderTopLeftRadius: detachedResults ? '8px': '0px',
-          borderTopRightRadius: detachedResults ? '8px': '0px',
-          borderTop: detachedResults ? '2px solid' : '1px solid',
+          borderBottomLeftRadius: '0.5rem',
+          borderBottomRightRadius: '0.5rem',
+          borderTopLeftRadius: detachedResults ? '0.5rem' : '0rem',
+          borderTopRightRadius: detachedResults ? '0.5rem' : '0rem',
+          borderTop: detachedResults ? '0.125rem solid' : '0.0625rem solid',
           borderTopColor: detachedResults ? 'w3beige' : 'rgba(104,129,132,.5)',
-          left: '-2px',
-          width: detachedResults ? '30%' : 'calc(100% + 4px)',
+          left: '-0.125rem',
+          width: detachedResults ? '30%' : 'calc(100% + 0.25rem)',
         },
         '.react-dropdown-select-item': {
           borderColor: 'rgba(104,129,132,.5)',
           fontFamily: 'Montserrat',
           fontWeight: 'bold',
-          fontSize: '14px',
-          lineHeight: '14px',
+          fontSize: '0.875rem',
+          lineHeight: '0.875rem',
           color: dark ? 'white' : 'text',
           padding: '1rem 2rem',
-          height: '56px',
+          height: '3.5rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'left',
@@ -111,16 +113,16 @@ const SearchBox = ({
             borderBottomColor: 'rgba(104,129,132,.5)',
           },
           '&:hover': {
-            bg: dark ? 'w3shade3': 'w3TextNavTeal',
-            color: dark ? 'inherit': 'white'
+            bg: dark ? 'w3shade3' : 'w3TextNavTeal',
+            color: dark ? 'inherit' : 'white',
           },
           '&::before': {
             display: 'block',
             content: "''",
-            width: '24px',
-            height: '24px',
+            width: '1.5rem',
+            height: '1.5rem',
             mr: '.75rem',
-            border: '1px solid gray',
+            border: '0.0625rem solid gray',
           },
           '&:last-of-type': {
             borderBottom: 'none',
@@ -133,17 +135,17 @@ const SearchBox = ({
           '&::before': {
             display: 'block',
             content: "''",
-            width: '24px',
-            height: '24px',
+            width: '1.5rem',
+            height: '1.5rem',
             mr: '.75rem',
             background: 'url(/images/magnifying-glass.svg) no-repeat',
           },
           span: {
             pl: '.25rem',
             fontFamily: 'Istok Web',
-            fontSize: '14px',
+            fontSize: '0.875rem',
             lineHeight: '150%',
-            height: '24px',
+            height: '1.5rem',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

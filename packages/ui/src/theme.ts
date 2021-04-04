@@ -1,10 +1,14 @@
+import buttonVariants from './theme/buttons'
+
+export const timing = [.25,.5,.75,1,1.25,1.5,1.75,2,3]
+
 const GlobalTheme = {
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   sizes: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fonts: {
     body: '"Inter", sans-serif',
     heading: '"Montserrat", sans-serif',
-    monospace: 'Menlo, monospace',
+    monospace: '"Roboto Mono", monospace',
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
   fontWeights: {
@@ -24,25 +28,25 @@ const GlobalTheme = {
     w3darkGreen: '#0D373C',
     w3beige: '#688184',
     w3darkGray: '#141A1E',
-    
+
     w3shade0: '#12191E',
     w3shade1: '#13212C',
     w3shade2: '#1B2731',
     w3shade3: '#1F3A46',
-    
+
     w3greenGradient: 'linear-gradient(0deg, #529DAD 1.85%, #60C092 97.11%)',
     w3hazeGradient: 'linear-gradient(180deg, #FFFFFF 0%, #E1ECEA 100%)',
-    
+
     w3ButtonTeal: '#335E67',
     w3TextNavTeal: '#4A7A84',
-    
+
     w3NavHighlightTeal: '#243843',
     w3NavNeonHighlightTeal: '#66E0D9',
     w3NavGrayGreen: '#1B262C',
-    
+
     w3PlayGroundNavy: '#13212C',
     w3PlaygroundSoftBlue: '#B2D2D9',
-    
+
     w3OffWhite: '#E9E9E9',
 
     unknownHEX0: '#CAD9F3',
@@ -60,7 +64,6 @@ const GlobalTheme = {
     unknownRGBA3: 'rgba(0, 0, 0, 0.06)',
     unknownRGBA4: 'rgba(104,129,132,.5)',
     unknownRGBA5: 'rgba(20, 102, 204, 0.16)',
-
   },
   forms: {
     select: {
@@ -79,127 +82,7 @@ const GlobalTheme = {
     },
   },
   buttons: {
-    primary: {
-      color: 'white',
-      bg: 'w3ButtonTeal',
-      boxShadow: '0px 15px 30px rgba(20, 102, 204, 0.16)',
-      borderRadius: '4px',
-      fontWeight: 'bold',
-      fontSize: '14px',
-      lineHeight: '14px',
-      textAlign: 'center',
-      letterSpacing: '-0.6px',
-      textTransform: 'uppercase',
-      fontFamily: 'Montserrat',
-      p: '1.5rem',
-      px: '2.5rem',
-      '&:hover': {
-        bg: 'w3TextNavTeal',
-      },
-      '&:active': {
-        bg: '#255661',
-      },
-    },
-    primaryMedium: {
-      color: 'white',
-      bg: 'w3ButtonTeal',
-      boxShadow: '0px 15px 30px rgba(20, 102, 204, 0.16)',
-      borderRadius: '4px',
-      fontWeight: 'bold',
-      fontSize: '14px',
-      lineHeight: '14px',
-      textAlign: 'center',
-      letterSpacing: '-0.6px',
-      textTransform: 'uppercase',
-      fontFamily: 'Montserrat',
-      p: 3,
-      '&:hover': {
-        bg: 'w3TextNavTeal',
-      },
-      '&:active': {
-        bg: '#255661',
-      },
-    },
-    primaryWithGradient: {
-      color: 'white',
-      background: 'linear-gradient(0deg, #529DAD 1.85%, #60C092 97.11%)',
-      boxShadow: '0px 15px 30px rgba(20, 102, 204, 0.16)',
-      borderRadius: '4px',
-      fontWeight: 'bold',
-      fontSize: '14px',
-      lineHeight: '14px',
-      textAlign: 'center',
-      letterSpacing: '-0.6px',
-      textTransform: 'uppercase',
-      fontFamily: 'Montserrat',
-      p: '1.5rem',
-      px: '2.5rem',
-      '&:hover': {
-        bg: 'w3TextNavTeal',
-      },
-      '&:active': {
-        bg: '#255661',
-      },
-    },
-    secondary: {
-      color: '#FFF',
-      border: '2px solid',
-      borderColor: '#304353',
-      borderRadius: '4px',
-      fontWeight: 'bold',
-      fontSize: '14px',
-      lineHeight: '14px',
-      textAlign: 'center',
-      letterSpacing: '-0.6px',
-      textTransform: 'uppercase',
-      bg: 'transparent',
-      '&:hover': {
-        bg: 'rgba(104, 129, 132, 0.1)',
-      },
-      '&:active': {
-        bg: 'rgba(104, 129, 132, 0.2)',
-      },
-    },
-    secondaryOnLight: {
-      color: 'text',
-      border: '2px solid',
-      borderColor: 'w3beige',
-      borderRadius: '4px',
-      p: 3,
-      fontWeight: 'bold',
-      fontSize: '14px',
-      lineHeight: '14px',
-      textAlign: 'center',
-      letterSpacing: '-0.6px',
-      textTransform: 'uppercase',
-      bg: 'transparent',
-      '&:hover': {
-        color: 'black',
-        border: '2px solid black',
-      },
-    },
-    tertiary: {
-      color: 'white',
-      fontWeight: 'bold',
-      fontSize: '14px',
-      lineHeight: '14px',
-      textAlign: 'center',
-      letterSpacing: '-0.6px',
-      textTransform: 'uppercase',
-      bg: 'transparent',
-    },
-    callout: {
-      color: 'white',
-      background: 'linear-gradient(0deg, #529DAD 1.85%, #60C092 97.11%)',
-      fontFamily: 'Montserrat',
-      fontSize: '14px',
-      fontWeight: '700',
-      lineHeight: '14px',
-      letterSpacing: '-0.6000000238418579px',
-      textTransform: 'uppercase',
-      py: '20px',
-      px: '60px',
-    },
+    ...buttonVariants
   },
   styles: {
     root: {
@@ -272,7 +155,7 @@ const GlobalTheme = {
       padding: '.75rem',
       borderRadius: '8px',
       marginTop: 0,
-      fontFamily: 'Roboto Mono',
+      fontFamily: 'monospace',
       fontStyle: 'normal',
       fontWeight: 'normal',
       fontSize: '14px',
@@ -284,6 +167,7 @@ const GlobalTheme = {
     },
     code: {
       m: 0,
+      fontFamily: 'monospace',
     },
     table: {
       width: '100%',

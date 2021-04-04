@@ -4,36 +4,78 @@ import { jsx, Flex, Styled } from 'theme-ui'
 import Link from 'next/link'
 import Stars from './Stars'
 import Badge from './Badge'
+import { cloudFlareGateway } from '../constants'
 
 type CardProps = {
+  api?: any
+  ipfsHash: string
   boxShadowOn?: boolean
   noHover?: boolean
 }
 
-const Card = ({boxShadowOn, noHover}: CardProps) => {
+const sample = {
+  name: 'SimpleStorage (ETH)',
+  description: 'SimpleStorage Web3API Using Ethereum',
+  icon: './meta/imgs/web3api.svg',
+  banner: './meta/imgs/web3api-banner.svg',
+  links: [
+    {
+      name: 'GitHub',
+      icon: './meta/imgs/github.svg',
+      url: 'https://github.com/Web3-API/demos/tree/main/simple-storage/web3api',
+    },
+    {
+      name: 'Website',
+      icon: './meta/imgs/web3api.svg',
+      url: 'https://web3api.dev',
+    },
+  ],
+  queries: [
+    {
+      name: 'Deploy Storage Contract',
+      description: 'Deploy the SimpleStorage contract onto Ethereum.',
+      query: './meta/queries/deploy.graphql',
+    },
+    {
+      name: 'Get Storage Value',
+      description:
+        'Get the storage value within an existing SimpleStorage contract on Ethereum.',
+      query: './meta/queries/get.graphql',
+    },
+    {
+      name: 'Set Storage Value',
+      description:
+        'Set the storage value within an existing SimpleStorage contract on Ethereum.',
+      query: './meta/queries/set.graphql',
+    },
+  ],
+}
+
+const Card = ({ api, ipfsHash, boxShadowOn, noHover }: CardProps) => {
   return (
     <div
       className="Card"
       sx={{
-        borderRadius: '8px',
+        borderRadius: '0.5rem',
         bg: 'white',
         transition: 'transform .2s ease',
-        boxShadow: boxShadowOn ? '0px 32px 44px rgba(28, 94, 93, 0.1)': 'none',
+        boxShadow: boxShadowOn ? '0rem 2rem 2.75rem rgba(28, 94, 93, 0.1)' : 'none',
         '&:hover': {
-          transform: noHover ? 'none' : 'scale(1.05)',
+          transform: noHover ? 'none' : 'translateY(-5px)',
+          boxShadow: boxShadowOn ? '0rem 2rem 2.75rem rgba(28, 94, 93, .125)' : 'none',
         },
       }}
     >
-      <Link href="apis/SOMEAPI">
+      <Link href={`${ipfsHash}`}>
         <a sx={{ textDecoration: 'none', p: 4 }}>
           <div className="wrap-contents">
             <div sx={{ display: 'block', m: 'auto' }}>
               <img
                 className="api-logo"
-                src="/images/uniswap.png"
+                src={`${cloudFlareGateway}${ipfsHash}${api.icon.replace('./','/')}`}
                 sx={{
-                  width: '140px',
-                  height: '140px',
+                  width: '8.75rem',
+                  height: '8.75rem',
                   display: 'block',
                   m: 'auto',
                 }}
@@ -47,15 +89,14 @@ const Card = ({boxShadowOn, noHover}: CardProps) => {
                   sx={{
                     textAlign: 'center',
                     my: 2,
-                    fontFamily: 'Montserrat',
                     fontWeight: 'bold',
-                    fontSize: '20px',
-                    lineHeight: '28px',
+                    fontSize: '1.25rem',
+                    lineHeight: '1.75rem',
                     letterSpacing: '-0.01em',
                     color: 'black',
                   }}
                 >
-                  UniswapV2
+                  {api.name}
                 </Styled.h3>
                 <div
                   className="subtitle"
@@ -63,13 +104,13 @@ const Card = ({boxShadowOn, noHover}: CardProps) => {
                     textAlign: 'center',
                     my: 2,
                     fontFamily: 'Montserrat',
-                    fontSize: '14px',
-                    lineHeight: '18px',
+                    fontSize: '0.875rem',
+                    lineHeight: '1.125rem',
                     color: 'text',
                     mixBlendMode: 'normal',
                   }}
                 >
-                  Historical data and analytics for Uniswap V2
+                  {api.description}
                 </div>
                 <Flex
                   sx={{
