@@ -7,10 +7,11 @@ import { useStateValue } from '../state/state'
 import addrShortener from '../utils/addrShortener'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Modal from './Modal'
+
 import User from '../../public/images/user.svg'
 import ETHlogoicon from '../../public/images/eth-logo-hollow-icon.svg'
 import MyAPIs from '../../public/images/myapis.svg'
-import Modal from './Modal'
 
 type SignInAreaProps = {
   onDark?: boolean
@@ -35,7 +36,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
     setShowSignOutModal(true)
   }
 
-  console.log({dapp})
+  console.log({ dapp })
   return (
     <Flex
       className="sign-in-wrap"
@@ -123,7 +124,15 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
           <li
             onClick={handleDisconnect}
             className="wallet-addr"
-            sx={{ p: '0.425rem', display: 'flex', alignItems: 'center' }}
+            sx={{
+              p: '0.425rem',
+              display: 'flex',
+              alignItems: 'center',
+              svg: {
+                stroke: 'whitesmoke',
+                strokeWidth: '0.2px',
+              },
+            }}
           >
             <ETHlogoicon stroke={onDark ? 'white' : theme.colors.w3darkGreen} />
             <span
