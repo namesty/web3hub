@@ -11,6 +11,7 @@ export const validatePublishBody = (
   
   const schema = object({
     description: string().required(),
+    subtext: string().required(),
     name: string().required(),
     icon: string().required(),
     location: string().required(),

@@ -40,6 +40,7 @@ create table apis (
   id bigserial not null,
   name varchar not null,
   description varchar not null,
+  subtext varchar not null,
   icon varchar not null,
   visible boolean default true,
   fk_owner_id bigint not null not null,

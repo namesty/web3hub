@@ -2,6 +2,7 @@ import db from "../services/db";
 export interface ApiData {
   id: number;
   name: string;
+  subtext: string;
   description: string;
   icon: string;
   location: string;
@@ -18,11 +19,11 @@ export class Api {
   public static async create(apiInfo: ApiData) {
     const connection = await db.connect();
     try {
-      const { name, description, icon, location, pointers, ownerId } = apiInfo;
+      const { name, subtext, description, icon, location, pointers, ownerId } = apiInfo;
       const insertApi = async (tx) => {
         const api = await tx.one(
-          "INSERT INTO apis (name, description, icon, fk_owner_id) VALUES ($1, $2, $3, $4) RETURNING *",
-          [name, description, icon, ownerId]
+          "INSERT INTO apis (name, subtext, description, icon, fk_owner_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+          [name, subtext, description, icon, ownerId]
         );
 
         //@TODO: Retrieve authId dynamically
@@ -44,6 +45,7 @@ export class Api {
       await connection.tx(insertApi);
       return {
         name,
+        subtext,
         description,
         icon,
         location,
@@ -65,6 +67,7 @@ export class Api {
           apis.id, 
           apis.description, 
           apis.name, 
+          apis.subtext,
           apis.icon, 
           uri_types.type as type, 
           api_uris.uri 
@@ -74,7 +77,7 @@ export class Api {
         WHERE visible = true`
       );
 
-      const sanitizeApis = (acc: ApiData[], api) => {
+      const sanitizeApis = (acc: ApiData[], api): ApiData[] => {
         const { authority, type, uri, ...metadata } = api;
         let apiAdded = acc.find(({ id }) => id === api.id);
         let apiSanitized = {

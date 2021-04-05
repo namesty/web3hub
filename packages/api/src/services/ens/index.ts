@@ -15,7 +15,7 @@ export const checkContentIsValid = async (
 
   const ens = new ENS({
     provider,
-    ensAddress: getEnsAddress("1"),
+    ensAddress: getEnsAddress("3"),
   });
 
   const getContents = async (
@@ -28,27 +28,32 @@ export const checkContentIsValid = async (
   };
 
   const contents = await getContents(pointers);
+
   const unvalidPointers = contents.filter(({ value }) => {
     return !value;
   });
 
   if (unvalidPointers.length) {
     return {
-      message: `Pointer: ${unvalidPointers[0]} is not registered`,
+      message: `Pointer: ${pointers[0]} is not registered`,
       valid: false,
     };
   }
 
   const unvalidLocation = contents.filter(({ value }) => {
-    const hash = value.split("/").slice(-1)[0];
-    const decodedContent = helpers.cidV0ToV1Base32(hash);
-    return !location.includes(decodedContent);
+    let hash = value.split("/").slice(-1)[0];
+
+    if (location.includes("bafy")) {
+      hash = helpers.cidV0ToV1Base32(hash);
+    }
+
+    return !location.includes(hash);
   });
 
   if (unvalidLocation.length) {
     return {
       valid: false,
-      message: `Pointer: ${unvalidLocation[0]} is not pointing to given location`,
+      message: `Pointer ${pointers[0]} is not pointing to given location`,
     };
   }
 
