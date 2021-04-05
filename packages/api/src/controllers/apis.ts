@@ -28,10 +28,6 @@ const publishApi = async (request: Request, response: Response) => {
       error: message,
     });
   } catch (error) {
-    if (error.message === "One of the locations has an invalid URI type") {
-      return response.json({ status: 400, error: error.message });
-    }
-
     response.json({ status: 500, error: error.message });
   }
 };

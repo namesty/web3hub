@@ -3,6 +3,7 @@ import { authenticate } from "passport";
 
 import { User } from "../models/User";
 import { fetchOrganizations } from "../services/github";
+import { validateSigninBody } from "./helpers/validateSigninBody";
 
 const router = Router();
 
@@ -33,14 +34,21 @@ const handleSignIn = async (
 ) => {
   const { address, addressType } = request.body;
 
-  if (address) {
-    const user = await User.findOrCreateByAddress({
-      address,
-      addressType,
-    });
-    return response.json({
-      status: 200,
-      user,
+  try {
+    if (address) {
+      const user = await User.findOrCreateByAddress({
+        address,
+        addressType,
+      });
+      return response.json({
+        status: 200,
+        user,
+      });
+    }
+  } catch (error) {
+    response.json({
+      status: 500,
+      error: error.message,
     });
   }
 
@@ -61,7 +69,7 @@ const onSuccessAuthHandler = ({ user }: Request, response: Response) => {
 
 router.get("/user/orgs", isLoggedWithGithub, userOrganizations);
 
-router.post("/auth/sign-in", handleSignIn, authScopes);
+router.post("/auth/sign-in", validateSigninBody, handleSignIn, authScopes);
 router.get("/auth/github/callback", onErrorAuthHandler, onSuccessAuthHandler);
 router.get("/auth/sign-out", (request: Request, response: Response) => {
   request.logout();

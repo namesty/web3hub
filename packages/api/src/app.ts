@@ -1,7 +1,9 @@
 import express, { Application as ExpressApp } from "express";
 import passport from "passport";
 import session from "express-session";
+import cors from "cors";
 import { serve, setup } from "swagger-ui-express";
+import morgan from "morgan";
 
 import "dotenv/config";
 
@@ -10,6 +12,9 @@ import { controllers } from "./controllers";
 import { swaggerJSON } from "../documentation/swagger";
 
 const app: ExpressApp = express();
+
+app.use(morgan("combined"));
+app.use(cors({ origin: "*" }));
 
 app.use("/docs", serve, setup(swaggerJSON));
 

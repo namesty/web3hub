@@ -55,6 +55,7 @@ export class User {
     addressType = AddressesTypes.ETHEREUM,
   }: Pick<UserData, "address" | "addressType">): Promise<Partial<UserData>> {
     const connection = await db.connect();
+    // @TODO: Make address type dynamic
     try {
       const user = await connection.oneOrNone(
         "SELECT users.id, addresses.address, users.username, users.github_token FROM addresses INNER JOIN users ON addresses.fk_user_id = users.id WHERE address = $1",

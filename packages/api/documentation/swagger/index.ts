@@ -1,9 +1,10 @@
 import apis from "./apis.json";
 import models from "./models.json";
 import auth from "./auth.json";
+import securitySchemes from "./securitySchemes.json";
 
 export const swaggerJSON = {
-  swagger: "2.0",
+  openapi: "3.0.2",
   info: {
     title: "Web3Hub API",
     version: "0.0.1-alpha",
@@ -22,6 +23,9 @@ export const swaggerJSON = {
     ...apis,
   },
   definitions: {
-    ...models
+    ...models,
+  },
+  components: {
+    ...securitySchemes,
   },
 };

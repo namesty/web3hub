@@ -1,22 +1,52 @@
 {
-  "/apis/active": {
+  "/api/actives": {
     "get": {
       "summary": "Get all APIs",
       "description": "Retrieve all active APIs",
       "produces": ["application/json"],
-      "parameters": [],
       "responses": {
         "200": {
-          "schema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Api"
+          "description": "List of active APIs",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "status": {
+                    "type": "integer"
+                  },
+                  "apis": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/Api"
+                    }
+                  }
+                },
+                "example": {
+                  "status": 200,
+                  "apis": [
+                    {
+                      "id": "3",
+                      "description": "DEX",
+                      "name": "Uniswap",
+                      "subtext": "Cool DEX",
+                      "icon": "uniswap.icon",
+                      "pointers": ["brazon.eth"],
+                      "location": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
+                    },
+                    {
+                      "id": "4",
+                      "description": "DEX Aggregator",
+                      "name": "Paraswap",
+                      "subtext": "Cool aggregator",
+                      "icon": "paraswap.icon",
+                      "pointers": ["brazon.eth"],
+                      "location": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
+                    }
+                  ]
+                }
+              }
             }
           }
-        },
-        "500": {
-          "status": "500",
-          "error": "Server error"
         }
       }
     }
@@ -29,7 +59,42 @@
           "in": "body",
           "description": "API Metadata",
           "schema": {
-            "$ref": "#/definitions/Api"
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "description": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "subtext": {
+                "type": "string"
+              },
+              "icon": {
+                "type": "string"
+              },
+              "location": {
+                "type": "string"
+              },
+              "pointers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "example": {
+              "id": 1,
+              "description": "Uniswap DEX",
+              "name": "Uniswap",
+              "subtext": "Cool DEX",
+              "icon": "uniswap.png",
+              "location": "w3//ipfs//QMabc",
+              "pointers": ["uniswap.web3api.eth"]
+            }
           }
         }
       ],
@@ -37,9 +102,121 @@
       "produces": ["application/json"],
       "responses": {
         "200": {
-          "status": "200",
-          "api": {
-            "$ref": "#/definitions/Api"
+          "description": "API was validated and created succesfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "integer"
+                  },
+                  "api": {
+                    "$ref": "#/definitions/Api"
+                  }
+                },
+                "example": {
+                  "status": 200,
+                  "api": {
+                    "id": 1,
+                    "description": "Uniswap DEX",
+                    "name": "Uniswap",
+                    "subtext": "Cool DEX",
+                    "icon": "uniswap.png",
+                    "location": "w3//ipfs//QMabc",
+                    "pointers": ["uniswap.web3api.eth"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "406": {
+          "description": "Pointer or location are incorrect",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "integer"
+                  },
+                  "error": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "status": 406,
+                  "error": "Pointer: uniswap.web3api.eth is not registered"
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Request body is wrong",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "integer"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "status": 400,
+                  "message": "Error(s) on body: \"subtext\" is required"
+                }
+              }
+            }
+          }
+        },
+        "404": {
+          "description": "Authentication failed",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "integer"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "status": 404,
+                  "message": "Authentication with GitHub is required"
+                }
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Unexpected error on APi",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "integer"
+                  },
+                  "error": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "status": 500,
+                  "error": ""
+                }
+              }
+            }
           }
         }
       }
