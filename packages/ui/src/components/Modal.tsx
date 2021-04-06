@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Close from '../../public/images/close.svg'
 import onboardInit from '../utils/onboardInit'
 import { useStateValue } from '../state/state'
+import axios from 'axios'
 
 type ModalProps = {
   screen: string
@@ -31,7 +32,12 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
   }
 
   const handleSignIn = async () => {
-    alert('implement sign in')
+    // if(dapp.address !== undefined){
+      let res = await axios.post('http://localhost:3001/auth/sign-in')
+      console.log({res})
+    // }
+    
+    // alert('implement sign in')
   }
 
   const handleSignOut = async () => {
