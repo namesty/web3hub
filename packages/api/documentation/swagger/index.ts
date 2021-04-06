@@ -1,7 +1,6 @@
 import apis from "./apis.json";
 import models from "./models.json";
 import auth from "./auth.json";
-import securitySchemes from "./securitySchemes.json";
 
 export const swaggerJSON = {
   openapi: "3.0.2",
@@ -24,8 +23,5 @@ export const swaggerJSON = {
   },
   definitions: {
     ...models,
-  },
-  components: {
-    ...securitySchemes,
   },
 };
