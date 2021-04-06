@@ -110,14 +110,12 @@ export class Ethereum {
     address: Address,
     method: string,
     args: (string | Record<string, string | number> )[]
-  ): Promise<string> {
+  ): Promise<any> {
     const contract = this.getContract(address, [method]);
     const funcs = Object.keys(contract.interface.functions);
     try {
       const tx = await contract[funcs[0]](...args);
-      const res = await tx.wait();
-      // TODO: improve this
-      return res.transactionHash;
+      return await tx.wait();
     } catch (e) {
       console.log(e);
       throw e;
