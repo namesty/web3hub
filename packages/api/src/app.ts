@@ -34,6 +34,3 @@ app.use(passport.session());
 app.use("/", controllers);
 
 export { app };
-
-
-// https://github.com/login/oauth/authorize?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fsignin&client_id=c0b5102af0262717b743
