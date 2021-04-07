@@ -13,7 +13,7 @@ export class SanitizeApis {
         await checkAndUpdateApis();
       };
       // Every day at 00:00
-      SanitizeApis.instance = scheduleJob("* * 00 * * *", executeSanitization);
+      // SanitizeApis.instance = scheduleJob("* * 00 * * *", executeSanitization);
     }
 
     return SanitizeApis.instance;
