@@ -6,12 +6,12 @@ import { User, UserData } from "../../models/User";
 const { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } = process.env;
 
 //@TODO: Make sure this is the best approach
-const domain = process.env.HOST || "http://localhost:3001";
+const domain = process.env.HOST || "http://localhost:3000";
 
 const strategyConfig = {
   clientID: GITHUB_CLIENT_ID,
   clientSecret: GITHUB_CLIENT_SECRET,
-  callbackURL: domain + "/auth/github/callback",
+  callbackURL: domain + "/signin",
 };
 
 interface GithubProfileDTO {

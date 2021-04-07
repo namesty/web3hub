@@ -77,13 +77,17 @@ const authScopes = authenticate("github", {
 });
 
 const onSuccessAuthHandler = (request: Request, response: Response) => {
-  console.log(request.redirectUrl)
-  response.redirect("http://localhost:3000");
+  console.log(request.redirectUrl);
+  response.json({ test: "test" });
 };
 
 router.get("/user/orgs", isLoggedWithGithub, userOrganizations);
 router.get("/auth/sign-in", handleSignIn, checkRedirectUri, authScopes);
-router.get("/auth/github/callback", authenticate("github"), onSuccessAuthHandler);
+router.get(
+  "/auth/github/callback",
+  authenticate("github"),
+  onSuccessAuthHandler
+);
 router.get("/auth/sign-out", (request: Request, response: Response) => {
   request.logout();
   response.json({ status: 200 });
