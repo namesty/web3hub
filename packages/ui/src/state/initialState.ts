@@ -10,4 +10,16 @@ let initialState = {
     apis: [],
   },
 }
+
+type dappType = {
+  balance: number
+  address: string
+  wallet: { name: string }
+  network: number
+  web3?: any
+  apis: any[]
+  github?: string
+}
+
 export default initialState
+export type { dappType }
