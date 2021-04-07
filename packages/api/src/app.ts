@@ -15,7 +15,6 @@ const app: ExpressApp = express();
 
 app.use(morgan("combined"));
 app.use(cors({ origin: "*" }));
-
 app.use("/docs", serve, setup(swaggerJSON));
 
 app.use(
@@ -27,10 +26,11 @@ app.use(
   })
 );
 
+passport.use(GithubStrategy);
+
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/", controllers);
-passport.use(GithubStrategy);
 
 export { app };

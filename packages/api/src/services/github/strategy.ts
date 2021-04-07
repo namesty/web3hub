@@ -18,6 +18,7 @@ interface GithubProfileDTO {
   id: string;
   profileUrl: string;
   username?: string;
+  state?: string;
 }
 
 const authCallback = async (

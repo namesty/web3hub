@@ -7,6 +7,7 @@ import Close from '../../public/images/close.svg'
 import onboardInit from '../utils/onboardInit'
 import { useStateValue } from '../state/state'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 type ModalProps = {
   screen: string
@@ -16,6 +17,7 @@ type ModalProps = {
 
 const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
   const [{ dapp }, dispatch] = useStateValue()
+  const { pathname } = useRouter()
   const onboard: any = onboardInit(dispatch)
 
   const handleConnect = async () => {
@@ -33,10 +35,10 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
 
   const handleSignIn = async () => {
     // if(dapp.address !== undefined){
-      let res = await axios.post('http://localhost:3001/auth/sign-in')
-      console.log({res})
+    let res = await axios.post('http://localhost:3001/auth/sign-in')
+    console.log({ res })
     // }
-    
+
     // alert('implement sign in')
   }
 
@@ -227,9 +229,9 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
             >
               Please sign in with GitHub to continue.
             </Styled.h4>
-            <Button variant="calloutLarge" onClick={handleSignIn}>
-              Sign in with github
-            </Button>
+            <a href={`http://localhost:3001/auth/sign-in?redirectUrl=${pathname}`}>
+              <Button variant="calloutLarge">Sign in with github</Button>
+            </a>
           </React.Fragment>
         )}
         {screen === 'signout' && (
@@ -247,12 +249,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
                 },
               }}
             />
-            <Image
-              src="/images/signout.svg"
-              alt="github"
-              width={140}
-              height={140}
-            />
+            <Image src="/images/signout.svg" alt="github" width={140} height={140} />
             <Styled.h1
               sx={{
                 color: 'white',

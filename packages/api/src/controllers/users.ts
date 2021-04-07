@@ -3,7 +3,6 @@ import { authenticate } from "passport";
 
 import { User } from "../models/User";
 import { fetchOrganizations } from "../services/github";
-import { validateSigninBody } from "./helpers/validateSigninBody";
 
 const router = Router();
 
@@ -27,18 +26,36 @@ const userOrganizations = async (request: Request, response: Response) => {
   });
 };
 
+const checkRedirectUri = (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  const { redirectUrl } = request.query;
+  if (redirectUrl) {
+    request.redirectUrl = redirectUrl as string;
+    console.log("This is the redirect url ", request.redirectUrl);
+    return next();
+  }
+
+  return response.json({
+    status: 400,
+    message: "Redirect URL has not been sent",
+  });
+};
+
 const handleSignIn = async (
   request: Request,
   response: Response,
   next: NextFunction
 ) => {
-  const { address, addressType } = request.body;
-
+  const { address, addressType } = request.query;
   try {
     if (address) {
+      // @TODO: Improve this
       const user = await User.findOrCreateByAddress({
-        address,
-        addressType,
+        address: address as string,
+        addressType: Number(addressType) || 1,
       });
       return response.json({
         status: 200,
@@ -59,18 +76,14 @@ const authScopes = authenticate("github", {
   scope: ["read:org", "read:user"],
 });
 
-const onErrorAuthHandler = authenticate("github", {
-  failureRedirect: "/login",
-});
-
-const onSuccessAuthHandler = ({ user }: Request, response: Response) => {
-  response.json({ status: 200, user });
+const onSuccessAuthHandler = (request: Request, response: Response) => {
+  console.log(request.redirectUrl)
+  response.redirect("http://localhost:3000");
 };
 
 router.get("/user/orgs", isLoggedWithGithub, userOrganizations);
-
-router.post("/auth/sign-in", validateSigninBody, handleSignIn, authScopes);
-router.get("/auth/github/callback", onErrorAuthHandler, onSuccessAuthHandler);
+router.get("/auth/sign-in", handleSignIn, checkRedirectUri, authScopes);
+router.get("/auth/github/callback", authenticate("github"), onSuccessAuthHandler);
 router.get("/auth/sign-out", (request: Request, response: Response) => {
   request.logout();
   response.json({ status: 200 });
