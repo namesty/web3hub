@@ -34,17 +34,12 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
     close()
   }
 
-  const handleSignIn = async () => {
-    // if(dapp.address !== undefined){
-    let res = await axios.post('http://localhost:3001/auth/sign-in')
-    console.log({ res })
-    // }
-
-    // alert('implement sign in')
-  }
-
-  const handleSignOut = async () => {
-    alert('implement sign out')
+  const handleSignOut = () => {
+    dispatch({
+      type: 'SET_GITHUB_USER',
+      payload: '',
+    })
+    close()
   }
 
   return (
@@ -198,8 +193,8 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
                 },
               }}
             />
-            
-            <Github fill={'white'} width="140px"/>
+
+            <Github fill={'white'} width="140px" />
             <Styled.h1
               sx={{
                 color: 'white',
@@ -226,7 +221,12 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
             >
               Please sign in with GitHub to continue.
             </Styled.h4>
-            <a href={`http://localhost:3001/auth/sign-in?redirectUrl=${pathname}`} onClick={() => {localStorage.setItem( 'w3hubLastURLb4Signin', asPath );}}>
+            <a
+              href={`http://localhost:3001/auth/sign-in?redirectUrl=${pathname}`}
+              onClick={() => {
+                localStorage.setItem('w3hubLastURLb4Signin', asPath)
+              }}
+            >
               <Button variant="calloutLarge">Sign in with github</Button>
             </a>
           </React.Fragment>
@@ -274,7 +274,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
               Would you like to sign out of github?
             </Styled.h4>
             <Button variant="calloutLarge" onClick={handleSignOut}>
-              Sign Out
+              Sign out
             </Button>
           </React.Fragment>
         )}
