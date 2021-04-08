@@ -85,7 +85,11 @@ const PublishAPI = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (apiData && subdomain.length > 0) {
-      setShowSignInModal(true)
+      if(dapp.github) {
+        alert('DO PUBLISH UX/LOGIC')
+      } else {
+        setShowSignInModal(true)
+      } 
     }
     console.log('SUBMIT')
     console.log(e.target)

@@ -8,6 +8,7 @@ import onboardInit from '../utils/onboardInit'
 import { useStateValue } from '../state/state'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import Github from '../../public/images/github-icon-large.svg'
 
 type ModalProps = {
   screen: string
@@ -17,7 +18,7 @@ type ModalProps = {
 
 const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
   const [{ dapp }, dispatch] = useStateValue()
-  const { pathname } = useRouter()
+  const { pathname, asPath } = useRouter()
   const onboard: any = onboardInit(dispatch)
 
   const handleConnect = async () => {
@@ -95,7 +96,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
             />
             <Image
               src="/images/eth-logo-hollow-large.svg"
-              alt="github"
+              alt="eth-logo-hollow-large"
               width={140}
               height={140}
             />
@@ -147,7 +148,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
             />
             <Image
               src="/images/eth-logo-hollow-large.svg"
-              alt="github"
+              alt="/eth-logo-hollow-large"
               width={140}
               height={140}
             />
@@ -197,12 +198,8 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
                 },
               }}
             />
-            <Image
-              src="/images/github-icon-large.svg"
-              alt="github"
-              width={140}
-              height={140}
-            />
+            
+            <Github fill={'white'} width="140px"/>
             <Styled.h1
               sx={{
                 color: 'white',
@@ -229,7 +226,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
             >
               Please sign in with GitHub to continue.
             </Styled.h4>
-            <a href={`http://localhost:3001/auth/sign-in?redirectUrl=${pathname}`}>
+            <a href={`http://localhost:3001/auth/sign-in?redirectUrl=${pathname}`} onClick={() => {localStorage.setItem( 'w3hubLastURLb4Signin', asPath );}}>
               <Button variant="calloutLarge">Sign in with github</Button>
             </a>
           </React.Fragment>
@@ -249,7 +246,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
                 },
               }}
             />
-            <Image src="/images/signout.svg" alt="github" width={140} height={140} />
+            <Image src="/images/signout.svg" alt="signout" width={140} height={140} />
             <Styled.h1
               sx={{
                 color: 'white',
@@ -274,7 +271,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
                 textAlign: 'center',
               }}
             >
-              Would you like to sign out of [username]?
+              Would you like to sign out of github?
             </Styled.h4>
             <Button variant="calloutLarge" onClick={handleSignOut}>
               Sign Out

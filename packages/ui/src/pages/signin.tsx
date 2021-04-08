@@ -3,12 +3,13 @@
 import { jsx, Flex, Styled } from 'theme-ui'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { useStateValue } from '../state/state'
 import axios from 'axios'
 
 import Layout from '../components/Layout'
 import Navbar from '../components/Navbar'
 import BGWave from '../components/BGWave'
-import { useStateValue } from '../state/state'
+import Header from '../components/Header'
 
 const Signin = () => {
   const [, dispatch] = useStateValue()
@@ -25,10 +26,10 @@ const Signin = () => {
           console.log('Access token: ', response.data.access_token)
           dispatch({
             type: 'SET_GITHUB_USER',
-            payload: response.data.access_token.access_token,
+            payload: response.data.access_token,
           })
         }
-        // router.push('/')
+        router.push(localStorage.getItem('w3hubLastURLb4Signin'))
       }
     })()
   }, [router.query])
@@ -38,7 +39,8 @@ const Signin = () => {
         <Navbar />
         <main>
           <div className="contents">
-            <section className="content">
+            <Header title="Browse APIs" />
+            <section className="content" sx={{ display: 'grid', placeItems: 'center', height: '50%'}}>  
               <Styled.h1>Signing In...</Styled.h1>
             </section>
           </div>
