@@ -11,9 +11,24 @@ import Header from '../components/Header'
 import BGWave from '../components/BGWave'
 import BottomSpace from '../components/BottomSpace'
 import Card from '../components/Card'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 const Home = () => {
   const [{ dapp }] = useStateValue()
+
+  useEffect(() => {
+    ;(async () => {
+      if (dapp.github) {
+        const test = await axios.get('http://localhost:3001/user/orgs', {
+          headers: {
+            Authorization: 'token ' + dapp.github,
+          },
+        })
+        console.log(test)
+      }
+    })()
+  }, [dapp.github])
   return (
     <Layout>
       <Flex>

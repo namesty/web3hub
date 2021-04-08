@@ -22,6 +22,7 @@ const Signin = () => {
           `http://localhost:3001/auth/github/callback/${router.query.code}`,
         )
 
+        console.log(response)
         if ('access_token' in response.data) {
           console.log('Access token: ', response.data.access_token)
           dispatch({
@@ -40,7 +41,10 @@ const Signin = () => {
         <main>
           <div className="contents">
             <Header title="Browse APIs" />
-            <section className="content" sx={{ display: 'grid', placeItems: 'center', height: '50%'}}>  
+            <section
+              className="content"
+              sx={{ display: 'grid', placeItems: 'center', height: '50%' }}
+            >
               <Styled.h1>Signing In...</Styled.h1>
             </section>
           </div>

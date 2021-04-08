@@ -1,20 +1,24 @@
 import db from "../services/db";
 
+type GhRequest = {
+  redirectUrl: string;
+  accessToken: string;
+  checkGhAuth: () => boolean;
+};
+
 declare global {
   namespace Express {
-    export interface Request {
-      redirectUrl?: string
-    }
+    export interface Request extends GhRequest {}
     export interface User extends UserData {}
   }
 }
 
 export interface UserData {
   id: string;
-  accessToken: string;
+  accessToken?: string;
   username: string;
-  address: string;
-  addressType: number;
+  address?: string;
+  addressType?: number;
   githubId: string;
 }
 

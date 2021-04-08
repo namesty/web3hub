@@ -4,7 +4,7 @@ import { Api, ApiData } from "../models/Api";
 import { SanitizeApis } from "../services/cronjob/checkApis";
 import { checkContentIsValid } from "../services/ens";
 import { validatePublishBody } from "./helpers";
-import { isLoggedWithGithub } from "./users";
+import { checkAccessToken } from "./users";
 
 const router = Router();
 
@@ -57,8 +57,7 @@ export const checkAndUpdateApis = async () => {
   }
 };
 
-SanitizeApis.getInstance();
 router.get("/api/actives", getAll);
-router.post("/publish", isLoggedWithGithub, validatePublishBody, publishApi);
+router.post("/publish", checkAccessToken, validatePublishBody, publishApi);
 
 export { router as ApiController };

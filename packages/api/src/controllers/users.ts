@@ -4,15 +4,22 @@ import { authenticate } from "passport";
 
 import { User } from "../models/User";
 import { fetchOrganizations } from "../services/github";
+import { ghCallback } from "../services/github/strategy";
 
 const router = Router();
 
-const isLoggedWithGithub = (
+const checkAccessToken = (
   request: Request,
   response: Response,
   next: NextFunction
 ) => {
-  if (request.isAuthenticated()) return next();
+  const auth = request.headers.authorization || "";
+  const isAuthed = auth.includes("token");
+  if (isAuthed) {
+    const [_, token] = auth.split(" ");
+    request.accessToken = token;
+    return next();
+  }
   response.json({
     status: 404,
     message: "Authentication with GitHub is required",
@@ -20,7 +27,14 @@ const isLoggedWithGithub = (
 };
 
 const userOrganizations = async (request: Request, response: Response) => {
-  const orgs = await fetchOrganizations(request.user.accessToken);
+  if (!request.accessToken) {
+    return response.json({
+      status: 404,
+      message: "Access Token missing in Authorization header",
+    });
+  }
+
+  const orgs = await fetchOrganizations(request.accessToken);
   return response.json({
     status: 200,
     orgs,
@@ -35,10 +49,8 @@ const checkRedirectUri = (
   const { redirectUrl } = request.query;
   if (redirectUrl) {
     request.redirectUrl = redirectUrl as string;
-    console.log("This is the redirect url ", request.redirectUrl);
     return next();
   }
-
   return response.json({
     status: 400,
     message: "Redirect URL has not been sent",
@@ -77,7 +89,7 @@ const authScopes = authenticate("github", {
   scope: ["read:org", "read:user"],
 });
 
-const onSuccessAuthHandler = async (request: Request, response: Response) => {
+const authHandler = async (request: Request, response: Response) => {
   const data = {
     client_id: process.env.GITHUB_CLIENT_ID,
     client_secret: process.env.GITHUB_CLIENT_SECRET,
@@ -104,19 +116,27 @@ const onSuccessAuthHandler = async (request: Request, response: Response) => {
     });
   }
 
-  response.json({
-    status: 200,
-    ...codeRequest.data,
-  });
+  try {
+    await ghCallback(codeRequest.data.access_token);
+    return response.json({
+      status: 200,
+      ...codeRequest.data,
+    });
+  } catch (e) {
+    return response.json({
+      status: 503,
+      error: e.message,
+    });
+  }
 };
 
-router.get("/user/orgs", isLoggedWithGithub, userOrganizations);
+router.get("/user/orgs", checkAccessToken, userOrganizations);
 router.get("/auth/sign-in", handleSignIn, checkRedirectUri, authScopes);
-router.get("/auth/github/callback/:code", onSuccessAuthHandler);
+router.get("/auth/github/callback/:code", authHandler);
 
 router.get("/auth/sign-out", (request: Request, response: Response) => {
   request.logout();
   response.json({ status: 200 });
 });
 
-export { isLoggedWithGithub, router as AuthController };
+export { checkAccessToken, router as AuthController };

@@ -14,7 +14,7 @@ import addrShortener from '../utils/addrShortener'
 import User from '../../public/images/user.svg'
 import ETHlogoicon from '../../public/images/eth-logo-hollow-icon.svg'
 import MyAPIs from '../../public/images/myapis.svg'
-import Github from '../../public/images/github-icon-large-x.svg'
+import Github from '../../public/images/github-icon-large.svg'
 
 
 type SignInAreaProps = {

@@ -10,6 +10,7 @@ import "dotenv/config";
 import { GithubStrategy } from "./services/github";
 import { controllers } from "./controllers";
 import { swaggerJSON } from "../documentation/swagger";
+import { SanitizeApis } from "./services/cronjob/checkApis";
 
 const app: ExpressApp = express();
 
@@ -33,4 +34,5 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use("/", controllers);
 
+SanitizeApis.getInstance();
 export { app };

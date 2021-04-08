@@ -1,3 +1,4 @@
+import axios from "axios";
 import { serializeUser, deserializeUser } from "passport";
 import { Strategy as GithubStrategy } from "passport-github2";
 
@@ -14,25 +15,30 @@ const strategyConfig = {
   callbackURL: domain + "/signin",
 };
 
-interface GithubProfileDTO {
-  id: string;
-  profileUrl: string;
-  username?: string;
-  state?: string;
-}
-
-const authCallback = async (
-  accessToken: string,
-  _,
-  profile: GithubProfileDTO,
-  done
-) => {
+export const ghCallback = async (accessToken: string) => {
   try {
-    let { username, profileUrl, id: githubId } = profile;
-    username = username || profileUrl.split("/").slice(-1)[0];
-    const userInfo = { accessToken, username, githubId };
-    const user = await User.findOrCreateByGithub(userInfo);
-    return done(null, { ...userInfo, id: user.id });
+    const { data: ghData } = await axios.get("https://api.github.com/user", {
+      headers: {
+        Authorization: `token ${accessToken}`,
+        Accept: "application/json",
+      },
+    });
+
+    const githubId = ghData.id.toString();
+    const username = ghData.username || ghData.url.split("/").slice(-1)[0];
+
+    const user = await User.findOrCreateByGithub({
+      accessToken,
+      username,
+      githubId,
+    });
+
+    return {
+      accessToken,
+      username,
+      githubId: ghData.id,
+      id: user.id,
+    };
   } catch (e) {
     throw new Error(e);
   }
@@ -41,4 +47,4 @@ const authCallback = async (
 serializeUser((user: UserData, done) => done(null, user));
 deserializeUser((obj: UserData, done) => done(null, obj));
 
-export default new GithubStrategy(strategyConfig, authCallback);
+export default new GithubStrategy(strategyConfig, () => {});
