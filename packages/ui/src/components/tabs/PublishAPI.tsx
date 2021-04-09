@@ -67,7 +67,6 @@ const PublishAPI = () => {
 
   const checkForENSAvailability = async () => {
     if(dapp.address !== undefined){
-      console.log('GOOD')
       setsubdomainLoading(true)
       try {
         const owner = await getOwner(dapp.web3, `${subdomain}.${MAIN_DOMAIN}`)
@@ -88,7 +87,11 @@ const PublishAPI = () => {
   const handleSubdomainChange = (e) => {
     setsubdomain(e.target.value)
     setsubdomainError('')
-    checkForENSAvailability()
+    setsubdomainSuccess(false)
+
+    if(e.target.value !== '') {
+      checkForENSAvailability()
+    }
   }
 
   const handleIPFSHashInput = async (e) => {

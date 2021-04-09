@@ -33,20 +33,11 @@ export const useCreateSubdomain = () => {
 
       await web3.sendTransaction(
         ENS_REGISTRY,
-        "function setSubnodeOwner(bytes32 node, bytes32 label, address owner) external",
-        [MAIN_DOMAIN_NAMEHASH, utf8ToKeccak256(subdomain), signerAddress]
+        "function setSubnodeRecord(bytes32 node, bytes32 label, address owner, address resolver, uint64 ttl) external",
+        [MAIN_DOMAIN_NAMEHASH, utf8ToKeccak256(subdomain), signerAddress, publicResolverAddress, "0"]
       )
 
       setStatus(1)
-
-      await web3.sendTransaction(
-        ENS_REGISTRY,
-        "function setResolver(bytes32 node, address owner)",
-        [domainNode, publicResolverAddress],
-        
-      )
-
-      setStatus(2)
 
       await web3.sendTransaction(
         publicResolverAddress,
@@ -56,7 +47,9 @@ export const useCreateSubdomain = () => {
         }]
       )
 
-      setStatus(3)
+      setStatus(2)
+
+      
     } catch(e) {
       setError(e)
     }
