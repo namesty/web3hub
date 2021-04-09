@@ -10,6 +10,7 @@
   "dependencies": {
     "@ensdomains/ensjs": "2.0.0",
     "axios": "0.21.1",
+    "connect-redis": "5.1.0",
     "content-hash": "2.5.2",
     "cors": "2.8.5",
     "dotenv": "8.2.0",
@@ -21,6 +22,7 @@
     "passport": "0.4.1",
     "passport-github2": "0.1.12",
     "pg-promise": "10.9.5",
+    "redis": "3.1.0",
     "ts-node": "9.1.1"
   },
   "devDependencies": {

@@ -20,11 +20,23 @@ const Home = () => {
   useEffect(() => {
     ;(async () => {
       if (dapp.github) {
-        const test = await axios.get('http://localhost:3001/user/orgs', {
-          headers: {
-            Authorization: 'token ' + dapp.github,
+        const test = await axios.post(
+          'http://localhost:3001/publish',
+          {
+            name: 'Paraswap',
+            description: 'DEX Aggregator',
+            subtext: 'Cool aggregator',
+            icon: 'paraswap.icon',
+            location: 'ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj',
+            pointers: ['brazon.eth'],
           },
-        })
+          {
+            headers: {
+              Authorization: 'token ' + dapp.github,
+            },
+            withCredentials: true,
+          },
+        )
         console.log(test)
       }
     })()

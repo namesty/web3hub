@@ -1,18 +1,5 @@
-import { ethers } from 'ethers'
 import InitialState from '../state/initialState'
-<<<<<<< HEAD
 import type { dappType } from '../state/initialState'
-=======
-
-export type newState = {
-  address: string
-  network: number
-  balance: number
-  wallet: { name: string }
-  web3?: ethers.providers.JsonRpcProvider
-  apis: any[]
-}
->>>>>>> main
 
 function dappReducer(state = {}, action) {
   console.log('dappReducer', state, action)

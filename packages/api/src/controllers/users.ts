@@ -15,15 +15,23 @@ const checkAccessToken = (
 ) => {
   const auth = request.headers.authorization || "";
   const isAuthed = auth.includes("token");
-  if (isAuthed) {
-    const [_, token] = auth.split(" ");
-    request.accessToken = token;
-    return next();
+  if (!isAuthed) {
+    return response.json({
+      status: 404,
+      message: "Authorization header is missing",
+    });
   }
-  response.json({
-    status: 404,
-    message: "Authentication with GitHub is required",
-  });
+
+  if (!request.session.user) {
+    return response.json({
+      status: 404,
+      message: "You must log in",
+    });
+  }
+
+  const [_, token] = auth.split(" ");
+  request.accessToken = token;
+  return next();
 };
 
 const userOrganizations = async (request: Request, response: Response) => {
@@ -117,7 +125,8 @@ const authHandler = async (request: Request, response: Response) => {
   }
 
   try {
-    await ghCallback(codeRequest.data.access_token);
+    const user = await ghCallback(codeRequest.data.access_token);
+    request.session.user = user;
     return response.json({
       status: 200,
       ...codeRequest.data,

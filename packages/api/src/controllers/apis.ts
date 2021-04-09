@@ -10,7 +10,7 @@ const router = Router();
 const publishApi = async (request: Request, response: Response) => {
   try {
     const apiInfo: ApiData = {
-      ownerId: request.user.id,
+      ownerId: request.session.user.id,
       ...request.body,
     };
 
