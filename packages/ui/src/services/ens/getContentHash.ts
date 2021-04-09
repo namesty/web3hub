@@ -2,24 +2,26 @@ import { ZERO_ADDRESS } from './../../constants';
 import { namehash } from "ethers/lib/utils"
 import { Base58 } from "@ethersproject/basex";
 import { ENS_REGISTRY } from "../../constants"
-import { Ethereum } from "../../utils/ethereum"
 import { ethers } from "ethers"
+import { callView } from '../../utils/ethereum';
 
-export const getContentHash = async (web3: Ethereum, domain: string) => {
-  const resolverAddress = await web3.callView(
+export const getContentHash = async (web3: ethers.providers.JsonRpcProvider, domain: string) => {
+  const resolverAddress = await callView(
     ENS_REGISTRY,
     "function resolver(bytes32 node) external view returns (address)",
     [namehash(domain)],
+    web3
   );
 
   if(resolverAddress === ZERO_ADDRESS) {
     return "";
   }
 
-  const hash = await web3.callView(
+  const hash = await callView(
     resolverAddress,
     "function contenthash(bytes32 node) external view returns (bytes)",
     [namehash(domain)],
+    web3
   );
 
   if (hash === "0x") {

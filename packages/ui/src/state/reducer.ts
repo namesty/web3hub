@@ -1,11 +1,12 @@
+import { ethers } from 'ethers'
 import InitialState from '../state/initialState'
 
-type newState = {
+export type newState = {
   address: string
   network: number
   balance: number
   wallet: { name: string }
-  web3?: any
+  web3?: ethers.providers.JsonRpcProvider
   apis: any[]
 }
 

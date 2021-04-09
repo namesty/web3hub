@@ -8,7 +8,7 @@ let initialState = {
       name: 'TEST',
     },
     network: networkID,
-    web3: {},
+    web3: undefined,
     apis: [],
   },
 }

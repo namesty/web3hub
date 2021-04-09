@@ -1,5 +1,5 @@
+import { createEthereumProvider } from './ethereum';
 import getOnboard from './Onboarding'
-import { Ethereum } from "./ethereum"
 
 const onboardInit = (dispatch) => {
   return getOnboard({
@@ -22,7 +22,7 @@ const onboardInit = (dispatch) => {
       })
     },
     wallet: (wallet) => {
-      let web3 = new Ethereum({ provider: wallet.provider })
+      let web3 = createEthereumProvider(wallet.provider)
       dispatch({
         type: 'SET_WALLET',
         payload: wallet,
