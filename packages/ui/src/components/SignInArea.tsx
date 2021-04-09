@@ -36,7 +36,6 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
     setShowSignOutModal(true)
   }
 
-  console.log({ dapp })
   return (
     <Flex
       className="sign-in-wrap"
