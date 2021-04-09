@@ -14,25 +14,25 @@ import { SanitizeApis } from "./services/cronjob/checkApis";
 
 const app: ExpressApp = express();
 
-app.use(morgan("combined"));
-app.use(cors({ origin: "*" }));
-app.use("/docs", serve, setup(swaggerJSON));
-
-app.use(
+const middlewares = [
+  morgan("combined"), // adds logger to the API
+  cors({ origin: "*" }), // support cors
   session({
     name: "web3hub",
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: true,
-  })
-);
+  }), // supports session cache on server side
+  express.json(), // accepts JSON as request.body
+  passport.initialize(), // initialize passport middleware
+  passport.session(), // allows passport to create session object
+];
 
-passport.use(GithubStrategy);
+middlewares.forEach((m) => app.use(m));
 
-app.use(express.json());
-app.use(passport.initialize());
-app.use(passport.session());
-app.use("/", controllers);
+app.use("/docs", serve, setup(swaggerJSON)); // host documentation on /docs endpoint
+passport.use(GithubStrategy); // implement github strategy with passport
+app.use("/", controllers); // add controllers routes
 
 SanitizeApis.getInstance();
 export { app };

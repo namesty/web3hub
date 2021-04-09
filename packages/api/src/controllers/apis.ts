@@ -1,7 +1,6 @@
 import { Request, Response, Router } from "express";
 
 import { Api, ApiData } from "../models/Api";
-import { SanitizeApis } from "../services/cronjob/checkApis";
 import { checkContentIsValid } from "../services/ens";
 import { validatePublishBody } from "./helpers";
 import { checkAccessToken } from "./users";

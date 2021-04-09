@@ -19,7 +19,15 @@ export class Api {
   public static async create(apiInfo: ApiData) {
     const connection = await db.connect();
     try {
-      const { name, subtext, description, icon, location, pointers, ownerId } = apiInfo;
+      const {
+        name,
+        subtext,
+        description,
+        icon,
+        location,
+        pointers,
+        ownerId,
+      } = apiInfo;
       const insertApi = async (tx) => {
         const api = await tx.one(
           "INSERT INTO apis (name, subtext, description, icon, fk_owner_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
@@ -48,8 +56,8 @@ export class Api {
         subtext,
         description,
         icon,
-        location,
-        pointers,
+        locationUri: location,
+        pointersUri: pointers,
       };
     } catch (error) {
       console.log("Error on method: Api.create() -> ", error.message);

@@ -37,10 +37,10 @@
       "icon": {
         "type": "string"
       },
-      "location": {
+      "locationUri": {
         "type": "string"
       },
-      "pointers": {
+      "pointersUri": {
         "type": "array",
         "items": {
           "type": "string"

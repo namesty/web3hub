@@ -29,18 +29,18 @@ export const checkContentIsValid = async (
 
   const contents = await getContents(pointers);
 
-  const unvalidPointers = contents.filter(({ value }) => {
+  const invalidPointers = contents.filter(({ value }) => {
     return !value;
   });
 
-  if (unvalidPointers.length) {
+  if (invalidPointers.length) {
     return {
       message: `Pointer: ${pointers[0]} is not registered`,
       valid: false,
     };
   }
 
-  const unvalidLocation = contents.filter(({ value }) => {
+  const invalidLocation = contents.filter(({ value }) => {
     let hash = value.split("/").slice(-1)[0];
 
     if (location.includes("bafy")) {
@@ -50,7 +50,7 @@ export const checkContentIsValid = async (
     return !location.includes(hash);
   });
 
-  if (unvalidLocation.length) {
+  if (invalidLocation.length) {
     return {
       valid: false,
       message: `Pointer ${pointers[0]} is not pointing to given location`,
