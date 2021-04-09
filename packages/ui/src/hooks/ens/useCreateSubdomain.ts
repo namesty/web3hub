@@ -37,15 +37,17 @@ export const useCreateSubdomain = () => {
         [MAIN_DOMAIN_NAMEHASH, utf8ToKeccak256(subdomain), signerAddress, publicResolverAddress, "0"]
       )
 
-      setStatus(1)
+      if(ipfs !== "") {
+        setStatus(1)
 
-      await web3.sendTransaction(
-        publicResolverAddress,
-        "function setContenthash(bytes32 node, bytes hash)",
-        [domainNode, "0x" + contentHash.fromIpfs(ipfs), {
-          gasLimit: 5000000
-        }]
-      )
+        await web3.sendTransaction(
+          publicResolverAddress,
+          "function setContenthash(bytes32 node, bytes hash)",
+          [domainNode, "0x" + contentHash.fromIpfs(ipfs), {
+            gasLimit: 5000000
+          }]
+        )
+      }
 
       setStatus(2)
 
