@@ -30,8 +30,8 @@
                       "name": "Uniswap",
                       "subtext": "Cool DEX",
                       "icon": "uniswap.icon",
-                      "pointers": ["brazon.eth"],
-                      "location": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
+                      "pointersUri": ["brazon.eth"],
+                      "locationUri": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
                     },
                     {
                       "id": "4",
@@ -39,8 +39,8 @@
                       "name": "Paraswap",
                       "subtext": "Cool aggregator",
                       "icon": "paraswap.icon",
-                      "pointers": ["brazon.eth"],
-                      "location": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
+                      "pointersUri": ["brazon.eth"],
+                      "locationUri": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
                     }
                   ]
                 }
@@ -55,6 +55,22 @@
     "post": {
       "summary": "Create new API",
       "parameters": [
+        {
+          "in": "header",
+          "name": "Authorization",
+          "type": "string",
+          "description": "Github access token",
+          "example": { "Authorization": "token gho_TOKEN" },
+          "required": true
+        },
+        {
+          "in": "header",
+          "name": "withCredentials",
+          "type": "boolean",
+          "description": "Allows the UI to send cookies to the backend",
+          "example": true,
+          "required": true
+        },
         {
           "in": "body",
           "description": "API Metadata",
@@ -76,10 +92,10 @@
               "icon": {
                 "type": "string"
               },
-              "location": {
+              "locationUri": {
                 "type": "string"
               },
-              "pointers": {
+              "pointersUri": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -92,8 +108,8 @@
               "name": "Uniswap",
               "subtext": "Cool DEX",
               "icon": "uniswap.png",
-              "location": "w3//ipfs//QMabc",
-              "pointers": ["uniswap.web3api.eth"]
+              "locationUri": "w3//ipfs//QMabc",
+              "pointersUri": ["uniswap.web3api.eth"]
             }
           }
         }
@@ -123,8 +139,8 @@
                     "name": "Uniswap",
                     "subtext": "Cool DEX",
                     "icon": "uniswap.png",
-                    "location": "w3//ipfs//QMabc",
-                    "pointers": ["uniswap.web3api.eth"]
+                    "locationUri": "w3//ipfs//QMabc",
+                    "pointersUri": ["uniswap.web3api.eth"]
                   }
                 }
               }
