@@ -24,8 +24,6 @@ const Signin = () => {
             withCredentials: true,
           },
         )
-
-        console.log(response)
         if ('access_token' in response.data) {
           console.log('Access token: ', response.data.access_token)
           dispatch({
