@@ -1,6 +1,6 @@
 import axios from 'axios'
 import yaml from 'js-yaml'
-import { cloudFlareGateway } from '../constants'
+import { cloudFlareGateway } from '../../constants'
 
 export default async function getMetaDataFromPackageHash(hash: string) {
   let ipfsDataFromJSON = null

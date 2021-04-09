@@ -1,3 +1,5 @@
+import {networkID} from '../constants'
+
 let initialState = {
   dapp: {
     balance: -1,
@@ -5,8 +7,8 @@ let initialState = {
     wallet: {
       name: 'TEST',
     },
-    network: 3,
-    web3: {},
+    network: networkID,
+    web3: undefined,
     apis: [],
   },
 }

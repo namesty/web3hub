@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { jsx, Flex, Button, useThemeUI } from 'theme-ui'
 
 import { useRouter } from 'next/router'
@@ -40,7 +40,6 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
     setShowSignOutModal(true)
   }
 
-  console.log({dapp})
   return (
     <Flex
       className="sign-in-wrap"
@@ -128,7 +127,15 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
           <li
             onClick={handleDisconnect}
             className="wallet-addr"
-            sx={{ p: '0.425rem', display: 'flex', alignItems: 'center' }}
+            sx={{
+              p: '0.425rem',
+              display: 'flex',
+              alignItems: 'center',
+              svg: {
+                stroke: 'whitesmoke',
+                strokeWidth: '0.2px',
+              },
+            }}
           >
             <ETHlogoicon stroke={onDark ? 'white' : theme.colors.w3darkGreen} />
             <span

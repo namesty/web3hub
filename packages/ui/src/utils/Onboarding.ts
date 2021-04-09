@@ -1,4 +1,5 @@
 import Onboard from 'bnc-onboard'
+import {networkID} from '../constants'
 let onboard = undefined
 
 const getOnboard = function (subscriptions) {
@@ -7,7 +8,7 @@ const getOnboard = function (subscriptions) {
       dappId: '834729ff-3ae1-42ec-b770-95de5ff553a0',
       subscriptions,
       hideBranding: true,
-      networkId: 1,
+      networkId: networkID,
       walletSelect: {
         wallets: [
           { walletName: 'metamask', preferred: true },
