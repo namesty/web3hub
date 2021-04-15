@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { jsx, Input, Flex, Button, Styled } from 'theme-ui'
 import { useCreateSubdomain } from '../../hooks/ens/useCreateSubdomain'
 import { useStateValue } from '../../state/state'
@@ -61,15 +61,15 @@ const PublishAPI = () => {
 
   useEffect(() => {
     if(subdomain !== '') {
-      checkForENSAvailability()
+      checkForENSAvailability(subdomain)
     }
   }, [dapp.address])
 
-  const checkForENSAvailability = async () => {
+  const checkForENSAvailability = useCallback(async (label: string) => {
     if(dapp.address !== undefined){
       setsubdomainLoading(true)
       try {
-        const owner = await getOwner(dapp.web3, `${subdomain}.${MAIN_DOMAIN}`)
+        const owner = await getOwner(dapp.web3, `${label}.${MAIN_DOMAIN}`)
         if(owner === ZERO_ADDRESS) {
           setsubdomainSuccess(true)
           setsubdomainError('')
@@ -82,15 +82,15 @@ const PublishAPI = () => {
       }
       setsubdomainLoading(false)
     }
-  }
+  }, [dapp.address, dapp.web3])
 
-  const handleSubdomainChange = (e) => {
+  const handleSubdomainChange = async (e) => {
     setsubdomain(e.target.value)
     setsubdomainError('')
     setsubdomainSuccess(false)
 
     if(e.target.value !== '') {
-      checkForENSAvailability()
+      checkForENSAvailability(e.target.value)
     }
   }
 
