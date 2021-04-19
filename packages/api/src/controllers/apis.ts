@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 
-import { Api, ApiData } from "../models/Api";
+import { Api } from "../models/Api";
+import { ApiData } from "../models/types";
 import { checkContentIsValid } from "../services/ens";
 import { checkAccessToken } from "./auth";
 import { validatePublishBody } from "./helpers";

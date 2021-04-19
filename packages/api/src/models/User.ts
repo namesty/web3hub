@@ -1,4 +1,5 @@
 import db from "../services/db";
+import { UserData } from "./types";
 
 type GhRequest = {
   redirectUrl: string;
@@ -11,15 +12,6 @@ declare global {
     export interface Request extends GhRequest {}
     export interface User extends UserData {}
   }
-}
-
-export interface UserData {
-  id: string;
-  accessToken?: string;
-  username: string;
-  address?: string;
-  addressType?: number;
-  githubId: string;
 }
 
 export enum AddressesTypes {

@@ -1,14 +1,5 @@
 import db from "../services/db";
-export interface ApiData {
-  id: number;
-  name: string;
-  subtext: string;
-  description: string;
-  icon: string;
-  locationUri: string;
-  pointerUris: string[];
-  ownerId?: string;
-}
+import { ApiData } from "./types";
 
 export enum Authorities {
   ENS = 1,

@@ -1,30 +1,6 @@
 {
-  "User": {
-    "type": "object",
-    "properties": {
-      "id": {
-        "type": "string"
-      },
-      "username": {
-        "type": "string"
-      },
-      "address": {
-        "type": "string"
-      },
-      "accessToken": {
-        "type": "string"
-      },
-      "addressType": {
-        "type": "string"
-      },
-      "githubId": {
-        "type": "string"
-      }
-    },
-    "additionalProperties": false,
-    "required": ["id"]
-  },
   "Api": {
+    "id": "ApiData",
     "type": "object",
     "properties": {
       "id": {
@@ -65,5 +41,31 @@
       "locationUri",
       "pointerUris"
     ]
+  },
+  "User": {
+    "id": "UserData",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "username": {
+        "type": "string"
+      },
+      "address": {
+        "type": "string"
+      },
+      "accessToken": {
+        "type": "string"
+      },
+      "addressType": {
+        "type": "integer"
+      },
+      "githubId": {
+        "type": "string"
+      }
+    },
+    "required": ["id"]
   }
 }
