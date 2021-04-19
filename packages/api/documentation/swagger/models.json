@@ -14,10 +14,15 @@
       "accessToken": {
         "type": "string"
       },
+      "addressType": {
+        "type": "string"
+      },
       "githubId": {
         "type": "string"
       }
-    }
+    },
+    "additionalProperties": false,
+    "required": ["id"]
   },
   "Api": {
     "type": "object",
@@ -25,13 +30,13 @@
       "id": {
         "type": "integer"
       },
-      "description": {
-        "type": "string"
-      },
       "name": {
         "type": "string"
       },
       "subtext": {
+        "type": "string"
+      },
+      "description": {
         "type": "string"
       },
       "icon": {
@@ -40,12 +45,25 @@
       "locationUri": {
         "type": "string"
       },
-      "pointersUri": {
+      "pointerUris": {
         "type": "array",
         "items": {
           "type": "string"
         }
+      },
+      "ownerId": {
+        "type": "string"
       }
-    }
+    },
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "description",
+      "name",
+      "subtext",
+      "icon",
+      "locationUri",
+      "pointerUris"
+    ]
   }
 }

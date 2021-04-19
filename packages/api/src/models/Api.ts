@@ -5,8 +5,8 @@ export interface ApiData {
   subtext: string;
   description: string;
   icon: string;
-  location: string;
-  pointers: string[];
+  locationUri: string;
+  pointerUris: string[];
   ownerId?: string;
 }
 
@@ -24,8 +24,8 @@ export class Api {
         subtext,
         description,
         icon,
-        location,
-        pointers,
+        locationUri,
+        pointerUris,
         ownerId,
       } = apiInfo;
       const insertApi = async (tx) => {
@@ -37,17 +37,17 @@ export class Api {
         //@TODO: Retrieve authId dynamically
         await tx.none(
           "INSERT INTO api_uris (uri, fk_api_id, fk_uri_type_id) VALUES ($1, $2, $3)",
-          [location, api.id, Authorities.IPFS]
+          [locationUri, api.id, Authorities.IPFS]
         );
 
-        const insertPointers = async (location) => {
+        const insertPointers = async (locationUri) => {
           await tx.none(
             "INSERT INTO api_uris (uri, fk_api_id, fk_uri_type_id) VALUES ($1, $2, $3)",
-            [location, api.id, Authorities.ENS]
+            [locationUri, api.id, Authorities.ENS]
           );
         };
 
-        pointers.map(insertPointers);
+        pointerUris.map(insertPointers);
       };
 
       await connection.tx(insertApi);
@@ -56,8 +56,8 @@ export class Api {
         subtext,
         description,
         icon,
-        locationUri: location,
-        pointersUri: pointers,
+        locationUri,
+        pointerUris,
       };
     } catch (error) {
       console.log("Error on method: Api.create() -> ", error.message);
@@ -90,14 +90,14 @@ export class Api {
         let apiAdded = acc.find(({ id }) => id === api.id);
         let apiSanitized = {
           ...metadata,
-          pointers: [],
+          pointerUris: [],
           ...(apiAdded || {}),
         };
 
         if (api.type === "pointer") {
-          apiSanitized.pointers.push(api.uri);
+          apiSanitized.pointerUris.push(api.uri);
         } else {
-          apiSanitized.location = api.uri;
+          apiSanitized.locationUri = api.uri;
         }
 
         if (!apiAdded) return [...acc, apiSanitized];

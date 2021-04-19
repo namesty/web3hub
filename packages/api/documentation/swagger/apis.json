@@ -1,7 +1,7 @@
 {
-  "/api/actives": {
+  "/apis/active": {
     "get": {
-      "summary": "Get all APIs",
+      "summary": "Get all Web3APIs",
       "description": "Retrieve all active APIs",
       "produces": ["application/json"],
       "responses": {
@@ -30,7 +30,7 @@
                       "name": "Uniswap",
                       "subtext": "Cool DEX",
                       "icon": "uniswap.icon",
-                      "pointersUri": ["brazon.eth"],
+                      "pointerUris": ["uniswap.api.eth"],
                       "locationUri": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
                     },
                     {
@@ -39,7 +39,7 @@
                       "name": "Paraswap",
                       "subtext": "Cool aggregator",
                       "icon": "paraswap.icon",
-                      "pointersUri": ["brazon.eth"],
+                      "pointerUris": ["uniswap.api.eth"],
                       "locationUri": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
                     }
                   ]
@@ -51,9 +51,10 @@
       }
     }
   },
-  "/publish": {
+  "/apis/publish": {
     "post": {
       "summary": "Create new API",
+      "description": "Store metadata",
       "parameters": [
         {
           "in": "header",
@@ -73,7 +74,7 @@
         },
         {
           "in": "body",
-          "description": "API Metadata",
+          "description": "Web3API Metadata",
           "schema": {
             "type": "object",
             "properties": {
@@ -95,7 +96,7 @@
               "locationUri": {
                 "type": "string"
               },
-              "pointersUri": {
+              "pointerUris": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -109,12 +110,11 @@
               "subtext": "Cool DEX",
               "icon": "uniswap.png",
               "locationUri": "w3//ipfs//QMabc",
-              "pointersUri": ["uniswap.web3api.eth"]
+              "pointerUris": ["api.uniswap.eth"]
             }
           }
         }
       ],
-      "description": "Store metadata ",
       "produces": ["application/json"],
       "responses": {
         "200": {
@@ -140,7 +140,7 @@
                     "subtext": "Cool DEX",
                     "icon": "uniswap.png",
                     "locationUri": "w3//ipfs//QMabc",
-                    "pointersUri": ["uniswap.web3api.eth"]
+                    "pointerUris": ["api.uniswap.eth"]
                   }
                 }
               }
@@ -214,7 +214,7 @@
           }
         },
         "500": {
-          "description": "Unexpected error on APi",
+          "description": "Unexpected error on API",
           "content": {
             "application/json": {
               "schema": {

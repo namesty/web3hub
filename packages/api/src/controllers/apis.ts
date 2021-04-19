@@ -2,8 +2,8 @@ import { Request, Response, Router } from "express";
 
 import { Api, ApiData } from "../models/Api";
 import { checkContentIsValid } from "../services/ens";
+import { checkAccessToken } from "./auth";
 import { validatePublishBody } from "./helpers";
-import { checkAccessToken } from "./users";
 
 const router = Router();
 
@@ -14,8 +14,11 @@ const publishApi = async (request: Request, response: Response) => {
       ...request.body,
     };
 
-    const { location, pointers } = apiInfo;
-    const { valid, message } = await checkContentIsValid(pointers, location);
+    const { locationUri, pointerUris } = apiInfo;
+    const { valid, message } = await checkContentIsValid(
+      pointerUris,
+      locationUri
+    );
 
     if (valid) {
       const api = await Api.create(apiInfo);
@@ -48,7 +51,10 @@ export const checkAndUpdateApis = async () => {
     const apis = await Api.getAllActive();
 
     apis.forEach(async (api: ApiData) => {
-      const { valid } = await checkContentIsValid(api.pointers, api.location);
+      const { valid } = await checkContentIsValid(
+        api.pointerUris,
+        api.locationUri
+      );
       if (!valid) Api.deactivate(api.id);
     });
   } catch (e) {
@@ -56,7 +62,7 @@ export const checkAndUpdateApis = async () => {
   }
 };
 
-router.get("/api/actives", getAll);
+router.get("/active", getAll);
 router.post("/publish", checkAccessToken, validatePublishBody, publishApi);
 
 export { router as ApiController };

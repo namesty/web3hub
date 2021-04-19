@@ -14,8 +14,8 @@ export const validatePublishBody = (
     subtext: string().required(),
     name: string().required(),
     icon: string().required(),
-    location: string().required(),
-    pointers: array().items(string()),
+    locationUri: string().required(),
+    pointerUris: array().items(string()),
   });
 
   validateRequest(request, response, next, schema);
