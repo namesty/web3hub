@@ -11,7 +11,7 @@ export const checkContentIsValid = async (
   pointers: string[],
   location: string
 ): Promise<CheckContentResponse> => {
-  const provider = new providers.JsonRpcProvider(process.env.RPC_NODE);
+  const provider = new providers.JsonRpcProvider(process.env.ETH_RPC_NODE);
 
   const ens = new ENS({
     provider,
