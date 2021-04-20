@@ -24,7 +24,7 @@ const middlewares = [
   session({
     name: "web3hub",
     store: new RedisStore({ client: redisClient }),
-    secret: "keyboard cat",
+    secret: process.env.SESSION_SECRET_KEY,
     resave: false,
     saveUninitialized: false,
   }), // supports session cache on server side
