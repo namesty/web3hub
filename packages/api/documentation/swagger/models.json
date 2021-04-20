@@ -59,7 +59,7 @@
       "accessToken": {
         "type": "string"
       },
-      "addressType": {
+      "authType": {
         "type": "integer"
       },
       "githubId": {

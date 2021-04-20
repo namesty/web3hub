@@ -54,13 +54,13 @@ const handleSignIn = async (
   response: Response,
   next: NextFunction
 ) => {
-  const { address, addressType } = request.query;
+  const { address, authType } = request.query;
   try {
     if (address) {
       // @TODO: Improve this
       const user = await User.findOrCreateByAddress({
         address: address as string,
-        addressType: Number(addressType) || 1,
+        authType: Number(authType) || 1,
       });
       return response.json({
         status: 200,
