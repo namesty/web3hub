@@ -62,24 +62,24 @@ const PublishAPI = () => {
   const [executeCreateSubdomain, { error, isLoading, status }] = useCreateSubdomain()
 
   useEffect(() => {
-    if (subdomain !== '') {
-      checkForENSAvailability()
+    if(subdomain !== '') {
+      checkForENSAvailability(subdomain)
     }
   }, [dapp.address])
 
-  const checkForENSAvailability = async () => {
-    if (dapp.address !== undefined) {
+  const checkForENSAvailability = useCallback(async (label: string) => {
+    if(dapp.address !== undefined){
       setsubdomainLoading(true)
       try {
-        const owner = await getOwner(dapp.web3, `${subdomain}.${MAIN_DOMAIN}`)
-        if (owner === ZERO_ADDRESS) {
+        const owner = await getOwner(dapp.web3, `${label}.${MAIN_DOMAIN}`)
+        if(owner === ZERO_ADDRESS) {
           setsubdomainSuccess(true)
           setsubdomainError('')
         } else {
           setsubdomainSuccess(false)
-          setsubdomainError('Subdomain name is not available')
+          setsubdomainError("Subdomain name is not available")
         }
-      } catch (e) {
+      } catch(e) {
         console.log(e)
       }
       setsubdomainLoading(false)
@@ -91,8 +91,17 @@ const PublishAPI = () => {
     setsubdomainError('')
     setsubdomainSuccess(false)
 
-    if (e.target.value !== '') {
-      checkForENSAvailability()
+    if(e.target.value !== '') {
+      checkForENSAvailability(e.target.value)
+    }
+  }
+
+  const handleRegisterENS = async (e) => {
+    e.preventDefault()
+    if (dapp.address === undefined) {
+      setShowConnectModal(true)
+    } else {
+      executeCreateSubdomain(subdomain, ipfs)
     }
   }
 
@@ -114,25 +123,6 @@ const PublishAPI = () => {
       }
     } else {
       setipfsLoading(false)
-    }
-  }
-
-  const handleRegisterENS = async (e) => {
-    e.preventDefault()
-    if (dapp.address === undefined) {
-      setShowConnectModal(true)
-    } else {
-      let sdExec = await executeCreateSubdomain(subdomain, ipfs)
-      if (error) {
-        console.log(error)
-      }
-      if (isLoading) {
-        console.log(isLoading)
-      }
-      if (status) {
-        console.log(status)
-      }
-      console.log(sdExec)
     }
   }
 
