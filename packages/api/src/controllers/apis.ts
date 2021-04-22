@@ -1,0 +1,69 @@
+import { Request, Response, Router } from "express";
+
+import { Api } from "../models/Api";
+import { ApiData } from "../models/types";
+import { checkContentIsValid } from "../services/ens";
+import { checkAccessToken } from "./auth";
+import { validatePublishBody } from "./helpers";
+
+const router = Router();
+
+const publishApi = async (request: Request, response: Response) => {
+  try {
+    const apiInfo: ApiData = {
+      ownerId: request.session.user.id,
+      ...request.body,
+    };
+
+    const { locationUri, pointerUris } = apiInfo;
+    const { valid, message } = await checkContentIsValid(
+      pointerUris,
+      locationUri
+    );
+
+    if (valid) {
+      const api = await Api.create(apiInfo);
+      return response.json({ status: 200, api });
+    }
+
+    return response.json({
+      status: 406,
+      error: message,
+    });
+  } catch (error) {
+    response.json({ status: 500, error: error.message });
+  }
+};
+
+const getAll = async (_: Request, response: Response) => {
+  try {
+    const apis = await Api.getAllActive();
+    return response.json({
+      status: 200,
+      apis,
+    });
+  } catch (error) {
+    response.json({ status: 500, error: error.message });
+  }
+};
+
+export const checkAndUpdateApis = async () => {
+  try {
+    const apis = await Api.getAllActive();
+
+    apis.forEach(async (api: ApiData) => {
+      const { valid } = await checkContentIsValid(
+        api.pointerUris,
+        api.locationUri
+      );
+      if (!valid) Api.deactivate(api.id);
+    });
+  } catch (e) {
+    console.log("Error when checking and updating apis -> ", e.message);
+  }
+};
+
+router.get("/active", getAll);
+router.post("/publish", checkAccessToken, validatePublishBody, publishApi);
+
+export { router as ApiController };

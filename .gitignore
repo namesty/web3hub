@@ -65,3 +65,10 @@ yarn-error.log
 .next
 
 .DS_Store
+
+# db docker volume
+postgres-data
+redis-data
+
+# UML diagram files
+*.puml

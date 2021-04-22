@@ -2,16 +2,20 @@
 /** @jsx jsx */
 import { useState } from 'react'
 import { jsx, Flex, Button, useThemeUI } from 'theme-ui'
+
+import { useRouter } from 'next/router'
 import { useStateValue } from '../state/state'
 
-import addrShortener from '../utils/addrShortener'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import Modal from './Modal'
+
+import addrShortener from '../utils/addrShortener'
 
 import User from '../../public/images/user.svg'
 import ETHlogoicon from '../../public/images/eth-logo-hollow-icon.svg'
 import MyAPIs from '../../public/images/myapis.svg'
+import Github from '../../public/images/github-icon-large.svg'
+
 
 type SignInAreaProps = {
   onDark?: boolean
@@ -153,7 +157,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
           </li>
         )}
 
-        {!dapp?.auth ? (
+        {!dapp?.github ? (
           <li
             onClick={handleSignIn}
             onKeyUp={handleSignIn}
@@ -180,8 +184,8 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
             onKeyUp={handleSignOut}
             sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
           >
-            <User stroke={onDark ? 'white' : theme.colors.w3darkGreen} />
-            <span>&nbsp;</span>
+            <Github fill={onDark ? 'white' : theme.colors.w3darkGreen} width="40px"/>
+            {/* <span>&nbsp;</span>
             <span
               sx={{
                 color: onDark ? 'white' : 'w3darkGreen',
@@ -192,8 +196,7 @@ const SignInArea = ({ onDark }: SignInAreaProps) => {
                 letterSpacing: '-0.025rem',
               }}
             >
-              USERNAME
-            </span>
+            </span> */}
           </li>
         )}
 

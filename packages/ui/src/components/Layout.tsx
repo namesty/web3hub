@@ -130,6 +130,7 @@ const Layout = ({ children }: LayoutProps) => {
             textTransform: 'none',
             appearance: 'none',
             cursor: 'pointer',
+            textDecoration: 'none'
           },
           'a:visited, a:active': {
             textDecoration: 'none',

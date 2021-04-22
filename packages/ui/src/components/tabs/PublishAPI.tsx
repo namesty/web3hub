@@ -9,6 +9,7 @@ import Card from '../Card'
 import Modal from '../Modal'
 import { MAIN_DOMAIN, ZERO_ADDRESS } from '../../constants'
 import { getOwner } from '../../services/ens/getOwner'
+import axios from 'axios'
 
 type ErrorMsg = {
   children: any
@@ -52,32 +53,33 @@ const PublishAPI = () => {
   // modals
   const [showConnectModal, setShowConnectModal] = useState(false)
   const [showSignInModal, setShowSignInModal] = useState(false)
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
 
   // data
   const [apiData, setApiData] = useState(null)
 
   //ens
-  const [executeCreateSubdomain] = useCreateSubdomain()
+  const [executeCreateSubdomain, { error, isLoading, status }] = useCreateSubdomain()
 
   useEffect(() => {
-    if(subdomain !== '') {
-      checkForENSAvailability(subdomain)
+    if (subdomain !== '') {
+      checkForENSAvailability()
     }
   }, [dapp.address])
 
-  const checkForENSAvailability = useCallback(async (label: string) => {
-    if(dapp.address !== undefined){
+  const checkForENSAvailability = async () => {
+    if (dapp.address !== undefined) {
       setsubdomainLoading(true)
       try {
-        const owner = await getOwner(dapp.web3, `${label}.${MAIN_DOMAIN}`)
-        if(owner === ZERO_ADDRESS) {
+        const owner = await getOwner(dapp.web3, `${subdomain}.${MAIN_DOMAIN}`)
+        if (owner === ZERO_ADDRESS) {
           setsubdomainSuccess(true)
           setsubdomainError('')
         } else {
           setsubdomainSuccess(false)
-          setsubdomainError("Subdomain name is not available")
+          setsubdomainError('Subdomain name is not available')
         }
-      } catch(e) {
+      } catch (e) {
         console.log(e)
       }
       setsubdomainLoading(false)
@@ -89,8 +91,8 @@ const PublishAPI = () => {
     setsubdomainError('')
     setsubdomainSuccess(false)
 
-    if(e.target.value !== '') {
-      checkForENSAvailability(e.target.value)
+    if (e.target.value !== '') {
+      checkForENSAvailability()
     }
   }
 
@@ -101,13 +103,13 @@ const PublishAPI = () => {
     setipfsError('')
     if (e.target.value !== '') {
       let metaData = await getMetaDataFromPackageHash(e.target.value)
-      if(metaData === undefined) {
+      if (metaData === undefined) {
         setipfsLoading(false)
         setApiData(null)
         setipfsError('No Package Found')
       } else {
         setipfsLoading(false)
-        setipfsSuccess(true)  
+        setipfsSuccess(true)
         setApiData(metaData)
       }
     } else {
@@ -120,17 +122,48 @@ const PublishAPI = () => {
     if (dapp.address === undefined) {
       setShowConnectModal(true)
     } else {
-      executeCreateSubdomain(subdomain, ipfs)
+      let sdExec = await executeCreateSubdomain(subdomain, ipfs)
+      if (error) {
+        console.log(error)
+      }
+      if (isLoading) {
+        console.log(isLoading)
+      }
+      if (status) {
+        console.log(status)
+      }
+      console.log(sdExec)
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (apiData && subdomain.length > 0) {
-      setShowSignInModal(true)
-    }
     console.log('SUBMIT')
-    console.log(e.target)
+    if (apiData && subdomain.length > 0) {
+      if (dapp.github && dapp.github !== '') {
+        const publishReq = await axios.post(
+          'http://localhost:3001/publish',
+          {
+            name: apiData.name,
+            description: apiData.description,
+            subtext: apiData.subtext,
+            icon: apiData.icon,
+            location: apiData.location,
+            pointers: [`${subdomain}.${MAIN_DOMAIN}`],
+          },
+          {
+            headers: {
+              Authorization: 'token ' + dapp.github,
+            },
+            withCredentials: true,
+          },
+        )
+        console.log({ publishReq })
+        setShowSuccessModal(true)
+      } else {
+        setShowSignInModal(true)
+      }
+    }
   }
 
   const handleInvalid = async (e) => {
@@ -143,8 +176,20 @@ const PublishAPI = () => {
     }
   }
 
-  const ipfsState = ipfsLoading ? 'loading' : ipfsSuccess ? 'success' : ipfsError ? 'error' : ''
-  const subdomainState = subdomainLoading ? 'loading' : subdomainSuccess ? 'success' : subdomainError ? 'error' : ''
+  const ipfsState = ipfsLoading
+    ? 'loading'
+    : ipfsSuccess
+    ? 'success'
+    : ipfsError
+    ? 'error'
+    : ''
+  const subdomainState = subdomainLoading
+    ? 'loading'
+    : subdomainSuccess
+    ? 'success'
+    : subdomainError
+    ? 'error'
+    : ''
 
   return (
     <Flex className="publish">
@@ -166,6 +211,17 @@ const PublishAPI = () => {
             noLeftShift
             close={() => {
               setShowSignInModal(false)
+            }}
+          />
+        </div>
+      )}
+      {showSuccessModal && (
+        <div sx={{ position: 'fixed', top: 0, left: 0, zIndex: 100000 }}>
+          <Modal
+            screen={'success'}
+            noLeftShift
+            close={() => {
+              setShowSuccessModal(false)
             }}
           />
         </div>

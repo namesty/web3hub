@@ -13,7 +13,6 @@ import BottomSpace from '../components/BottomSpace'
 import Card from '../components/Card'
 
 const Home = () => {
-  const [{ dapp }] = useStateValue()
   return (
     <Layout>
       <Flex>

@@ -1,0 +1,71 @@
+{
+  "Api": {
+    "id": "ApiData",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "name": {
+        "type": "string"
+      },
+      "subtext": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "icon": {
+        "type": "string"
+      },
+      "locationUri": {
+        "type": "string"
+      },
+      "pointerUris": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "ownerId": {
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "description",
+      "name",
+      "subtext",
+      "icon",
+      "locationUri",
+      "pointerUris"
+    ]
+  },
+  "User": {
+    "id": "UserData",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "username": {
+        "type": "string"
+      },
+      "address": {
+        "type": "string"
+      },
+      "accessToken": {
+        "type": "string"
+      },
+      "addressType": {
+        "type": "integer"
+      },
+      "githubId": {
+        "type": "string"
+      }
+    },
+    "required": ["id"]
+  }
+}
