@@ -72,7 +72,7 @@ const PublishAPI = () => {
     async (label: string) => {
       setsubdomainLoading(true)
       try {
-        const owner = await getOwner(dapp.web3, `${label}.${MAIN_DOMAIN}`)
+        const owner = await getOwner(`${label}.${MAIN_DOMAIN}`, dapp.web3)
         if (owner === ZERO_ADDRESS) {
           setsubdomainLookupSuccess(true)
           setsubdomainError('')
@@ -85,7 +85,7 @@ const PublishAPI = () => {
       }
       setsubdomainLoading(false)
     },
-    [dapp.address, dapp.web3],
+    [dapp.web3],
   )
 
   const handleSubdomainChange = async (e) => {

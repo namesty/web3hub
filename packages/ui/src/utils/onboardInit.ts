@@ -22,7 +22,7 @@ const onboardInit = (dispatch) => {
       })
     },
     wallet: (wallet) => {
-      let web3 = createEthereumProvider(wallet.provider)
+      let web3 = wallet.provider && createEthereumProvider(wallet.provider)
       dispatch({
         type: 'SET_WALLET',
         payload: wallet,

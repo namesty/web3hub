@@ -1,4 +1,5 @@
-import {networkID} from '../constants'
+import { createEthereumProvider } from './../utils/ethereum';
+import {INFURA_URI, networkID} from '../constants'
 
 let initialState = {
   dapp: {

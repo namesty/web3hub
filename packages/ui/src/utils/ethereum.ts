@@ -1,4 +1,5 @@
 import { ethers } from "ethers"
+import { INFURA_URI } from "../constants";
 
 type Address = string;
 type EthereumProvider = string | ethers.providers.ExternalProvider;
@@ -11,8 +12,12 @@ export const createEthereumProvider = (provider: EthereumProvider): ethers.provi
   }
 }
 
-export const getContract = (address: Address, abi: string[], provider: ethers.providers.JsonRpcProvider): ethers.Contract => {
-  return new ethers.Contract(address, abi, provider.getSigner());
+export const getReadOnlyProvider = (): ethers.providers.JsonRpcProvider => {
+  return new ethers.providers.JsonRpcProvider(INFURA_URI)
+}
+
+export const getContract = (address: Address, abi: string[], providerOrSigner: ethers.providers.JsonRpcProvider | ethers.providers.JsonRpcSigner): ethers.Contract => {
+  return new ethers.Contract(address, abi, providerOrSigner);
 }
 
 export const deployContract = async (
@@ -31,9 +36,17 @@ export const callView = async (
   address: Address,
   method: string,
   args: string[],
-  provider: ethers.providers.JsonRpcProvider
+  provider?: ethers.providers.JsonRpcProvider
 ): Promise<string> => {
-  const contract = getContract(address, [method], provider);
+  let contract: ethers.Contract
+
+  if(!provider) {
+    const infuraProvider = getReadOnlyProvider()
+    contract = getContract(address, [method], infuraProvider)
+  } else {
+    contract = getContract(address, [method], provider);
+  }
+
   const funcs = Object.keys(contract.interface.functions);
   const res = await contract[funcs[0]](...args);
   return res.toString();

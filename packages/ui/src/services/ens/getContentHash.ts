@@ -5,7 +5,7 @@ import { ENS_REGISTRY } from "../../constants"
 import { ethers } from "ethers"
 import { callView } from '../../utils/ethereum';
 
-export const getContentHash = async (web3: ethers.providers.JsonRpcProvider, domain: string) => {
+export const getContentHash = async (domain: string, web3?: ethers.providers.JsonRpcProvider) => {
   const resolverAddress = await callView(
     ENS_REGISTRY,
     "function resolver(bytes32 node) external view returns (address)",
