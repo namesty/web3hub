@@ -12,6 +12,22 @@ let initialState = {
     web3: undefined,
     apis: [],
   },
+  publish: {
+    subdomain: '',
+    ipfs: '',
+    subdomainError: '',
+    subdomainLookupSuccess:false,
+    subdomainRegisterSuccess:false,
+    subdomainLoading:false,
+    ipfsLoading:false,
+    ipfsError: '',
+    ipfsSuccess:false,
+    showConnectModal:false,
+    showSignInModal:false,
+    showSuccessModal:false,
+    apiData: null,
+    registrationStatus: -1,
+  }
 }
 
 type dappType = {
@@ -24,5 +40,23 @@ type dappType = {
   github?: string
 }
 
+type publishType = {
+  subdomain: string
+  ipfs: string
+  subdomainError: string
+  subdomainLookupSuccess: boolean
+  subdomainRegisterSuccess: boolean
+  subdomainLoading: boolean
+  ipfsLoading: boolean
+  ipfsError: string
+  ipfsSuccess: boolean
+  showConnectModal: boolean
+  showSignInModal: boolean
+  showSuccessModal: boolean
+  apiData: any
+  registrationStatus: number
+}
+
 export default initialState
 export type { dappType }
+export type { publishType }
