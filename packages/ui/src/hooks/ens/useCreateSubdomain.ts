@@ -34,8 +34,15 @@ export const useCreateSubdomain = () => {
 
       await sendTransaction(
         FIFS_REGISTRAR,
-        "function register(bytes32 label, address owner, address resolver, uint64 ttl) external",
-        [utf8ToKeccak256(subdomain), signerAddress, publicResolverAddress, "0"],
+        "function register(bytes32 label, address owner) external",
+        [utf8ToKeccak256(subdomain), signerAddress],
+        web3
+      )
+
+      await sendTransaction(
+        ENS_REGISTRY,
+        "function setResolver(bytes32 node, address owner)",
+        [domainNode, publicResolverAddress],
         web3
       )
 
