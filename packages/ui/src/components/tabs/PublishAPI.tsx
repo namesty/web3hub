@@ -10,6 +10,7 @@ import Modal from '../Modal'
 import { MAIN_DOMAIN, ZERO_ADDRESS } from '../../constants'
 import { getOwner } from '../../services/ens/getOwner'
 import axios from 'axios'
+import image from 'next/image'
 
 type ErrorMsg = {
   children: any
@@ -105,6 +106,12 @@ const PublishAPI = () => {
       executeCreateSubdomain(subdomain, ipfs)
     }
   }
+
+  useEffect(() => {
+    if(status === 2) {
+      setsubdomainRegisterSuccess(true)
+    }
+  }, [status])
 
   const handleIPFSHashInput = async (e) => {
     setipfs(e.target.value)
