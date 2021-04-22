@@ -110,7 +110,7 @@ const Card = ({ api, ipfsHash, boxShadowOn, noHover }: CardProps) => {
                     mixBlendMode: 'normal',
                   }}
                 >
-                  {api.description}
+                  {api.subtext}
                 </div>
                 <Flex
                   sx={{

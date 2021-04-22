@@ -62,36 +62,36 @@ const PublishAPI = () => {
   const [executeCreateSubdomain, { error, isLoading, status }] = useCreateSubdomain()
 
   useEffect(() => {
-    if(subdomain !== '') {
+    if (subdomain !== '') {
       checkForENSAvailability(subdomain)
     }
   }, [dapp.address])
 
-  const checkForENSAvailability = useCallback(async (label: string) => {
-    if(dapp.address !== undefined){
+  const checkForENSAvailability = useCallback(
+    async (label: string) => {
       setsubdomainLoading(true)
       try {
         const owner = await getOwner(dapp.web3, `${label}.${MAIN_DOMAIN}`)
-        if(owner === ZERO_ADDRESS) {
+        if (owner === ZERO_ADDRESS) {
           setsubdomainSuccess(true)
           setsubdomainError('')
         } else {
           setsubdomainSuccess(false)
-          setsubdomainError("Subdomain name is not available")
+          setsubdomainError('Subdomain name is not available')
         }
-      } catch(e) {
+      } catch (e) {
         console.log(e)
       }
       setsubdomainLoading(false)
-    }
-  }, [dapp.address, dapp.web3])
+    },
+    [dapp.address, dapp.web3],
+  )
 
   const handleSubdomainChange = async (e) => {
     setsubdomain(e.target.value)
     setsubdomainError('')
     setsubdomainSuccess(false)
-
-    if(e.target.value !== '') {
+    if (e.target.value !== '') {
       checkForENSAvailability(e.target.value)
     }
   }
@@ -268,7 +268,7 @@ const PublishAPI = () => {
             '&:after': {
               display: 'block',
               position: 'absolute',
-              right: '.75rem',
+              right: '-2.5rem',
               top: 'calc(50% - 11px)',
               content: "''",
               width: '22px',
@@ -324,16 +324,21 @@ const PublishAPI = () => {
           </p>
           <div className="fieldset">
             <label>ENS Subdomain</label>
-            <div className={'inputwrap ' + subdomainState}>
+            <div
+              className={'inputwrap ' + subdomainState}
+              sx={{ display: 'flex', alignItems: 'center', width: 'max-content !important' }}
+            >
               <Input
+                sx={{maxWidth: '12rem', pr: '0 !important'}}
                 type="text"
                 name="ens"
-                placeholder="{SUBDOMAIN}.open.web3.eth"
+                placeholder="{SUBDOMAIN}"
                 required
                 pattern="^[^.]+\.open\.web3\.eth$"
                 onChange={handleSubdomainChange}
                 value={subdomain}
               />
+              <span sx={{ ml: 3 }}>.open.web3.eth</span>
             </div>
             {subdomainError && <ErrorMsg bottomshift>{subdomainError}</ErrorMsg>}
             <p>
