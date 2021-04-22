@@ -44,7 +44,7 @@ export const callView = async (
     const infuraProvider = getReadOnlyProvider()
     contract = getContract(address, [method], infuraProvider)
   } else {
-    contract = getContract(address, [method], provider);
+    contract = getContract(address, [method], provider.getSigner());
   }
 
   const funcs = Object.keys(contract.interface.functions);
@@ -58,7 +58,7 @@ export const sendTransaction = async (
   args: (string | Record<string, string | number> )[],
   provider: ethers.providers.JsonRpcProvider
 ): Promise<ethers.providers.TransactionReceipt> => {
-  const contract = getContract(address, [method], provider);
+  const contract = getContract(address, [method], provider.getSigner());
   const funcs = Object.keys(contract.interface.functions);
   try {
     const tx = await contract[funcs[0]](...args);
