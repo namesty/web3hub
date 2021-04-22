@@ -42,7 +42,8 @@ const PublishAPI = () => {
 
   // input states
   const [subdomainError, setsubdomainError] = useState('')
-  const [subdomainSuccess, setsubdomainSuccess] = useState(false)
+  const [subdomainLookupSuccess, setsubdomainLookupSuccess] = useState(false)
+  const [subdomainRegisterSuccess, setsubdomainRegisterSuccess] = useState(false)
   const [subdomainLoading, setsubdomainLoading] = useState(false)
 
   // input states
@@ -73,10 +74,10 @@ const PublishAPI = () => {
       try {
         const owner = await getOwner(dapp.web3, `${label}.${MAIN_DOMAIN}`)
         if (owner === ZERO_ADDRESS) {
-          setsubdomainSuccess(true)
+          setsubdomainLookupSuccess(true)
           setsubdomainError('')
         } else {
-          setsubdomainSuccess(false)
+          setsubdomainLookupSuccess(false)
           setsubdomainError('Subdomain name is not available')
         }
       } catch (e) {
@@ -90,7 +91,7 @@ const PublishAPI = () => {
   const handleSubdomainChange = async (e) => {
     setsubdomain(e.target.value)
     setsubdomainError('')
-    setsubdomainSuccess(false)
+    setsubdomainLookupSuccess(false)
     if (e.target.value !== '') {
       checkForENSAvailability(e.target.value)
     }
@@ -175,8 +176,10 @@ const PublishAPI = () => {
     : ''
   const subdomainState = subdomainLoading
     ? 'loading'
-    : subdomainSuccess
-    ? 'success'
+    : subdomainLookupSuccess
+    ? 'successfulLookup'
+    : subdomainRegisterSuccess
+    ? 'registered'
     : subdomainError
     ? 'error'
     : ''
@@ -280,9 +283,14 @@ const PublishAPI = () => {
                 background: 'url(/images/loading.svg) no-repeat',
               },
             },
-            '&.success': {
+            '&.successfulLookup': {
               '&:after': {
                 background: 'url(/images/check-circle.svg) no-repeat',
+              },
+            },
+            '&.regsitered': {
+              '&:after': {
+                background: 'url(/images/check-circle-green.svg) no-repeat',
               },
             },
             '&.error': {
@@ -326,10 +334,14 @@ const PublishAPI = () => {
             <label>ENS Subdomain</label>
             <div
               className={'inputwrap ' + subdomainState}
-              sx={{ display: 'flex', alignItems: 'center', width: 'max-content !important' }}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                width: 'max-content !important',
+              }}
             >
               <Input
-                sx={{maxWidth: '12rem', pr: '0 !important'}}
+                sx={{ maxWidth: '12rem', pr: '0 !important' }}
                 type="text"
                 name="ens"
                 placeholder="{SUBDOMAIN}"
