@@ -35,64 +35,64 @@ const ErrorMsg = ({ children, bottomshift }: ErrorMsg) => (
 )
 
 const PublishAPI = () => {
-  const [{ dapp }, dispatch] = useStateValue()
+  const [{ dapp, publish }, dispatch] = useStateValue()
 
-  // inputs
-  const [subdomain, setsubdomain] = useState('')
-  const [ipfs, setipfs] = useState('')
+  // // inputs
+  // const [subdomain, setsubdomain] = useState('')
+  // const [ipfs, setipfs] = useState('')
 
-  // input states
-  const [subdomainError, setsubdomainError] = useState('')
-  const [subdomainLookupSuccess, setsubdomainLookupSuccess] = useState(false)
-  const [subdomainRegisterSuccess, setsubdomainRegisterSuccess] = useState(false)
-  const [subdomainLoading, setsubdomainLoading] = useState(false)
+  // // input states
+  // const [subdomainError, setsubdomainError] = useState('')
+  // const [subdomainLookupSuccess, setsubdomainLookupSuccess] = useState(false)
+  // const [subdomainRegisterSuccess, setsubdomainRegisterSuccess] = useState(false)
+  // const [subdomainLoading, setsubdomainLoading] = useState(false)
 
-  // input states
-  const [ipfsLoading, setipfsLoading] = useState(false)
-  const [ipfsError, setipfsError] = useState('')
-  const [ipfsSuccess, setipfsSuccess] = useState(false)
+  // // input states
+  // const [ipfsLoading, setipfsLoading] = useState(false)
+  // const [ipfsError, setipfsError] = useState('')
+  // const [ipfsSuccess, setipfsSuccess] = useState(false)
 
-  // modals
-  const [showConnectModal, setShowConnectModal] = useState(false)
-  const [showSignInModal, setShowSignInModal] = useState(false)
-  const [showSuccessModal, setShowSuccessModal] = useState(false)
+  // // modals
+  // const [showConnectModal, setShowConnectModal] = useState(false)
+  // const [showSignInModal, setShowSignInModal] = useState(false)
+  // const [showSuccessModal, setShowSuccessModal] = useState(false)
 
-  // data
-  const [apiData, setApiData] = useState(null)
+  // // data
+  // const [apiData, setApiData] = useState(null)
 
   //ens
   const [executeCreateSubdomain, { error, isLoading, status }] = useCreateSubdomain()
 
   useEffect(() => {
-    if (subdomain !== '') {
-      checkForENSAvailability(subdomain)
+    if (publish.subdomain !== '') {
+      checkForENSAvailability(publish.subdomain)
     }
   }, [dapp.address])
 
   const checkForENSAvailability = useCallback(
     async (label: string) => {
-      setsubdomainLoading(true)
+      dispatch({type:'setsubdomainLoading',payload:true})
       try {
         const owner = await getOwner(`${label}.${MAIN_DOMAIN}`, dapp.web3)
         if (owner === ZERO_ADDRESS) {
-          setsubdomainLookupSuccess(true)
-          setsubdomainError('')
+          dispatch({type:'setsubdomainLookupSuccess',payload:true})
+          dispatch({type:'setsubdomainError',payload:''})
         } else {
-          setsubdomainLookupSuccess(false)
-          setsubdomainError('Subdomain name is not available')
+          dispatch({type:'setsubdomainLookupSuccess',payload:false})
+          dispatch({type:'setsubdomainError',payload:'Subdomain name is not available'})
         }
       } catch (e) {
         console.log(e)
       }
-      setsubdomainLoading(false)
+      dispatch({type:'setsubdomainLoading',payload:false})
     },
     [dapp.web3],
   )
 
   const handleSubdomainChange = async (e) => {
-    setsubdomain(e.target.value)
-    setsubdomainError('')
-    setsubdomainLookupSuccess(false)
+    dispatch({type:'setsubdomain',payload:e.target.value})
+    dispatch({type:'setsubdomainError',payload:''})
+    dispatch({type:'setsubdomainLookupSuccess',payload:false})
     if (e.target.value !== '') {
       checkForENSAvailability(e.target.value)
     }
@@ -101,53 +101,59 @@ const PublishAPI = () => {
   const handleRegisterENS = async (e) => {
     e.preventDefault()
     if (dapp.address === undefined) {
-      setShowConnectModal(true)
+      dispatch({type:'setShowConnectModal',payload:true})
     } else {
-      executeCreateSubdomain(subdomain, ipfs)
+      executeCreateSubdomain(publish.subdomain, publish.ipfs)
     }
   }
 
   useEffect(() => {
     if(status === 2) {
-      setsubdomainRegisterSuccess(true)
+      dispatch({type:'setsubdomainRegisterSuccess',payload:true})
     }
   }, [status])
 
+  useEffect(() => {
+    if(publish.subdomain !== '' && publish.ipfs !== '') {
+      executeCreateSubdomain(publish.subdomain, publish.ipfs)
+    }
+  }, [dapp.address])
+
   const handleIPFSHashInput = async (e) => {
-    setipfs(e.target.value)
-    setipfsLoading(true)
-    setipfsSuccess(false)
-    setipfsError('')
+    dispatch({type:'setipfs',payload:e.target.value})
+    dispatch({type:'setipfsLoading',payload:true})
+    dispatch({type:'setipfsSuccess',payload:false})
+    dispatch({type:'setipfsError',payload:''})
     if (e.target.value !== '') {
       let metaData = await getMetaDataFromPackageHash(e.target.value)
       if (metaData === undefined) {
-        setipfsLoading(false)
-        setApiData(null)
-        setipfsError('No Package Found')
+        dispatch({type:'setipfsLoading',payload:false})
+        dispatch({type:'setApiData',payload:null})
+        dispatch({type:'setipfsError',payload:'No Package Found'})
       } else {
-        setipfsLoading(false)
-        setipfsSuccess(true)
-        setApiData(metaData)
+        dispatch({type:'setipfsLoading',payload:false})
+        dispatch({type:'setipfsSuccess',payload:true})
+        dispatch({type:'setApiData',payload:metaData})
       }
     } else {
-      setipfsLoading(false)
+      dispatch({type:'setipfsLoading',payload:false})
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('SUBMIT')
-    if (apiData && subdomain.length > 0) {
+    if (publish.apiData && publish.subdomain.length > 0) {
       if (dapp.github && dapp.github !== '') {
         const publishReq = await axios.post(
           'http://localhost:3001/publish',
           {
-            name: apiData.name,
-            description: apiData.description,
-            subtext: apiData.subtext,
-            icon: apiData.icon,
-            location: apiData.location,
-            pointers: [`${subdomain}.${MAIN_DOMAIN}`],
+            name: publish.apiData.name,
+            description: publish.apiData.description,
+            subtext: publish.apiData.subtext,
+            icon: publish.apiData.icon,
+            location: publish.apiData.location,
+            pointers: [`${publish.subdomain}.${MAIN_DOMAIN}`],
           },
           {
             headers: {
@@ -157,9 +163,9 @@ const PublishAPI = () => {
           },
         )
         console.log({ publishReq })
-        setShowSuccessModal(true)
+        dispatch({type:'setShowSuccessModal',payload:true})
       } else {
-        setShowSignInModal(true)
+        dispatch({type:'setShowSignInModal',payload:true})
       }
     }
   }
@@ -167,61 +173,61 @@ const PublishAPI = () => {
   const handleInvalid = async (e) => {
     e.preventDefault()
     if (e.target.name === 'ipfs') {
-      setipfsError('Please enter a valid IPFS hash')
+      dispatch({type:'setipfsError',payload:'Please enter a valid IPFS hash'})
     }
     if (e.target.name === 'ens') {
-      setsubdomainError('Please enter a valid ENS sub-domain')
+      dispatch({type:'setsubdomainError',payload:'Please enter a valid ENS sub-domain'})
     }
   }
 
-  const ipfsState = ipfsLoading
+  const ipfsState = publish.ipfsLoading
     ? 'loading'
-    : ipfsSuccess
+    : publish.ipfsSuccess
     ? 'success'
-    : ipfsError
+    : publish.ipfsError
     ? 'error'
     : ''
-  const subdomainState = subdomainLoading
+  const subdomainState = publish.subdomainLoading
     ? 'loading'
-    : subdomainLookupSuccess
+    : publish.subdomainLookupSuccess
     ? 'successfulLookup'
-    : subdomainRegisterSuccess
+    : publish.subdomainRegisterSuccess
     ? 'registered'
-    : subdomainError
+    : publish.subdomainError
     ? 'error'
     : ''
 
   return (
     <Flex className="publish">
-      {showConnectModal && (
+      {publish.showConnectModal && (
         <div sx={{ position: 'fixed', top: 0, left: 0, zIndex: 100000 }}>
           <Modal
             screen={'connect'}
             noLeftShift
             close={() => {
-              setShowConnectModal(false)
+              dispatch({type:'setShowConnectModal',payload:false})
             }}
           />
         </div>
       )}
-      {showSignInModal && (
+      {publish.showSignInModal && (
         <div sx={{ position: 'fixed', top: 0, left: 0, zIndex: 100000 }}>
           <Modal
             screen={'signin'}
             noLeftShift
             close={() => {
-              setShowSignInModal(false)
+              dispatch({type:'setShowSignInModal',payload:false})
             }}
           />
         </div>
       )}
-      {showSuccessModal && (
+      {publish.showSuccessModal && (
         <div sx={{ position: 'fixed', top: 0, left: 0, zIndex: 100000 }}>
           <Modal
             screen={'success'}
             noLeftShift
             close={() => {
-              setShowSuccessModal(false)
+              dispatch({type:'setShowSuccessModal',payload:false})
             }}
           />
         </div>
@@ -324,11 +330,11 @@ const PublishAPI = () => {
                 required
                 pattern="^Qm[1-9A-HJ-NP-Za-km-z]{44}(\/.*)?|^\/ipns\/.+"
                 onChange={handleIPFSHashInput}
-                value={ipfs}
-                disabled={ipfsSuccess}
+                value={publish.ipfs}
+                disabled={publish.ipfsSuccess}
               />
             </div>
-            {ipfsError && <ErrorMsg>{ipfsError}</ErrorMsg>}
+            {publish.ipfsError && <ErrorMsg>{publish.ipfsError}</ErrorMsg>}
           </div>
         </section>
         <section>
@@ -355,11 +361,11 @@ const PublishAPI = () => {
                 required
                 pattern="^[^.]+\.open\.web3\.eth$"
                 onChange={handleSubdomainChange}
-                value={subdomain}
+                value={publish.subdomain}
               />
               <span sx={{ ml: 3 }}>.open.web3.eth</span>
             </div>
-            {subdomainError && <ErrorMsg bottomshift>{subdomainError}</ErrorMsg>}
+            {publish.subdomainError && <ErrorMsg bottomshift>{publish.subdomainError}</ErrorMsg>}
             <p>
               <small>
                 This option will cost ~0.0023 ETH ($2.90 USD)
@@ -378,7 +384,7 @@ const PublishAPI = () => {
             <Button
               variant="primaryMedium"
               onClick={handleRegisterENS}
-              disabled={subdomain.length === 0}
+              disabled={publish.subdomain.length === 0}
             >
               Register ENS
             </Button>
@@ -395,7 +401,7 @@ const PublishAPI = () => {
             <Button
               variant="primaryMedium"
               type="submit"
-              disabled={subdomain.length === 0 || ipfs.length === 0}
+              disabled={publish.subdomain.length === 0 || publish.ipfs.length === 0}
             >
               Publish
             </Button>
@@ -414,7 +420,7 @@ const PublishAPI = () => {
       >
         <div className="title">Package Preview</div>
         <div className="wrapper" sx={{ maxWidth: '17.5rem' }}>
-          {apiData && <Card api={apiData} ipfsHash={ipfs} boxShadowOn noHover />}
+          {publish.apiData && <Card api={publish.apiData} ipfsHash={publish.ipfs} boxShadowOn noHover />}
         </div>
       </Flex>
     </Flex>

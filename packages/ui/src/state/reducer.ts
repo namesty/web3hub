@@ -33,7 +33,7 @@ function dappReducer(state = {}, action) {
 }
 
 function publishReducer(state = {}, action) {
-  console.log('dappReducer', state, action)
+  console.log('publishReducer', state, action)
   let newStateObj: publishType = InitialState.publish
   switch (action.type) {
     case 'setsubdomain':
@@ -83,10 +83,11 @@ function publishReducer(state = {}, action) {
   }
 }
 
-export default function mainReducer({ dapp, publish }, action) {
+export default function mainReducer(w3hubStates, action) {
   // middleware goes here, i.e calling analytics service, etc.
+  // localStorage.setItem('w3hubStates.publish', JSON.stringify(w3hubStates.publish))
   return {
-    dapp: dappReducer(dapp, action),
-    publish: publishReducer(publish, action)
+    dapp: dappReducer(w3hubStates.dapp, action),
+    publish: publishReducer(w3hubStates.publish, action)
   }
 }
