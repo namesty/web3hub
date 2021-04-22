@@ -1,7 +1,7 @@
 import { namehash } from "ethers/lib/utils"
 import { useCallback, useState } from "react"
 import contentHash from 'content-hash'
-import { ENS_REGISTRY, MAIN_DOMAIN } from "../../constants"
+import { ENS_REGISTRY, FIFS_REGISTRAR, MAIN_DOMAIN } from "../../constants"
 import { useStateValue } from "../../state/state"
 import { utf8ToKeccak256 } from "../../utils/hash"
 import { ethers } from "ethers"
@@ -33,9 +33,16 @@ export const useCreateSubdomain = () => {
       setStatus(0)
 
       await sendTransaction(
+        FIFS_REGISTRAR,
+        "function register(bytes32 label, address owner) external",
+        [utf8ToKeccak256(subdomain), signerAddress],
+        web3
+      )
+
+      await sendTransaction(
         ENS_REGISTRY,
-        "function setSubnodeRecord(bytes32 node, bytes32 label, address owner, address resolver, uint64 ttl) external",
-        [MAIN_DOMAIN_NAMEHASH, utf8ToKeccak256(subdomain), signerAddress, publicResolverAddress, "0"],
+        "function setResolver(bytes32 node, address owner)",
+        [domainNode, publicResolverAddress],
         web3
       )
 

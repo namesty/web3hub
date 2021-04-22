@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { jsx, Input, Flex, Button, Styled } from 'theme-ui'
 import { useCreateSubdomain } from '../../hooks/ens/useCreateSubdomain'
 import { useStateValue } from '../../state/state'
@@ -84,9 +84,9 @@ const PublishAPI = () => {
       }
       setsubdomainLoading(false)
     }
-  }
+  }, [dapp.address, dapp.web3])
 
-  const handleSubdomainChange = (e) => {
+  const handleSubdomainChange = async (e) => {
     setsubdomain(e.target.value)
     setsubdomainError('')
     setsubdomainSuccess(false)
