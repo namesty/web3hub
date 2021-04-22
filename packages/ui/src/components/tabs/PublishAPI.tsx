@@ -61,7 +61,7 @@ const PublishAPI = () => {
   // const [apiData, setApiData] = useState(null)
 
   //ens
-  const [executeCreateSubdomain, { error, isLoading, status }] = useCreateSubdomain()
+  const [executeCreateSubdomain, { status }] = useCreateSubdomain()
 
   useEffect(() => {
     if (publish.subdomain !== '') {
