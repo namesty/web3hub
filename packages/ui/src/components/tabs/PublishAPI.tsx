@@ -130,7 +130,7 @@ const PublishAPI = () => {
             subtext: publish.apiData.subtext,
             icon: publish.apiData.icon,
             locationUri: publish.ipfs,
-            pointers: [`${publish.subdomain}.${MAIN_DOMAIN}`],
+            pointerUris: [`${publish.subdomain}.${MAIN_DOMAIN}`],
           },
           {
             headers: {
