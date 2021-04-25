@@ -43,7 +43,19 @@ const getAll = async (_: Request, response: Response) => {
       apis,
     });
   } catch (error) {
-    response.json({ status: 500, error: error.message });
+    return response.json({ status: 500, error: error.message });
+  }
+};
+
+const getApi = async (request: Request, response: Response) => {
+  try {
+    const api = await Api.get(request.params.id);
+    return response.json({
+      status: 200,
+      api,
+    });
+  } catch (error) {
+    return response.json({ status: 500, error: error.message });
   }
 };
 
@@ -64,6 +76,7 @@ export const checkAndUpdateApis = async () => {
 };
 
 router.get("/active", getAll);
+router.get("/find/:id", getApi)
 router.post("/publish", checkAccessToken, validatePublishBody, publishApi);
 
 export { router as ApiController };

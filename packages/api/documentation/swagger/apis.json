@@ -51,6 +51,56 @@
       }
     }
   },
+  "/apis/find/{id}": {
+    "get": {
+      "summary": "Find a Web3API",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "string",
+          "description": "The Web3API ID",
+          "example": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Web3API Metadata",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "status": {
+                    "type": "integer"
+                  },
+                  "api": {
+                    "type": "object",
+                    "items": {
+                      "$ref": "#/definitions/Api"
+                    }
+                  }
+                },
+                "example": {
+                  "status": 200,
+                  "api": {
+                    "id": "3",
+                    "description": "DEX",
+                    "name": "Uniswap",
+                    "subtext": "Cool DEX",
+                    "icon": "uniswap.icon",
+                    "pointerUris": ["uniswap.api.eth"],
+                    "locationUri": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "/apis/publish": {
     "post": {
       "summary": "Create new API",

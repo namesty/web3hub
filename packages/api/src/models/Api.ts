@@ -116,4 +116,53 @@ export class Api {
       throw new Error(error);
     }
   }
+
+  public static async get(id: string) {
+    const connection = await db.connect();
+    try {
+      const apiData = await connection.manyOrNone(
+        `SELECT apis.id, 
+          apis.description, 
+          apis.name, 
+          apis.subtext,
+          apis.icon, 
+          uri_types.type as type, 
+          api_uris.uri FROM apis 
+        INNER JOIN api_uris ON apis.id = api_uris.fk_api_id 
+        INNER JOIN uri_types ON uri_types.id = api_uris.fk_uri_type_id 
+        WHERE apis.id = $1`,
+        [id]
+      );
+
+      if (!apiData.length) return null;
+
+      const sanitizeApi = (
+        acc: ApiData,
+        { name, subtext, description, id, icon, type, uri }
+      ) => {
+        const api = { ...acc };
+        if (type === "pointer") {
+          api["pointerUris"] = [...acc.pointerUris, uri];
+        } else {
+          api["locationUri"] = uri;
+        }
+
+        return {
+          name,
+          subtext,
+          description,
+          id,
+          icon,
+          ...api,
+        };
+      };
+
+      const api = apiData.reduce(sanitizeApi, { pointerUris: [] });
+
+      return api;
+    } catch (error) {
+      console.log("Error on method: Api.get() -> ", error.message);
+      throw new Error(error);
+    }
+  }
 }
