@@ -76,27 +76,7 @@ export class Api {
         WHERE visible = true`
       );
 
-      const sanitizeApis = (acc: ApiData[], api): ApiData[] => {
-        const { authority, type, uri, ...metadata } = api;
-        let apiAdded = acc.find(({ id }) => id === api.id);
-        let apiSanitized = {
-          ...metadata,
-          pointerUris: [],
-          ...(apiAdded || {}),
-        };
-
-        if (api.type === "pointer") {
-          apiSanitized.pointerUris.push(api.uri);
-        } else {
-          apiSanitized.locationUri = api.uri;
-        }
-
-        if (!apiAdded) return [...acc, apiSanitized];
-        apiAdded = apiSanitized;
-        return acc;
-      };
-
-      return apis.reduce(sanitizeApis, []);
+      return apis.reduce(this.sanitizeApis, []);
     } catch (error) {
       console.log("Error on method: Api.getAllActive() -> ", error.message);
       throw new Error(error);
@@ -115,5 +95,56 @@ export class Api {
       console.log("Error on method: Api.deactivate() -> ", error.message);
       throw new Error(error);
     }
+  }
+
+  public static async get(name: string, visible = true) {
+    const connection = await db.connect();
+    try {
+      const apiData = await connection.manyOrNone(
+        `SELECT apis.id, 
+          apis.description, 
+          apis.name, 
+          apis.subtext,
+          apis.icon, 
+          uri_types.type as type, 
+          api_uris.uri FROM apis 
+        INNER JOIN api_uris ON apis.id = api_uris.fk_api_id 
+        INNER JOIN uri_types ON uri_types.id = api_uris.fk_uri_type_id 
+        WHERE LOWER(apis.name) LIKE $1 AND apis.visible = $2`,
+        [`%${name}%`, visible]
+      );
+
+      if (!apiData.length) return null;
+
+      const api = apiData.reduce(this.sanitizeApis, []);
+
+      return api;
+    } catch (error) {
+      console.log("Error on method: Api.get() -> ", error.message);
+      throw new Error(error);
+    }
+  }
+
+  private static sanitizeApis(acc: ApiData[], api): ApiData[] {
+    const { authority, type, uri, name, ...metadata } = api;
+
+    let apiAdded = acc.find(({ name }) => name === api.name);
+
+    let apiSanitized = {
+      ...metadata,
+      name,
+      pointerUris: [],
+      ...(apiAdded || {}),
+    };
+
+    if (api.type === "pointer") {
+      apiSanitized.pointerUris.push(api.uri);
+    } else {
+      apiSanitized.locationUri = api.uri;
+    }
+
+    if (!apiAdded) return [...acc, apiSanitized];
+    apiAdded = apiSanitized;
+    return acc;
   }
 }
