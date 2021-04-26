@@ -75,7 +75,7 @@ export class Api {
         INNER JOIN uri_types ON uri_types.id = api_uris.fk_uri_type_id 
         WHERE visible = true`
       );
-console.log(apis)
+
       return apis.reduce(this.sanitizeApis, []);
     } catch (error) {
       console.log("Error on method: Api.getAllActive() -> ", error.message);
@@ -97,7 +97,7 @@ console.log(apis)
     }
   }
 
-  public static async get(name: string) {
+  public static async get(name: string, visible = true) {
     const connection = await db.connect();
     try {
       const apiData = await connection.manyOrNone(
@@ -110,8 +110,8 @@ console.log(apis)
           api_uris.uri FROM apis 
         INNER JOIN api_uris ON apis.id = api_uris.fk_api_id 
         INNER JOIN uri_types ON uri_types.id = api_uris.fk_uri_type_id 
-        WHERE LOWER(apis.name) LIKE $1`,
-        [`%${name}%`]
+        WHERE LOWER(apis.name) LIKE $1 AND apis.visible = $2`,
+        [`%${name}%`, visible]
       );
 
       if (!apiData.length) return null;
@@ -126,10 +126,13 @@ console.log(apis)
   }
 
   private static sanitizeApis(acc: ApiData[], api): ApiData[] {
-    const { authority, type, uri, ...metadata } = api;
-    let apiAdded = acc.find(({ id }) => id === api.id);
+    const { authority, type, uri, name, ...metadata } = api;
+
+    let apiAdded = acc.find(({ name }) => name === api.name);
+
     let apiSanitized = {
       ...metadata,
+      name,
       pointerUris: [],
       ...(apiAdded || {}),
     };

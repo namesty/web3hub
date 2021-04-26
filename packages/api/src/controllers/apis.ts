@@ -49,6 +49,7 @@ const getAll = async (_: Request, response: Response) => {
 
 const getApi = async (request: Request, response: Response) => {
   try {
+    // @TODO: Add dynamic param visible
     const api = await Api.get(request.params.name);
     return response.json({
       status: 200,
