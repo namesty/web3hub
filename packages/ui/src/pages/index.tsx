@@ -10,9 +10,23 @@ import Navbar from '../components/Navbar'
 import Header from '../components/Header'
 import BGWave from '../components/BGWave'
 import BottomSpace from '../components/BottomSpace'
-import Card from '../components/Card'
+
+import { useEffect } from 'react'
+import axios from 'axios'
 
 const Home = () => {
+  useEffect(() => {
+    (async () => {
+      console.log('test all')
+      const dataAll = await axios.get(`http://localhost:3001/apis/all`) 
+      console.log(dataAll)
+
+      console.log('test find')
+      let name = 'SimpleStorage'
+      const dataFind = await axios.get(`http://localhost:3001/apis/find/${name}`) 
+      console.log(dataFind)
+    })();
+  }, [])
   return (
     <Layout>
       <Flex>
