@@ -49,7 +49,7 @@ const getAll = async (_: Request, response: Response) => {
 
 const getApi = async (request: Request, response: Response) => {
   try {
-    const api = await Api.get(request.params.id);
+    const api = await Api.get(request.params.name);
     return response.json({
       status: 200,
       api,
@@ -76,7 +76,7 @@ export const checkAndUpdateApis = async () => {
 };
 
 router.get("/active", getAll);
-router.get("/find/:id", getApi)
+router.get("/find/:name", getApi)
 router.post("/publish", checkAccessToken, validatePublishBody, publishApi);
 
 export { router as ApiController };

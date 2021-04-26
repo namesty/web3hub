@@ -75,28 +75,8 @@ export class Api {
         INNER JOIN uri_types ON uri_types.id = api_uris.fk_uri_type_id 
         WHERE visible = true`
       );
-
-      const sanitizeApis = (acc: ApiData[], api): ApiData[] => {
-        const { authority, type, uri, ...metadata } = api;
-        let apiAdded = acc.find(({ id }) => id === api.id);
-        let apiSanitized = {
-          ...metadata,
-          pointerUris: [],
-          ...(apiAdded || {}),
-        };
-
-        if (api.type === "pointer") {
-          apiSanitized.pointerUris.push(api.uri);
-        } else {
-          apiSanitized.locationUri = api.uri;
-        }
-
-        if (!apiAdded) return [...acc, apiSanitized];
-        apiAdded = apiSanitized;
-        return acc;
-      };
-
-      return apis.reduce(sanitizeApis, []);
+console.log(apis)
+      return apis.reduce(this.sanitizeApis, []);
     } catch (error) {
       console.log("Error on method: Api.getAllActive() -> ", error.message);
       throw new Error(error);
@@ -117,7 +97,7 @@ export class Api {
     }
   }
 
-  public static async get(id: string) {
+  public static async get(name: string) {
     const connection = await db.connect();
     try {
       const apiData = await connection.manyOrNone(
@@ -130,39 +110,38 @@ export class Api {
           api_uris.uri FROM apis 
         INNER JOIN api_uris ON apis.id = api_uris.fk_api_id 
         INNER JOIN uri_types ON uri_types.id = api_uris.fk_uri_type_id 
-        WHERE apis.id = $1`,
-        [id]
+        WHERE LOWER(apis.name) LIKE $1`,
+        [`%${name}%`]
       );
 
       if (!apiData.length) return null;
 
-      const sanitizeApi = (
-        acc: ApiData,
-        { name, subtext, description, id, icon, type, uri }
-      ) => {
-        const api = { ...acc };
-        if (type === "pointer") {
-          api["pointerUris"] = [...acc.pointerUris, uri];
-        } else {
-          api["locationUri"] = uri;
-        }
-
-        return {
-          name,
-          subtext,
-          description,
-          id,
-          icon,
-          ...api,
-        };
-      };
-
-      const api = apiData.reduce(sanitizeApi, { pointerUris: [] });
+      const api = apiData.reduce(this.sanitizeApis, []);
 
       return api;
     } catch (error) {
       console.log("Error on method: Api.get() -> ", error.message);
       throw new Error(error);
     }
+  }
+
+  private static sanitizeApis(acc: ApiData[], api): ApiData[] {
+    const { authority, type, uri, ...metadata } = api;
+    let apiAdded = acc.find(({ id }) => id === api.id);
+    let apiSanitized = {
+      ...metadata,
+      pointerUris: [],
+      ...(apiAdded || {}),
+    };
+
+    if (api.type === "pointer") {
+      apiSanitized.pointerUris.push(api.uri);
+    } else {
+      apiSanitized.locationUri = api.uri;
+    }
+
+    if (!apiAdded) return [...acc, apiSanitized];
+    apiAdded = apiSanitized;
+    return acc;
   }
 }
