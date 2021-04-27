@@ -52,7 +52,7 @@ const SortNav = () => {
           }}
         >
           <span>
-            <b>46</b>&nbsp;API's
+            <b>{dapp.apis.length}</b>&nbsp;API's
           </span>
           <div>
             <Select sx={{ minWidth: '8rem', border: 'none' }}>

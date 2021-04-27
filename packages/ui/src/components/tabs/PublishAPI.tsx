@@ -406,7 +406,7 @@ const PublishAPI = () => {
         <div className="title">Package Preview</div>
         <div className="wrapper" sx={{ maxWidth: '17.5rem' }}>
           {publish.apiData && (
-            <Card api={publish.apiData} ipfsHash={publish.ipfs} boxShadowOn noHover />
+            <Card api={publish.apiData} boxShadowOn noHover />
           )}
         </div>
       </Flex>

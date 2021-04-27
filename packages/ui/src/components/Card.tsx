@@ -8,12 +8,11 @@ import { cloudFlareGateway } from '../constants'
 
 type CardProps = {
   api?: any
-  ipfsHash?: string
   boxShadowOn?: boolean
   noHover?: boolean
 }
 
-const Card = ({ api, ipfsHash = "#", boxShadowOn, noHover }: CardProps) => {
+const Card = ({ api, boxShadowOn, noHover }: CardProps) => {
   return (
     <div
       className="Card"
@@ -28,13 +27,16 @@ const Card = ({ api, ipfsHash = "#", boxShadowOn, noHover }: CardProps) => {
         },
       }}
     >
-      <Link href={`${ipfsHash}`}>
+      <Link href={`apis/ens/${api.pointerUris[0]}`}>
         <a sx={{ textDecoration: 'none', p: 4, width: '100%', height: '100%' }}>
           <div className="wrap-contents">
             <div sx={{ display: 'block', m: 'auto' }}>
               <img
                 className="api-logo"
-                src={`${cloudFlareGateway}${ipfsHash}${api.icon.replace('./','/')}`}
+                src={`${cloudFlareGateway}${api.locationUri.split(
+                  'ipfs/',
+                  '',
+                )}${api.icon.replace('./', '/')}`}
                 sx={{
                   width: '8.75rem',
                   height: '8.75rem',
@@ -43,7 +45,6 @@ const Card = ({ api, ipfsHash = "#", boxShadowOn, noHover }: CardProps) => {
                 }}
               />
             </div>
-
             <div className="info">
               <div className="row" sx={{ justifyContent: 'space-between' }}>
                 <Styled.h3
@@ -86,7 +87,17 @@ const Card = ({ api, ipfsHash = "#", boxShadowOn, noHover }: CardProps) => {
                   <Stars count={320} />
                 </Flex>
                 <Flex sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <Badge label="ipfs" />
+                  <div
+                    onClick={(e) => {
+                      e.preventDefault()
+                      window.open(
+                        `${cloudFlareGateway}${api.locationUri.split('ipfs/', '')}`,
+                      )
+                    }}
+                    sx={{ cursor: 'pointer', '*': { cursor: 'pointer' } }}
+                  >
+                    <Badge label="ipfs" />
+                  </div>
                 </Flex>
               </div>
             </div>

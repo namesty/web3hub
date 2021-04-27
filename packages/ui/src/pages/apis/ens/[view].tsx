@@ -6,12 +6,20 @@ import Navbar from '../../../components/Navbar'
 import Header from '../../../components/Header'
 import BottomSpace from '../../../components/BottomSpace'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import axios from 'axios'
 import APIDetail from '../../../components/APIDetail'
-
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 const ApiView = () => {
   const router = useRouter()
+  const [apiData, setapiData] = useState()
+  // useEffect(() => {
+  //   ;(async () => {
+  //     const { data: apiData } = await axios.get(
+  //       `http://localhost:3001/apis/ens/${router.asPath.split('/apis/ens/')[1]}`,
+  //     )
+  //     setapiData(apiData)
+  //   })()
+  // }, [])
   return (
     <Layout>
       <Flex>
@@ -19,7 +27,7 @@ const ApiView = () => {
         <main>
           <div className="contents">
             <Header backNav={`Browse API's`} />
-            <APIDetail />
+            <APIDetail api={apiData} />
             <BottomSpace />
           </div>
         </main>

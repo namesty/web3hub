@@ -1,25 +1,20 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Styled, Button } from 'theme-ui'
-import Badge from '../components/Badge'
 import BottomSpace from '../components/BottomSpace'
 import Stars from '../components/Stars'
 import PlaygroundImg from '../../public/images/playground.svg'
-import { useRouter } from 'next/router'
 import { cloudFlareGateway, sampleAPI } from '../constants'
 
 type APIDetailProps = {
   api?: any
-  ipfsHash?: string
   ensAddress?: string
 }
 
 const APIDetail = ({
   api = sampleAPI,
   ensAddress = 'simplestorage.open.web3.eth',
-  ipfsHash = 'QmRx5RkbgfoMQTbRPG5izfxxDtny3Hin3pj4EB2ocxVjXA',
 }: APIDetailProps) => {
-  const router = useRouter()
   return (
     <div
       className="wrap"
@@ -33,7 +28,7 @@ const APIDetail = ({
       <Flex className="top">
         <img
           className="api-logo"
-          src={`${cloudFlareGateway}${ipfsHash}${api.icon.replace('./', '/')}`}
+          src={`${cloudFlareGateway}${api.locationUri}${api.icon.replace('./', '/')}`}
           sx={{
             width: '13.125rem',
             height: '13.125rem',

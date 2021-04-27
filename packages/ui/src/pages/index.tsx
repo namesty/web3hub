@@ -13,14 +13,6 @@ import BottomSpace from '../components/BottomSpace'
 import Card from '../components/Card'
 
 const Home = () => {
-  // useEffect(() => {
-  //   (async () => {
-  //     console.log('test find')
-  //     let name = 'SimpleStorage'
-  //     const dataFind = await axios.get(`http://localhost:3001/apis/find/${name}`) 
-  //     console.log(dataFind)
-  //   })();
-  // }, [])
   const [{ dapp }, dispatch] = useStateValue()
   return (
     <Layout>
