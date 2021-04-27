@@ -90,6 +90,13 @@ const PublishAPI = () => {
     }
   }, [status])
 
+  
+  useEffect(() => {
+    if(dapp.github === '') {
+      dispatch({ type: 'setShowSignInModal', payload: true })  
+    }
+  }, [dapp.github])
+
   useEffect(() => {
     if (publish.subdomain !== '' && publish.ipfs !== '') {
       executeCreateSubdomain(publish.subdomain, publish.ipfs)
@@ -129,7 +136,7 @@ const PublishAPI = () => {
             description: publish.apiData.description,
             subtext: publish.apiData.subtext,
             icon: publish.apiData.icon,
-            locationUri: publish.ipfs,
+            locationUri: 'ipfs/'+publish.ipfs,
             pointerUris: [`${publish.subdomain}.${MAIN_DOMAIN}`],
           },
           {
@@ -193,9 +200,6 @@ const PublishAPI = () => {
           <Modal
             screen={'signin'}
             noLeftShift
-            close={() => {
-              dispatch({ type: 'setShowSignInModal', payload: false })
-            }}
           />
         </div>
       )}

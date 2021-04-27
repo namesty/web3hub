@@ -10,6 +10,7 @@ let initialState = {
     network: networkID,
     web3: undefined,
     apis: [],
+    github: ''
   },
   publish: {
     subdomain: '',
