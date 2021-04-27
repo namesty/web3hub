@@ -8,7 +8,7 @@ import { cloudFlareGateway } from '../constants'
 
 type CardProps = {
   api?: any
-  ipfsHash: string
+  ipfsHash?: string
   boxShadowOn?: boolean
   noHover?: boolean
 }
