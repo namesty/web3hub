@@ -111,7 +111,7 @@ export class Api {
         INNER JOIN api_uris ON apis.id = api_uris.fk_api_id 
         INNER JOIN uri_types ON uri_types.id = api_uris.fk_uri_type_id 
         WHERE LOWER(apis.name) LIKE $1 AND apis.visible = $2`,
-        [`%${name}%`, visible]
+        [`%${name.toLowerCase()}%`, visible]
       );
 
       if (!apiData.length) return null;
