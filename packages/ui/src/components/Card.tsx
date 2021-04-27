@@ -13,7 +13,7 @@ type CardProps = {
   noHover?: boolean
 }
 
-const Card = ({ api, ipfsHash, boxShadowOn, noHover }: CardProps) => {
+const Card = ({ api, ipfsHash = "#", boxShadowOn, noHover }: CardProps) => {
   return (
     <div
       className="Card"
@@ -29,7 +29,7 @@ const Card = ({ api, ipfsHash, boxShadowOn, noHover }: CardProps) => {
       }}
     >
       <Link href={`${ipfsHash}`}>
-        <a sx={{ textDecoration: 'none', p: 4 }}>
+        <a sx={{ textDecoration: 'none', p: 4, width: '100%', height: '100%' }}>
           <div className="wrap-contents">
             <div sx={{ display: 'block', m: 'auto' }}>
               <img

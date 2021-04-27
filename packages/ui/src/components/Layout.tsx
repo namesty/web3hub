@@ -14,15 +14,17 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   const { theme } = useThemeUI()
   const [, dispatch] = useStateValue()
-  const { data: apis, error } = useSWR('/api/apis')
+  const { data: apis, error } = useSWR('http://localhost:3001/apis/active')
   // https://github.com/system-ui/theme-ui/issues/834#issuecomment-625865772
   const pageLevelAnimationTiming = timing[3] +'s'
   
   useEffect(() => {
-    dispatch({
-      type: 'SET_AVAILABLE_APIS',
-      payload: apis,
-    })
+    if(apis && apis.apis) {
+      dispatch({
+        type: 'SET_AVAILABLE_APIS',
+        payload: apis.apis,
+      })
+    }
   }, [apis])
 
   return (

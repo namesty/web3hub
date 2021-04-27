@@ -16,6 +16,7 @@ const SortNav = () => {
   useEffect(() => {
     setsearchOptions(dapp.apis)
   }, [dapp.apis])
+  
 
   return (
     <nav>

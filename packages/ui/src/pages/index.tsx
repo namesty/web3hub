@@ -10,23 +10,18 @@ import Navbar from '../components/Navbar'
 import Header from '../components/Header'
 import BGWave from '../components/BGWave'
 import BottomSpace from '../components/BottomSpace'
-
-import { useEffect } from 'react'
-import axios from 'axios'
+import Card from '../components/Card'
 
 const Home = () => {
-  useEffect(() => {
-    (async () => {
-      console.log('test all')
-      const dataAll = await axios.get(`http://localhost:3001/apis/active`) 
-      console.log(dataAll)
-
-      console.log('test find')
-      let name = 'SimpleStorage'
-      const dataFind = await axios.get(`http://localhost:3001/apis/find/${name}`) 
-      console.log(dataFind)
-    })();
-  }, [])
+  // useEffect(() => {
+  //   (async () => {
+  //     console.log('test find')
+  //     let name = 'SimpleStorage'
+  //     const dataFind = await axios.get(`http://localhost:3001/apis/find/${name}`) 
+  //     console.log(dataFind)
+  //   })();
+  // }, [])
+  const [{ dapp }, dispatch] = useStateValue()
   return (
     <Layout>
       <Flex>
@@ -37,9 +32,9 @@ const Home = () => {
             <section className="content">
               <SortNav />
               <ApiGrid>
-                {/* {dapp?.apis && dapp.apis.map((api, idx) => (
+                {dapp?.apis && dapp.apis.map((api, idx) => (
                   <Card api={api} boxShadowOn key={idx + '-api'} />
-                ))} */}
+                ))}
               </ApiGrid>
             </section>
             <BottomSpace />
