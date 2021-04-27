@@ -18,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       console.log('test all')
-      const dataAll = await axios.get(`http://localhost:3001/apis/all`) 
+      const dataAll = await axios.get(`http://localhost:3001/apis/active`) 
       console.log(dataAll)
 
       console.log('test find')
