@@ -11,9 +11,15 @@ import Header from '../components/Header'
 import BGWave from '../components/BGWave'
 import BottomSpace from '../components/BottomSpace'
 import Card from '../components/Card'
+import SearchBox from '../components/SearchBox'
+import { useEffect } from 'react'
 
 const Home = () => {
-  const [{ dapp }, dispatch] = useStateValue()
+  const [{ dapp, search }, dispatch] = useStateValue()
+  useEffect(() => {
+    // search !== undefined ? console.log(search.sortedApi)  : null
+  }, [search])
+  
   return (
     <Layout>
       <Flex>
@@ -24,9 +30,14 @@ const Home = () => {
             <section className="content">
               <SortNav />
               <ApiGrid>
-                {dapp?.apis && dapp.apis.map((api, idx) => (
-                  <Card api={api} boxShadowOn key={idx + '-api'} />
-                ))}
+                {search !== undefined && search.sortedApi !== -1 ? (
+                  <Card api={search.sortedApi[0]} boxShadowOn />
+                ) : (
+                  dapp?.apis &&
+                  dapp.apis.map((api, idx) => (
+                    <Card api={api} boxShadowOn key={idx + '-api'} />
+                  ))
+                )}
               </ApiGrid>
             </section>
             <BottomSpace />

@@ -4,7 +4,7 @@ import { jsx, Flex, Styled, Button } from 'theme-ui'
 import BottomSpace from '../components/BottomSpace'
 import Stars from '../components/Stars'
 import PlaygroundImg from '../../public/images/playground.svg'
-import { cloudFlareGateway, sampleAPI } from '../constants'
+import { cloudFlareGateway } from '../constants'
 
 type APIDetailProps = {
   api?: any
@@ -12,7 +12,7 @@ type APIDetailProps = {
 }
 
 const APIDetail = ({
-  api = sampleAPI,
+  api,
   ensAddress = 'simplestorage.open.web3.eth',
 }: APIDetailProps) => {
   return (
@@ -28,7 +28,7 @@ const APIDetail = ({
       <Flex className="top">
         <img
           className="api-logo"
-          src={`${cloudFlareGateway}${api.locationUri}${api.icon.replace('./', '/')}`}
+          src={`${cloudFlareGateway}${api.locationUri.split('ipfs/')[0]}${api.icon.replace('./', '/')}`}
           sx={{
             width: '13.125rem',
             height: '13.125rem',
@@ -144,7 +144,7 @@ const APIDetail = ({
               </a>
             </li>
 
-            {api.links.map((link, idx) => {
+            {'links' in api && api.links.map((link, idx) => {
               if (link.name === 'github') {
                 return (
                   <li sx={{ display: 'flex' }} key={'apilink' + idx}>

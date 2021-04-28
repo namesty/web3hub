@@ -11,15 +11,19 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 const ApiView = () => {
   const router = useRouter()
-  const [apiData, setapiData] = useState()
-  // useEffect(() => {
-  //   ;(async () => {
-  //     const { data: apiData } = await axios.get(
-  //       `http://localhost:3001/apis/ens/${router.asPath.split('/apis/ens/')[1]}`,
-  //     )
-  //     setapiData(apiData)
-  //   })()
-  // }, [])
+  const [apiDataRes, setapiDataRes] = useState(null)
+  useEffect(() => {
+    async function fetchApiDetails() {
+      if(router.query.view !== undefined) {
+        const { data: apiData } = await axios.get(
+          `http://localhost:3001/apis/find/ens/${router.query.view}`,
+        )
+        console.log(apiData)
+        setapiDataRes(apiData.api)
+      }
+    }
+    fetchApiDetails()
+  }, [router.query.view])
   return (
     <Layout>
       <Flex>
@@ -27,7 +31,7 @@ const ApiView = () => {
         <main>
           <div className="contents">
             <Header backNav={`Browse API's`} />
-            <APIDetail api={apiData} />
+            {apiDataRes !== null && <APIDetail api={apiDataRes} />}
             <BottomSpace />
           </div>
         </main>

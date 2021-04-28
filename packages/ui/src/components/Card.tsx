@@ -8,11 +8,12 @@ import { cloudFlareGateway } from '../constants'
 
 type CardProps = {
   api?: any
+  ipfsHash?: string
   boxShadowOn?: boolean
   noHover?: boolean
 }
 
-const Card = ({ api, boxShadowOn, noHover }: CardProps) => {
+const Card = ({ api, ipfsHash, boxShadowOn, noHover }: CardProps) => {
   return (
     <div
       className="Card"
@@ -27,16 +28,13 @@ const Card = ({ api, boxShadowOn, noHover }: CardProps) => {
         },
       }}
     >
-      <Link href={`apis/ens/${api.pointerUris[0]}`}>
+      <Link href={`${ipfsHash || 'apis/ens/'+api.pointerUris[0]}`}>
         <a sx={{ textDecoration: 'none', p: 4, width: '100%', height: '100%' }}>
           <div className="wrap-contents">
             <div sx={{ display: 'block', m: 'auto' }}>
               <img
                 className="api-logo"
-                src={`${cloudFlareGateway}${api.locationUri.split(
-                  'ipfs/',
-                  '',
-                )}${api.icon.replace('./', '/')}`}
+                src={`${cloudFlareGateway}${ipfsHash || api.locationUri.split('ipfs/')[1]}${api.icon.replace('./','/')}`}
                 sx={{
                   width: '8.75rem',
                   height: '8.75rem',
@@ -45,6 +43,7 @@ const Card = ({ api, boxShadowOn, noHover }: CardProps) => {
                 }}
               />
             </div>
+
             <div className="info">
               <div className="row" sx={{ justifyContent: 'space-between' }}>
                 <Styled.h3
@@ -87,17 +86,7 @@ const Card = ({ api, boxShadowOn, noHover }: CardProps) => {
                   <Stars count={320} />
                 </Flex>
                 <Flex sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <div
-                    onClick={(e) => {
-                      e.preventDefault()
-                      window.open(
-                        `${cloudFlareGateway}${api.locationUri.split('ipfs/', '')}`,
-                      )
-                    }}
-                    sx={{ cursor: 'pointer', '*': { cursor: 'pointer' } }}
-                  >
-                    <Badge label="ipfs" />
-                  </div>
+                  <Badge label="ipfs" />
                 </Flex>
               </div>
             </div>

@@ -9,14 +9,24 @@ const SortNav = () => {
   const [{ dapp }, dispatch] = useStateValue()
 
   // TODO: Turn this into reusable hook because it also exsits on playground
-  const [searchValues, setsearchValues] = useState([])
   const [searchOptions, setsearchOptions] = useState(dapp.apis)
-  const handleSearchValuesChange = (values) => setsearchValues(values)
+  const handleSearchValuesChange = (value) => {
+    if(value.length === 0) {
+      dispatch({
+        type: 'sortSelectApi',
+        payload: -1
+      })  
+    } else {
+      dispatch({
+        type: 'sortSelectApi',
+        payload: value
+      })
+    }
+  }
 
   useEffect(() => {
     setsearchOptions(dapp.apis)
   }, [dapp.apis])
-  
 
   return (
     <nav>
@@ -25,12 +35,11 @@ const SortNav = () => {
           <SearchBox
             detachedResults
             large
-            searchBy="id"
+            searchBy="name"
             placeholder={'Search'}
-            labelField="id"
-            valueField="id"
+            labelField="name"
+            valueField="name"
             options={searchOptions}
-            values={searchValues}
             onChange={handleSearchValuesChange}
           />
         )}
