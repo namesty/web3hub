@@ -20,6 +20,6 @@ export interface UserData {
   username?: string;
   address?: string;
   accessToken?: string;
-  addressType?: number;
+  authType?: number;
   githubId?: string;
 }
