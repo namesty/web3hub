@@ -39,7 +39,7 @@
                       "name": "Paraswap",
                       "subtext": "Cool aggregator",
                       "icon": "paraswap.icon",
-                      "pointerUris": ["uniswap.api.eth"],
+                      "pointerUris": ["paraswap.api.eth"],
                       "locationUri": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
                     }
                   ]
@@ -53,7 +53,7 @@
   },
   "/apis/find/{name}": {
     "get": {
-      "summary": "Find a Web3API",
+      "summary": "Find a Web3API based on the name",
       "produces": ["application/json"],
       "parameters": [
         {
@@ -62,6 +62,75 @@
           "type": "string",
           "description": "The Web3API name pattern",
           "example": "uni",
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Web3API Metadata",
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "status": {
+                    "type": "integer"
+                  },
+                  "apis": {
+                    "type": "object",
+                    "items": {
+                      "$ref": "#/definitions/Api"
+                    }
+                  }
+                },
+                "example": {
+                  "status": 200,
+                  "apis": [
+                    {
+                      "id": "3",
+                      "description": "DEX",
+                      "name": "Uniswap",
+                      "subtext": "Cool DEX",
+                      "icon": "uniswap.icon",
+                      "pointerUris": ["uniswap.api.eth"],
+                      "locationUri": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
+                    },
+                    {
+                      "id": "4",
+                      "description": "DEX Aggregator",
+                      "name": "Paraswap",
+                      "subtext": "Cool aggregator",
+                      "icon": "paraswap.icon",
+                      "pointerUris": ["paraswap.api.eth"],
+                      "locationUri": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/apis/find/{location}/{pointer}": {
+    "get": {
+      "summary": "Find a Web3API based on the ",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "location",
+          "type": "string",
+          "description": "The Web3API storage",
+          "example": "ens",
+          "required": true
+        },
+        {
+          "in": "path",
+          "name": "pointer",
+          "type": "string",
+          "description": "The Web3API pointer",
+          "example": "uniswap.web3api.eth",
           "required": true
         }
       ],
@@ -84,17 +153,15 @@
                 },
                 "example": {
                   "status": 200,
-                  "apis": [
-                    {
-                      "id": "3",
-                      "description": "DEX",
-                      "name": "Uniswap",
-                      "subtext": "Cool DEX",
-                      "icon": "uniswap.icon",
-                      "pointerUris": ["uniswap.api.eth"],
-                      "locationUri": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
-                    }
-                  ]
+                  "api": {
+                    "id": "3",
+                    "description": "DEX",
+                    "name": "Uniswap",
+                    "subtext": "Cool DEX",
+                    "icon": "uniswap.icon",
+                    "pointerUris": ["uniswap.api.eth"],
+                    "locationUri": "ipfs://QmUvHu18pVVJu5WqWbB2YJxb7LkL4YeKpzwYhuetWqD3pj"
+                  }
                 }
               }
             }
