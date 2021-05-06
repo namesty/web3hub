@@ -38,15 +38,15 @@ const Playground = ({ api }: PlaygroundProps) => {
       let domqueries = Array.from(queries)
       domqueries.shift()
       let methodsList = []
-      domqueries.map((row)=>{
+      await domqueries.map((row)=>{
         async function getMethods () {
           let queryData = await axios.get(`${cloudFlareGateway.replace('/ipfs/','')}${row.attribs.href}`)
           let key = row.attribs.href.split('meta/queries/')[1].split('.graphql')[0]
           methodsList.push({ id: key, value: queryData.data })
-          setMethods(methodsList)
         }
         getMethods()
       })
+      setMethods(methodsList)
     }
     getRelatedFunctions()
   }, [])
