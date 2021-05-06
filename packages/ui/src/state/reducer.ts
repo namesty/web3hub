@@ -34,7 +34,6 @@ function dappReducer(state = {}, action) {
 }
 
 function searchReducer(state = {}, action) {
-  console.log('searchReducer', state, action)
   let newStateObj: searchType = InitialState.search
   switch (action.type) {
     case 'sortSelectApi':
@@ -45,7 +44,6 @@ function searchReducer(state = {}, action) {
 }
 
 function publishReducer(state = {}, action) {
-  console.log('publishReducer', state, action)
   let newStateObj: publishType = InitialState.publish
   switch (action.type) {
     case 'setsubdomain':

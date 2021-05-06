@@ -24,7 +24,7 @@ const CreateApi = () => {
     <Layout>
       <Flex>
         <main sx={{ pb: 5 }}>
-          <div className="contents animate" sx={{ maxWidth: 'calc(76.5rem + 112px)' }}>
+          <div className="contents" sx={{ maxWidth: 'calc(76.5rem + 112px)' }}>
             <Header title={'Create a Web3API'}/>
             <Flex
               className="tabs"

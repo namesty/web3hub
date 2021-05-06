@@ -1,30 +1,31 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Button, Styled } from 'theme-ui'
-import Badge from './Badge'
-import Stars from './Stars'
-import BGWave from '../components/BGWave'
 import React, { useEffect, useState } from 'react'
-import SelectBox from './SelectBox'
-import SearchBox from './SearchBox'
-import { useStateValue } from '../state/state'
 import axios from 'axios'
-import { cloudFlareGateway } from '../constants'
 import cheerio from 'cheerio'
 import cleaner from 'clean-html'
+import { useRouter } from 'next/router'
+import { useStateValue } from '../state/state'
+import { cloudFlareGateway } from '../constants'
+
+import Badge from './Badge'
+import Stars from './Stars'
+import BGWave from './BGWave'
+import SelectBox from './SelectBox'
+import SearchBox from './SearchBox'
 
 type PlaygroundProps = {
   api?: any
 }
 
 const Playground = ({ api }: PlaygroundProps) => {
-  const [{ dapp }, dispatch] = useStateValue()
-
+  const [{ dapp }] = useStateValue()
+  const router = useRouter()
   const [searchOptions, setsearchOptions] = useState(dapp.apis)
   const [methods, setMethods] = useState<any>({})
   const [selectedMethod, setSelectMethod] = useState<any>(Object.entries(methods)[0] || '')
-  const [queryValues, setqueryValues] = useState([])
-  const handleShowSchema = (e: React.BaseSyntheticEvent) => console.log(e.target)
+  const handleShowSchema = (e: React.BaseSyntheticEvent) => console.log('TODO')
   const handleQueryValuesChange = (method) => setSelectMethod(method[0].value)
 
   useEffect(() => {
@@ -53,10 +54,7 @@ const Playground = ({ api }: PlaygroundProps) => {
   useEffect(() => {
     setsearchOptions(dapp.apis)
   }, [dapp.apis])
-
-  // useEffect(() => {
-  // }, [methods])
-
+  
   return (
     <div
       className="playground"
@@ -73,7 +71,7 @@ const Playground = ({ api }: PlaygroundProps) => {
         },
       }}
     >
-      {searchOptions && searchOptions.length > 0 && (
+      {searchOptions && searchOptions.length > 0 &&  (
         <React.Fragment>
           <Flex
             className="header"
@@ -94,7 +92,7 @@ const Playground = ({ api }: PlaygroundProps) => {
               valueField="name"
               options={searchOptions}
               onChange={() => {
-                console.log('change')
+                console.log('TODO')
               }}
             />
             <Flex
@@ -107,7 +105,7 @@ const Playground = ({ api }: PlaygroundProps) => {
               }}
             >
               <div className="left">
-                <Stars count={320} onDark />
+                <Stars count={0} onDark />
                 <ul className="category-Badges" sx={{ ml: 3 }}>
                   <li>
                     <Badge label="IPFS" onDark />
@@ -115,7 +113,7 @@ const Playground = ({ api }: PlaygroundProps) => {
                 </ul>
               </div>
               <div className="right">
-                <a className="text-nav" href="/apis/SOMEAPI">
+                <a className="text-nav" href={router.asPath.replace('playground','apis')}>
                   GO TO API PAGE
                 </a>
               </div>
@@ -136,13 +134,12 @@ const Playground = ({ api }: PlaygroundProps) => {
                   labelField="id"
                   valueField="id"
                   options={methods}
-                  values={queryValues}
                   onChange={handleQueryValuesChange}
                 />
               </Flex>
               <Styled.code>
                 <textarea
-                  onChange={() => console.log('YO')}
+                  onChange={() => console.log('TODO')}
                   sx={{ resize: 'none', width: '100%', height: '21.875rem' }}
                   value={selectedMethod}
                 ></textarea>
@@ -162,7 +159,7 @@ const Playground = ({ api }: PlaygroundProps) => {
                 className="controls"
                 sx={{
                   justifyContent: 'space-between',
-                  mb: 4,
+                  mb: 2,
                   '*': { display: 'flex', alignItems: 'center' },
                 }}
               >
@@ -183,15 +180,15 @@ const Playground = ({ api }: PlaygroundProps) => {
               <Styled.code sx={{ flex: 1 }}>
                 <Styled.pre sx={{ height: '100%' }}>{`
 "data": {
-"transactions": [
-  {
-    "_amount": "5494500",
-    "_asset": "pBTC",
-    "_timestamp": "1605245034",
-    "_type": "mint",
-    "id": "0x0001c85a114e81b26a2c466bf988d3a5c61f0bc7c9dde34670e1f8b494bad87e-104"
-  }
-]
+  "transactions": [
+    {
+      "_amount": "5494500",
+      "_asset": "pBTC",
+      "_timestamp": "1605245034",
+      "_type": "mint",
+      "id": "0x0001c85a114e81b26a2c466bf988d3a5c61f0bc7c9dde34670e1f8b494bad87e-104"
+    }
+  ]
 }
           `}</Styled.pre>
               </Styled.code>

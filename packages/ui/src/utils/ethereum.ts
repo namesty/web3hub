@@ -63,8 +63,8 @@ export const sendTransaction = async (
   try {
     const tx = await contract[funcs[0]](...args);
     return await tx.wait();
-  } catch (e) {
-    console.log(e);
-    throw e;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }

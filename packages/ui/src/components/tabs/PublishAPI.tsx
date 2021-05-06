@@ -126,7 +126,6 @@ const PublishAPI = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('SUBMIT')
     if (publish.apiData && publish.subdomain.length > 0) {
       if (dapp.github && dapp.github !== '') {
         const publishReq = await axios.post(
@@ -146,7 +145,6 @@ const PublishAPI = () => {
             withCredentials: true,
           },
         )
-        console.log({ publishReq })
         dispatch({ type: 'setShowSuccessModal', payload: true })
       } else {
         dispatch({ type: 'setShowSignInModal', payload: true })

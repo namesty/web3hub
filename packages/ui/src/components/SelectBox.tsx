@@ -19,7 +19,7 @@ const SelectBox = ({
   labelField,
   valueField,
   options,
-  values,
+  values = [],
   onChange,
 }: RDSProps) => {
   return (

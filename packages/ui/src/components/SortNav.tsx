@@ -8,7 +8,6 @@ import SearchBox from './SearchBox'
 const SortNav = () => {
   const [{ dapp }, dispatch] = useStateValue()
 
-  // TODO: Turn this into reusable hook because it also exsits on playground
   const [searchOptions, setsearchOptions] = useState(dapp.apis)
   const handleSearchValuesChange = (value) => {
     if(value.length === 0) {

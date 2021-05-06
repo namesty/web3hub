@@ -9,12 +9,10 @@ import { useRouter } from 'next/router'
 
 type APIDetailProps = {
   api?: any
-  ensAddress?: string
 }
 
 const APIDetail = ({
   api,
-  ensAddress = 'simplestorage.open.web3.eth',
 }: APIDetailProps) => {
   const router = useRouter()
   return (
@@ -30,7 +28,9 @@ const APIDetail = ({
       <Flex className="top">
         <img
           className="api-logo"
-          src={`${cloudFlareGateway}${api.locationUri.split('ipfs/')[0]}${api.icon.replace('./', '/')}`}
+          src={`${cloudFlareGateway}${
+            api.locationUri.split('ipfs/')[0]
+          }${api.icon.replace('./', '/')}`}
           sx={{
             width: '13.125rem',
             height: '13.125rem',
@@ -114,7 +114,7 @@ const APIDetail = ({
               </Styled.h4>
             </div>
             <div className="right">
-              <Stars count={320} large />
+              <Stars count={0} large />
             </div>
           </Flex>
           <ul
@@ -135,47 +135,52 @@ const APIDetail = ({
               },
             }}
           >
-            <li sx={{ display: 'flex' }}>
-              <img
-                sx={{ maxWidth: '1.1875rem', mr: 2 }}
-                src="/images/link.svg"
-                alt="icon"
-              />
-              <a href={ensAddress} target="_BLANK">
-                {ensAddress}
-              </a>
-            </li>
-
-            {'links' in api && api.links.map((link, idx) => {
-              if (link.name === 'github') {
+            {'pointerUris' in api &&
+              api.pointerUris.map((pointer, idx) => {
                 return (
-                  <li sx={{ display: 'flex' }} key={'apilink' + idx}>
+                  <li sx={{ display: 'flex' }} key={idx+'pointerURI'}>
                     <img
                       sx={{ maxWidth: '1.1875rem', mr: 2 }}
-                      src="/images/github.svg"
+                      src="/images/link.svg"
                       alt="icon"
                     />
-                    <a href="https://www.github.com/ORG/REPO" target="_BLANK">
-                      github.com/ORG/REPO
+                    <a href={pointer} target="_BLANK">
+                      {pointer}
                     </a>
                   </li>
                 )
-              }
-              if (link.name === 'website') {
-                return (
-                  <li sx={{ display: 'flex' }} key={'apilink' + idx}>
-                    <img
-                      sx={{ maxWidth: '1.1875rem', mr: 2 }}
-                      src="/images/doc.svg"
-                      alt="icon"
-                    />
-                    <a href="https://www.github.com/ORG/docs" target="_BLANK">
-                      github.com/ORG/DOCS
-                    </a>
-                  </li>
-                )
-              }
-            })}
+              })}
+            {'links' in api &&
+              api.links.map((link, idx) => {
+                if (link.name === 'github') {
+                  return (
+                    <li sx={{ display: 'flex' }} key={'apilink' + idx}>
+                      <img
+                        sx={{ maxWidth: '1.1875rem', mr: 2 }}
+                        src="/images/github.svg"
+                        alt="icon"
+                      />
+                      <a href="https://www.github.com/ORG/REPO" target="_BLANK">
+                        github.com/ORG/REPO
+                      </a>
+                    </li>
+                  )
+                }
+                if (link.name === 'website') {
+                  return (
+                    <li sx={{ display: 'flex' }} key={'apilink' + idx}>
+                      <img
+                        sx={{ maxWidth: '1.1875rem', mr: 2 }}
+                        src="/images/doc.svg"
+                        alt="icon"
+                      />
+                      <a href="https://www.github.com/ORG/docs" target="_BLANK">
+                        github.com/ORG/DOCS
+                      </a>
+                    </li>
+                  )
+                }
+              })}
           </ul>
           <br />
           <Button
@@ -220,7 +225,7 @@ const APIDetail = ({
             mr: 4,
           }}
         />
-        <div sx={{ width: '34.375rem' }}>
+        <div sx={{ width: '38.375rem' }}>
           <Styled.h2 sx={{ textAlign: 'center' }}>Get Started</Styled.h2>
           <Styled.code>
             <Styled.pre>{`yarn install @web3api/client`}</Styled.pre>
