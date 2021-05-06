@@ -8,43 +8,54 @@ import React, { useEffect, useState } from 'react'
 import SelectBox from './SelectBox'
 import SearchBox from './SearchBox'
 import { useStateValue } from '../state/state'
+import axios from 'axios'
+import { cloudFlareGateway } from '../constants'
+import cheerio from 'cheerio'
+import cleaner from 'clean-html'
 
-const Playground = () => {
+type PlaygroundProps = {
+  api?: any
+}
+
+const Playground = ({ api }: PlaygroundProps) => {
   const [{ dapp }, dispatch] = useStateValue()
 
-  // TODO: Turn this into reusable hook because it also exsits on index
-  const [searchValues, setsearchValues] = useState([])
   const [searchOptions, setsearchOptions] = useState(dapp.apis)
-
+  const [methods, setMethods] = useState<any>({})
+  const [selectedMethod, setSelectMethod] = useState<any>(Object.entries(methods)[0] || '')
   const [queryValues, setqueryValues] = useState([])
-  const [queryOptions, setqueryOptions] = useState([
-    {
-      id: 'Get Swap',
-    },
-    {
-      id: 'Get Transaction',
-    },
-    {
-      id: 'Get History',
-    },
-  ])
-  const handleNewQuery = (e: React.BaseSyntheticEvent) => console.log(e.target)
   const handleShowSchema = (e: React.BaseSyntheticEvent) => console.log(e.target)
+  const handleQueryValuesChange = (method) => setSelectMethod(method[0].value)
 
-  const handleSearchValuesChange = (values) => setsearchValues(values)
-  const handleQueryValuesChange = (values) => setqueryValues(values)
-
-  // useEffect(() => {
-  //   async function getRelatedFunctions() {
-  //     let queries = await axios.get(`/api/apis/${searchValues[0].id}/queries`)
-  //     setqueryOptions(queries.data)
-  //   }
-  //   getRelatedFunctions()
-  // }, [searchValues])
+  useEffect(() => {
+    async function getRelatedFunctions() {
+      let queriesPage = await axios.get(`${cloudFlareGateway}${api.locationUri}/meta/queries`)
+      let siteURLHTMLClean = ''
+      cleaner.clean(queriesPage.data, html => siteURLHTMLClean = html)
+      let $ = cheerio.load(siteURLHTMLClean)
+      let queries = $('table tr td:nth-child(2) a')
+      let domqueries = Array.from(queries)
+      domqueries.shift()
+      let methodsList = []
+      domqueries.map((row)=>{
+        async function getMethods () {
+          let queryData = await axios.get(`${cloudFlareGateway.replace('/ipfs/','')}${row.attribs.href}`)
+          let key = row.attribs.href.split('meta/queries/')[1].split('.graphql')[0]
+          methodsList.push({ id: key, value: queryData.data })
+          setMethods(methodsList)
+        }
+        getMethods()
+      })
+    }
+    getRelatedFunctions()
+  }, [])
 
   useEffect(() => {
     setsearchOptions(dapp.apis)
   }, [dapp.apis])
+
+  // useEffect(() => {
+  // }, [methods])
 
   return (
     <div
@@ -77,13 +88,14 @@ const Playground = () => {
           >
             <SearchBox
               dark
-              searchBy="id"
+              searchBy="name"
               placeholder={'Search API’s'}
-              labelField="id"
-              valueField="id"
+              labelField="name"
+              valueField="name"
               options={searchOptions}
-              values={searchValues}
-              onChange={handleSearchValuesChange}
+              onChange={() => {
+                console.log('change')
+              }}
             />
             <Flex
               className="selection-detail"
@@ -123,37 +135,28 @@ const Playground = () => {
                   skinny
                   labelField="id"
                   valueField="id"
-                  options={queryOptions}
+                  options={methods}
                   values={queryValues}
                   onChange={handleQueryValuesChange}
                 />
-
-                <Button variant="secondarySmall" onClick={handleNewQuery}>
-                  New
-                </Button>
               </Flex>
               <Styled.code>
                 <textarea
                   onChange={() => console.log('YO')}
                   sx={{ resize: 'none', width: '100%', height: '21.875rem' }}
-                  value={`
-mutation {
-  swap(token: jfid) {
-    token
-    _timestamp
-    _asset
-    _type
-    _amount
-  }xw
-}
-          `}
+                  value={selectedMethod}
                 ></textarea>
               </Styled.code>
             </div>
             &nbsp;
             <div
               className="result"
-              sx={{ width: '60%', backgroundColor: 'w3PlayGroundNavy', display: 'flex', flexDirection: 'column' }}
+              sx={{
+                width: '60%',
+                backgroundColor: 'w3PlayGroundNavy',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
             >
               <Flex
                 className="controls"
@@ -178,7 +181,7 @@ mutation {
                 </div>
               </Flex>
               <Styled.code sx={{ flex: 1 }}>
-                <Styled.pre sx={{height: '100%'}}>{`
+                <Styled.pre sx={{ height: '100%' }}>{`
 "data": {
 "transactions": [
   {

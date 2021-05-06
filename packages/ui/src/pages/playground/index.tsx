@@ -1,11 +1,11 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex } from 'theme-ui'
-import Layout from '../components/Layout'
-import Playground from '../components/Playground'
 import { Global } from '@emotion/core'
-import Navbar from '../components/Navbar'
-import Header from '../components/Header'
+import Layout from '../../components/Layout'
+import Navbar from '../../components/Navbar'
+import Header from '../../components/Header'
+import Playground from '../../components/Playground'
 
 const PlaygroundPage = () => {
   return (
@@ -15,7 +15,7 @@ const PlaygroundPage = () => {
         <main>
           <div className="contents animate">
             <Header onDark title="Playground" />
-            <Playground />
+            <Playground/>
           </div>
         </main>
       </Flex>

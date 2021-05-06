@@ -5,6 +5,7 @@ import BottomSpace from '../components/BottomSpace'
 import Stars from '../components/Stars'
 import PlaygroundImg from '../../public/images/playground.svg'
 import { cloudFlareGateway } from '../constants'
+import { useRouter } from 'next/router'
 
 type APIDetailProps = {
   api?: any
@@ -15,6 +16,7 @@ const APIDetail = ({
   api,
   ensAddress = 'simplestorage.open.web3.eth',
 }: APIDetailProps) => {
+  const router = useRouter()
   return (
     <div
       className="wrap"
@@ -180,7 +182,7 @@ const APIDetail = ({
             variant="calloutLarge"
             sx={{ pl: 4, width: '100%' }}
             onClick={() => {
-              router.push(`/playground?ens=${'SOMEAPI '}`)
+              router.push(`/playground/ens/${api.pointerUris[0]}`)
             }}
           >
             <Flex sx={{ alignItems: 'center', justifyContent: 'left' }}>

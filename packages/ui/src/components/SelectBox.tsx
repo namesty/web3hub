@@ -9,7 +9,7 @@ type RDSProps = {
   labelField: string
   valueField: string
   options: any[]
-  values: any[]
+  values?: any[]
   onChange: (values: any) => void
 }
 
@@ -111,7 +111,7 @@ const SelectBox = ({
             fontSize: '0.875rem',
             lineHeight: '0.875rem',
             letterSpacing: '-0.004em',
-            textTransform: 'capitalize',
+
             color: dark ? 'white' : 'text',
           },
         },

@@ -11,15 +11,9 @@ import Header from '../components/Header'
 import BGWave from '../components/BGWave'
 import BottomSpace from '../components/BottomSpace'
 import Card from '../components/Card'
-import SearchBox from '../components/SearchBox'
-import { useEffect } from 'react'
 
 const Home = () => {
-  const [{ dapp, search }, dispatch] = useStateValue()
-  useEffect(() => {
-    // search !== undefined ? console.log(search.sortedApi)  : null
-  }, [search])
-  
+  const [{ dapp, search }] = useStateValue()  
   return (
     <Layout>
       <Flex>

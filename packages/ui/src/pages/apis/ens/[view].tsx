@@ -5,25 +5,11 @@ import Layout from '../../../components/Layout'
 import Navbar from '../../../components/Navbar'
 import Header from '../../../components/Header'
 import BottomSpace from '../../../components/BottomSpace'
-import { useRouter } from 'next/router'
 import APIDetail from '../../../components/APIDetail'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useGetAPIfromENSParamInURL } from '../../../hooks/ens/useGetAPIfromENS'
+
 const ApiView = () => {
-  const router = useRouter()
-  const [apiDataRes, setapiDataRes] = useState(null)
-  useEffect(() => {
-    async function fetchApiDetails() {
-      if(router.query.view !== undefined) {
-        const { data: apiData } = await axios.get(
-          `http://localhost:3001/apis/find/ens/${router.query.view}`,
-        )
-        console.log(apiData)
-        setapiDataRes(apiData.api)
-      }
-    }
-    fetchApiDetails()
-  }, [router.query.view])
+  const [{data}] = useGetAPIfromENSParamInURL()
   return (
     <Layout>
       <Flex>
@@ -31,7 +17,7 @@ const ApiView = () => {
         <main>
           <div className="contents">
             <Header backNav={`Browse API's`} />
-            {apiDataRes !== null && <APIDetail api={apiDataRes} />}
+            {data !== null && <APIDetail api={data} />}
             <BottomSpace />
           </div>
         </main>
