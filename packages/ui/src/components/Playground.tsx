@@ -24,23 +24,29 @@ const Playground = ({ api }: PlaygroundProps) => {
   const router = useRouter()
   const [searchOptions, setsearchOptions] = useState(dapp.apis)
   const [methods, setMethods] = useState<any>({})
-  const [selectedMethod, setSelectMethod] = useState<any>(Object.entries(methods)[0] || '')
+  const [selectedMethod, setSelectMethod] = useState<any>(
+    Object.entries(methods)[0] || '',
+  )
   const handleShowSchema = (e: React.BaseSyntheticEvent) => console.log('TODO')
   const handleQueryValuesChange = (method) => setSelectMethod(method[0].value)
 
   useEffect(() => {
     async function getRelatedFunctions() {
-      let queriesPage = await axios.get(`${cloudFlareGateway}${api.locationUri}/meta/queries`)
+      let queriesPage = await axios.get(
+        `${cloudFlareGateway}${api.locationUri}/meta/queries`,
+      )
       let siteURLHTMLClean = ''
-      cleaner.clean(queriesPage.data, html => siteURLHTMLClean = html)
+      cleaner.clean(queriesPage.data, (html) => (siteURLHTMLClean = html))
       let $ = cheerio.load(siteURLHTMLClean)
       let queries = $('table tr td:nth-child(2) a')
       let domqueries = Array.from(queries)
       domqueries.shift()
       let methodsList = []
-      await domqueries.map((row)=>{
-        async function getMethods () {
-          let queryData = await axios.get(`${cloudFlareGateway.replace('/ipfs/','')}${row.attribs.href}`)
+      await domqueries.map((row) => {
+        async function getMethods() {
+          let queryData = await axios.get(
+            `${cloudFlareGateway.replace('/ipfs/', '')}${row.attribs.href}`,
+          )
           let key = row.attribs.href.split('meta/queries/')[1].split('.graphql')[0]
           methodsList.push({ id: key, value: queryData.data })
         }
@@ -48,13 +54,17 @@ const Playground = ({ api }: PlaygroundProps) => {
       })
       setMethods(methodsList)
     }
-    getRelatedFunctions()
+
+    if (router.asPath.includes('ens/')) {
+      getRelatedFunctions()
+    } else {
+    }
   }, [])
 
   useEffect(() => {
     setsearchOptions(dapp.apis)
   }, [dapp.apis])
-  
+
   return (
     <div
       className="playground"
@@ -71,7 +81,7 @@ const Playground = ({ api }: PlaygroundProps) => {
         },
       }}
     >
-      {searchOptions && searchOptions.length > 0 &&  (
+      {searchOptions && searchOptions.length > 0 && (
         <React.Fragment>
           <Flex
             className="header"
@@ -113,7 +123,10 @@ const Playground = ({ api }: PlaygroundProps) => {
                 </ul>
               </div>
               <div className="right">
-                <a className="text-nav" href={router.asPath.replace('playground','apis')}>
+                <a
+                  className="text-nav"
+                  href={router.asPath.replace('playground', 'apis')}
+                >
                   GO TO API PAGE
                 </a>
               </div>
