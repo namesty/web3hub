@@ -3,11 +3,10 @@
 import { jsx, Flex, Button, Styled } from 'theme-ui'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import cheerio from 'cheerio'
-import cleaner from 'clean-html'
 import { useRouter } from 'next/router'
 import { useStateValue } from '../state/state'
 import { cloudFlareGateway } from '../constants'
+import get_CFG_UI_DOM from '../utils/get_CFG_UI_DOM'
 
 import Badge from './Badge'
 import Stars from './Stars'
@@ -27,22 +26,17 @@ const Playground = ({ api }: PlaygroundProps) => {
   const [selectedMethod, setSelectMethod] = useState<any>(
     Object.entries(methods)[0] || '',
   )
+  const [loadingqueries, setloadingqueries] = useState(false)
   const handleShowSchema = (e: React.BaseSyntheticEvent) => console.log('TODO')
   const handleQueryValuesChange = (method) => setSelectMethod(method[0].value)
 
   useEffect(() => {
-    async function getRelatedFunctions() {
-      let queriesPage = await axios.get(
-        `${cloudFlareGateway}${api.locationUri}/meta/queries`,
-      )
-      let siteURLHTMLClean = ''
-      cleaner.clean(queriesPage.data, (html) => (siteURLHTMLClean = html))
-      let $ = cheerio.load(siteURLHTMLClean)
-      let queries = $('table tr td:nth-child(2) a')
-      let domqueries = Array.from(queries)
-      domqueries.shift()
+    async function getPackageQueries() {
+      let $ = await get_CFG_UI_DOM(api, '/meta/queries')
+      let queries = Array.from($('table tr td:nth-child(2) a'))
+      queries.shift() // dump .. in row 1
       let methodsList = []
-      await domqueries.map((row) => {
+      await queries.map((row: any) => {
         async function getMethods() {
           let queryData = await axios.get(
             `${cloudFlareGateway.replace('/ipfs/', '')}${row.attribs.href}`,
@@ -53,10 +47,11 @@ const Playground = ({ api }: PlaygroundProps) => {
         getMethods()
       })
       setMethods(methodsList)
+      setloadingqueries(false)
     }
-
     if (router.asPath.includes('ens/')) {
-      getRelatedFunctions()
+      setloadingqueries(true)
+      getPackageQueries()
     } else {
     }
   }, [])
@@ -141,14 +136,17 @@ const Playground = ({ api }: PlaygroundProps) => {
                 className="templates"
                 sx={{ flex: 1, mb: 4, justifyContent: 'space-between' }}
               >
-                <SelectBox
-                  dark
-                  skinny
-                  labelField="id"
-                  valueField="id"
-                  options={methods}
-                  onChange={handleQueryValuesChange}
-                />
+                {loadingqueries && ('Loading Methods...')}
+                {!loadingqueries && (
+                  <SelectBox
+                    dark
+                    skinny
+                    labelField="id"
+                    valueField="id"
+                    options={methods}
+                    onChange={handleQueryValuesChange}
+                  />
+                )}
               </Flex>
               <Styled.code>
                 <textarea
