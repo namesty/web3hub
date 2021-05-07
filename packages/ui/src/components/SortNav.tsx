@@ -39,6 +39,7 @@ const SortNav = () => {
             labelField="name"
             valueField="name"
             options={searchOptions}
+            values={searchOptions}
             onChange={handleSearchValuesChange}
           />
         )}

@@ -115,6 +115,7 @@ const Playground = ({ api }: PlaygroundProps) => {
               labelField="name"
               valueField="name"
               options={apiOptions}
+              values={apiOptions}
               onChange={() => {
                 console.log('TODO')
               }}

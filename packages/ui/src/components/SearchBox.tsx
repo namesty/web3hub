@@ -13,6 +13,7 @@ type RDSProps = {
   labelField: string
   valueField: string
   options: any[]
+  values: any[]
   onChange?: (value: any) => void
 }
 
@@ -25,6 +26,7 @@ const SearchBox = ({
   labelField,
   valueField,
   options,
+  values,
   onChange,
 }: RDSProps) => {
   // Styling fix
@@ -160,6 +162,7 @@ const SearchBox = ({
       labelField={labelField}
       valueField={valueField}
       options={options}
+      values={values}
       onChange={onChange}
     />
   )
