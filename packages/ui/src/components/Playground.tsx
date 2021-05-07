@@ -13,6 +13,7 @@ import Stars from './Stars'
 import BGWave from './BGWave'
 import SelectBox from './SelectBox'
 import SearchBox from './SearchBox'
+import Close from '../../public/images/close.svg'
 
 type PlaygroundProps = {
   api?: any
@@ -21,13 +22,21 @@ type PlaygroundProps = {
 const Playground = ({ api }: PlaygroundProps) => {
   const [{ dapp }] = useStateValue()
   const router = useRouter()
-  const [searchOptions, setsearchOptions] = useState(dapp.apis)
-  const [methods, setMethods] = useState<any>({})
-  const [selectedMethod, setSelectMethod] = useState<any>(
-    Object.entries(methods)[0] || '',
-  )
+  const [apiOptions, setapiOptions] = useState(dapp.apis)
+
   const [loadingqueries, setloadingqueries] = useState(false)
-  const handleShowSchema = (e: React.BaseSyntheticEvent) => console.log('TODO')
+  const [loadingschema, setloadingschema] = useState(false)
+
+  const [queries, setqueries] = useState<any>({})
+  const [schema, setschema] = useState(null)
+
+  const [showschema, setshowschema] = useState(false)
+
+  const [selectedMethod, setSelectMethod] = useState<any>(
+    Object.entries(queries)[0] || '',
+  )
+
+  const handleShowSchema = (e: React.BaseSyntheticEvent) => setshowschema(!showschema)
   const handleQueryValuesChange = (method) => setSelectMethod(method[0].value)
 
   useEffect(() => {
@@ -35,18 +44,18 @@ const Playground = ({ api }: PlaygroundProps) => {
       let $ = await get_CFG_UI_DOM(api, '/meta/queries')
       let queries = Array.from($('table tr td:nth-child(2) a'))
       queries.shift() // dump .. in row 1
-      let methodsList = []
+      let queriesList = []
       await queries.map((row: any) => {
-        async function getMethods() {
+        async function getQueries() {
           let queryData = await axios.get(
             `${cloudFlareGateway.replace('/ipfs/', '')}${row.attribs.href}`,
           )
           let key = row.attribs.href.split('meta/queries/')[1].split('.graphql')[0]
-          methodsList.push({ id: key, value: queryData.data })
+          queriesList.push({ id: key, value: queryData.data })
         }
-        getMethods()
+        getQueries()
       })
-      setMethods(methodsList)
+      setqueries(queriesList)
       setloadingqueries(false)
     }
     if (router.asPath.includes('ens/')) {
@@ -57,9 +66,21 @@ const Playground = ({ api }: PlaygroundProps) => {
   }, [])
 
   useEffect(() => {
-    setsearchOptions(dapp.apis)
-  }, [dapp.apis])
+    async function getPackageSchema() {
+      let schemaResponse = await axios.get(
+        `${cloudFlareGateway}${api.locationUri.split('ipfs/')[0]}/schema.graphql`,
+      )
+      setschema(schemaResponse.data)
+      setloadingschema(false)
+    }
+    if (router.asPath.includes('ens/')) {
+      setloadingschema(true)
+      getPackageSchema()
+    } else {
+    }
+  }, [])
 
+  useEffect(() => setapiOptions(dapp.apis), [dapp.apis])
   return (
     <div
       className="playground"
@@ -68,15 +89,13 @@ const Playground = ({ api }: PlaygroundProps) => {
         borderRadius: '1rem',
         overflow: 'hidden',
         'code, pre, textarea': {
-          color: 'w3PlaygroundSoftBlue',
-          backgroundColor: 'transparent !important',
           border: 'none',
           fontSize: '0.875rem',
           lineHeight: '0.875rem',
         },
       }}
     >
-      {searchOptions && searchOptions.length > 0 && (
+      {apiOptions && apiOptions.length > 0 && (
         <React.Fragment>
           <Flex
             className="header"
@@ -95,7 +114,7 @@ const Playground = ({ api }: PlaygroundProps) => {
               placeholder={'Search API’s'}
               labelField="name"
               valueField="name"
-              options={searchOptions}
+              options={apiOptions}
               onChange={() => {
                 console.log('TODO')
               }}
@@ -136,14 +155,15 @@ const Playground = ({ api }: PlaygroundProps) => {
                 className="templates"
                 sx={{ flex: 1, mb: 4, justifyContent: 'space-between' }}
               >
-                {loadingqueries && ('Loading Methods...')}
-                {!loadingqueries && (
+                {loadingqueries ? (
+                  'Loading Queries...'
+                ) : (
                   <SelectBox
                     dark
                     skinny
                     labelField="id"
                     valueField="id"
-                    options={methods}
+                    options={queries}
                     onChange={handleQueryValuesChange}
                   />
                 )}
@@ -151,7 +171,13 @@ const Playground = ({ api }: PlaygroundProps) => {
               <Styled.code>
                 <textarea
                   onChange={() => console.log('TODO')}
-                  sx={{ resize: 'none', width: '100%', height: '21.875rem' }}
+                  sx={{
+                    resize: 'none',
+                    width: '100%',
+                    height: '21.875rem',
+                    bg: 'transparent',
+                    color: 'w3PlaygroundSoftBlue',
+                  }}
                   value={selectedMethod}
                 ></textarea>
               </Styled.code>
@@ -160,7 +186,7 @@ const Playground = ({ api }: PlaygroundProps) => {
             <div
               className="result"
               sx={{
-                width: '60%',
+                width: '70%',
                 backgroundColor: 'w3PlayGroundNavy',
                 display: 'flex',
                 flexDirection: 'column',
@@ -171,6 +197,7 @@ const Playground = ({ api }: PlaygroundProps) => {
                 sx={{
                   justifyContent: 'space-between',
                   mb: 2,
+                  overflow: 'hidden',
                   '*': { display: 'flex', alignItems: 'center' },
                 }}
               >
@@ -179,17 +206,23 @@ const Playground = ({ api }: PlaygroundProps) => {
                   <Button variant="hollowSmall">Save</Button>
                 </div>
                 <div className="right">
-                  <span
-                    className="text-nav left-chevron"
-                    onClick={handleShowSchema}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    <span sx={{ fontSize: '2.5rem', pr: '1rem' }}>‹</span> Show Schema
-                  </span>
+                  {loadingschema ? (
+                    'Loading Schema...'
+                  ) : (
+                    <span
+                      className="text-nav left-chevron"
+                      onClick={handleShowSchema}
+                      sx={{ cursor: 'pointer' }}
+                    >
+                      {loadingschema && 'Loading Schema...'}
+                      <span sx={{ fontSize: '2.5rem', pr: '1rem' }}>‹</span>
+                      <span>Show Schema</span>
+                    </span>
+                  )}
                 </div>
               </Flex>
               <Styled.code sx={{ flex: 1 }}>
-                <Styled.pre sx={{ height: '100%' }}>{`
+                <Styled.pre sx={{ height: '100%', color: 'w3PlaygroundSoftBlue' }}>{`
 "data": {
   "transactions": [
     {
@@ -204,6 +237,45 @@ const Playground = ({ api }: PlaygroundProps) => {
           `}</Styled.pre>
               </Styled.code>
             </div>
+            {schema && (
+              <Flex
+                sx={{
+                  p: 0,
+                  position: 'absolute',
+                  right: !showschema ? '-100%' : '0',
+                  transition: '.25s all ease',
+                  height: 'calc(100% + 20px)',
+                  overflow: 'hidden',
+                  width: 'max-content',
+                  borderRadius: '8px',
+                  borderTopRightRadius: '0px'
+                }}
+              >
+                <Close
+                  onClick={handleShowSchema}
+                  sx={{
+                    fill: '#FFF',
+                    width: '30px',
+                    height: '30px',
+                    top: '1rem',
+                    '&:hover': {
+                      fill: 'w3PlaygroundSoftBlue',
+                      cursor: 'pointer',
+                    },
+                  }}
+                />
+                <Styled.pre
+                  className="hidden-schema-panel"
+                  sx={{
+                    backgroundColor: 'white',
+                    color: 'w3shade3',
+                    width: 'max-content',
+                  }}
+                >
+                  {schema}
+                </Styled.pre>
+              </Flex>
+            )}
           </Flex>
         </React.Fragment>
       )}
