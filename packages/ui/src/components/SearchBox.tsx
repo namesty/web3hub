@@ -156,9 +156,9 @@ const SearchBox = ({
       searchable
       clearable
       keepSelectedInList
-      dropdownHandle={false}
       searchBy={searchBy}
       placeholder={placeholder}
+      dropdownHandle={false}
       labelField={labelField}
       valueField={valueField}
       options={options}

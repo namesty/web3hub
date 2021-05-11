@@ -7,6 +7,7 @@ type RDSProps = {
   dark?: boolean
   skinny?: boolean
   labelField: string
+  placeholder: string
   valueField: string
   options: any[]
   values?: any[]
@@ -17,6 +18,7 @@ const SelectBox = ({
   dark,
   skinny,
   labelField,
+  placeholder,
   valueField,
   options,
   values = [],
@@ -49,9 +51,9 @@ const SelectBox = ({
           borderColor: 'text',
           boxShadow: 'none',
         },
-        '.react-dropdown-select-input': {
-          display: 'none',
-        },
+        // '.react-dropdown-select-input': {
+        //   display: 'none',
+        // },
         '.react-dropdown-select-clear': {
           fontSize: '1.5625rem',
           top: '-0.125rem',
@@ -120,6 +122,7 @@ const SelectBox = ({
         },
       }}
       keepSelectedInList
+      placeholder={placeholder}
       dropdownHandle={true}
       labelField={labelField}
       valueField={valueField}
