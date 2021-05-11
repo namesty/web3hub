@@ -1,8 +1,32 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
+    "lib": [
+      "es2015",
+      "es5",
+      "dom"
+    ],
+    "outDir": "build",
+    "moduleResolution": "node",
+    "declaration": true,
+    "downlevelIteration": true,
+    "preserveSymlinks": true,
+    "preserveWatchOutput": true,
+    "pretty": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "module": "commonjs",
+    "sourceMap": true,
+    "target": "es5",
     "resolveJsonModule": true,
-    "downlevelIteration": true
+    "strictNullChecks": true
   },
-  "include": ["./scripts", "./src"]
+  "include": [
+    "./src/**/*.ts",
+    "./scripts/**/*.ts"
+  ],
+  "exclude": []
 }

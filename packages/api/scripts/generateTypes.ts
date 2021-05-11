@@ -13,7 +13,7 @@ const generateManifest = async () => {
   const modelNames = Object.keys(models);
 
   for (let i = 0; i < modelNames.length; i++) {
-    const options = {};
+    const options: any = {};
     if (i > 0) {
       options["bannerComment"] = "\n\n";
     }

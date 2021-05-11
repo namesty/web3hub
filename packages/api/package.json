@@ -5,6 +5,7 @@
   "scripts": {
     "start": "ts-node src/server.ts",
     "dev": "nodemon src/server.ts",
+    "build": "yarn generate:types && tsc",
     "db:start": "docker-compose up -d",
     "generate:types": "ts-node --script-mode scripts/generateTypes.ts",
     "postinstall": "yarn generate:types"
