@@ -16,6 +16,9 @@ import Close from '../../public/images/close.svg'
 import getPackageSchemaFromAPIObject from '../services/ipfs/getPackageSchemaFromAPIObject'
 import getPackageQueriesFromAPIObject from '../services/ipfs/getPackageQueriesFromAPIObject'
 
+import GQLCodeBlock from '../components/GQLCodeBlock'
+import cleanSchema from '../utils/cleanSchema'
+
 type PlaygroundProps = {
   api?: any
 }
@@ -30,6 +33,8 @@ const Playground = ({ api }: PlaygroundProps) => {
 
   const [showschema, setshowschema] = useState(false)
   const [selectedMethod, setSelectedMethod] = useState<any>()
+
+  const [structuredschema, setstructuredschema] = useState<any>()
 
   const handleShowSchema = (e: React.BaseSyntheticEvent) => setshowschema(!showschema)
   const handleQueryValuesChange = (method) => setSelectedMethod(method[0].value)
@@ -47,6 +52,20 @@ const Playground = ({ api }: PlaygroundProps) => {
       setapiContents({
         schema: schemaData,
         queries: queriesData,
+      })
+      const {
+        localqueries,
+        localmutations,
+        localcustom,
+        importedqueries,
+        importedmutations,
+      } = cleanSchema(schemaData)
+      setstructuredschema({
+        localqueries: localqueries,
+        localmutations: localmutations,
+        localcustom: localcustom,
+        importedqueries: importedqueries,
+        importedmutations: importedmutations,
       })
       setloadingContents(false)
     }
@@ -217,15 +236,15 @@ const Playground = ({ api }: PlaygroundProps) => {
           `}</Styled.pre>
             </Styled.code>
           </div>
-          {apiContents?.schema && (
+          {structuredschema?.localqueries && (
             <Flex
               sx={{
                 p: 0,
                 position: 'absolute',
                 right: !showschema ? '-100%' : '0',
                 transition: '.25s all ease',
-                height: 'calc(100% + 20px)',
-                overflow: 'hidden',
+                height: '480px',
+                overflowY:'scroll',
                 width: 'max-content',
                 borderRadius: '8px',
                 borderTopRightRadius: '0px',
@@ -244,16 +263,19 @@ const Playground = ({ api }: PlaygroundProps) => {
                   },
                 }}
               />
-              <Styled.pre
+              <aside
                 className="hidden-schema-panel"
                 sx={{
-                  backgroundColor: 'white',
                   color: 'w3shade3',
                   width: 'max-content',
                 }}
               >
-                {apiContents.schema}
-              </Styled.pre>
+                <GQLCodeBlock title="Queries" value={structuredschema.localqueries}/>
+                <GQLCodeBlock title="Mutations" value={structuredschema.localmutations}/>
+                <GQLCodeBlock title="Custom Types" value={structuredschema.localcustom}/>
+                <GQLCodeBlock title="Imported Queries" value={structuredschema.importedqueries}/>
+                <GQLCodeBlock title="Imported Mutations" value={structuredschema.importedmutations}/>
+              </aside>
             </Flex>
           )}
         </Flex>
