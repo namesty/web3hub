@@ -73,7 +73,7 @@ const Playground = ({ api }: PlaygroundProps) => {
       go()
     }
   }, [loadingContents])
-  
+
   return (
     <div
       className="playground"
@@ -111,8 +111,8 @@ const Playground = ({ api }: PlaygroundProps) => {
               options={apiOptions}
               values={[]}
               onChange={(e) => {
-                if(e.length > 0) {
-                  router.push('/playground/ens/'+e[0].pointerUris[0])
+                if (e.length > 0) {
+                  router.push('/playground/ens/' + e[0].pointerUris[0])
                   console.log('TODO')
                 }
               }}
@@ -139,7 +139,11 @@ const Playground = ({ api }: PlaygroundProps) => {
               </ul>
             </div>
             <div className="right">
-              <a className="text-nav" href={router.asPath.replace('playground', 'apis')}>
+              <a
+                className="text-nav"
+                href={router.asPath.replace('playground', 'apis')}
+                sx={{ '&:hover': { textDecoration: 'underline' } }}
+              >
                 GO TO API PAGE
               </a>
             </div>
@@ -221,19 +225,9 @@ const Playground = ({ api }: PlaygroundProps) => {
               </div>
             </Flex>
             <Styled.code sx={{ flex: 1 }}>
-              <Styled.pre sx={{ height: '100%', color: 'w3PlaygroundSoftBlue' }}>{`
-"data": {
-  "transactions": [
-    {
-      "_amount": "5494500",
-      "_asset": "pBTC",
-      "_timestamp": "1605245034",
-      "_type": "mint",
-      "id": "0x0001c85a114e81b26a2c466bf988d3a5c61f0bc7c9dde34670e1f8b494bad87e-104"
-    }
-  ]
-}
-          `}</Styled.pre>
+              <Styled.pre
+                sx={{ height: '100%', color: 'w3PlaygroundSoftBlue' }}
+              >{``}</Styled.pre>
             </Styled.code>
           </div>
           {structuredschema?.localqueries && (
@@ -244,7 +238,7 @@ const Playground = ({ api }: PlaygroundProps) => {
                 right: !showschema ? '-100%' : '0',
                 transition: '.25s all ease',
                 height: '480px',
-                overflowY:'scroll',
+                overflowY: 'scroll',
                 width: 'max-content',
                 borderRadius: '8px',
                 borderTopRightRadius: '0px',
@@ -270,11 +264,17 @@ const Playground = ({ api }: PlaygroundProps) => {
                   width: 'max-content',
                 }}
               >
-                <GQLCodeBlock title="Queries" value={structuredschema.localqueries}/>
-                <GQLCodeBlock title="Mutations" value={structuredschema.localmutations}/>
-                <GQLCodeBlock title="Custom Types" value={structuredschema.localcustom}/>
-                <GQLCodeBlock title="Imported Queries" value={structuredschema.importedqueries}/>
-                <GQLCodeBlock title="Imported Mutations" value={structuredschema.importedmutations}/>
+                <GQLCodeBlock title="Queries" value={structuredschema.localqueries} />
+                <GQLCodeBlock title="Mutations" value={structuredschema.localmutations} />
+                <GQLCodeBlock title="Custom Types" value={structuredschema.localcustom} />
+                <GQLCodeBlock
+                  title="Imported Queries"
+                  value={structuredschema.importedqueries}
+                />
+                <GQLCodeBlock
+                  title="Imported Mutations"
+                  value={structuredschema.importedmutations}
+                />
               </aside>
             </Flex>
           )}
