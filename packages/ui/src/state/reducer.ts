@@ -4,7 +4,7 @@ import type { publishType } from '../state/initialState'
 import type { searchType } from '../state/initialState'
 
 function dappReducer(state = {}, action) {
-  console.log('dappReducer', state, action)
+  // console.log('dappReducer', state, action)
   let newStateObj: dappType = InitialState.dapp
   switch (action.type) {
     case 'SET_ADDRESS':

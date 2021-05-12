@@ -2,18 +2,19 @@
 /** @jsx jsx */
 import { jsx, Flex, Button, Styled } from 'theme-ui'
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useStateValue } from '../state/state'
-import { cloudFlareGateway } from '../constants'
-import get_CFG_UI_DOM from '../utils/get_CFG_UI_DOM'
 
 import Badge from './Badge'
 import Stars from './Stars'
 import BGWave from './BGWave'
 import SelectBox from './SelectBox'
 import SearchBox from './SearchBox'
+
 import Close from '../../public/images/close.svg'
+
+import getPackageSchemaFromAPIObject from '../services/ipfs/getPackageSchemaFromAPIObject'
+import getPackageQueriesFromAPIObject from '../services/ipfs/getPackageQueriesFromAPIObject'
 
 type PlaygroundProps = {
   api?: any
@@ -33,31 +34,6 @@ const Playground = ({ api }: PlaygroundProps) => {
   const handleShowSchema = (e: React.BaseSyntheticEvent) => setshowschema(!showschema)
   const handleQueryValuesChange = (method) => setSelectedMethod(method[0].value)
 
-  async function getPackageSchema() {
-    let schemaResponse = await axios.get(
-      `${cloudFlareGateway}${api.locationUri.split('ipfs/')[0]}/schema.graphql`,
-    )
-    return schemaResponse.data
-  }
-
-  async function getPackageQueries() {
-    let $ = await get_CFG_UI_DOM(api, '/meta/queries')
-    let queries = Array.from($('table tr td:nth-child(2) a'))
-    queries.shift() // dump .. in row 1
-    let queriesList = []
-    await queries.map((row: any) => {
-      async function getQueries() {
-        let queryData = await axios.get(
-          `${cloudFlareGateway.replace('/ipfs/', '')}${row.attribs.href}`,
-        )
-        let key = row.attribs.href.split('meta/queries/')[1].split('.graphql')[0]
-        await queriesList.push({ id: key, value: queryData.data })
-      }
-      getQueries()
-    })
-    return queriesList
-  }
-
   useEffect(() => {
     if (router.asPath.includes('ens/')) {
       setloadingContents(true)
@@ -66,8 +42,8 @@ const Playground = ({ api }: PlaygroundProps) => {
 
   useEffect(() => {
     async function go() {
-      let schemaData = await getPackageSchema()
-      let queriesData = await getPackageQueries()
+      let schemaData = await getPackageSchemaFromAPIObject(api)
+      let queriesData = await getPackageQueriesFromAPIObject(api)
       setapiContents({
         schema: schemaData,
         queries: queriesData,
@@ -78,7 +54,7 @@ const Playground = ({ api }: PlaygroundProps) => {
       go()
     }
   }, [loadingContents])
-
+  
   return (
     <div
       className="playground"
