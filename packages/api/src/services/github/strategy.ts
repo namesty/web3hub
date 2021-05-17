@@ -29,7 +29,6 @@ export const ghCallback = async (accessToken: string) => {
     const username = ghData.username || ghData.url.split("/").slice(-1)[0];
 
     const user = await User.findOrCreateByGithub({
-      accessToken,
       username,
       githubId,
     });
