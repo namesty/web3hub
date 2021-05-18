@@ -16,7 +16,7 @@ import { SanitizeApis } from "./services/cronjob/checkApis";
 
 const app: ExpressApp = express();
 const RedisStore = connectRedis(session);
-const redisClient = redis.createClient();
+const redisClient = redis.createClient({ host:'redis', port: 6379 });
 
 const middlewares = [
   morgan("combined"), // adds logger to the API
