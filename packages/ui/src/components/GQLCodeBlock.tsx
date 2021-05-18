@@ -11,7 +11,7 @@ type GQLCodeBlockProps = {
   value: any
 }
 
-const nextUntil = function (elem, selector, filter) {
+const nextElementUntil = function (elem, selector, filter) {
   const siblings = []
   elem = elem.nextElementSibling
   while (elem) {
@@ -54,7 +54,7 @@ const GQLCodeBlock = ({ title, value }: GQLCodeBlockProps) => {
     }, 1000)
   }, [])
 
-  // Check for "parans"
+  // Inject end marker
   useEffect(() => {
     setTimeout(() => {
     let closeParenElement: any = Array.from(
@@ -70,13 +70,14 @@ const GQLCodeBlock = ({ title, value }: GQLCodeBlockProps) => {
   },1100)
   }, [])
 
+  // Buttin toggle
   useEffect(() => {
     setTimeout(() => {
       let btn = codeEl.current.querySelector(`.type-toggle`)
       if (btn !== null) {
         btn.addEventListener('click', () => {
           const start = codeEl.current.querySelector('.start-marker')
-          const inbetweenEls = nextUntil(start, '.end-marker', null)
+          const inbetweenEls = nextElementUntil(start, '.end-marker', null)
           inbetweenEls.map((el) => {
             if (el.classList.contains('hidden')) {
               el.classList.remove('hidden')
@@ -114,7 +115,7 @@ const GQLCodeBlock = ({ title, value }: GQLCodeBlockProps) => {
           width: '20px'
         },
         code: {
-          // height: 100px;
+          // display: inline-block
           // white-space: initial;
         }
       }}
