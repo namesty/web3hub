@@ -28,7 +28,7 @@ const Test = () => {
         <Navbar />
         <main>
           <div className="contents animate">
-            <Header title="Button Test" />
+            <Header title="Test page" />
             <hr />
             <h1>Test Page</h1>
             <section>
