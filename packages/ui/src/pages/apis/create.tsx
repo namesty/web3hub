@@ -9,6 +9,7 @@ import PublishAPI from '../../components/tabs/PublishAPI'
 import Header from '../../components/Header'
 import Modal from '../../components/Modal'
 import BottomSpace from '../../components/BottomSpace'
+import Auth from '../../services/ceramic/auth'
 
 const CreateApi = () => {
   const router = useRouter()
@@ -20,12 +21,31 @@ const CreateApi = () => {
   useEffect(() => {
     setActiveTab(router.query.activeTab)
   }, [router.query.activeTab])
+
+  const checkInfo = async () => {
+    await Auth.getInstance()
+    const t = await Auth.get('basicProfile')
+    console.log(t)
+  }
+
+  const writeInfo = async () => {
+    await Auth.getInstance()
+
+    // example after logging with gh
+    await Auth.set('github', {
+      username: 'cbrzn',
+      access_token: '',
+    })
+  }
+
   return (
     <Layout>
+      <button onClick={checkInfo}>check info</button>
+      <button onClick={writeInfo}>write info</button>
       <Flex>
         <main sx={{ pb: 5 }}>
           <div className="contents" sx={{ maxWidth: 'calc(76.5rem + 112px)' }}>
-            <Header title={'Create a Web3API'}/>
+            <Header title={'Create a Web3API'} />
             <Flex
               className="tabs"
               onClick={handleTabClick}
