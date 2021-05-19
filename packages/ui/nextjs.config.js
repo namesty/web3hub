@@ -1,48 +1,27 @@
-// See here for help
-// https://nextjs.org/docs/api-reference/next.config.js/custom-webpack-config
+// https://github.com/vercel/next.js/blob/canary/examples/with-monaco-editor/next.config.js
+const withCSS = require('@zeit/next-css')
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
-
-// Specify separate paths
-const path = require('path');
-const APP_DIR = path.resolve(__dirname, './src');
-const MONACO_DIR = path.resolve(__dirname, './node_modules/monaco-editor');
-
-module.exports = {
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Note: we provide webpack above so you should not `require` it
-    // Perform customizations to webpack config
-    config.plugins.push(new webpack.IgnorePlugin(/\/__tests__\//))
-
-    // MONACO EDITOR RULES
+module.exports = withCSS({
+  webpack: (config) => {
     config.module.rules.push({
-      test: /\.css$/,
-      include: APP_DIR,
-      use: [{
-        loader: 'style-loader',
-      }, {
-        loader: 'css-loader',
+      test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+      use: {
+        loader: 'url-loader',
         options: {
-          modules: true,
-          namedExport: true,
+          limit: 100000,
         },
-      }],
-    }, {
-      test: /\.css$/,
-      include: MONACO_DIR,
-      use: ['style-loader', 'css-loader'],
+      },
     })
 
-    // MONACO EDITOR PLUGIN
     config.plugins.push(
       new MonacoWebpackPlugin({
-        // available options are documented at 
-        // https://github.com/Microsoft/monaco-editor-webpack-plugin#options
-        languages: ['graphql']
+        // Add languages as needed...
+        languages: ['javascript', 'typescript'],
+        filename: 'static/[name].worker.js',
       })
     )
 
-    // Important: return the modified config
     return config
   },
-}
+})
