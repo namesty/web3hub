@@ -18,8 +18,7 @@ import getPackageQueriesFromAPIObject from '../services/ipfs/getPackageQueriesFr
 
 import GQLCodeBlock from '../components/GQLCodeBlock'
 import cleanSchema from '../utils/cleanSchema'
-import { sampleAPI } from '../constants'
-import BottomSpace from './BottomSpace'
+import { responseData } from '../constants'
 
 type PlaygroundProps = {
   api?: any
@@ -40,6 +39,8 @@ const Playground = ({ api }: PlaygroundProps) => {
 
   const [clientresponse, setclientresponse] = useState<any>('')
 
+  const [varformstoggle, setvarformstoggle] = useState(false)
+
   function handleShowSchema(e: React.BaseSyntheticEvent) {
     return setshowschema(!showschema)
   }
@@ -59,11 +60,17 @@ const Playground = ({ api }: PlaygroundProps) => {
   }
 
   function handleRunBtnClick() {
-    setclientresponse(sampleAPI)
+    setclientresponse(responseData)
   }
+
   function handleClearBtnClick() {
     setclientresponse('')
   }
+  function handleVarsFormToggle() {
+    console.log(varformstoggle)
+    setvarformstoggle(!varformstoggle)
+  }
+  
 
   useEffect(() => {
     if (router.asPath.includes('ens/')) {
@@ -102,7 +109,7 @@ const Playground = ({ api }: PlaygroundProps) => {
 
   const regexp = /\$([a-zA-Z0-9_-]{1,})/g
   const varsList = [...selectedMethod.matchAll(regexp)] || null
-  console.log(varsList)
+
   return (
     <div
       className="playground"
@@ -117,225 +124,252 @@ const Playground = ({ api }: PlaygroundProps) => {
         },
       }}
     >
-      <React.Fragment>
+      <Flex
+        className="header"
+        sx={{
+          p: '1.5rem',
+          backgroundColor: 'w3shade2',
+          '*': { display: 'flex' },
+          label: {
+            display: 'none',
+          },
+        }}
+      >
+        {api === undefined ? (
+          <SearchBox
+            key={'search-api-box'}
+            dark
+            searchBy="name"
+            placeholder={'Search API’s'}
+            labelField="name"
+            valueField="name"
+            options={apiOptions}
+            values={[]}
+            onChange={(e) => {
+              if (e.length > 0) {
+                router.push('/playground/ens/' + e[0].pointerUris[0])
+                console.log('TODO')
+              }
+            }}
+          />
+        ) : (
+          <Styled.h1 sx={{ mb: 0 }}>{api.name}</Styled.h1>
+        )}
         <Flex
-          className="header"
+          className="selection-detail"
           sx={{
-            p: '1.5rem',
-            backgroundColor: 'w3shade2',
-            '*': { display: 'flex' },
-            label: {
-              display: 'none',
-            },
+            ml: 4,
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flex: 1,
           }}
         >
-          {api === undefined ? (
-            <SearchBox
-              key={'search-api-box'}
-              dark
-              searchBy="name"
-              placeholder={'Search API’s'}
-              labelField="name"
-              valueField="name"
-              options={apiOptions}
-              values={[]}
-              onChange={(e) => {
-                if (e.length > 0) {
-                  router.push('/playground/ens/' + e[0].pointerUris[0])
-                  console.log('TODO')
-                }
-              }}
-            />
-          ) : (
-            <Styled.h1 sx={{ mb: 0 }}>{api.name}</Styled.h1>
-          )}
-
+          <div className="left">
+            <Stars count={0} onDark />
+            <ul className="category-Badges" sx={{ ml: 3 }}>
+              <li>
+                <Badge label="IPFS" onDark />
+              </li>
+            </ul>
+          </div>
+          <div className="right">
+            <a
+              className="text-nav"
+              href={router.asPath.replace('playground', 'apis')}
+              sx={{ '&:hover': { textDecoration: 'underline' } }}
+            >
+              GO TO API PAGE
+            </a>
+          </div>
+        </Flex>
+      </Flex>
+      <Flex className="body" sx={{ height: '65vh' }}>
+        <div
+          className="query"
+          sx={{
+            width: '40%',
+            backgroundColor: 'w3PlayGroundNavy',
+            p: '1.5rem',
+            minWidth: '435px',
+          }}
+        >
           <Flex
-            className="selection-detail"
+            className="templates"
+            sx={{ flex: 1, mb: 4, justifyContent: 'space-between' }}
+          >
+            {apiContents?.queries && (
+              <SelectBox
+                key={'queries-box'}
+                dark
+                skinny
+                labelField="id"
+                valueField="id"
+                placeholder={'Select Query'}
+                options={apiContents.queries}
+                onChange={handleQueryValuesChange}
+              />
+            )}
+          </Flex>
+          <Styled.code>
+            <textarea
+              sx={{
+                resize: 'none',
+                width: '100%',
+                height: '18rem',
+                bg: 'transparent',
+                color: 'w3PlaygroundSoftBlue',
+                border: '2px solid rgba(205,208,227,0.295455) !important',
+                borderRadius: '4px',
+              }}
+              value={selectedMethod}
+            ></textarea>
+          </Styled.code>
+          <div
+            className={varformstoggle ? 'vars expanded' : 'vars'}
             sx={{
-              ml: 4,
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flex: 1,
+              position: 'absolute',
+              width: '100%',
+              height: '40px',
+              bottom: 0,
+              left: 0,
+              '&.expanded': { height: 'max-content' },
             }}
           >
-            <div className="left">
-              <Stars count={0} onDark />
-              <ul className="category-Badges" sx={{ ml: 3 }}>
-                <li>
-                  <Badge label="IPFS" onDark />
-                </li>
-              </ul>
+            <div
+              className="lip"
+              onClick={handleVarsFormToggle}
+              sx={{
+                bg: 'gray',
+                height: '40px',
+                p: 1,
+                alignItems: 'center',
+                display: 'grid',
+                color: 'white',
+                cursor: 'pointer'
+              }}
+            >
+              Vars
+            </div>
+            <form sx={{bg: 'white', p: 3}}>
+              {varsList.map((varItem) => (
+                <Field
+                  label={varItem[0]}
+                  name={varItem[1]}
+                  defaultValue=""
+                  key={varItem[1]}
+                />
+              ))}
+            </form>
+          </div>
+        </div>
+        &nbsp;
+        <div
+          className="result"
+          sx={{
+            width: '70%',
+            backgroundColor: 'w3PlayGroundNavy',
+            display: 'flex',
+            flexDirection: 'column',
+            p: '1.5rem',
+            pb: 0,
+          }}
+        >
+          <Flex
+            className="controls"
+            sx={{
+              justifyContent: 'space-between',
+              mb: 2,
+              '*': { display: 'flex', alignItems: 'center' },
+            }}
+          >
+            <div className="left" sx={{ '> *': { mr: 2 } }}>
+              <Button variant="primarySmall" onClick={handleRunBtnClick}>
+                Run
+              </Button>
+              {clientresponse !== '' && (
+                <React.Fragment>
+                  <Button variant="secondarySmall" onClick={handleSaveBtnClick}>
+                    Save
+                  </Button>
+                  <Button variant="secondarySmall" onClick={handleClearBtnClick}>
+                    Clear
+                  </Button>
+                </React.Fragment>
+              )}
             </div>
             <div className="right">
-              <a
-                className="text-nav"
-                href={router.asPath.replace('playground', 'apis')}
-                sx={{ '&:hover': { textDecoration: 'underline' } }}
-              >
-                GO TO API PAGE
-              </a>
+              {loadingContents ? (
+                'Loading Schema...'
+              ) : (
+                <span
+                  className="text-nav left-chevron"
+                  onClick={handleShowSchema}
+                  sx={{ cursor: 'pointer' }}
+                >
+                  {loadingContents && 'Loading Schema...'}
+                  <span sx={{ fontSize: '2.5rem', pr: '1rem' }}>‹</span>
+                  <span>Show Schema</span>
+                </span>
+              )}
             </div>
           </Flex>
-        </Flex>
-        <Flex className="body">
-          <div
-            className="query"
+          <div sx={{ flex: 1, pb: 0, mb: 0 }}>
+            <Styled.pre
+              sx={{ height: '100%', color: 'w3PlaygroundSoftBlue', pb: 0, mb: 0 }}
+            >
+              {clientresponse !== '' && JSON.stringify(clientresponse, undefined, 2)}
+            </Styled.pre>
+          </div>
+        </div>
+        {structuredschema?.localqueries && (
+          <Flex
             sx={{
-              width: '40%',
-              backgroundColor: 'w3PlayGroundNavy',
-              p: '1.5rem',
-              minWidth: '435px',
+              p: 0,
+              position: 'absolute',
+              right: !showschema ? '-100%' : '0',
+              transition: '.25s all ease',
+              height: '510px',
+              overflowY: 'scroll',
+              width: 'max-content',
+              borderRadius: '8px',
+              borderTopRightRadius: '0px',
             }}
           >
-            <Flex
-              className="templates"
-              sx={{ flex: 1, mb: 4, justifyContent: 'space-between' }}
-            >
-              {apiContents?.queries && (
-                <SelectBox
-                  key={'queries-box'}
-                  dark
-                  skinny
-                  labelField="id"
-                  valueField="id"
-                  placeholder={'Select Query'}
-                  options={apiContents.queries}
-                  onChange={handleQueryValuesChange}
-                />
-              )}
-            </Flex>
-            <Styled.code>
-              <textarea
-                onChange={() => console.log('TODO')}
-                sx={{
-                  resize: 'none',
-                  width: '100%',
-                  height: '21.875rem',
-                  bg: 'transparent',
-                  color: 'w3PlaygroundSoftBlue',
-                }}
-                value={selectedMethod}
-              ></textarea>
-            </Styled.code>
-            <div className="vars">
-              <form>
-                {varsList.map((varItem) => (
-                  <Field label={varItem[0]} name={varItem[1]} defaultValue="" key={varItem[1]} />
-                ))}
-              </form>
-            </div>
-          </div>
-          &nbsp;
-          <div
-            className="result"
-            sx={{
-              width: '70%',
-              backgroundColor: 'w3PlayGroundNavy',
-              display: 'flex',
-              flexDirection: 'column',
-              p: '1.5rem',
-              pb: 0,
-            }}
-          >
-            <Flex
-              className="controls"
+            <Close
+              onClick={handleShowSchema}
               sx={{
-                justifyContent: 'space-between',
-                mb: 2,
-                overflow: 'hidden',
-                '*': { display: 'flex', alignItems: 'center' },
+                fill: '#FFF',
+                width: '30px',
+                height: '30px',
+                top: '1rem',
+                '&:hover': {
+                  fill: 'w3PlaygroundSoftBlue',
+                  cursor: 'pointer',
+                },
+              }}
+            />
+            <aside
+              className="hidden-schema-panel"
+              sx={{
+                color: 'w3shade3',
+                width: '400px',
               }}
             >
-              <div className="left" sx={{ '> *': { mr: 2 } }}>
-                <Button variant="primarySmall" onClick={handleRunBtnClick}>
-                  Run
-                </Button>
-                {clientresponse !== '' && (
-                  <React.Fragment>
-                    <Button variant="secondarySmall" onClick={handleSaveBtnClick}>
-                      Save
-                    </Button>
-                    <Button variant="secondarySmall" onClick={handleClearBtnClick}>
-                      Clear
-                    </Button>
-                  </React.Fragment>
-                )}
-              </div>
-              <div className="right">
-                {loadingContents ? (
-                  'Loading Schema...'
-                ) : (
-                  <span
-                    className="text-nav left-chevron"
-                    onClick={handleShowSchema}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    {loadingContents && 'Loading Schema...'}
-                    <span sx={{ fontSize: '2.5rem', pr: '1rem' }}>‹</span>
-                    <span>Show Schema</span>
-                  </span>
-                )}
-              </div>
-            </Flex>
-            <div sx={{ flex: 1, pb: 0, mb: 0 }}>
-              <Styled.pre
-                sx={{ height: '100%', color: 'w3PlaygroundSoftBlue', pb: 0, mb: 0 }}
-              >
-                {clientresponse !== '' && JSON.stringify(clientresponse, undefined, 2)}
-              </Styled.pre>
-            </div>
-          </div>
-          {structuredschema?.localqueries && (
-            <Flex
-              sx={{
-                p: 0,
-                position: 'absolute',
-                right: !showschema ? '-100%' : '0',
-                transition: '.25s all ease',
-                height: '510px',
-                overflowY: 'scroll',
-                width: 'max-content',
-                borderRadius: '8px',
-                borderTopRightRadius: '0px',
-              }}
-            >
-              <Close
-                onClick={handleShowSchema}
-                sx={{
-                  fill: '#FFF',
-                  width: '30px',
-                  height: '30px',
-                  top: '1rem',
-                  '&:hover': {
-                    fill: 'w3PlaygroundSoftBlue',
-                    cursor: 'pointer',
-                  },
-                }}
+              <GQLCodeBlock title="Queries" value={structuredschema.localqueries} />
+              <GQLCodeBlock title="Mutations" value={structuredschema.localmutations} />
+              <GQLCodeBlock title="Custom Types" value={structuredschema.localcustom} />
+              <GQLCodeBlock
+                title="Imported Queries"
+                value={structuredschema.importedqueries}
               />
-              <aside
-                className="hidden-schema-panel"
-                sx={{
-                  color: 'w3shade3',
-                  width: '400px',
-                }}
-              >
-                <GQLCodeBlock title="Queries" value={structuredschema.localqueries} />
-                <GQLCodeBlock title="Mutations" value={structuredschema.localmutations} />
-                <GQLCodeBlock title="Custom Types" value={structuredschema.localcustom} />
-                <GQLCodeBlock
-                  title="Imported Queries"
-                  value={structuredschema.importedqueries}
-                />
-                <GQLCodeBlock
-                  title="Imported Mutations"
-                  value={structuredschema.importedmutations}
-                />
-              </aside>
-            </Flex>
-          )}
-        </Flex>
-      </React.Fragment>
+              <GQLCodeBlock
+                title="Imported Mutations"
+                value={structuredschema.importedmutations}
+              />
+            </aside>
+          </Flex>
+        )}
+      </Flex>
       <BGWave dark />
     </div>
   )
