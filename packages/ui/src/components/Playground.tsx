@@ -1,50 +1,78 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, Flex, Button, Styled } from 'theme-ui'
-import Badge from './Badge'
-import Stars from './Stars'
-import BGWave from '../components/BGWave'
 import React, { useEffect, useState } from 'react'
-import SelectBox from './SelectBox'
-import SearchBox from './SearchBox'
+import { useRouter } from 'next/router'
 import { useStateValue } from '../state/state'
 
-const Playground = () => {
-  const [{ dapp }, dispatch] = useStateValue()
+import Badge from './Badge'
+import Stars from './Stars'
+import BGWave from './BGWave'
+import SelectBox from './SelectBox'
+import SearchBox from './SearchBox'
 
-  // TODO: Turn this into reusable hook because it also exsits on index
-  const [searchValues, setsearchValues] = useState([])
-  const [searchOptions, setsearchOptions] = useState(dapp.apis)
+import Close from '../../public/images/close.svg'
 
-  const [queryValues, setqueryValues] = useState([])
-  const [queryOptions, setqueryOptions] = useState([
-    {
-      id: 'Get Swap',
-    },
-    {
-      id: 'Get Transaction',
-    },
-    {
-      id: 'Get History',
-    },
-  ])
-  const handleNewQuery = (e: React.BaseSyntheticEvent) => console.log(e.target)
-  const handleShowSchema = (e: React.BaseSyntheticEvent) => console.log(e.target)
+import getPackageSchemaFromAPIObject from '../services/ipfs/getPackageSchemaFromAPIObject'
+import getPackageQueriesFromAPIObject from '../services/ipfs/getPackageQueriesFromAPIObject'
 
-  const handleSearchValuesChange = (values) => setsearchValues(values)
-  const handleQueryValuesChange = (values) => setqueryValues(values)
+import GQLCodeBlock from '../components/GQLCodeBlock'
+import cleanSchema from '../utils/cleanSchema'
 
-  // useEffect(() => {
-  //   async function getRelatedFunctions() {
-  //     let queries = await axios.get(`/api/apis/${searchValues[0].id}/queries`)
-  //     setqueryOptions(queries.data)
-  //   }
-  //   getRelatedFunctions()
-  // }, [searchValues])
+type PlaygroundProps = {
+  api?: any
+}
+
+const Playground = ({ api }: PlaygroundProps) => {
+  const [{ dapp }] = useStateValue()
+  const router = useRouter()
+  const [apiOptions] = useState(dapp.apis)
+
+  const [apiContents, setapiContents] = useState<any>({})
+  const [loadingContents, setloadingContents] = useState(false)
+
+  const [showschema, setshowschema] = useState(false)
+  const [selectedMethod, setSelectedMethod] = useState<any>()
+
+  const [structuredschema, setstructuredschema] = useState<any>()
+
+  const handleShowSchema = (e: React.BaseSyntheticEvent) => setshowschema(!showschema)
+  const handleQueryValuesChange = (method) => setSelectedMethod(method[0].value)
 
   useEffect(() => {
-    setsearchOptions(dapp.apis)
-  }, [dapp.apis])
+    if (router.asPath.includes('ens/')) {
+      setloadingContents(true)
+    }
+  }, [router])
+
+  useEffect(() => {
+    async function go() {
+      let schemaData = await getPackageSchemaFromAPIObject(api)
+      let queriesData = await getPackageQueriesFromAPIObject(api)
+      setapiContents({
+        schema: schemaData,
+        queries: queriesData,
+      })
+      const {
+        localqueries,
+        localmutations,
+        localcustom,
+        importedqueries,
+        importedmutations,
+      } = cleanSchema(schemaData)
+      setstructuredschema({
+        localqueries: localqueries,
+        localmutations: localmutations,
+        localcustom: localcustom,
+        importedqueries: importedqueries,
+        importedmutations: importedmutations,
+      })
+      setloadingContents(false)
+    }
+    if (loadingContents === true) {
+      go()
+    }
+  }, [loadingContents])
 
   return (
     <div
@@ -54,148 +82,205 @@ const Playground = () => {
         borderRadius: '1rem',
         overflow: 'hidden',
         'code, pre, textarea': {
-          color: 'w3PlaygroundSoftBlue',
-          backgroundColor: 'transparent !important',
           border: 'none',
           fontSize: '0.875rem',
           lineHeight: '0.875rem',
         },
       }}
     >
-      {searchOptions && searchOptions.length > 0 && (
-        <React.Fragment>
+      <React.Fragment>
+        <Flex
+          className="header"
+          sx={{
+            p: '1.5rem',
+            backgroundColor: 'w3shade2',
+            '*': { display: 'flex' },
+            label: {
+              display: 'none',
+            },
+          }}
+        >
+          {api === undefined ? (
+            <SearchBox
+              key={'search-api-box'}
+              dark
+              searchBy="name"
+              placeholder={'Search API’s'}
+              labelField="name"
+              valueField="name"
+              options={apiOptions}
+              values={[]}
+              onChange={(e) => {
+                if (e.length > 0) {
+                  router.push('/playground/ens/' + e[0].pointerUris[0])
+                  console.log('TODO')
+                }
+              }}
+            />
+          ) : (
+            <Styled.h1 sx={{ mb: 0 }}>{api.name}</Styled.h1>
+          )}
+
           <Flex
-            className="header"
+            className="selection-detail"
             sx={{
-              p: '1.5rem',
-              backgroundColor: 'w3shade2',
-              '*': { display: 'flex' },
-              label: {
-                display: 'none',
-              },
+              ml: 4,
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flex: 1,
             }}
           >
-            <SearchBox
-              dark
-              searchBy="id"
-              placeholder={'Search API’s'}
-              labelField="id"
-              valueField="id"
-              options={searchOptions}
-              values={searchValues}
-              onChange={handleSearchValuesChange}
-            />
-            <Flex
-              className="selection-detail"
-              sx={{
-                ml: 4,
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flex: 1,
-              }}
-            >
-              <div className="left">
-                <Stars count={320} onDark />
-                <ul className="category-Badges" sx={{ ml: 3 }}>
-                  <li>
-                    <Badge label="IPFS" onDark />
-                  </li>
-                </ul>
-              </div>
-              <div className="right">
-                <a className="text-nav" href="/apis/SOMEAPI">
-                  GO TO API PAGE
-                </a>
-              </div>
-            </Flex>
-          </Flex>
-          <Flex className="body" sx={{ '> *': { p: '1.5rem' } }}>
-            <div
-              className="query"
-              sx={{ width: '40%', backgroundColor: 'w3PlayGroundNavy' }}
-            >
-              <Flex
-                className="templates"
-                sx={{ flex: 1, mb: 4, justifyContent: 'space-between' }}
+            <div className="left">
+              <Stars count={0} onDark />
+              <ul className="category-Badges" sx={{ ml: 3 }}>
+                <li>
+                  <Badge label="IPFS" onDark />
+                </li>
+              </ul>
+            </div>
+            <div className="right">
+              <a
+                className="text-nav"
+                href={router.asPath.replace('playground', 'apis')}
+                sx={{ '&:hover': { textDecoration: 'underline' } }}
               >
+                GO TO API PAGE
+              </a>
+            </div>
+          </Flex>
+        </Flex>
+        <Flex className="body" sx={{ '> *': { p: '1.5rem' } }}>
+          <div
+            className="query"
+            sx={{ width: '40%', backgroundColor: 'w3PlayGroundNavy' }}
+          >
+            <Flex
+              className="templates"
+              sx={{ flex: 1, mb: 4, justifyContent: 'space-between' }}
+            >
+              {apiContents?.queries && (
                 <SelectBox
+                  key={'queries-box'}
                   dark
                   skinny
                   labelField="id"
                   valueField="id"
-                  options={queryOptions}
-                  values={queryValues}
+                  placeholder={'Select Query'}
+                  options={apiContents.queries}
                   onChange={handleQueryValuesChange}
                 />
-
-                <Button variant="secondarySmall" onClick={handleNewQuery}>
-                  New
-                </Button>
-              </Flex>
-              <Styled.code>
-                <textarea
-                  onChange={() => console.log('YO')}
-                  sx={{ resize: 'none', width: '100%', height: '21.875rem' }}
-                  value={`
-mutation {
-  swap(token: jfid) {
-    token
-    _timestamp
-    _asset
-    _type
-    _amount
-  }xw
-}
-          `}
-                ></textarea>
-              </Styled.code>
-            </div>
-            &nbsp;
-            <div
-              className="result"
-              sx={{ width: '60%', backgroundColor: 'w3PlayGroundNavy', display: 'flex', flexDirection: 'column' }}
-            >
-              <Flex
-                className="controls"
+              )}
+            </Flex>
+            <Styled.code>
+              <textarea
+                onChange={() => console.log('TODO')}
                 sx={{
-                  justifyContent: 'space-between',
-                  mb: 4,
-                  '*': { display: 'flex', alignItems: 'center' },
+                  resize: 'none',
+                  width: '100%',
+                  height: '21.875rem',
+                  bg: 'transparent',
+                  color: 'w3PlaygroundSoftBlue',
                 }}
-              >
-                <div className="left">
-                  <Button variant="primarySmall">Run</Button>
-                  <Button variant="hollowSmall">Save</Button>
-                </div>
-                <div className="right">
+                value={selectedMethod}
+              ></textarea>
+            </Styled.code>
+          </div>
+          &nbsp;
+          <div
+            className="result"
+            sx={{
+              width: '70%',
+              backgroundColor: 'w3PlayGroundNavy',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <Flex
+              className="controls"
+              sx={{
+                justifyContent: 'space-between',
+                mb: 2,
+                overflow: 'hidden',
+                '*': { display: 'flex', alignItems: 'center' },
+              }}
+            >
+              <div className="left">
+                <Button variant="primarySmall">Run</Button>
+                <Button variant="hollowSmall">Save</Button>
+              </div>
+              <div className="right">
+                {loadingContents ? (
+                  'Loading Schema...'
+                ) : (
                   <span
                     className="text-nav left-chevron"
                     onClick={handleShowSchema}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <span sx={{ fontSize: '2.5rem', pr: '1rem' }}>‹</span> Show Schema
+                    {loadingContents && 'Loading Schema...'}
+                    <span sx={{ fontSize: '2.5rem', pr: '1rem' }}>‹</span>
+                    <span>Show Schema</span>
                   </span>
-                </div>
-              </Flex>
-              <Styled.code sx={{ flex: 1 }}>
-                <Styled.pre sx={{height: '100%'}}>{`
-"data": {
-"transactions": [
-  {
-    "_amount": "5494500",
-    "_asset": "pBTC",
-    "_timestamp": "1605245034",
-    "_type": "mint",
-    "id": "0x0001c85a114e81b26a2c466bf988d3a5c61f0bc7c9dde34670e1f8b494bad87e-104"
-  }
-]
-}
-          `}</Styled.pre>
-              </Styled.code>
-            </div>
-          </Flex>
-        </React.Fragment>
-      )}
+                )}
+              </div>
+            </Flex>
+            <Styled.code sx={{ flex: 1 }}>
+              <Styled.pre
+                sx={{ height: '100%', color: 'w3PlaygroundSoftBlue' }}
+              >{``}</Styled.pre>
+            </Styled.code>
+          </div>
+          {structuredschema?.localqueries && (
+            <Flex
+              sx={{
+                p: 0,
+                position: 'absolute',
+                right: !showschema ? '-100%' : '0',
+                transition: '.25s all ease',
+                height: '480px',
+                overflowY: 'scroll',
+                width: 'max-content',
+                borderRadius: '8px',
+                borderTopRightRadius: '0px',
+              }}
+            >
+              <Close
+                onClick={handleShowSchema}
+                sx={{
+                  fill: '#FFF',
+                  width: '30px',
+                  height: '30px',
+                  top: '1rem',
+                  '&:hover': {
+                    fill: 'w3PlaygroundSoftBlue',
+                    cursor: 'pointer',
+                  },
+                }}
+              />
+              <aside
+                className="hidden-schema-panel"
+                sx={{
+                  color: 'w3shade3',
+                  width: 'max-content',
+                }}
+              >
+                <GQLCodeBlock title="Queries" value={structuredschema.localqueries} />
+                <GQLCodeBlock title="Mutations" value={structuredschema.localmutations} />
+                <GQLCodeBlock title="Custom Types" value={structuredschema.localcustom} />
+                <GQLCodeBlock
+                  title="Imported Queries"
+                  value={structuredschema.importedqueries}
+                />
+                <GQLCodeBlock
+                  title="Imported Mutations"
+                  value={structuredschema.importedmutations}
+                />
+              </aside>
+            </Flex>
+          )}
+        </Flex>
+      </React.Fragment>
+
       <BGWave dark />
     </div>
   )

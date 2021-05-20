@@ -4,7 +4,7 @@ import { jsx } from 'theme-ui'
 import ApiGrid from '../ApiGrid'
 
 const Published = () => {
-  return <ApiGrid />
+  return <div/>
 }
 
 export default Published

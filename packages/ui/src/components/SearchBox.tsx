@@ -14,7 +14,7 @@ type RDSProps = {
   valueField: string
   options: any[]
   values: any[]
-  onChange: (values: any) => void
+  onChange?: (value: any) => void
 }
 
 const SearchBox = ({
@@ -156,9 +156,9 @@ const SearchBox = ({
       searchable
       clearable
       keepSelectedInList
-      dropdownHandle={false}
       searchBy={searchBy}
       placeholder={placeholder}
+      dropdownHandle={false}
       labelField={labelField}
       valueField={valueField}
       options={options}

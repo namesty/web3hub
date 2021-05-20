@@ -13,6 +13,7 @@ import BottomSpace from '../components/BottomSpace'
 import Card from '../components/Card'
 
 const Home = () => {
+  const [{ dapp, search }] = useStateValue()  
   return (
     <Layout>
       <Flex>
@@ -23,9 +24,14 @@ const Home = () => {
             <section className="content">
               <SortNav />
               <ApiGrid>
-                {/* {dapp?.apis && dapp.apis.map((api, idx) => (
-                  <Card api={api} boxShadowOn key={idx + '-api'} />
-                ))} */}
+                {search !== undefined && search.sortedApi !== -1 ? (
+                  <Card api={search.sortedApi[0]} boxShadowOn />
+                ) : (
+                  dapp?.apis &&
+                  dapp.apis.map((api, idx) => (
+                    <Card api={api} boxShadowOn key={idx + '-api'} />
+                  ))
+                )}
               </ApiGrid>
             </section>
             <BottomSpace />

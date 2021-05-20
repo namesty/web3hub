@@ -10,6 +10,7 @@ let initialState = {
     network: networkID,
     web3: undefined,
     apis: [],
+    github: ''
   },
   publish: {
     subdomain: '',
@@ -26,6 +27,9 @@ let initialState = {
     showSuccessModal:false,
     apiData: null,
     registrationStatus: -1,
+  },
+  search: {
+    sortedApi: -1
   }
 }
 
@@ -56,6 +60,11 @@ type publishType = {
   registrationStatus: number
 }
 
+type searchType = {
+  sortedApi: any
+}
+
 export default initialState
 export type { dappType }
 export type { publishType }
+export type { searchType }

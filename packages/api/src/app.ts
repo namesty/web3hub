@@ -38,5 +38,5 @@ passport.use(GithubStrategy); // implement github strategy with passport
 app.use("/docs", serve, setup(swaggerJSON)); // host documentation on /docs endpoint
 app.use("/", controllers); // add controllers routes
 
-SanitizeApis.getInstance();
+// SanitizeApis.getInstance();
 export { app };

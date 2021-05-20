@@ -25,13 +25,13 @@ export default async function getMetaDataFromPackageHash(hash: string) {
   }
 
   if (ipfsDataFromJSON === null && ipfsDataFromYAML === null) {
-    console.log('NO METADATA FOUND')
+    return 'NO METADATA FOUND'
   } else {
     try {
       const doc = yaml.load(ipfsData)
       return doc
-    } catch (e) {
-      console.log(e)
+    } catch (error) {
+      console.log(error)
     }
   }
 }

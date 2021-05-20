@@ -51,8 +51,8 @@ export class User {
 
   public static async findOrCreateByAddress({
     address,
-    addressType = AddressesTypes.ETHEREUM,
-  }: Pick<UserData, "address" | "addressType">): Promise<Partial<UserData>> {
+    authType = AddressesTypes.ETHEREUM,
+  }: Pick<UserData, "address" | "authType">): Promise<Partial<UserData>> {
     const connection = await db.connect();
     // @TODO: Make address type dynamic
     try {
@@ -67,7 +67,7 @@ export class User {
         );
         await tx.none(
           "INSERT INTO addresses (address, fk_user_id, fk_address_type_id) VALUES ($1, $2, $3)",
-          [address, user.id, addressType]
+          [address, user.id, authType]
         );
       };
 

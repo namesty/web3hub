@@ -1,9 +1,10 @@
 import InitialState from '../state/initialState'
 import type { dappType } from '../state/initialState'
 import type { publishType } from '../state/initialState'
+import type { searchType } from '../state/initialState'
 
 function dappReducer(state = {}, action) {
-  console.log('dappReducer', state, action)
+  // console.log('dappReducer', state, action)
   let newStateObj: dappType = InitialState.dapp
   switch (action.type) {
     case 'SET_ADDRESS':
@@ -32,8 +33,17 @@ function dappReducer(state = {}, action) {
   }
 }
 
+function searchReducer(state = {}, action) {
+  let newStateObj: searchType = InitialState.search
+  switch (action.type) {
+    case 'sortSelectApi':
+      newStateObj.sortedApi = action.payload
+      return {...state, ...newStateObj}
+    
+  }
+}
+
 function publishReducer(state = {}, action) {
-  console.log('publishReducer', state, action)
   let newStateObj: publishType = InitialState.publish
   switch (action.type) {
     case 'setsubdomain':
@@ -88,6 +98,7 @@ export default function mainReducer(w3hubStates, action) {
   // localStorage.setItem('w3hubStates.publish', JSON.stringify(w3hubStates.publish))
   return {
     dapp: dappReducer(w3hubStates.dapp, action),
-    publish: publishReducer(w3hubStates.publish, action)
+    publish: publishReducer(w3hubStates.publish, action),
+    search: searchReducer(w3hubStates.search, action)
   }
 }

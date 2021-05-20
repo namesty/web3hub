@@ -2,4 +2,4 @@
 import axios from 'axios'
 import { request } from 'graphql-request'
 export const fetcherREST = (url) => axios.get(url).then((res) => res.data)
-export const fetcherGQL = (query) => request('/api/graphql', query)
+// export const fetcherGQL = (query) => request('/api/graphql', query)

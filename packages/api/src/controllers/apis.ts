@@ -43,7 +43,20 @@ const getAll = async (_: Request, response: Response) => {
       apis,
     });
   } catch (error) {
-    response.json({ status: 500, error: error.message });
+    return response.json({ status: 500, error: error.message });
+  }
+};
+
+const getApiByName = async (request: Request, response: Response) => {
+  try {
+    // @TODO: Add dynamic param visible
+    const apis = await Api.get(request.params.name.toLowerCase());
+    return response.json({
+      status: 200,
+      apis,
+    });
+  } catch (error) {
+    return response.json({ status: 500, error: error.message });
   }
 };
 
@@ -63,7 +76,28 @@ export const checkAndUpdateApis = async () => {
   }
 };
 
+export const getApiByLocation = async (
+  request: Request,
+  response: Response
+) => {
+  try {
+    const { location, name } = request.params;
+    const api = await Api.getByLocation(location, name);
+    return response.json({
+      status: 200,
+      api,
+    });
+  } catch (error) {
+    return response.json({
+      status: 500,
+      error: error.message,
+    });
+  }
+};
+
 router.get("/active", getAll);
+router.get("/find/:name", getApiByName);
+router.get("/find/:location/:name", getApiByLocation);
 router.post("/publish", checkAccessToken, validatePublishBody, publishApi);
 
 export { router as ApiController };

@@ -3,7 +3,11 @@
 import { Grid, jsx, Button } from 'theme-ui'
 import { useRouter } from 'next/router'
 
-const ApiGrid = ({children}) => {
+type ApiGridProps = {
+  children: any[]
+}
+
+const ApiGrid = ({children}: ApiGridProps) => {
   const router = useRouter()
   return (
     <div>

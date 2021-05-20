@@ -7,19 +7,36 @@ import Close from '../../public/images/close.svg'
 import onboardInit from '../utils/onboardInit'
 import { useStateValue } from '../state/state'
 import axios from 'axios'
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import Github from '../../public/images/github-icon-large.svg'
 
 type ModalProps = {
   screen: string
   noLeftShift?: boolean
-  close: () => void
+  data?: any
+  close?: () => void
 }
 
-const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
+const Modal = ({ screen = 'connect', close, noLeftShift, data }: ModalProps) => {
   const [{ dapp }, dispatch] = useStateValue()
-  const { pathname, asPath } = useRouter()
+  const router = useRouter()
   const onboard: any = onboardInit(dispatch)
+
+  const CloseButton = (
+    <Close
+      onClick={close}
+      sx={{
+        position: 'absolute',
+        right: 4,
+        top: 4,
+        fill: '#597980',
+        '&:hover': {
+          fill: 'white',
+          cursor: 'pointer',
+        },
+      }}
+    />
+  )
 
   const handleConnect = async () => {
     let selected = await onboard.walletSelect()
@@ -76,19 +93,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
       >
         {screen === 'connect' && (
           <React.Fragment>
-            <Close
-              onClick={close}
-              sx={{
-                position: 'absolute',
-                right: 4,
-                top: 4,
-                fill: '#597980',
-                '&:hover': {
-                  fill: 'white',
-                  cursor: 'pointer',
-                },
-              }}
-            />
+            {close ? ( CloseButton ) : null}
             <Image
               src="/images/eth-logo-hollow-large.svg"
               alt="eth-logo-hollow-large"
@@ -128,19 +133,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
         )}
         {screen === 'disconnect' && (
           <React.Fragment>
-            <Close
-              onClick={close}
-              sx={{
-                position: 'absolute',
-                right: 4,
-                top: 4,
-                fill: '#597980',
-                '&:hover': {
-                  fill: 'white',
-                  cursor: 'pointer',
-                },
-              }}
-            />
+            {close ? ( CloseButton ) : null}
             <Image
               src="/images/eth-logo-hollow-large.svg"
               alt="/eth-logo-hollow-large"
@@ -180,19 +173,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
         )}
         {screen === 'signin' && (
           <React.Fragment>
-            <Close
-              onClick={close}
-              sx={{
-                position: 'absolute',
-                right: 4,
-                top: 4,
-                fill: '#597980',
-                '&:hover': {
-                  fill: 'white',
-                  cursor: 'pointer',
-                },
-              }}
-            />
+            {close ? ( CloseButton ) : null}
 
             <Github fill={'white'} width="140px" />
             <Styled.h1
@@ -222,9 +203,9 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
               Please sign in with GitHub to continue.
             </Styled.h4>
             <a
-              href={`http://localhost:3001/auth/sign-in?redirectUrl=${pathname}`}
+              href={`http://localhost:3001/auth/sign-in?redirectUrl=${router.pathname}`}
               onClick={() => {
-                localStorage.setItem('w3hubLastURLb4Signin', asPath)
+                localStorage.setItem('w3hubLastURLb4Signin', router.asPath)
               }}
             >
               <Button variant="calloutLarge">Sign in with github</Button>
@@ -233,19 +214,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
         )}
         {screen === 'signout' && (
           <React.Fragment>
-            <Close
-              onClick={close}
-              sx={{
-                position: 'absolute',
-                right: 4,
-                top: 4,
-                fill: '#597980',
-                '&:hover': {
-                  fill: 'white',
-                  cursor: 'pointer',
-                },
-              }}
-            />
+            {close ? ( CloseButton ) : null}
             <Image src="/images/signout.svg" alt="signout" width={140} height={140} />
             <Styled.h1
               sx={{
@@ -280,19 +249,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
         )}
         {screen === 'success' && (
           <React.Fragment>
-            <Close
-              onClick={close}
-              sx={{
-                position: 'absolute',
-                right: 4,
-                top: 4,
-                fill: '#597980',
-                '&:hover': {
-                  fill: 'white',
-                  cursor: 'pointer',
-                },
-              }}
-            />
+            {close ? ( CloseButton ) : null}
             <img src="/images/trophy.svg" alt="trophy" sx={{ width: '13.75rem' }} />
             <Styled.h1
               sx={{
@@ -320,7 +277,7 @@ const Modal = ({ screen = 'connect', close, noLeftShift }: ModalProps) => {
             >
               Package now live on the Web3Hub!
             </Styled.h4>
-            <Button variant="calloutLarge">View API</Button>
+            <Button variant="calloutLarge" onClick={()=>router.push(`/apis/ens/${data}`)}>View API</Button>
           </React.Fragment>
         )}
       </Flex>
