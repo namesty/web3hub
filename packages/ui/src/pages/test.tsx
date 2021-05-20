@@ -30,7 +30,6 @@ const Test = () => {
           <div className="contents animate">
             <Header title="Test page" />
             <hr />
-            <h1>Test Page</h1>
             <section>
               <GQLCodeBlock title="Queries" value={localqueries}/>
               <GQLCodeBlock title="Mutations" value={localmutations}/>

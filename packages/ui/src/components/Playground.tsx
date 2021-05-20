@@ -149,10 +149,10 @@ const Playground = ({ api }: PlaygroundProps) => {
             </div>
           </Flex>
         </Flex>
-        <Flex className="body" sx={{ '> *': { p: '1.5rem' } }}>
+        <Flex className="body">
           <div
             className="query"
-            sx={{ width: '40%', backgroundColor: 'w3PlayGroundNavy' }}
+            sx={{ width: '40%', backgroundColor: 'w3PlayGroundNavy', p: '1.5rem' }}
           >
             <Flex
               className="templates"
@@ -193,6 +193,8 @@ const Playground = ({ api }: PlaygroundProps) => {
               backgroundColor: 'w3PlayGroundNavy',
               display: 'flex',
               flexDirection: 'column',
+              p: '1.5rem',
+              pb: 0,
             }}
           >
             <Flex
@@ -224,9 +226,9 @@ const Playground = ({ api }: PlaygroundProps) => {
                 )}
               </div>
             </Flex>
-            <Styled.code sx={{ flex: 1 }}>
+            <Styled.code sx={{ flex: 1, pb: 0, mb: 0 }}>
               <Styled.pre
-                sx={{ height: '100%', color: 'w3PlaygroundSoftBlue' }}
+                sx={{ height: '100%', color: 'w3PlaygroundSoftBlue', pb: 0, mb: 0 }}
               >{``}</Styled.pre>
             </Styled.code>
           </div>
@@ -237,7 +239,7 @@ const Playground = ({ api }: PlaygroundProps) => {
                 position: 'absolute',
                 right: !showschema ? '-100%' : '0',
                 transition: '.25s all ease',
-                height: '480px',
+                height: '510px',
                 overflowY: 'scroll',
                 width: 'max-content',
                 borderRadius: '8px',
@@ -261,7 +263,7 @@ const Playground = ({ api }: PlaygroundProps) => {
                 className="hidden-schema-panel"
                 sx={{
                   color: 'w3shade3',
-                  width: 'max-content',
+                  width: '400px',
                 }}
               >
                 <GQLCodeBlock title="Queries" value={structuredschema.localqueries} />
