@@ -112,7 +112,7 @@ const Navbar = () => {
         </Flex>
       </div>
       <div className="col" sx={{ flex: '3 !important' }}>
-        <a href="https://airtable.com/shr2Xne2zinztVBCo" target="_BLANK" sx={{
+        <a href="https://web3api.typeform.com/to/AkTwem3f" target="_BLANK" sx={{
           color: 'white',
           fontSize: 1,
           '&:hover': {

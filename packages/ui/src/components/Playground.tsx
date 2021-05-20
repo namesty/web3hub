@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, Flex, Button, Styled } from 'theme-ui'
+import { jsx, Flex, Button, Styled, Field } from 'theme-ui'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useStateValue } from '../state/state'
@@ -18,6 +18,8 @@ import getPackageQueriesFromAPIObject from '../services/ipfs/getPackageQueriesFr
 
 import GQLCodeBlock from '../components/GQLCodeBlock'
 import cleanSchema from '../utils/cleanSchema'
+import { sampleAPI } from '../constants'
+import BottomSpace from './BottomSpace'
 
 type PlaygroundProps = {
   api?: any
@@ -32,12 +34,36 @@ const Playground = ({ api }: PlaygroundProps) => {
   const [loadingContents, setloadingContents] = useState(false)
 
   const [showschema, setshowschema] = useState(false)
-  const [selectedMethod, setSelectedMethod] = useState<any>()
+  const [selectedMethod, setSelectedMethod] = useState('')
 
   const [structuredschema, setstructuredschema] = useState<any>()
 
-  const handleShowSchema = (e: React.BaseSyntheticEvent) => setshowschema(!showschema)
-  const handleQueryValuesChange = (method) => setSelectedMethod(method[0].value)
+  const [clientresponse, setclientresponse] = useState<any>('')
+
+  function handleShowSchema(e: React.BaseSyntheticEvent) {
+    return setshowschema(!showschema)
+  }
+
+  function handleQueryValuesChange(method) {
+    return setSelectedMethod(method[0].value)
+  }
+
+  function handleSaveBtnClick() {
+    const fileData = JSON.stringify(clientresponse)
+    const blob = new Blob([fileData], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.download = `response.json`
+    link.href = url
+    link.click()
+  }
+
+  function handleRunBtnClick() {
+    setclientresponse(sampleAPI)
+  }
+  function handleClearBtnClick() {
+    setclientresponse('')
+  }
 
   useEffect(() => {
     if (router.asPath.includes('ens/')) {
@@ -74,6 +100,9 @@ const Playground = ({ api }: PlaygroundProps) => {
     }
   }, [loadingContents])
 
+  const regexp = /\$([a-zA-Z0-9_-]{1,})/g
+  const varsList = [...selectedMethod.matchAll(regexp)] || null
+  console.log(varsList)
   return (
     <div
       className="playground"
@@ -152,7 +181,12 @@ const Playground = ({ api }: PlaygroundProps) => {
         <Flex className="body">
           <div
             className="query"
-            sx={{ width: '40%', backgroundColor: 'w3PlayGroundNavy', p: '1.5rem' }}
+            sx={{
+              width: '40%',
+              backgroundColor: 'w3PlayGroundNavy',
+              p: '1.5rem',
+              minWidth: '435px',
+            }}
           >
             <Flex
               className="templates"
@@ -184,6 +218,13 @@ const Playground = ({ api }: PlaygroundProps) => {
                 value={selectedMethod}
               ></textarea>
             </Styled.code>
+            <div className="vars">
+              <form>
+                {varsList.map((varItem) => (
+                  <Field label={varItem[0]} name={varItem[1]} defaultValue="" key={varItem[1]} />
+                ))}
+              </form>
+            </div>
           </div>
           &nbsp;
           <div
@@ -206,9 +247,20 @@ const Playground = ({ api }: PlaygroundProps) => {
                 '*': { display: 'flex', alignItems: 'center' },
               }}
             >
-              <div className="left">
-                <Button variant="primarySmall">Run</Button>
-                <Button variant="hollowSmall">Save</Button>
+              <div className="left" sx={{ '> *': { mr: 2 } }}>
+                <Button variant="primarySmall" onClick={handleRunBtnClick}>
+                  Run
+                </Button>
+                {clientresponse !== '' && (
+                  <React.Fragment>
+                    <Button variant="secondarySmall" onClick={handleSaveBtnClick}>
+                      Save
+                    </Button>
+                    <Button variant="secondarySmall" onClick={handleClearBtnClick}>
+                      Clear
+                    </Button>
+                  </React.Fragment>
+                )}
               </div>
               <div className="right">
                 {loadingContents ? (
@@ -226,11 +278,13 @@ const Playground = ({ api }: PlaygroundProps) => {
                 )}
               </div>
             </Flex>
-            <Styled.code sx={{ flex: 1, pb: 0, mb: 0 }}>
+            <div sx={{ flex: 1, pb: 0, mb: 0 }}>
               <Styled.pre
                 sx={{ height: '100%', color: 'w3PlaygroundSoftBlue', pb: 0, mb: 0 }}
-              >{``}</Styled.pre>
-            </Styled.code>
+              >
+                {clientresponse !== '' && JSON.stringify(clientresponse, undefined, 2)}
+              </Styled.pre>
+            </div>
           </div>
           {structuredschema?.localqueries && (
             <Flex
@@ -282,7 +336,6 @@ const Playground = ({ api }: PlaygroundProps) => {
           )}
         </Flex>
       </React.Fragment>
-
       <BGWave dark />
     </div>
   )
